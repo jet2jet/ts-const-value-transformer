@@ -1,0 +1,19 @@
+{
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": {
+    "baseUrl": "./src/main",
+    "module": "node16",
+    "rootDir": "../..",
+    "paths": {
+      "@/*": ["../../src/main/*"]
+    },
+    "target": "es2023",
+    "types": ["node", "jest"]
+  },
+  "include": [
+    "./src/main/**/*.mts",
+    "./src/test/**/*.mts",
+    "./test/typings/*.d.ts"
+  ],
+  "exclude": ["./src/test-project"]
+}

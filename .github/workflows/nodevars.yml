@@ -1,0 +1,41 @@
+name: Setup Node.js versions
+
+on:
+  workflow_call:
+    outputs:
+      node-version:
+        description: 'Common Node.js version'
+        value: ${{ jobs.export.outputs.node-version }}
+      npm-version:
+        description: 'Common NPM version'
+        value: ${{ jobs.export.outputs.npm-version }}
+
+env:
+  NPM_VERSION: 11.5.1
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    outputs:
+      node-version: ${{ steps.setver.outputs.node_version }}
+      npm-version: ${{ steps.setver.outputs.npm_version }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: setver
+        run: |
+          if [ ! -f .tool-versions ]; then
+            echo ".tool-versions file not found in repository root" >&2
+            exit 1
+          fi
+
+          raw_node_version=$(awk '$1 == "nodejs" { print $2 }' .tool-versions | head -n 1)
+
+          if [ -z "$raw_node_version" ]; then
+            echo "nodejs entry not found in .tool-versions" >&2
+            exit 1
+          fi
+
+          node_version="${raw_node_version#v}"
+
+          echo "node_version=$node_version" >> "$GITHUB_OUTPUT"
+          echo "npm_version=${NPM_VERSION}" >> "$GITHUB_OUTPUT"

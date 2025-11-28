@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`use transformer in "plugins" run tspc: emit file 'index.mjs' 1`] = `
+"import * as mod from './mod.mjs';
+const constValue1 = 1;
+const constValue2 = 0.1;
+const constValue3 = -1;
+const constValue4 = 'foo';
+const constValue5 = true;
+const constValue6 = 10n;
+const constValue7 = -10n;
+const constValue8 = \`aaa
+bbb\`;
+const constValue9 = \`bbb\${n}\`;
+const constValue10 = !0;
+const constValue11 = void 0 /* undefined */;
+console.log(1 /* constValue1 */, 0.1 /* constValue2 */, -1 /* constValue3 */, 
+/* the comment */
+/* the comment */
+"foo" /* constValue4 */, 
+/* the comment */
+true /* constValue5 */, 10n /* constValue6 */ /* the comment */, -10n /* constValue7 */, 
+/* the comment */
+"aaa\\nbbb" /* constValue8 */.toString() /* the comment */, 
+// don't transform because constValue9 is not a literal type
+constValue9.toString(), 
+// don't transform for asserted type
+n.toString(), true /* constValue10 */, 
+// 'constValue11 || 12345' is literal type, but don't transform (instead transform 'constValue11')
+void 0 /* constValue11 */ || 12345, 
+// 'constValue1 ? constValue2 : constValue3' is literal type, but don't transform
+1 /* constValue1 */ ? 0.1 /* constValue2 */ : -1 /* constValue3 */);
+export { constValue1, constValue2, constValue3, constValue4, constValue5, constValue6, constValue7, constValue8, constValue9, };
+console.log(mod.Hoge, n === mod.Hoge || n === mod.Piyo);
+export const constObject = {
+    a: 4,
+    b: 'bar',
+    c: false,
+    d: null,
+    e: void 0 /* undefined */,
+    f: 20n,
+    g: -30n,
+    h: {
+        h1: 1 /* constValue1 */,
+        h2: -3.14,
+        h3: {},
+    },
+};
+console.log(constObject.a, constObject.b, constObject.c, constObject.d, constObject.e, constObject.f, constObject.g, constObject.h, constObject.h.h1, constObject.h.h2, constObject.h.h3, 
+//
+constObject.a.toString(), constObject.b.toString(), constObject.c.toString(), constObject.f.toString(), constObject.g.toString(), constObject.h.h1.toString(), constObject.h.h2.toString());
+console.log(o.a);
+console.log(o.h.h1);
+var BarEnum;
+(function (BarEnum) {
+    BarEnum[BarEnum["A"] = 1] = "A";
+    BarEnum["B"] = "hoge";
+})(BarEnum || (BarEnum = {}));
+console.log(1 /* BarEnum.A */, "hoge" /* BarEnum.B */);
+(() => {
+    const { a, b: b2, e = -1 /* constValue3 */ } = constObject;
+    console.log(4 /* a */, "bar" /* b2 */, -1 /* e */);
+})();
+((x = 0.1 /* constValue2 */) => {
+    console.log(x);
+})();
+function fn2() {
+    return 12345;
+}
+console.log(fn2());
+// don't transform spread element and parameter declarations
+console.log([...Array(5)].map((u, i) => (void 0 /* u */ == null ? i : 0)));
+const fn1 = (...args) => args.length;
+console.log(fn1(...Array(5)));
+export {};
+//# sourceMappingURL=index.mjs.map"
+`;
+
+exports[`use transformer in "plugins" run tspc: emit file 'mod.mjs' 1`] = `
+"export const Hoge = 1;
+export const Piyo = 2;
+//# sourceMappingURL=mod.mjs.map"
+`;
+
+exports[`use transformer in "plugins" run tspc: emitted files 1`] = `
+[
+  "index.d.mts",
+  "index.mjs",
+  "index.mjs.map",
+  "mod.d.mts",
+  "mod.mjs",
+  "mod.mjs.map",
+]
+`;

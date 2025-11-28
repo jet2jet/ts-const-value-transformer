@@ -1,0 +1,99 @@
+{
+  "name": "ts-const-value-transformer",
+  "version": "0.1.0",
+  "engines": {
+    "node": ">=20.19.3"
+  },
+  "description": "Transforms constant variables with actual literals in TypeScript project.",
+  "type": "module",
+  "module": "./dist/index.mjs",
+  "exports": {
+    ".": {
+      "default": "./dist/index.mjs",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.mts"
+    },
+    "./getCustomTransformers": {
+      "default": "./dist/getCustomTransformers.mjs",
+      "import": "./dist/getCustomTransformers.mjs",
+      "types": "./dist/getCustomTransformers.d.mts"
+    },
+    "./getCustomTransformers.mjs": {
+      "default": "./dist/getCustomTransformers.mjs",
+      "import": "./dist/getCustomTransformers.mjs",
+      "types": "./dist/getCustomTransformers.d.mts"
+    },
+    "./loader": {
+      "default": "./dist/loader.mjs",
+      "import": "./dist/loader.mjs",
+      "types": "./dist/loader.d.mts"
+    },
+    "./loader.mjs": {
+      "default": "./dist/loader.mjs",
+      "import": "./dist/loader.mjs",
+      "types": "./dist/loader.d.mts"
+    }
+  },
+  "types": "./dist/index.d.mts",
+  "author": "jet (ジェット)",
+  "license": "MIT",
+  "homepage": "https://github.com/jet2jet/ts-const-value-transformer",
+  "keywords": [
+    "typescript",
+    "transformer",
+    "optimize",
+    "optimizer",
+    "optimization",
+    "webpack-loader"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jet2jet/ts-const-value-transformer.git"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/jet2jet"
+  },
+  "scripts": {
+    "build": "npm run build:esm",
+    "build:esm": "tsc -p ./tsconfig.app.json && npm run build:esm:addModuleExports",
+    "build:esm:addModuleExports": "node ./tools/addModuleExports.mjs ./dist/getCustomTransformers.mjs",
+    "lint": "npm run lint:eslint && npm run lint:prettier",
+    "lint:eslint": "eslint -c eslint.config.mjs --ext .mjs,.mts .",
+    "lint:eslint:fix": "eslint -c eslint.config.mjs --fix --ext .mjs,.mts .",
+    "lint:fix": "npm run lint:eslint:fix && npm run lint:prettier:fix",
+    "lint:prettier": "prettier --config ./.prettierrc.yml --check \"**/*.{js,jsx,ts,tsx,yml,json,md}\"",
+    "lint:prettier:fix": "prettier --config ./.prettierrc.yml --write \"**/*.{js,jsx,ts,tsx,yml,json,md}\"",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config ./jest.config.mjs",
+    "test:update": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config ./jest.config.mjs -u",
+    "typecheck": "tsc --project tsconfig.json --noEmit && echo \"Done\".",
+    "version": "node ./tools/updateVersion.mjs ./src/main/version.mts && git add -A ./src/main/version.mts"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/node": "~20.19.22",
+    "@typescript-eslint/eslint-plugin": "^8.48.0",
+    "@typescript-eslint/parser": "^8.48.0",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import-x": "^4.16.1",
+    "eslint-plugin-n": "^17.23.1",
+    "eslint-plugin-promise": "^7.2.1",
+    "jest": "^30.2.0",
+    "memfs": "^4.51.0",
+    "neostandard": "^0.12.2",
+    "prettier": "^3.6.2",
+    "ts-jest": "^29.4.5",
+    "ts-loader": "^9.5.4",
+    "ts-patch": "^3.3.0",
+    "tslib": "^2.8.1",
+    "typescript": "~5.5.4",
+    "webpack": "^5.103.0"
+  },
+  "peerDependencies": {
+    "typescript": ">=5.5"
+  },
+  "dependencies": {
+    "source-map": "^0.7.6"
+  }
+}

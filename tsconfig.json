@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.test.json",
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["../../src/main/*"]
+    },
+    "target": "es2023"
+  },
+  "include": [
+    "./src/main/**/*.mts",
+    "./src/test/**/*.mts",
+    "./test/typings/*.d.ts"
+  ],
+  "exclude": ["./src/test-project"]
+}

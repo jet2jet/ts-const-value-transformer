@@ -1,0 +1,226 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`loader test: generated source 1`] = `
+"(()=>{"use strict";var e={d:(o,n)=>{for(var t in n)e.o(n,t)&&!e.o(o,t)&&Object.defineProperty(o,t,{enumerable:!0,get:n[t]})},o:(o,n)=>Object.prototype.hasOwnProperty.call(o,n),r:o=>{"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(o,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(o,"__esModule",{value:!0})}},t={};e.r(t),e.d(t,{constObject:()=>d,constValue1:()=>l,constValue2:()=>r,constValue3:()=>a,constValue4:()=>c,constValue5:()=>s,constValue6:()=>g,constValue7:()=>b,constValue8:()=>i,constValue9:()=>u});const l=1,r=.1,a=-1,c="foo",s=!0,g=10n,b=-10n,i="aaa\\nbbb",u=\`bbb\${n}\`;console.log(1,.1,-1,"foo",!0,10n,-10n,"aaa\\nbbb".toString(),u.toString(),n.toString(),!0,12345,.1),console.log(1,1===n||2===n);const d={a:4,b:"bar",c:!1,d:null,e:void 0,f:20n,g:-30n,h:{h1:1,h2:-3.14,h3:{}}};var S;console.log(4,"bar",!1,null,void 0,20n,-30n,d.h,1,-3.14,d.h.h3,4..toString(),"bar".toString(),(!1).toString(),20n.toString(),-30n.toString(),1..toString(),-3.14.toString()),console.log(o.a),console.log(o.h.h1),function(o){o[o.A=1]="A",o.B="hoge"}(S||(S={})),console.log(1,"hoge"),(()=>{const{a:o,b:n,e=-1}=d;console.log(4,"bar",-1)})(),((o=.1)=>{console.log(o)})(),console.log(12345),console.log([...Array(5)].map((o,n)=>n)),console.log(((...o)=>o.length)(...Array(5)));var h=exports;for(var f in t)h[f]=t[f];t.__esModule&&Object.defineProperty(h,"__esModule",{value:!0})})();
+//# sourceMappingURL=index.js.map"
+`;
+
+exports[`loader test: generated source map 1`] = `
+{
+  "file": "index.js",
+  "ignoreList": [],
+  "mappings": "mBACA,IAAIA,EAAsB,CCA1BA,EAAwB,CAACC,EAASC,KACjC,IAAI,IAAIC,KAAOD,EACXF,EAAoBI,EAAEF,EAAYC,KAASH,EAAoBI,EAAEH,EAASE,IAC5EE,OAAOC,eAAeL,EAASE,EAAK,CAAEI,YAAY,EAAMC,IAAKN,EAAWC,MCJ3EH,EAAwB,CAACS,EAAKC,IAAUL,OAAOM,UAAUC,eAAeC,KAAKJ,EAAKC,GCClFV,EAAyBC,IACH,oBAAXa,QAA0BA,OAAOC,aAC1CV,OAAOC,eAAeL,EAASa,OAAOC,YAAa,CAAEC,MAAO,WAE7DX,OAAOC,eAAeL,EAAS,aAAc,CAAEe,OAAO,M,yMCHvD,MAAK,EAAc,EACd,EAAc,GACd,GAAgB,EAChB,EAAc,MACd,GAAc,EACd,EAAc,IACd,GAAgB,IAChB,EAAc,WAGd,EAAc,MAAOC,IAI1BC,QAAQC,IACNC,EACAC,IACAC,EAGAC,OAEAC,EACAC,KACAC,IAEAC,WAAYC,WAEd,EAAcA,WAEXX,EAASW,YACVC,EAEe,MAEDR,IAchBH,QAAQC,IAAIW,EAA4BA,IAAjBb,GAA+Cc,IAAjBd,GAE/C,MAAM,EAAc,CAC1B,EAAI,EACJ,EAAI,MACJ,GAAI,EACJ,EAAI,KACJ,OAAKe,EACL,EAAI,IACJ,GAAM,IACN,EAAI,CACJ,GAAQZ,EACR,IAAS,KACT,GAAO,KA8BP,IAAU,EA3BVF,QAAQC,IACNc,EACAC,OACAC,EACAC,UACAC,EACAC,KACAC,IACF,EAAcC,EACZC,GACAC,KACF,EAAcF,EAAEG,GAEdV,GAAcL,WACdM,MAAcN,aACdO,GAAcP,WACdU,IAAcV,YACdW,IAAcX,WACda,GAAiBb,YACjBc,KAAiBd,YAKnBV,QAAQC,IAAKf,EAAyBwC,GACtC1B,QAAQC,IAAKf,EAAyBoC,EAAEK,IAExC,SAAU,GACV,aACA,UACC,CAHD,CAAU,MAAQ,KAIlB3B,QAAQC,IAAI2B,EAAWC,QAEvB,MACA,MAAO,EAAE,EAAG,EAAG,EAAG,GAAMzB,GAAe,EACvC,QAAUH,IAAIyB,EAAGI,OAAIC,EACpB,EAHD,GAKA,EAAEC,EAAY7B,MACd,QAAUF,IAAI+B,EACb,EAFD,GAOAhC,QAAQC,IAFA,OAKRD,QAAQC,IAAI,IAAIgC,MAAiB,IAAIC,IAAI,CAACC,EAAE,IAAoBC,IAEhEpC,QAAQC,IADG,KAAKoC,IAAsBA,EAAKC,OAC/BC,IAAON,MAAiB,K",
+  "names": [
+    "__webpack_require__",
+    "exports",
+    "definition",
+    "key",
+    "o",
+    "Object",
+    "defineProperty",
+    "enumerable",
+    "get",
+    "obj",
+    "prop",
+    "prototype",
+    "hasOwnProperty",
+    "call",
+    "Symbol",
+    "toStringTag",
+    "value",
+    "n",
+    "console",
+    "log",
+    "constValue1",
+    "constValue2",
+    "constValue3",
+    "constValue4",
+    "constValue5",
+    "constValue6",
+    "constValue7",
+    "constValue8",
+    "toString",
+    "constValue10",
+    "mod.Hoge",
+    "mod.Piyo",
+    "undefined",
+    "constObject.a",
+    "constObject.b",
+    "constObject.c",
+    "constObject.d",
+    "constObject.e",
+    "constObject.f",
+    "constObject.g",
+    "h",
+    "constObject.h.h1",
+    "constObject.h.h2",
+    "h3",
+    "a",
+    "h1",
+    "BarEnum.A",
+    "BarEnum.B",
+    "b2",
+    "e",
+    "x",
+    "Array",
+    "map",
+    "u",
+    "i",
+    "args",
+    "length",
+    "fn1",
+  ],
+  "sourceRoot": "",
+  "sources": [
+    "webpack://ts-const-value-transformer/webpack/bootstrap",
+    "webpack://ts-const-value-transformer/webpack/runtime/define property getters",
+    "webpack://ts-const-value-transformer/webpack/runtime/hasOwnProperty shorthand",
+    "webpack://ts-const-value-transformer/webpack/runtime/make namespace object",
+    "webpack://ts-const-value-transformer/./src/test-project/index.mts",
+  ],
+  "sourcesContent": [
+    "// The require scope
+var __webpack_require__ = {};
+
+",
+    "// define getter functions for harmony exports
+__webpack_require__.d = (exports, definition) => {
+	for(var key in definition) {
+		if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+			Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+		}
+	}
+};",
+    "__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))",
+    "// define __esModule on exports
+__webpack_require__.r = (exports) => {
+	if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+		Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+	}
+	Object.defineProperty(exports, '__esModule', { value: true });
+};",
+    "import * as mod from './mod.mjs';
+
+const constValue1 = 1;
+const constValue2 = 0.1;
+const constValue3 = -1;
+const constValue4 = 'foo';
+const constValue5 = true;
+const constValue6 = 10n;
+const constValue7 = -10n;
+const constValue8 = \`aaa
+bbb\`;
+declare let n: number;
+const constValue9 = \`bbb\${n}\`;
+const constValue10 = !0;
+const constValue11 = undefined;
+
+console.log(
+  constValue1,
+  constValue2,
+  constValue3,
+  /* the comment */
+  /* the comment */
+  constValue4,
+  /* the comment */
+  constValue5,
+  constValue6 /* the comment */,
+  constValue7,
+  /* the comment */
+  constValue8.toString() /* the comment */,
+  // don't transform because constValue9 is not a literal type
+  constValue9.toString(),
+  // don't transform for asserted type
+  (n as 10).toString(),
+  constValue10,
+  // 'constValue11 || 12345' is literal type, but don't transform (instead transform 'constValue11')
+  constValue11 || 12345,
+  // 'constValue1 ? constValue2 : constValue3' is literal type, but don't transform
+  constValue1 ? constValue2 : constValue3
+);
+export {
+  constValue1,
+  constValue2,
+  constValue3,
+  constValue4,
+  constValue5,
+  constValue6,
+  constValue7,
+  constValue8,
+  constValue9,
+};
+
+console.log(mod.Hoge, (n as number) === mod.Hoge || (n as number) === mod.Piyo);
+
+export const constObject = {
+  a: 4,
+  b: 'bar',
+  c: false,
+  d: null,
+  e: undefined,
+  f: 20n,
+  g: -30n,
+  h: {
+    h1: constValue1,
+    h2: -3.14,
+    h3: {},
+  },
+} as const;
+console.log(
+  constObject.a,
+  constObject.b,
+  constObject.c,
+  constObject.d,
+  constObject.e,
+  constObject.f,
+  constObject.g,
+  constObject.h,
+  constObject.h.h1,
+  constObject.h.h2,
+  constObject.h.h3,
+  //
+  constObject.a.toString(),
+  constObject.b.toString(),
+  constObject.c.toString(),
+  constObject.f.toString(),
+  constObject.g.toString(),
+  constObject.h.h1.toString(),
+  constObject.h.h2.toString()
+);
+
+// don't transform here
+declare let o: object;
+console.log((o as typeof constObject).a);
+console.log((o as typeof constObject).h.h1);
+
+const enum BarEnum {
+  A = 1,
+  B = 'hoge',
+}
+console.log(BarEnum.A, BarEnum.B);
+
+(() => {
+  const { a, b: b2, e = constValue3 } = constObject;
+  console.log(a, b2, e);
+})();
+
+((x: number = constValue2) => {
+  console.log(x);
+})();
+
+function fn2() {
+  return 12345 as const;
+}
+console.log(fn2());
+
+// don't transform spread element and parameter declarations
+console.log([...Array<undefined>(5)].map((u, i) => (u == null ? i : 0)));
+const fn1 = (...args: undefined[]) => args.length;
+console.log(fn1(...Array<undefined>(5)));
+
+export {};
+",
+  ],
+  "version": 3,
+}
+`;

@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "declaration": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "lib": ["ES2023"],
+    "module": "node16",
+    "moduleResolution": "node16",
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "outDir": "./dist",
+    "rootDir": "./src/main",
+    "skipLibCheck": true,
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "stripInternal": true,
+    "target": "es2023",
+    "verbatimModuleSyntax": true
+  },
+  "include": ["./src/main/**/*.mts"],
+  "exclude": ["./src/main/**/*.cts"]
+}
