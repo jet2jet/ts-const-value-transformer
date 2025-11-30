@@ -1,29 +1,12 @@
 {
   "configurations": [
     {
-      "name": "Run opened test (v3)",
+      "name": "Run opened test",
       "type": "node",
       "runtimeExecutable": "npm",
       "runtimeArgs": [
         "run",
-        "test:v3",
-        "--",
-        "--testTimeout",
-        "100000",
-        "--runTestsByPath",
-        "${relativeFile}"
-      ],
-      "request": "launch",
-      "console": "integratedTerminal",
-      "skipFiles": ["<node_internals>/**"]
-    },
-    {
-      "name": "Run opened test (v4)",
-      "type": "node",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": [
-        "run",
-        "test:v4",
+        "test",
         "--",
         "--testTimeout",
         "100000",
