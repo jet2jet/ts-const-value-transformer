@@ -1,6 +1,8 @@
 /**
  * @file Adds 'module.exports' export for specified file.
  * (See also: https://nodejs.org/api/modules.html#loading-ecmascript-modules-using-require)
+ * @notes
+ * This will not be necessary when typescript version is >= 5.6
  */
 
 import * as fs from 'fs';
