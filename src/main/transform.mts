@@ -10,6 +10,8 @@ export interface TransformOptions {
   hoistProperty?: boolean | undefined;
   /** Hoist TypeScript's `enum` values (which are constant). Default is true, but if you want to preserve references, set false explicitly. Note that TypeScript compiler erases `const enum` references unless `preserveConstEnums` is true. */
   hoistEnumValues?: boolean | undefined;
+  /** Hoist values defined in the external libraries. Default is true, but if the external libraries are not bundled, set false explicitly to keep references. */
+  hoistExternalValues?: boolean | undefined;
   /** Hoist function calls which the return value is constant. Default is false because function calls may have side effects. */
   unsafeHoistFunctionCall?: boolean | undefined;
   /** Hoist expressions with `as XXX`. Default is false because the base (non-`as`) value may be non-constant. */
@@ -30,6 +32,7 @@ function assignDefaultValues(
     ts: options.ts ?? ts,
     hoistProperty: options.hoistProperty ?? true,
     hoistEnumValues: options.hoistEnumValues ?? true,
+    hoistExternalValues: options.hoistExternalValues ?? true,
     unsafeHoistAsExpresion: options.unsafeHoistAsExpresion ?? false,
     unsafeHoistFunctionCall: options.unsafeHoistFunctionCall ?? false,
   };
@@ -140,6 +143,9 @@ function visitNodeAndReplaceIfNeeded(
   ) {
     return node;
   }
+  if (!options.hoistExternalValues && isExternalReference(node, program)) {
+    return node;
+  }
   if (ts.isIdentifier(node)) {
     if (
       // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
@@ -230,6 +236,41 @@ function isEnumIdentifier(
   const typeChecker = program.getTypeChecker();
   const type = typeChecker.getTypeAtLocation(node);
   return (type.getFlags() & ts.TypeFlags.EnumLiteral) !== 0;
+}
+
+function isExternalReference(
+  node: ts.Expression,
+  program: ts.Program
+): boolean {
+  const typeChecker = program.getTypeChecker();
+  const nodeSym = typeChecker.getSymbolAtLocation(node);
+  let nodeFrom: ts.Node | undefined = nodeSym?.getDeclarations()?.[0];
+  while (nodeFrom) {
+    if (program.isSourceFileFromExternalLibrary(nodeFrom.getSourceFile())) {
+      return true;
+    }
+    // Walk into the 'import' variables
+    if (!ts.isImportSpecifier(nodeFrom)) {
+      break;
+    }
+    const baseName = nodeFrom.propertyName ?? nodeFrom.name;
+    const baseSym = typeChecker.getSymbolAtLocation(baseName);
+    nodeFrom = baseSym?.getDeclarations()?.[0];
+  }
+  const type = typeChecker.getTypeAtLocation(node);
+  const sym = type.getSymbol();
+  if (!sym) {
+    return false;
+  }
+  const def = sym.getDeclarations()?.[0];
+  if (!def) {
+    return false;
+  }
+  const typeDefinitionSource = def.getSourceFile();
+  if (program.isSourceFileFromExternalLibrary(typeDefinitionSource)) {
+    return true;
+  }
+  return false;
 }
 
 function isAsConstExpression(node: ts.AsExpression): boolean {

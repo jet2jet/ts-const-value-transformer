@@ -73,6 +73,21 @@ describe('createTransformer and printSourceWithMap', () => {
     expect(resultData[0]).toMatchSnapshot('transformed source');
     expect(resultData[1]).toMatchSnapshot('source map object');
   });
+  it('test with hoistExternalValues=false', () => {
+    const [program, sourceFile] = prepareSource();
+    const transformer = createTransformer(program, {
+      options: { hoistExternalValues: false },
+    });
+    const result = ts.transform(
+      sourceFile,
+      [transformer],
+      program.getCompilerOptions()
+    );
+    const transformedSource = result.transformed[0]!;
+    const resultData = printSourceWithMap(transformedSource, 'index.mts');
+    expect(resultData[0]).toMatchSnapshot('transformed source');
+    expect(resultData[1]).toMatchSnapshot('source map object');
+  });
   it('test with unsafeHoistFunctionCall', () => {
     const [program, sourceFile] = prepareSource();
     const transformer = createTransformer(program, {

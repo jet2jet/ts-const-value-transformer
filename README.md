@@ -152,6 +152,8 @@ export interface TransformOptions {
   hoistProperty?: boolean | undefined;
   /** Hoist TypeScript's `enum` values (which are constant). Default is true, but if you want to preserve references, set false explicitly. Note that TypeScript compiler erases `const enum` references unless `preserveConstEnums` is true. */
   hoistEnumValues?: boolean | undefined;
+  /** Hoist values defined in the external libraries. Default is true, but if the external libraries are not bundled, set false explicitly to keep references. */
+  hoistExternalValues?: boolean | undefined;
   /** Hoist function calls which the return value is constant. Default is false because function calls may have side effects. */
   unsafeHoistFunctionCall?: boolean | undefined;
   /** Hoist expressions with `as XXX`. Default is false because the base (non-`as`) value may be non-constant. */
