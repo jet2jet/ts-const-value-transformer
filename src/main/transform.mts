@@ -8,6 +8,8 @@ export interface TransformOptions {
   ts?: typeof ts;
   /** Hoist property expressions (`x.prop`) which the value is constant. Default is true, but if the property getter has side effects (not recommended), set false explicitly. */
   hoistProperty?: boolean | undefined;
+  /** Hoist TypeScript's `enum` values (which are constant). Default is true, but if you want to preserve references, set false explicitly. Note that TypeScript compiler erases `const enum` references unless `preserveConstEnums` is true. */
+  hoistEnumValues?: boolean | undefined;
   /** Hoist function calls which the return value is constant. Default is false because function calls may have side effects. */
   unsafeHoistFunctionCall?: boolean | undefined;
   /** Hoist expressions with `as XXX`. Default is false because the base (non-`as`) value may be non-constant. */
@@ -21,14 +23,15 @@ interface NodeWithSymbols extends ts.Node {
 }
 
 function assignDefaultValues(
-  options: TransformOptions | undefined
+  options: TransformOptions = {}
 ): NonNullableTransformOptions {
   return {
-    ts,
-    hoistProperty: true,
-    unsafeHoistAsExpresion: false,
-    unsafeHoistFunctionCall: false,
-    ...options,
+    // avoid using spread syntax to override `undefined` (not missing) values
+    ts: options.ts ?? ts,
+    hoistProperty: options.hoistProperty ?? true,
+    hoistEnumValues: options.hoistEnumValues ?? true,
+    unsafeHoistAsExpresion: options.unsafeHoistAsExpresion ?? false,
+    unsafeHoistFunctionCall: options.unsafeHoistFunctionCall ?? false,
   };
 }
 
@@ -126,6 +129,10 @@ function visitNodeAndReplaceIfNeeded(
     (!options.hoistProperty &&
       ts.isPropertyAccessExpression(node) &&
       !isEnumAccess(node, program, ts)) ||
+    (!options.hoistEnumValues &&
+      ((ts.isPropertyAccessExpression(node) &&
+        isEnumAccess(node, program, ts)) ||
+        (ts.isIdentifier(node) && isEnumIdentifier(node, program, ts)))) ||
     (!options.unsafeHoistFunctionCall && ts.isCallLikeExpression(node)) ||
     node.kind === ts.SyntaxKind.TrueKeyword ||
     node.kind === ts.SyntaxKind.FalseKeyword ||
@@ -205,6 +212,17 @@ function visitNodeAndReplaceIfNeeded(
 
 function isEnumAccess(
   node: ts.PropertyAccessExpression,
+  program: ts.Program,
+  tsInstance: typeof ts
+): boolean {
+  const ts = tsInstance;
+  const typeChecker = program.getTypeChecker();
+  const type = typeChecker.getTypeAtLocation(node);
+  return (type.getFlags() & ts.TypeFlags.EnumLiteral) !== 0;
+}
+
+function isEnumIdentifier(
+  node: ts.Identifier,
   program: ts.Program,
   tsInstance: typeof ts
 ): boolean {

@@ -98,6 +98,12 @@ const enum BarEnum {
 }
 console.log(BarEnum.A, BarEnum.B);
 
+enum BazEnum {
+  C = 2,
+  D = 'piyo',
+}
+console.log(BazEnum.C, BazEnum.D);
+
 (() => {
   const { a, b: b2, e = constValue3 } = constObject;
   console.log(a, b2, e);

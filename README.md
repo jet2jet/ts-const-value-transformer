@@ -150,6 +150,8 @@ export interface TransformOptions {
   ts?: typeof ts;
   /** Hoist property expressions (`x.prop`) which the value is constant. Default is true, but if the property getter has side effects (not recommended), set false explicitly. */
   hoistProperty?: boolean | undefined;
+  /** Hoist TypeScript's `enum` values (which are constant). Default is true, but if you want to preserve references, set false explicitly. Note that TypeScript compiler erases `const enum` references unless `preserveConstEnums` is true. */
+  hoistEnumValues?: boolean | undefined;
   /** Hoist function calls which the return value is constant. Default is false because function calls may have side effects. */
   unsafeHoistFunctionCall?: boolean | undefined;
   /** Hoist expressions with `as XXX`. Default is false because the base (non-`as`) value may be non-constant. */
@@ -157,7 +159,7 @@ export interface TransformOptions {
 }
 ```
 
-Note that you must pass `options` field to `createTransformer` function or `"plugins"` specifier.
+Note that you must pass `options` field to `createTransformer` function or `"plugins"` specifier (see above examples).
 
 ### APIs
 
