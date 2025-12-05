@@ -156,6 +156,8 @@ export interface TransformOptions {
   hoistExternalValues?: boolean | undefined;
   /** Hoist function calls which the return value is constant. Default is false because function calls may have side effects. */
   unsafeHoistFunctionCall?: boolean | undefined;
+  /** Hoist function calls, with `@__PURE__` (or `#__PURE__`) comment annotation (must be a multi-line comment), which the return value is constant. Default is false, but if the function really has no side effects, you can safely specify true. If true, `unsafeHoistFunctionCall` option is ignored for `@__PURE__` functions */
+  hoistPureFunctionCall?: boolean | undefined;
   /** Hoist expressions with `as XXX`. Default is false because the base (non-`as`) value may be non-constant. */
   unsafeHoistAsExpresion?: boolean | undefined;
 }

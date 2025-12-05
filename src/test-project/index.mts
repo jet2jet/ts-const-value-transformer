@@ -122,6 +122,8 @@ function fn2() {
   return 12345 as const;
 }
 console.log(fn2());
+// with annotation
+console.log(/*@__PURE__*/ fn2(), /*#__PURE__*/ fn2());
 
 // don't transform spread element and parameter declarations
 console.log([...Array<undefined>(5)].map((u, i) => (u == null ? i : 0)));

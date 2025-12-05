@@ -103,6 +103,21 @@ describe('createTransformer and printSourceWithMap', () => {
     expect(resultData[0]).toMatchSnapshot('transformed source');
     expect(resultData[1]).toMatchSnapshot('source map object');
   });
+  it('test with hoistPureFunctionCall', () => {
+    const [program, sourceFile] = prepareSource();
+    const transformer = createTransformer(program, {
+      options: { hoistPureFunctionCall: true },
+    });
+    const result = ts.transform(
+      sourceFile,
+      [transformer],
+      program.getCompilerOptions()
+    );
+    const transformedSource = result.transformed[0]!;
+    const resultData = printSourceWithMap(transformedSource, 'index.mts');
+    expect(resultData[0]).toMatchSnapshot('transformed source');
+    expect(resultData[1]).toMatchSnapshot('source map object');
+  });
   it('test with unsafeHoistAsExpresion', () => {
     const [program, sourceFile] = prepareSource();
     const transformer = createTransformer(program, {

@@ -14,6 +14,8 @@ export interface TransformOptions {
   hoistExternalValues?: boolean | undefined;
   /** Hoist function calls which the return value is constant. Default is false because function calls may have side effects. */
   unsafeHoistFunctionCall?: boolean | undefined;
+  /** Hoist function calls, with `@__PURE__` (or `#__PURE__`) comment annotation (must be a multi-line comment), which the return value is constant. Default is false, but if the function really has no side effects, you can safely specify true. If true, `unsafeHoistFunctionCall` option is ignored for `@__PURE__` functions */
+  hoistPureFunctionCall?: boolean | undefined;
   /** Hoist expressions with `as XXX`. Default is false because the base (non-`as`) value may be non-constant. */
   unsafeHoistAsExpresion?: boolean | undefined;
 }
@@ -34,6 +36,7 @@ function assignDefaultValues(
     hoistEnumValues: options.hoistEnumValues ?? true,
     hoistExternalValues: options.hoistExternalValues ?? true,
     unsafeHoistAsExpresion: options.unsafeHoistAsExpresion ?? false,
+    hoistPureFunctionCall: options.hoistPureFunctionCall ?? false,
     unsafeHoistFunctionCall: options.unsafeHoistFunctionCall ?? false,
   };
 }
@@ -136,12 +139,19 @@ function visitNodeAndReplaceIfNeeded(
       ((ts.isPropertyAccessExpression(node) &&
         isEnumAccess(node, program, ts)) ||
         (ts.isIdentifier(node) && isEnumIdentifier(node, program, ts)))) ||
-    (!options.unsafeHoistFunctionCall && ts.isCallLikeExpression(node)) ||
     node.kind === ts.SyntaxKind.TrueKeyword ||
     node.kind === ts.SyntaxKind.FalseKeyword ||
     node.kind === ts.SyntaxKind.NullKeyword
   ) {
     return node;
+  }
+  if (
+    !options.unsafeHoistFunctionCall &&
+    (!options.hoistPureFunctionCall || !hasPureAnnotation(node, sourceFile, ts))
+  ) {
+    if (ts.isCallLikeExpression(node)) {
+      return node;
+    }
   }
   if (!options.hoistExternalValues && isExternalReference(node, program)) {
     return node;
@@ -320,6 +330,26 @@ function hasParentAsExpression(
     }
   }
   return hasParentAsExpression(node.parent, context, ts);
+}
+
+function hasPureAnnotation(
+  node: ts.Node,
+  sourceFile: ts.SourceFile,
+  tsInstance: typeof ts
+): boolean {
+  const ts = tsInstance;
+  const fullText = node.getFullText(sourceFile);
+  const ranges = ts.getLeadingCommentRanges(fullText, 0) ?? [];
+  for (const range of ranges) {
+    if (range.kind !== ts.SyntaxKind.MultiLineCommentTrivia) {
+      continue;
+    }
+    const text = fullText.slice(range.pos + 2, range.end - 2).trim();
+    if ((text[0] === '@' || text[0] === '#') && text.slice(1) === '__PURE__') {
+      return true;
+    }
+  }
+  return false;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
