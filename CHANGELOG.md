@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.2.0
+
+Add following options:
+
+- `hoistEnumValues`
+- `hoistExternalValues`
+- `hoistPureFunctionCall`
+
 ## v0.1.1
 
 Add `createTransformer` export point
