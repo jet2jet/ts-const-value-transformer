@@ -24,7 +24,7 @@ describe('use transformer in "plugins"', () => {
       }
       throw e;
     }
-  });
+  }, 20000);
 
   test('run tspc', async () => {
     const dist = path.join(TEST_PROJECT_DIR, 'dist');
@@ -48,5 +48,5 @@ describe('use transformer in "plugins"', () => {
         expect(content).toMatchSnapshot(`emit file '${file}'`);
       })
     );
-  });
+  }, 20000);
 });

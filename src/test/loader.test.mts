@@ -49,6 +49,12 @@ describe('loader', () => {
       entry: {
         index: path.resolve(TEST_PROJECT_DIR, 'index.mts'),
       },
+      // for test, don't bundle 'typescript' module
+      externals: {
+        typescript: {
+          root: 'typescript',
+        },
+      },
       output: {
         path: '/dummy',
         library: {

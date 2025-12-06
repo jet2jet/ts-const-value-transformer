@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`use transformer in "plugins" run tspc: emit file 'index.mjs' 1`] = `
-"import * as mod from './mod.mjs';
+"import * as ts from 'typescript';
+import { versionMajorMinor as vmm } from 'typescript';
+import * as mod from './mod.mjs';
 const constValue1 = 1;
 const constValue2 = 0.1;
 const constValue3 = -1;
@@ -31,6 +33,8 @@ void 0 /* constValue11 */ || 12345,
 // 'constValue1 ? constValue2 : constValue3' is literal type, but don't transform
 1 /* constValue1 */ ? 0.1 /* constValue2 */ : -1 /* constValue3 */);
 export { constValue1, constValue2, constValue3, constValue4, constValue5, constValue6, constValue7, constValue8, constValue9, };
+// External values
+console.log(133 /* ts.SyntaxKind.AnyKeyword */, ts.versionMajorMinor, "5.5" /* vmm */);
 console.log(mod.Hoge, n === mod.Hoge || n === mod.Piyo);
 export const constObject = {
     a: 4,
@@ -57,6 +61,12 @@ var BarEnum;
     BarEnum["B"] = "hoge";
 })(BarEnum || (BarEnum = {}));
 console.log(1 /* BarEnum.A */, "hoge" /* BarEnum.B */);
+var BazEnum;
+(function (BazEnum) {
+    BazEnum[BazEnum["C"] = 2] = "C";
+    BazEnum["D"] = "piyo";
+})(BazEnum || (BazEnum = {}));
+console.log(2 /* BazEnum.C */, "piyo" /* BazEnum.D */);
 (() => {
     const { a, b: b2, e = -1 /* constValue3 */ } = constObject;
     console.log(4 /* a */, "bar" /* b2 */, -1 /* e */);
@@ -68,6 +78,8 @@ function fn2() {
     return 12345;
 }
 console.log(fn2());
+// with annotation
+console.log(/*@__PURE__*/ fn2(), /*#__PURE__*/ fn2());
 // don't transform spread element and parameter declarations
 console.log([...Array(5)].map((u, i) => (void 0 /* u */ == null ? i : 0)));
 const fn1 = (...args) => args.length;
