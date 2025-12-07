@@ -3,6 +3,7 @@
 exports[`use transformer in "plugins" run tspc: emit file 'index.mjs' 1`] = `
 "import * as ts from 'typescript';
 import { versionMajorMinor as vmm } from 'typescript';
+import { versionMajorMinor } from 'typescript';
 import * as mod from './mod.mjs';
 const constValue1 = 1;
 const constValue2 = 0.1;
@@ -34,7 +35,7 @@ void 0 /* constValue11 */ || 12345,
 1 /* constValue1 */ ? 0.1 /* constValue2 */ : -1 /* constValue3 */);
 export { constValue1, constValue2, constValue3, constValue4, constValue5, constValue6, constValue7, constValue8, constValue9, };
 // External values
-console.log(133 /* ts.SyntaxKind.AnyKeyword */, ts.versionMajorMinor, "5.5" /* vmm */);
+console.log(133 /* ts.SyntaxKind.AnyKeyword */, ts.versionMajorMinor, "5.5" /* versionMajorMinor */, "5.5" /* vmm */);
 console.log(mod.Hoge, n === mod.Hoge || n === mod.Piyo);
 export const constObject = {
     a: 4,

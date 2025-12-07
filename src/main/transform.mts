@@ -265,7 +265,12 @@ function isExternalReference(
     }
     const baseName = nodeFrom.propertyName ?? nodeFrom.name;
     const baseSym = typeChecker.getSymbolAtLocation(baseName);
-    nodeFrom = baseSym?.getDeclarations()?.[0];
+    // We must follow 'aliased' symbol for parsing the symbol which name is not changed from the exported symbol name
+    const exportedSym =
+      baseSym && baseSym.getFlags() & ts.SymbolFlags.Alias
+        ? typeChecker.getAliasedSymbol(baseSym)
+        : baseSym;
+    nodeFrom = exportedSym?.getDeclarations()?.[0];
   }
   const type = typeChecker.getTypeAtLocation(node);
   const sym = type.getSymbol();

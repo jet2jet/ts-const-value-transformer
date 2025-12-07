@@ -1,5 +1,6 @@
 import * as ts from 'typescript';
 import { versionMajorMinor as vmm } from 'typescript';
+import { versionMajorMinor } from 'typescript';
 import * as mod from './mod.mjs';
 
 const constValue1 = 1;
@@ -52,7 +53,12 @@ export {
 };
 
 // External values
-console.log(ts.SyntaxKind.AnyKeyword, ts.versionMajorMinor, vmm);
+console.log(
+  ts.SyntaxKind.AnyKeyword,
+  ts.versionMajorMinor,
+  versionMajorMinor,
+  vmm
+);
 
 console.log(mod.Hoge, (n as number) === mod.Hoge || (n as number) === mod.Piyo);
 
