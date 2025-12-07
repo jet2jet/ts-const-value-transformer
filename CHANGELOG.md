@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.1
+
+Fix for tracing imported symbol
+
 ## v0.2.0
 
 Add following options:
