@@ -18,6 +18,12 @@ export interface TransformOptions {
   hoistPureFunctionCall?: boolean | undefined;
   /** Hoist expressions with `as XXX`. Default is false because the base (non-`as`) value may be non-constant. */
   unsafeHoistAsExpresion?: boolean | undefined;
+  /**
+   * External names (tested with `.includes()` for string, with `.test()` for RegExp) for `hoistExternalValues` settings (If `hoistExternalValues` is not specified, this setting will be used).
+   * - Path separators for input file name are always normalized to '/' internally.
+   * - Default is `['/node_modules/']`.
+   */
+  externalNames?: ReadonlyArray<string | RegExp> | undefined;
 }
 
 type NonNullableTransformOptions = Required<TransformOptions>;
@@ -38,6 +44,7 @@ function assignDefaultValues(
     unsafeHoistAsExpresion: options.unsafeHoistAsExpresion ?? false,
     hoistPureFunctionCall: options.hoistPureFunctionCall ?? false,
     unsafeHoistFunctionCall: options.unsafeHoistFunctionCall ?? false,
+    externalNames: options.externalNames ?? [],
   };
 }
 
@@ -153,7 +160,10 @@ function visitNodeAndReplaceIfNeeded(
       return node;
     }
   }
-  if (!options.hoistExternalValues && isExternalReference(node, program)) {
+  if (
+    !options.hoistExternalValues &&
+    isExternalReference(node, program, options.externalNames)
+  ) {
     return node;
   }
   if (ts.isIdentifier(node)) {
@@ -250,14 +260,30 @@ function isEnumIdentifier(
 
 function isExternalReference(
   node: ts.Expression,
-  program: ts.Program
+  program: ts.Program,
+  externalNames: ReadonlyArray<string | RegExp>
 ): boolean {
   const typeChecker = program.getTypeChecker();
   const nodeSym = typeChecker.getSymbolAtLocation(node);
   let nodeFrom: ts.Node | undefined = nodeSym?.getDeclarations()?.[0];
   while (nodeFrom) {
-    if (program.isSourceFileFromExternalLibrary(nodeFrom.getSourceFile())) {
-      return true;
+    const sourceFileName = nodeFrom.getSourceFile();
+    if (externalNames.length === 0) {
+      if (/[\\/]node_modules[\\/]/.test(sourceFileName.fileName)) {
+        return true;
+      }
+    } else {
+      if (
+        externalNames.some((part) => {
+          if (typeof part === 'string') {
+            return sourceFileName.fileName.replace(/\\/g, '/').includes(part);
+          } else {
+            return part.test(sourceFileName.fileName);
+          }
+        })
+      ) {
+        return true;
+      }
     }
     // Walk into the 'import' variables
     if (!ts.isImportSpecifier(nodeFrom)) {
