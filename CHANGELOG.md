@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.3.0
+
+Add `externalNames` option for `hoistExternalValues`
+
 ## v0.2.1
 
 Fix for tracing imported symbol

@@ -160,6 +160,12 @@ export interface TransformOptions {
   hoistPureFunctionCall?: boolean | undefined;
   /** Hoist expressions with `as XXX`. Default is false because the base (non-`as`) value may be non-constant. */
   unsafeHoistAsExpresion?: boolean | undefined;
+  /**
+   * External names (tested with `.includes()` for string, with `.test()` for RegExp) for `hoistExternalValues` settings (If `hoistExternalValues` is not specified, this setting will be used).
+   * - Path separators for input file name are always normalized to '/' internally.
+   * - Default is `['/node_modules/']`.
+   */
+  externalNames?: ReadonlyArray<string | RegExp> | undefined;
 }
 ```
 
