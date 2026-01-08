@@ -18,6 +18,8 @@ export interface TransformOptions {
   hoistPureFunctionCall?: boolean | undefined;
   /** Hoist expressions with `as XXX`. Default is false because the base (non-`as`) value may be non-constant. */
   unsafeHoistAsExpresion?: boolean | undefined;
+  /** Hoist properties/variables that can write (i.e. `let` / `var` variables or properies without `readonly`). Default is false because although the value is literal type at some point, the value may change to another literal type. */
+  unsafeHoistWritableValues?: boolean | undefined;
   /**
    * External names (tested with `.includes()` for string, with `.test()` for RegExp) for `hoistExternalValues` settings (If `hoistExternalValues` is not specified, this setting will be used).
    * - Path separators for input file name are always normalized to '/' internally.
@@ -44,6 +46,7 @@ function assignDefaultValues(
     unsafeHoistAsExpresion: options.unsafeHoistAsExpresion ?? false,
     hoistPureFunctionCall: options.hoistPureFunctionCall ?? false,
     unsafeHoistFunctionCall: options.unsafeHoistFunctionCall ?? false,
+    unsafeHoistWritableValues: options.unsafeHoistWritableValues ?? false,
     externalNames: options.externalNames ?? [],
   };
 }
@@ -173,9 +176,7 @@ function visitNodeAndReplaceIfNeeded(
       (!ts.isExpression(node.parent) &&
         (!('initializer' in node.parent) ||
           node !== node.parent.initializer)) ||
-      (!options.hoistProperty &&
-        ts.isPropertyAccessExpression(node.parent) &&
-        node === node.parent.name)
+      (ts.isPropertyAccessExpression(node.parent) && node === node.parent.name)
     ) {
       return node;
     }
@@ -187,6 +188,13 @@ function visitNodeAndReplaceIfNeeded(
       hasParentAsExpression(node.parent, context, ts))
   ) {
     return node;
+  }
+
+  if (!options.unsafeHoistWritableValues) {
+    const r = isReadonlyExpression(node, program, ts);
+    if (r === false) {
+      return node;
+    }
   }
 
   try {
@@ -381,6 +389,107 @@ function hasPureAnnotation(
     }
   }
   return false;
+}
+
+function getMemberName(m: ts.TypeElement | undefined, tsInstance: typeof ts) {
+  if (!m || !m.name) {
+    return '';
+  }
+  const name = m.name;
+  if (tsInstance.isIdentifier(name)) {
+    return name.escapedText;
+  } else if (tsInstance.isPrivateIdentifier(name)) {
+    return name.escapedText;
+  } else if (tsInstance.isStringLiteral(name)) {
+    return name.text;
+  } else {
+    return '';
+  }
+}
+
+function isReadonlyPropertyAccess(
+  a: ts.PropertyAccessExpression,
+  typeChecker: ts.TypeChecker,
+  tsInstance: typeof ts
+) {
+  const ts = tsInstance;
+  const type = typeChecker.getTypeAtLocation(a.expression);
+  const memberName = a.name.getText();
+  if (type.getFlags() & ts.TypeFlags.Object) {
+    const dummyTypeNode = typeChecker.typeToTypeNode(
+      type,
+      a,
+      ts.NodeBuilderFlags.NoTruncation
+    );
+    if (dummyTypeNode && ts.isTypeLiteralNode(dummyTypeNode)) {
+      for (let i = 0; i < dummyTypeNode.members.length; ++i) {
+        const m = dummyTypeNode.members[i];
+        if (
+          m &&
+          getMemberName(m, ts) === memberName &&
+          ts.isPropertySignature(m)
+        ) {
+          if (
+            m.modifiers?.some((m) => m.kind === ts.SyntaxKind.ReadonlyKeyword)
+          ) {
+            return true;
+          }
+        }
+      }
+    }
+    const prop = type.getProperty(memberName);
+    if (prop && prop.declarations && prop.declarations.length > 0) {
+      const decl = prop.declarations[0]!;
+      if (
+        ts.isPropertySignature(decl) &&
+        decl.modifiers?.some((m) => m.kind === ts.SyntaxKind.ReadonlyKeyword)
+      ) {
+        return true;
+      }
+      if (
+        ts.isVariableDeclaration(decl) &&
+        // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+        decl.parent &&
+        ts.isVariableDeclarationList(decl.parent) &&
+        decl.parent.flags & ts.NodeFlags.Const
+      ) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+function isReadonlyExpression(
+  node: ts.Expression,
+  program: ts.Program,
+  tsInstance: typeof ts
+): boolean | null {
+  const ts = tsInstance;
+  const typeChecker = program.getTypeChecker();
+  if (
+    ts.isIdentifier(node) &&
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+    node.parent &&
+    !ts.isPropertyAccessExpression(node.parent)
+  ) {
+    const nodeSym = typeChecker.getSymbolAtLocation(node);
+    if (nodeSym?.valueDeclaration) {
+      if (ts.isVariableDeclarationList(nodeSym.valueDeclaration.parent)) {
+        if (nodeSym.valueDeclaration.parent.flags & ts.NodeFlags.Const) {
+          return true;
+        }
+        return false;
+      }
+    }
+  }
+  if (ts.isPropertyAccessExpression(node)) {
+    if (isEnumAccess(node, program, ts)) {
+      return true;
+    }
+    return isReadonlyPropertyAccess(node, typeChecker, ts);
+  }
+  return null;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

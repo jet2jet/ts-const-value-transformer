@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`loader test: generated source 1`] = `
-"(()=>{"use strict";var e={d:(o,n)=>{for(var t in n)e.o(n,t)&&!e.o(o,t)&&Object.defineProperty(o,t,{enumerable:!0,get:n[t]})},o:(o,n)=>Object.prototype.hasOwnProperty.call(o,n),r:o=>{"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(o,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(o,"__esModule",{value:!0})}},t={};e.r(t),e.d(t,{constObject:()=>d,constValue1:()=>l,constValue2:()=>r,constValue3:()=>c,constValue4:()=>a,constValue5:()=>s,constValue6:()=>g,constValue7:()=>i,constValue8:()=>u,constValue9:()=>b}),require(void 0);const l=1,r=.1,c=-1,a="foo",s=!0,g=10n,i=-10n,u="aaa\\nbbb",b=\`bbb\${n}\`;console.log(1,.1,-1,"foo",!0,10n,-10n,"aaa\\nbbb".toString(),b.toString(),n.toString(),!0,12345,.1),console.log(133,"5.5","5.5","5.5"),console.log(1,1===n||2===n);const d={a:4,b:"bar",c:!1,d:null,e:void 0,f:20n,g:-30n,h:{h1:1,h2:-3.14,h3:{}}};var S,f;function y(){return 12345}console.log(4,"bar",!1,null,void 0,20n,-30n,d.h,1,-3.14,d.h.h3,4..toString(),"bar".toString(),(!1).toString(),20n.toString(),-30n.toString(),1..toString(),-3.14.toString()),console.log(o.a),console.log(o.h.h1),function(o){o[o.A=1]="A",o.B="hoge"}(S||(S={})),console.log(1,"hoge"),function(o){o[o.C=2]="C",o.D="piyo"}(f||(f={})),console.log(2,"piyo"),(()=>{const{a:o,b:n,e=-1}=d;console.log(4,"bar",-1)})(),((o=.1)=>{console.log(o)})(),console.log(12345),console.log(y(),y()),console.log([...Array(5)].map((o,n)=>n)),console.log(((...o)=>o.length)(...Array(5)));var h=exports;for(var p in t)h[p]=t[p];t.__esModule&&Object.defineProperty(h,"__esModule",{value:!0})})();
+"(()=>{"use strict";var e={d:(o,n)=>{for(var t in n)e.o(n,t)&&!e.o(o,t)&&Object.defineProperty(o,t,{enumerable:!0,get:n[t]})},o:(o,n)=>Object.prototype.hasOwnProperty.call(o,n),r:o=>{"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(o,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(o,"__esModule",{value:!0})}},t={};e.r(t),e.d(t,{constObject:()=>d,constValue1:()=>l,constValue2:()=>r,constValue3:()=>c,constValue4:()=>s,constValue5:()=>a,constValue6:()=>g,constValue7:()=>i,constValue8:()=>b,constValue9:()=>u}),require(void 0);const l=1,r=.1,c=-1,s="foo",a=!0,g=10n,i=-10n,b="aaa\\nbbb",u=\`bbb\${n}\`;console.log(1,.1,-1,"foo",!0,10n,-10n,"aaa\\nbbb".toString(),u.toString(),n.toString(),!0,12345,.1,!0),console.log(133,"5.5","5.5","5.5"),console.log(1,1===n||2===n);const d={a:4,b:"bar",c:!1,d:null,e:void 0,f:20n,g:-30n,h:{h1:1,h2:-3.14,h3:{}}};console.log(4,"bar",!1,null,void 0,20n,-30n,d.h,1,-3.14,d.h.h3,4..toString(),"bar".toString(),(!1).toString(),20n.toString(),-30n.toString(),1..toString(),-3.14.toString()),console.log(o.a),console.log(o.h.h1);const p={a:!1,b:2};console.log(p.a,p.b);const S={p:1,q:"q",r:{s:!1,t:2}};var f,y;function h(){return 12345}S.p=null,S.r.s=!0,console.log(S.p,"q",S.r.s,2),function(o){o[o.A=1]="A",o.B="hoge"}(f||(f={})),console.log(1,"hoge"),function(o){o[o.C=2]="C",o.D="piyo"}(y||(y={})),console.log(2,"piyo"),(()=>{const{a:o,b:n,e=-1}=d;console.log(4,"bar",-1)})(),((o=.1)=>{console.log(o)})(),console.log(12345),console.log(h(),h()),console.log([...Array(5)].map((o,n)=>n)),console.log(((...o)=>o.length)(...Array(5)));var v=exports;for(var V in t)v[V]=t[V];t.__esModule&&Object.defineProperty(v,"__esModule",{value:!0})})();
 //# sourceMappingURL=index.js.map"
 `;
 
@@ -9,7 +9,7 @@ exports[`loader test: generated source map 1`] = `
 {
   "file": "index.js",
   "ignoreList": [],
-  "mappings": "mBACA,IAAIA,EAAsB,CCA1BA,EAAwB,CAACC,EAASC,KACjC,IAAI,IAAIC,KAAOD,EACXF,EAAoBI,EAAEF,EAAYC,KAASH,EAAoBI,EAAEH,EAASE,IAC5EE,OAAOC,eAAeL,EAASE,EAAK,CAAEI,YAAY,EAAMC,IAAKN,EAAWC,MCJ3EH,EAAwB,CAACS,EAAKC,IAAUL,OAAOM,UAAUC,eAAeC,KAAKJ,EAAKC,GCClFV,EAAyBC,IACH,oBAAXa,QAA0BA,OAAOC,aAC1CV,OAAOC,eAAeL,EAASa,OAAOC,YAAa,CAAEC,MAAO,WAE7DX,OAAOC,eAAeL,EAAS,aAAc,CAAEe,OAAO,M,yMCLlBC,aAAQC,GAA7C,MCKK,EAAc,EACd,EAAc,GACd,GAAgB,EAChB,EAAc,MACd,GAAc,EACd,EAAc,IACd,GAAgB,IAChB,EAAc,WAGd,EAAc,MAAOC,IAI1BC,QAAQC,IACNC,EACAC,IACAC,EAGAC,OAEAC,EACAC,KACAC,IAEAC,WAAYC,WAEd,EAAcA,WAEXX,EAASW,YACVC,EAEe,MAEDR,IAehBH,QAAQC,IACNW,IACAC,MACAC,MACAC,OAGFf,QAAQC,IAAIe,EAA4BA,IAAjBjB,GAA+CkB,IAAjBlB,GAE/C,MAAM,EAAc,CAC1B,EAAI,EACJ,EAAI,MACJ,GAAI,EACJ,EAAI,KACJ,OAAKD,EACL,EAAI,IACJ,GAAM,IACN,EAAI,CACJ,GAAQI,EACR,IAAS,KACT,GAAO,KA8BP,IAAU,EAMN,EAeJ,SAAQ,IACR,OAAQ,KACR,CAlDAF,QAAQC,IACNiB,EACAC,OACAC,EACAC,UACAC,EACAC,KACAC,IACF,EAAcC,EACZC,GACAC,KACF,EAAcF,EAAEG,GAEdV,GAAcR,WACdS,MAAcT,aACdU,GAAcV,WACda,IAAcb,YACdc,IAAcd,WACdgB,GAAiBhB,YACjBiB,KAAiBjB,YAKnBV,QAAQC,IAAKjB,EAAyB6C,GACtC7B,QAAQC,IAAKjB,EAAyByC,EAAEK,IAExC,SAAU,GACV,aACA,UACC,CAHD,CAAU,MAAQ,KAIlB9B,QAAQC,IAAI8B,EAAWC,QAEvB,SAAI,GACJ,aACA,UACC,CAHD,CAAI,MAAQ,KAIZhC,QAAQC,IAAIgC,EAAWC,QAEvB,MACA,MAAO,EAAE,EAAG,EAAG,EAAG,GAAM9B,GAAe,EACvC,QAAUH,IAAI4B,EAAGM,OAAIC,EACpB,EAHD,GAKA,EAAEC,EAAYlC,MACd,QAAUF,IAAIoC,EACb,EAFD,GAOArC,QAAQC,IAFA,OAIRD,QAAQC,IAAkBqC,IAAM,KAGhCtC,QAAQC,IAAI,IAAIsC,MAAiB,IAAIC,IAAI,CAACC,EAAE,IAAoBC,IAEhE1C,QAAQC,IADG,KAAK0C,IAAsBA,EAAKC,OAC/BC,IAAON,MAAiB,K",
+  "mappings": "mBACA,IAAIA,EAAsB,CCA1BA,EAAwB,CAACC,EAASC,KACjC,IAAI,IAAIC,KAAOD,EACXF,EAAoBI,EAAEF,EAAYC,KAASH,EAAoBI,EAAEH,EAASE,IAC5EE,OAAOC,eAAeL,EAASE,EAAK,CAAEI,YAAY,EAAMC,IAAKN,EAAWC,MCJ3EH,EAAwB,CAACS,EAAKC,IAAUL,OAAOM,UAAUC,eAAeC,KAAKJ,EAAKC,GCClFV,EAAyBC,IACH,oBAAXa,QAA0BA,OAAOC,aAC1CV,OAAOC,eAAeL,EAASa,OAAOC,YAAa,CAAEC,MAAO,WAE7DX,OAAOC,eAAeL,EAAS,aAAc,CAAEe,OAAO,M,yMCLlBC,aAAQC,GAA7C,MCKK,EAAc,EACd,EAAc,GACd,GAAgB,EAChB,EAAc,MACd,GAAc,EACd,EAAc,IACd,GAAgB,IAChB,EAAc,WAGd,EAAc,MAAOC,IAK1BC,QAAQC,IACNC,EACAC,IACAC,EAGAC,OAEAC,EACAC,KACAC,IAEAC,WAAYC,WAEd,EAAcA,WAEXX,EAASW,YACVC,EAEe,MAEDR,IAvBI,GAwCpBH,QAAQC,IACNW,IACAC,MACAC,MACAC,OAGFf,QAAQC,IAAIe,EAA4BA,IAAjBjB,GAA+CkB,IAAjBlB,GAE/C,MAAM,EAAc,CAC1B,EAAI,EACJ,EAAI,MACJ,GAAI,EACJ,EAAI,KACJ,OAAKD,EACL,EAAI,IACJ,GAAM,IACN,EAAI,CACJ,GAAQI,EACR,IAAS,KACT,GAAO,KAGPF,QAAQC,IACNiB,EACAC,OACAC,EACAC,UACAC,EACAC,KACAC,IACF,EAAcC,EACZC,GACAC,KACF,EAAcF,EAAEG,GAEdV,GAAcR,WACdS,MAAcT,aACdU,GAAcV,WACda,IAAcb,YACdc,IAAcd,WACdgB,GAAiBhB,YACjBiB,KAAiBjB,YAKnBV,QAAQC,IAAKjB,EAAyB6C,GACtC7B,QAAQC,IAAKjB,EAAyByC,EAAEK,IAExC,MAAK,EAAiB,CACtB,GAGkB,EAFlB,EAGkB,GAElB9B,QAAQC,IAAI8B,EAAeF,EAAE,EAAgBG,GAU7C,MAAK,EAAyC,CAC9C,EAAI,EACJ,EAAI,IACJ,EAAI,CACJ,GAAM,EACN,EAAM,IAaN,IAAU,EAMN,EAeJ,SAAQ,IACR,OAAQ,KACR,CAjCAC,EAAmBC,EAAG,KACtBD,EAAmBE,EAAEC,GAAG,EAExBpC,QAAQC,IACR,EAAqBiC,EACnBG,IACF,EAAqBF,EAAEC,EACrBE,GAGF,SAAU,GACV,aACA,UACC,CAHD,CAAU,MAAQ,KAIlBtC,QAAQC,IAAIsC,EAAWC,QAEvB,SAAI,GACJ,aACA,UACC,CAHD,CAAI,MAAQ,KAIZxC,QAAQC,IAAIwC,EAAWC,QAEvB,MACA,MAAO,EAAE,EAAG,EAAG,EAAG,GAAMtC,GAAe,EACvC,QAAUH,IAAI4B,EAAGc,OAAIC,EACpB,EAHD,GAKA,EAAEC,EAAY1C,MACd,QAAUF,IAAI4C,EACb,EAFD,GAOA7C,QAAQC,IAFA,OAIRD,QAAQC,IAAkB6C,IAAM,KAGhC9C,QAAQC,IAAI,IAAI8C,MAAiB,IAAIC,IAAI,CAACC,EAAE,IAAoBC,IAEhElD,QAAQC,IADG,KAAKkD,IAAsBA,EAAKC,OAC/BC,IAAON,MAAiB,K",
   "names": [
     "__webpack_require__",
     "exports",
@@ -62,6 +62,14 @@ exports[`loader test: generated source map 1`] = `
     "h3",
     "a",
     "h1",
+    "nonConstObject",
+    "b",
+    "partialConstObject",
+    "p",
+    "r",
+    "s",
+    "partialConstObject.q",
+    "partialConstObject.r.t",
     "BarEnum.A",
     "BarEnum.B",
     "BazEnum.C",
@@ -127,6 +135,7 @@ declare let n: number;
 const constValue9 = \`bbb\${n}\`;
 const constValue10 = !0;
 const constValue11 = undefined;
+let writableValue1 = true;
 
 console.log(
   constValue1,
@@ -149,7 +158,9 @@ console.log(
   // 'constValue11 || 12345' is literal type, but don't transform (instead transform 'constValue11')
   constValue11 || 12345,
   // 'constValue1 ? constValue2 : constValue3' is literal type, but don't transform
-  constValue1 ? constValue2 : constValue3
+  constValue1 ? constValue2 : constValue3,
+  // writableValue1 is literal type, but don't transform unless \`unsafeHoistWritableValues\` is true
+  writableValue1
 );
 export {
   constValue1,
@@ -213,6 +224,41 @@ console.log(
 declare let o: object;
 console.log((o as typeof constObject).a);
 console.log((o as typeof constObject).h.h1);
+
+const nonConstObject = {
+  a: true,
+  b: 1,
+};
+nonConstObject.a = false;
+nonConstObject.b = 2;
+// don't transform \`a\` unless \`unsafeHoistWritableValues\` is true
+console.log(nonConstObject.a, nonConstObject.b);
+
+interface WithReadonlyObject {
+  p: number | null;
+  readonly q: 'q';
+  readonly r: {
+    s: boolean;
+    readonly t: 2;
+  };
+}
+const partialConstObject: WithReadonlyObject = {
+  p: 1,
+  q: 'q',
+  r: {
+    s: false,
+    t: 2,
+  },
+};
+partialConstObject.p = null;
+partialConstObject.r.s = true;
+// don't transform \`p\` and \`r.s\` unless \`unsafeHoistWritableValues\` is true
+console.log(
+  partialConstObject.p,
+  partialConstObject.q,
+  partialConstObject.r.s,
+  partialConstObject.r.t
+);
 
 const enum BarEnum {
   A = 1,

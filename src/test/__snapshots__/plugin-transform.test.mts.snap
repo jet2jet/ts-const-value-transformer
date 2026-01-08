@@ -17,6 +17,7 @@ bbb\`;
 const constValue9 = \`bbb\${n}\`;
 const constValue10 = !0;
 const constValue11 = void 0 /* undefined */;
+let writableValue1 = true;
 console.log(1 /* constValue1 */, 0.1 /* constValue2 */, -1 /* constValue3 */, 
 /* the comment */
 /* the comment */
@@ -32,7 +33,9 @@ n.toString(), true /* constValue10 */,
 // 'constValue11 || 12345' is literal type, but don't transform (instead transform 'constValue11')
 void 0 /* constValue11 */ || 12345, 
 // 'constValue1 ? constValue2 : constValue3' is literal type, but don't transform
-1 /* constValue1 */ ? 0.1 /* constValue2 */ : -1 /* constValue3 */);
+1 /* constValue1 */ ? 0.1 /* constValue2 */ : -1 /* constValue3 */, 
+// writableValue1 is literal type, but don't transform unless \`unsafeHoistWritableValues\` is true
+writableValue1);
 export { constValue1, constValue2, constValue3, constValue4, constValue5, constValue6, constValue7, constValue8, constValue9, };
 // External values
 console.log(133 /* ts.SyntaxKind.AnyKeyword */, ts.versionMajorMinor, "5.5" /* versionMajorMinor */, "5.5" /* vmm */);
@@ -56,6 +59,26 @@ console.log(constObject.a, constObject.b, constObject.c, constObject.d, constObj
 constObject.a.toString(), constObject.b.toString(), constObject.c.toString(), constObject.f.toString(), constObject.g.toString(), constObject.h.h1.toString(), constObject.h.h2.toString());
 console.log(o.a);
 console.log(o.h.h1);
+const nonConstObject = {
+    a: true,
+    b: 1,
+};
+nonConstObject.a = false;
+nonConstObject.b = 2;
+// don't transform \`a\` unless \`unsafeHoistWritableValues\` is true
+console.log(nonConstObject.a, nonConstObject.b);
+const partialConstObject = {
+    p: 1,
+    q: 'q',
+    r: {
+        s: false,
+        t: 2,
+    },
+};
+partialConstObject.p = null;
+partialConstObject.r.s = true;
+// don't transform \`p\` and \`r.s\` unless \`unsafeHoistWritableValues\` is true
+console.log(partialConstObject.p, partialConstObject.q, partialConstObject.r.s, partialConstObject.r.t);
 var BarEnum;
 (function (BarEnum) {
     BarEnum[BarEnum["A"] = 1] = "A";

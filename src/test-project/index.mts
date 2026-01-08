@@ -16,6 +16,7 @@ declare let n: number;
 const constValue9 = `bbb${n}`;
 const constValue10 = !0;
 const constValue11 = undefined;
+let writableValue1 = true;
 
 console.log(
   constValue1,
@@ -38,7 +39,9 @@ console.log(
   // 'constValue11 || 12345' is literal type, but don't transform (instead transform 'constValue11')
   constValue11 || 12345,
   // 'constValue1 ? constValue2 : constValue3' is literal type, but don't transform
-  constValue1 ? constValue2 : constValue3
+  constValue1 ? constValue2 : constValue3,
+  // writableValue1 is literal type, but don't transform unless `unsafeHoistWritableValues` is true
+  writableValue1
 );
 export {
   constValue1,
@@ -102,6 +105,41 @@ console.log(
 declare let o: object;
 console.log((o as typeof constObject).a);
 console.log((o as typeof constObject).h.h1);
+
+const nonConstObject = {
+  a: true,
+  b: 1,
+};
+nonConstObject.a = false;
+nonConstObject.b = 2;
+// don't transform `a` unless `unsafeHoistWritableValues` is true
+console.log(nonConstObject.a, nonConstObject.b);
+
+interface WithReadonlyObject {
+  p: number | null;
+  readonly q: 'q';
+  readonly r: {
+    s: boolean;
+    readonly t: 2;
+  };
+}
+const partialConstObject: WithReadonlyObject = {
+  p: 1,
+  q: 'q',
+  r: {
+    s: false,
+    t: 2,
+  },
+};
+partialConstObject.p = null;
+partialConstObject.r.s = true;
+// don't transform `p` and `r.s` unless `unsafeHoistWritableValues` is true
+console.log(
+  partialConstObject.p,
+  partialConstObject.q,
+  partialConstObject.r.s,
+  partialConstObject.r.t
+);
 
 const enum BarEnum {
   A = 1,
