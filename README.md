@@ -160,6 +160,8 @@ export interface TransformOptions {
   hoistPureFunctionCall?: boolean | undefined;
   /** Hoist expressions with `as XXX`. Default is false because the base (non-`as`) value may be non-constant. */
   unsafeHoistAsExpresion?: boolean | undefined;
+  /** Hoist properties/variables that can write (i.e. `let` / `var` variables or properies without `readonly`). Default is false because although the value is literal type at some point, the value may change to another literal type. */
+  unsafeHoistWritableValues?: boolean | undefined;
   /**
    * External names (tested with `.includes()` for string, with `.test()` for RegExp) for `hoistExternalValues` settings (If `hoistExternalValues` is not specified, this setting will be used).
    * - Path separators for input file name are always normalized to '/' internally.
@@ -252,6 +254,21 @@ The version string of this package.
 #### type TransformOptions
 
 See [Transform options](#transform-options).
+
+## Notice
+
+Starting from v0.4.0, `unsafeHoistWritableValues` option is introduced. Since TypeScript sometimes narrows non-constant values to literal types such as:
+
+```ts
+const resultObject = { success: false };
+someFunc1(resultObject);
+console.log(resultObject.success); // resultObject.success will be `boolean` type
+resultObject.success = false;
+someFunc1(resultObject);
+console.log(resultObject.success); // resultObject.success will be `false` type, not `boolean`
+```
+
+... so if `unsafeHoistWritableValues` is true, the second reference of `resultObject.success` above will be replaced to `false`, which may not be correct.
 
 ## Additional notes
 

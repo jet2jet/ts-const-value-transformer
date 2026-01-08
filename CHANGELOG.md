@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.4.0
+
+Add `unsafeHoistWritableValues` option to prevent from hoisting non-const values with literal type unexpectedly
+
 ## v0.3.0
 
 Add `externalNames` option for `hoistExternalValues`
