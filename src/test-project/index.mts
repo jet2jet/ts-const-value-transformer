@@ -54,6 +54,14 @@ export {
   constValue8,
   constValue9,
 };
+setWritableValue1();
+if (constValue1 && (writableValue1 || !constValue5)) {
+  console.log('');
+}
+
+function setWritableValue1() {
+  writableValue1 = !!Math.random();
+}
 
 // External values
 console.log(

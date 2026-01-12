@@ -136,9 +136,17 @@ function visitNodeAndReplaceIfNeeded(
   if (
     ts.isLiteralExpression(node) ||
     ts.isObjectLiteralExpression(node) ||
+    // UnaryExpression start
     ts.isPrefixUnaryExpression(node) ||
     ts.isPostfixUnaryExpression(node) ||
+    ts.isDeleteExpression(node) ||
+    ts.isTypeOfExpression(node) ||
+    ts.isVoidExpression(node) ||
+    ts.isAwaitExpression(node) ||
+    ts.isTypeAssertionExpression(node) ||
+    // UnaryExpression end
     ts.isBinaryExpression(node) ||
+    ts.isParenthesizedExpression(node) ||
     ts.isConditionalExpression(node) ||
     ts.isVoidExpression(node) ||
     ts.isSpreadElement(node) ||

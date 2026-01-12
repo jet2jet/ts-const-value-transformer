@@ -37,6 +37,13 @@ void 0 /* constValue11 */ || 12345,
 // writableValue1 is literal type, but don't transform unless \`unsafeHoistWritableValues\` is true
 writableValue1);
 export { constValue1, constValue2, constValue3, constValue4, constValue5, constValue6, constValue7, constValue8, constValue9, };
+setWritableValue1();
+if (1 /* constValue1 */ && (writableValue1 || !true /* constValue5 */)) {
+    console.log('');
+}
+function setWritableValue1() {
+    writableValue1 = !!Math.random();
+}
 // External values
 console.log(133 /* ts.SyntaxKind.AnyKeyword */, ts.versionMajorMinor, "5.5" /* versionMajorMinor */, "5.5" /* vmm */);
 console.log(mod.Hoge, n === mod.Hoge || n === mod.Piyo);
