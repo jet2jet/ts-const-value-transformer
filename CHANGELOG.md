@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.4.1
+
+Fix for not hositing some more unary expressions and parenthesized expression
+
 ## v0.4.0
 
 Add `unsafeHoistWritableValues` option to prevent from hoisting non-const values with literal type unexpectedly
