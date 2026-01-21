@@ -154,9 +154,10 @@ function visitNodeAndReplaceIfNeeded(
     }
   } else if (ts.isIdentifier(node)) {
     if (
-      (!ts.isExpression(parent) &&
+      !ts.isComputedPropertyName(parent) &&
+      ((!ts.isExpression(parent) &&
         (!('initializer' in parent) || node !== parent.initializer)) ||
-      (ts.isPropertyAccessExpression(parent) && node === parent.name)
+        (ts.isPropertyAccessExpression(parent) && node === parent.name))
     ) {
       return node;
     }

@@ -105,6 +105,9 @@ console.log(2 /* BazEnum['C'] */, "piyo" /* BazEnum['D'] */);
 // Element access with constant name
 const name_a = 'a';
 console.log(constObject["a" /* name_a */]);
+// Object initializer with computed name
+const objWithComputedName = { ["a" /* name_a */]: 432 };
+console.log(objWithComputedName["a" /* name_a */]);
 (() => {
     const { a, b: b2, e = -1 /* constValue3 */ } = constObject;
     console.log(4 /* a */, "bar" /* b2 */, -1 /* e */);

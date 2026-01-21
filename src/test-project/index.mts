@@ -170,6 +170,10 @@ console.log(BazEnum['C'], BazEnum['D']);
 const name_a = 'a';
 console.log(constObject[name_a]);
 
+// Object initializer with computed name
+const objWithComputedName = { [name_a]: 432 } as const;
+console.log(objWithComputedName[name_a]);
+
 (() => {
   const { a, b: b2, e = constValue3 } = constObject;
   console.log(a, b2, e);
