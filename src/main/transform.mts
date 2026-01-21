@@ -22,6 +22,10 @@ export interface TransformOptions {
   unsafeHoistAsExpresion?: boolean | undefined;
   /** Hoist properties/variables that can write (i.e. `let` / `var` variables or properies without `readonly`). Default is false because although the value is literal type at some point, the value may change to another literal type. */
   unsafeHoistWritableValues?: boolean | undefined;
+  /** Uses `undefined` symbol for `undefined` type values. Default is false and replaces to `void 0`. */
+  useUndefinedSymbolForUndefinedValue?: boolean | undefined;
+  /** Hoist `undefined` symbol to `void 0` (or `undefined` if {@linkcode useUndefinedSymbolForUndefinedValue} is true). Default is true. */
+  hoistUndefinedSymbol?: boolean | undefined;
   /**
    * External names (tested with `.includes()` for string, with `.test()` for RegExp) for `hoistExternalValues` settings (If `hoistExternalValues` is not specified, this setting will be used).
    * - Path separators for input file name are always normalized to '/' internally.
@@ -58,6 +62,9 @@ function assignDefaultValues(
     hoistPureFunctionCall: options.hoistPureFunctionCall ?? false,
     unsafeHoistFunctionCall: options.unsafeHoistFunctionCall ?? false,
     unsafeHoistWritableValues: options.unsafeHoistWritableValues ?? false,
+    useUndefinedSymbolForUndefinedValue:
+      options.useUndefinedSymbolForUndefinedValue ?? false,
+    hoistUndefinedSymbol: options.hoistUndefinedSymbol ?? true,
     externalNames: options.externalNames ?? [],
     ignoreFiles: options.ignoreFiles ?? [],
   };
@@ -188,6 +195,12 @@ function visitNodeAndReplaceIfNeeded(
     if (!options.hoistEnumValues && isEnumIdentifier(node, program, ts)) {
       return node;
     }
+    if (
+      !options.hoistUndefinedSymbol &&
+      isUndefinedIdentifier(node, parent, program, ts)
+    ) {
+      return node;
+    }
   } else if (
     ts.isPropertyAccessExpression(node) ||
     ts.isElementAccessExpression(node)
@@ -238,6 +251,9 @@ function visitNodeAndReplaceIfNeeded(
     const type = typeChecker.getTypeAtLocation(node);
     const flags = type.getFlags();
     let newNode: ts.Node;
+    if (type.isUnionOrIntersection()) {
+      return node;
+    }
     if (type.isStringLiteral()) {
       newNode = context.factory.createStringLiteral(type.value);
     } else if (type.isNumberLiteral()) {
@@ -262,7 +278,11 @@ function visitNodeAndReplaceIfNeeded(
     } else if (flags & ts.TypeFlags.Null) {
       newNode = context.factory.createNull();
     } else if (flags & ts.TypeFlags.Undefined) {
-      newNode = context.factory.createVoidZero();
+      if (options.useUndefinedSymbolForUndefinedValue) {
+        newNode = context.factory.createIdentifier('undefined');
+      } else {
+        newNode = context.factory.createVoidZero();
+      }
     } else {
       return node;
     }
@@ -569,6 +589,33 @@ function isHoistablePropertyAccess(
     }
   }
   return false;
+}
+
+function isUndefinedIdentifier(
+  node: ts.Identifier,
+  parent: ts.Node,
+  program: ts.Program,
+  tsInstance: typeof ts
+): boolean {
+  if (
+    tsInstance.isPropertyAccessExpression(parent) ||
+    tsInstance.isElementAccessExpression(parent)
+  ) {
+    return false;
+  }
+  const typeChecker = program.getTypeChecker();
+  const type = typeChecker.getTypeAtLocation(node);
+  const sym = typeChecker.getSymbolAtLocation(node);
+  if (!sym || sym.getEscapedName().toString() !== 'undefined') {
+    return false;
+  }
+  if (
+    type.isUnionOrIntersection() ||
+    !(type.getFlags() & ts.TypeFlags.Undefined)
+  ) {
+    return false;
+  }
+  return true;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
