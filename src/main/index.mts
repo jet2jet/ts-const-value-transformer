@@ -1,3 +1,8 @@
+import createPortalTransformer, {
+  createPortalTransformerSync,
+  type CreatePortalTransformerOptions,
+  type PortalTransformer,
+} from './createPortalTransformer.mjs';
 import createTransformer from './createTransformer.mjs';
 import version from './version.mjs';
 
@@ -8,4 +13,11 @@ export {
   type TransformOptions,
 } from './transform.mjs';
 
-export { createTransformer, version };
+export {
+  createPortalTransformer,
+  createPortalTransformerSync,
+  createTransformer,
+  type CreatePortalTransformerOptions,
+  type PortalTransformer,
+  version,
+};

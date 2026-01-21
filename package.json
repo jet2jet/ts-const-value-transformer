@@ -23,6 +23,16 @@
       "import": "./dist/createTransformer.mjs",
       "types": "./dist/createTransformer.d.mts"
     },
+    "./createPortalTransformer": {
+      "default": "./dist/createPortalTransformer.mjs",
+      "import": "./dist/createPortalTransformer.mjs",
+      "types": "./dist/createPortalTransformer.d.mts"
+    },
+    "./createPortalTransformer.mjs": {
+      "default": "./dist/createPortalTransformer.mjs",
+      "import": "./dist/createPortalTransformer.mjs",
+      "types": "./dist/createPortalTransformer.d.mts"
+    },
     "./getCustomTransformers": {
       "default": "./dist/getCustomTransformers.mjs",
       "import": "./dist/getCustomTransformers.mjs",
