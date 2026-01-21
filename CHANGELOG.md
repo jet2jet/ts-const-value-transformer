@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.5.0
+
+- Add `useUndefinedSymbolForUndefinedValue` and `hoistUndefinedSymbol` options
+- Add `createPortalTransformer` to use transformer easily
+- Skip update process if unchanged
+- Skip some declarations for performance
+- Add hoisting computed property name
+- Add test for element access
+- Avoid hosting indexed property access
+- Add test case for OmittedExpression and SatisfiesExpression
+- Refactor to avoid handling unexpected expressions
+
 ## v0.4.1
 
 Fix for not hositing some more unary expressions and parenthesized expression

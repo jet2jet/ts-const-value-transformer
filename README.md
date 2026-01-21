@@ -162,12 +162,25 @@ export interface TransformOptions {
   unsafeHoistAsExpresion?: boolean | undefined;
   /** Hoist properties/variables that can write (i.e. `let` / `var` variables or properies without `readonly`). Default is false because although the value is literal type at some point, the value may change to another literal type. */
   unsafeHoistWritableValues?: boolean | undefined;
+  /** Uses `undefined` symbol for `undefined` type values. Default is false and replaces to `void 0`. */
+  useUndefinedSymbolForUndefinedValue?: boolean | undefined;
+  /** Hoist `undefined` symbol to `void 0` (or `undefined` if useUndefinedSymbolForUndefinedValue is true). Default is true. */
+  hoistUndefinedSymbol?: boolean | undefined;
   /**
    * External names (tested with `.includes()` for string, with `.test()` for RegExp) for `hoistExternalValues` settings (If `hoistExternalValues` is not specified, this setting will be used).
    * - Path separators for input file name are always normalized to '/' internally.
    * - Default is `['/node_modules/']`.
    */
   externalNames?: ReadonlyArray<string | RegExp> | undefined;
+  /**
+   * Specifies for file name list or function to skip transformation. This option is used by webpack loader, the transformed called from ts-loader, and createPortalTransformer only.
+   * - For list, if the token is `string`, the transformation will be skipped if `fileName.indexOf(token) >= 0` is true.
+   *   If the token is `RegExp`, the transformation will be skipped if `fileName.indexOf(token) >= 0` is true.
+   * - For function, the transformation will be skipped if `fn(fileName)` is true.
+   */
+  ignoreFiles?:
+    | ReadonlyArray<string | RegExp>
+    | ((fileName: string) => boolean);
 }
 ```
 
@@ -183,6 +196,10 @@ import {
   transformSource,
   version,
   type TransformOptions,
+  createPortalTransformer,
+  createPortalTransformerSync,
+  type CreatePortalTransformerOptions,
+  type PortalTransformer,
 } from 'ts-const-value-transformer';
 ```
 
@@ -245,7 +262,7 @@ Prints (generates) source code from `SourceFile`, along with raw source-map data
 
 #### transformSource: (sourceFile: ts.SourceFile, program: ts.Program, context: ts.TransformationContext, options?: TransformOptions) => ts.SourceFile
 
-Transforms the source file with TypeScript project. You don't need to call this function directly; use `createTransformer` instead.
+Transforms the source file with TypeScript project. You don't need to call this function directly; use `createTransformer` or `createPortalTransformer` instead.
 
 #### version: string
 
@@ -254,6 +271,15 @@ The version string of this package.
 #### type TransformOptions
 
 See [Transform options](#transform-options).
+
+#### createPortalTransformer: (options?: CreatePortalTransformerOptions) => Promise<PortalTransformer>
+
+Creates 'portal transformer', which can be used the transformer easily from the code which does not use TypeScript Compiler API.  
+The return object has `transform` method with signature: `(content: string, fileName: string, sourceMap?: string | RawSourceMap | null, options?: TransformOptions) => [newSource: string, newSourceMap: RawSourceMap | undefined]`. You can call to transform TypeScript source code. (Note that this API does not transpile to JavaScript; the output code is still TypeScript code.)
+
+`CreatePortalTransformerOptions` has three optional options: `project` (path to tsconfig.json), `typescript` (package path to `typescript` or `typescript` namespace object), and `cwd` (current directory for file search). Also, `ignoreFiles` can be used.
+
+If `Promise` cannot be used for some reason, use `createPortalTransformerSync` instead.
 
 ## Notice
 
