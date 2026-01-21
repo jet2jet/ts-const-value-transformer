@@ -1,11 +1,10 @@
 {
   "extends": "./tsconfig.app.json",
   "compilerOptions": {
-    "baseUrl": "./src/main",
     "module": "node16",
-    "rootDir": "../..",
+    "rootDir": ".",
     "paths": {
-      "@/*": ["../../src/main/*"]
+      "@/*": ["./src/main/*"]
     },
     "target": "es2023",
     "types": ["node", "jest"]
