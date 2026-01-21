@@ -106,7 +106,10 @@ console.log(
   constObject.f.toString(),
   constObject.g.toString(),
   constObject.h.h1.toString(),
-  constObject.h.h2.toString()
+  constObject.h.h2.toString(),
+  // element accesses are hoistable by default
+  constObject['a'],
+  constObject['d']
 );
 
 // don't transform here
@@ -160,6 +163,12 @@ enum BazEnum {
   D = 'piyo',
 }
 console.log(BazEnum.C, BazEnum.D);
+// element access
+console.log(BazEnum['C'], BazEnum['D']);
+
+// Element access with constant name
+const name_a = 'a';
+console.log(constObject[name_a]);
 
 (() => {
   const { a, b: b2, e = constValue3 } = constObject;

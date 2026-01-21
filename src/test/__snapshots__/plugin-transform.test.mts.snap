@@ -63,7 +63,9 @@ export const constObject = {
 };
 console.log(constObject.a, constObject.b, constObject.c, constObject.d, constObject.e, constObject.f, constObject.g, constObject.h, constObject.h.h1, constObject.h.h2, constObject.h.h3, 
 //
-constObject.a.toString(), constObject.b.toString(), constObject.c.toString(), constObject.f.toString(), constObject.g.toString(), constObject.h.h1.toString(), constObject.h.h2.toString());
+constObject.a.toString(), constObject.b.toString(), constObject.c.toString(), constObject.f.toString(), constObject.g.toString(), constObject.h.h1.toString(), constObject.h.h2.toString(), 
+// element accesses are hoistable by default
+constObject['a'], constObject['d']);
 console.log(o.a);
 console.log(o.h.h1);
 const nonConstObject = {
@@ -98,6 +100,11 @@ var BazEnum;
     BazEnum["D"] = "piyo";
 })(BazEnum || (BazEnum = {}));
 console.log(2 /* BazEnum.C */, "piyo" /* BazEnum.D */);
+// element access
+console.log(2 /* BazEnum['C'] */, "piyo" /* BazEnum['D'] */);
+// Element access with constant name
+const name_a = 'a';
+console.log(constObject["a" /* name_a */]);
 (() => {
     const { a, b: b2, e = -1 /* constValue3 */ } = constObject;
     console.log(4 /* a */, "bar" /* b2 */, -1 /* e */);
