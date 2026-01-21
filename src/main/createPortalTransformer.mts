@@ -12,15 +12,6 @@ export interface CreatePortalTransformerOptions extends TransformOptions {
   project?: string;
   typescript?: string | typeof tsNamespace;
   cwd?: string;
-  /**
-   * Specifies for file name list or function to skip transformation.
-   * - For list, if the token is `string`, the transformation will be skipped if `fileName.indexOf(token) >= 0` is true.
-   *   If the token is `RegExp`, the transformation will be skipped if `fileName.indexOf(token) >= 0` is true.
-   * - For function, the transformation will be skipped if `fn(fileName)` is true.
-   */
-  ignoreFiles?:
-    | ReadonlyArray<string | RegExp>
-    | ((fileName: string) => boolean);
 }
 
 export interface PortalTransformer {

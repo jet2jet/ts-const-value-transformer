@@ -1,5 +1,7 @@
 import * as sourceMap from 'source-map';
 import * as ts from 'typescript';
+// for JSDoc
+import type createPortalTransformer from './createPortalTransformer.mjs';
 
 const SYMBOL_ORIGINAL_NODE = Symbol('originalNode');
 
@@ -26,6 +28,15 @@ export interface TransformOptions {
    * - Default is `['/node_modules/']`.
    */
   externalNames?: ReadonlyArray<string | RegExp> | undefined;
+  /**
+   * Specifies for file name list or function to skip transformation. This option is used by webpack loader, the transformed called from ts-loader, and {@link createPortalTransformer} only.
+   * - For list, if the token is `string`, the transformation will be skipped if `fileName.indexOf(token) >= 0` is true.
+   *   If the token is `RegExp`, the transformation will be skipped if `fileName.indexOf(token) >= 0` is true.
+   * - For function, the transformation will be skipped if `fn(fileName)` is true.
+   */
+  ignoreFiles?:
+    | ReadonlyArray<string | RegExp>
+    | ((fileName: string) => boolean);
 }
 
 type NonNullableTransformOptions = Required<TransformOptions>;
@@ -48,6 +59,7 @@ function assignDefaultValues(
     unsafeHoistFunctionCall: options.unsafeHoistFunctionCall ?? false,
     unsafeHoistWritableValues: options.unsafeHoistWritableValues ?? false,
     externalNames: options.externalNames ?? [],
+    ignoreFiles: options.ignoreFiles ?? [],
   };
 }
 

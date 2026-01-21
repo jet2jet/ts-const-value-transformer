@@ -9,9 +9,6 @@ import type { TransformOptions } from './transform.mjs';
 export interface TsConstValueTransformerLoaderOptions extends TransformOptions {
   project?: string;
   typescript?: string | typeof tsNamespace;
-  ignoreFiles?:
-    | ReadonlyArray<string | RegExp>
-    | ((fileName: string) => boolean);
 }
 
 const transformerMap: Map<string, PortalTransformer> = new Map();
