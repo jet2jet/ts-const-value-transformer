@@ -269,7 +269,7 @@ exports[`createPortalTransformer test: generated source map 1`] = `
     "tuple2",
   ],
   "sources": [
-    "/home/user/develop/ts-const-value-transformer/main/src/test-project/index.mts",
+    "index.mts",
   ],
   "sourcesContent": [
     "import * as ts from 'typescript';
