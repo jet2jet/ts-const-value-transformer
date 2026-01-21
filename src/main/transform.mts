@@ -62,6 +62,7 @@ export function transformSource(
   return visitNodeChildren(
     sourceFile,
     sourceFile,
+    sourceFile,
     program,
     context,
     assignDefaultValues(options)
@@ -70,6 +71,7 @@ export function transformSource(
 
 function visitNodeChildren(
   node: ts.SourceFile,
+  parent: ts.Node,
   sourceFile: ts.SourceFile,
   program: ts.Program,
   context: ts.TransformationContext,
@@ -77,6 +79,7 @@ function visitNodeChildren(
 ): ts.SourceFile;
 function visitNodeChildren(
   node: ts.Node,
+  parent: ts.Node,
   sourceFile: ts.SourceFile,
   program: ts.Program,
   context: ts.TransformationContext,
@@ -85,6 +88,7 @@ function visitNodeChildren(
 
 function visitNodeChildren(
   node: ts.Node,
+  parent: ts.Node,
   sourceFile: ts.SourceFile,
   program: ts.Program,
   context: ts.TransformationContext,
@@ -92,6 +96,7 @@ function visitNodeChildren(
 ): ts.Node {
   const newNode = visitNodeAndReplaceIfNeeded(
     node,
+    parent,
     sourceFile,
     program,
     context,
@@ -102,13 +107,15 @@ function visitNodeChildren(
   }
   return ts.visitEachChild(
     newNode,
-    (node) => visitNodeChildren(node, sourceFile, program, context, options),
+    (node) =>
+      visitNodeChildren(node, newNode, sourceFile, program, context, options),
     context
   );
 }
 
 function visitNodeAndReplaceIfNeeded(
   node: ts.SourceFile,
+  parent: ts.Node,
   sourceFile: ts.SourceFile,
   program: ts.Program,
   context: ts.TransformationContext,
@@ -116,6 +123,7 @@ function visitNodeAndReplaceIfNeeded(
 ): ts.SourceFile;
 function visitNodeAndReplaceIfNeeded(
   node: ts.Node,
+  parent: ts.Node,
   sourceFile: ts.SourceFile,
   program: ts.Program,
   context: ts.TransformationContext,
@@ -124,76 +132,64 @@ function visitNodeAndReplaceIfNeeded(
 
 function visitNodeAndReplaceIfNeeded(
   node: ts.Node,
+  parent: ts.Node,
   sourceFile: ts.SourceFile,
   program: ts.Program,
   context: ts.TransformationContext,
   options: NonNullableTransformOptions
 ): ts.Node {
   const ts = options.ts;
-  if (!ts.isExpression(node) && !ts.isIdentifier(node)) {
-    return node;
-  }
-  if (
-    ts.isLiteralExpression(node) ||
-    ts.isObjectLiteralExpression(node) ||
-    // UnaryExpression start
-    ts.isPrefixUnaryExpression(node) ||
-    ts.isPostfixUnaryExpression(node) ||
-    ts.isDeleteExpression(node) ||
-    ts.isTypeOfExpression(node) ||
-    ts.isVoidExpression(node) ||
-    ts.isAwaitExpression(node) ||
-    ts.isTypeAssertionExpression(node) ||
-    // UnaryExpression end
-    ts.isBinaryExpression(node) ||
-    ts.isParenthesizedExpression(node) ||
-    ts.isConditionalExpression(node) ||
-    ts.isVoidExpression(node) ||
-    ts.isSpreadElement(node) ||
-    (!options.hoistProperty &&
-      ts.isPropertyAccessExpression(node) &&
-      !isEnumAccess(node, program, ts)) ||
-    (!options.hoistEnumValues &&
-      ((ts.isPropertyAccessExpression(node) &&
-        isEnumAccess(node, program, ts)) ||
-        (ts.isIdentifier(node) && isEnumIdentifier(node, program, ts)))) ||
-    node.kind === ts.SyntaxKind.TrueKeyword ||
-    node.kind === ts.SyntaxKind.FalseKeyword ||
-    node.kind === ts.SyntaxKind.NullKeyword
-  ) {
-    return node;
-  }
-  if (
-    !options.unsafeHoistFunctionCall &&
-    (!options.hoistPureFunctionCall || !hasPureAnnotation(node, sourceFile, ts))
-  ) {
-    if (ts.isCallLikeExpression(node)) {
+  if (ts.isCallLikeExpression(node)) {
+    if (
+      !ts.isExpression(node) ||
+      (!options.unsafeHoistFunctionCall &&
+        (!options.hoistPureFunctionCall ||
+          !hasPureAnnotation(node, sourceFile, ts)))
+    ) {
       return node;
     }
+  } else if (ts.isIdentifier(node)) {
+    if (
+      (!ts.isExpression(parent) &&
+        (!('initializer' in parent) || node !== parent.initializer)) ||
+      (ts.isPropertyAccessExpression(parent) && node === parent.name)
+    ) {
+      return node;
+    }
+    if (!options.hoistEnumValues && isEnumIdentifier(node, program, ts)) {
+      return node;
+    }
+  } else if (
+    ts.isPropertyAccessExpression(node) ||
+    ts.isElementAccessExpression(node)
+  ) {
+    if (
+      (!options.hoistProperty && !isEnumAccess(node, program, ts)) ||
+      (!options.hoistEnumValues &&
+        (isEnumAccess(node, program, ts) ||
+          (ts.isIdentifier(node) && isEnumIdentifier(node, program, ts))))
+    ) {
+      return node;
+    }
+  } else if (ts.isAsExpression(node)) {
+    if (!options.unsafeHoistAsExpresion) {
+      return node;
+    }
+  } else {
+    return node;
   }
+
   if (
     !options.hoistExternalValues &&
     isExternalReference(node, program, options.externalNames)
   ) {
     return node;
   }
-  if (ts.isIdentifier(node)) {
-    if (
-      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-      !node.parent ||
-      (!ts.isExpression(node.parent) &&
-        (!('initializer' in node.parent) ||
-          node !== node.parent.initializer)) ||
-      (ts.isPropertyAccessExpression(node.parent) && node === node.parent.name)
-    ) {
-      return node;
-    }
-  }
 
   if (
     !options.unsafeHoistAsExpresion &&
     (hasAsExpression(node, context, ts) ||
-      hasParentAsExpression(node.parent, context, ts))
+      hasParentAsExpression(parent, context, ts))
   ) {
     return node;
   }
@@ -253,7 +249,7 @@ function visitNodeAndReplaceIfNeeded(
 }
 
 function isEnumAccess(
-  node: ts.PropertyAccessExpression,
+  node: ts.PropertyAccessExpression | ts.ElementAccessExpression,
   program: ts.Program,
   tsInstance: typeof ts
 ): boolean {
@@ -275,7 +271,7 @@ function isEnumIdentifier(
 }
 
 function isExternalReference(
-  node: ts.Expression,
+  node: ts.Node,
   program: ts.Program,
   externalNames: ReadonlyArray<string | RegExp>
 ): boolean {
@@ -399,6 +395,17 @@ function hasPureAnnotation(
   return false;
 }
 
+function getNameFromElementAccessExpression(
+  node: ts.ElementAccessExpression,
+  typeChecker: ts.TypeChecker
+) {
+  const type = typeChecker.getTypeAtLocation(node.argumentExpression);
+  if (type.isStringLiteral() || type.isNumberLiteral()) {
+    return `${type.value}`;
+  }
+  return null;
+}
+
 function getMemberName(m: ts.TypeElement | undefined, tsInstance: typeof ts) {
   if (!m || !m.name) {
     return '';
@@ -416,13 +423,18 @@ function getMemberName(m: ts.TypeElement | undefined, tsInstance: typeof ts) {
 }
 
 function isReadonlyPropertyAccess(
-  a: ts.PropertyAccessExpression,
+  a: ts.PropertyAccessExpression | ts.ElementAccessExpression,
   typeChecker: ts.TypeChecker,
   tsInstance: typeof ts
 ) {
   const ts = tsInstance;
   const type = typeChecker.getTypeAtLocation(a.expression);
-  const memberName = a.name.getText();
+  const memberName = ts.isPropertyAccessExpression(a)
+    ? a.name.getText()
+    : getNameFromElementAccessExpression(a, typeChecker);
+  if (memberName == null) {
+    return false;
+  }
   if (type.getFlags() & ts.TypeFlags.Object) {
     const dummyTypeNode = typeChecker.typeToTypeNode(
       type,
@@ -469,7 +481,7 @@ function isReadonlyPropertyAccess(
 }
 
 function isReadonlyExpression(
-  node: ts.Expression,
+  node: ts.Node,
   program: ts.Program,
   tsInstance: typeof ts
 ): boolean | null {
@@ -491,7 +503,10 @@ function isReadonlyExpression(
       }
     }
   }
-  if (ts.isPropertyAccessExpression(node)) {
+  if (
+    ts.isPropertyAccessExpression(node) ||
+    ts.isElementAccessExpression(node)
+  ) {
     if (isEnumAccess(node, program, ts)) {
       return true;
     }
