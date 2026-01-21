@@ -4,7 +4,11 @@ import * as path from 'path';
 import type { RawSourceMap } from 'source-map';
 import type * as tsNamespace from 'typescript';
 import createTransformer from './createTransformer.mjs';
-import { printSourceWithMap, type TransformOptions } from './transform.mjs';
+import {
+  getIgnoreFilesFunction,
+  printSourceWithMap,
+  type TransformOptions,
+} from './transform.mjs';
 
 const require = createRequire(import.meta.url);
 
@@ -54,19 +58,7 @@ function createPortalTransformerImpl(
   ts: typeof tsNamespace
 ): PortalTransformer {
   const project = options.project ?? 'tsconfig.json';
-  let ignoreFiles = options.ignoreFiles ?? [];
-  if (typeof ignoreFiles !== 'function') {
-    const a = ignoreFiles;
-    ignoreFiles = (fileName: string) => {
-      return a.some((t) => {
-        if (typeof t === 'string') {
-          return fileName.indexOf(t) >= 0;
-        } else {
-          return t.test(fileName);
-        }
-      });
-    };
-  }
+  const ignoreFiles = getIgnoreFilesFunction(options.ignoreFiles);
   const cwd = options.cwd ?? process.cwd();
   const getCurrentDirectory = () => cwd;
   const config = ts.getParsedCommandLineOfConfigFile(project, void 0, {

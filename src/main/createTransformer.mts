@@ -1,5 +1,9 @@
 import type * as ts from 'typescript';
-import { transformSource, type TransformOptions } from './transform.mjs';
+import {
+  getIgnoreFilesFunction,
+  transformSource,
+  type TransformOptions,
+} from './transform.mjs';
 
 interface Config {
   options?: TransformOptions;
@@ -12,12 +16,17 @@ export default function createTransformer(
   // for ts-patch
   extras?: { ts?: typeof ts }
 ): ts.TransformerFactory<ts.SourceFile> {
+  const options: TransformOptions = {
+    ...config?.options,
+    ...(extras?.ts && { ts: extras?.ts }),
+  };
+  const ignoreFiles = getIgnoreFilesFunction(options.ignoreFiles);
   return (context) => {
     return (sourceFile) => {
-      return transformSource(sourceFile, program, context, {
-        ...config?.options,
-        ...(extras?.ts && { ts: extras?.ts }),
-      });
+      if (ignoreFiles(sourceFile.fileName)) {
+        return sourceFile;
+      }
+      return transformSource(sourceFile, program, context, options);
     };
   };
 }

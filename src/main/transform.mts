@@ -72,6 +72,29 @@ function assignDefaultValues(
 
 ////////////////////////////////////////////////////////////////////////////////
 
+export function getIgnoreFilesFunction(
+  ignoreFiles: TransformOptions['ignoreFiles']
+): (fileName: string) => boolean {
+  if (!ignoreFiles) {
+    return () => false;
+  }
+  if (typeof ignoreFiles === 'function') {
+    return ignoreFiles;
+  }
+  const a = ignoreFiles;
+  return (fileName: string) => {
+    return a.some((t) => {
+      if (typeof t === 'string') {
+        return fileName.indexOf(t) >= 0;
+      } else {
+        return t.test(fileName);
+      }
+    });
+  };
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 export function transformSource(
   sourceFile: ts.SourceFile,
   program: ts.Program,
