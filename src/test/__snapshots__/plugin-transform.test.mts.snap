@@ -115,6 +115,12 @@ console.log(/*@__PURE__*/ fn2(), /*#__PURE__*/ fn2());
 console.log([...Array(5)].map((u, i) => (void 0 /* u */ == null ? i : 0)));
 const fn1 = (...args) => args.length;
 console.log(fn1(...Array(5)));
+// don't transform omitted expression
+const tuple = [1, 2];
+const [, tuple2] = tuple;
+console.log(2 /* tuple2 */);
+// don't transform satisfies expression
+tuple2;
 export {};
 //# sourceMappingURL=index.mjs.map"
 `;

@@ -182,4 +182,12 @@ console.log([...Array<undefined>(5)].map((u, i) => (u == null ? i : 0)));
 const fn1 = (...args: undefined[]) => args.length;
 console.log(fn1(...Array<undefined>(5)));
 
+// don't transform omitted expression
+const tuple = [1, 2] as const;
+const [, tuple2] = tuple;
+console.log(tuple2);
+
+// don't transform satisfies expression
+tuple2 satisfies 2;
+
 export {};

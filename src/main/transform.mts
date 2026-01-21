@@ -105,6 +105,10 @@ function visitNodeChildren(
   if ((newNode as NodeWithSymbols)[SYMBOL_ORIGINAL_NODE]) {
     return newNode;
   }
+  // skip children for satisifes expression
+  if (ts.isSatisfiesExpression(newNode)) {
+    return newNode;
+  }
   return ts.visitEachChild(
     newNode,
     (node) =>
