@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.5.1
+
+- Fix missing for handling `ignoreFiles` for `createTransformer` (used from ts-loader, etc.)
+
 ## v0.5.0
 
 - Add `useUndefinedSymbolForUndefinedValue` and `hoistUndefinedSymbol` options

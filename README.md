@@ -264,6 +264,8 @@ Prints (generates) source code from `SourceFile`, along with raw source-map data
 
 Transforms the source file with TypeScript project. You don't need to call this function directly; use `createTransformer` or `createPortalTransformer` instead.
 
+Note that `ignoreFiles` of `options` will be ignored for this function.
+
 #### version: string
 
 The version string of this package.
