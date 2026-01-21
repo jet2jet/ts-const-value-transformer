@@ -67,7 +67,9 @@ constObject.a.toString(), constObject.b.toString(), constObject.c.toString(), co
 // element accesses are hoistable by default
 constObject['a'], constObject['d']);
 console.log(o.a);
+console.log(o['a']);
 console.log(o.h.h1);
+console.log(o.h['h1']);
 const nonConstObject = {
     a: true,
     b: 1,

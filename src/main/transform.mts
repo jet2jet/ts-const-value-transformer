@@ -419,7 +419,10 @@ function hasParentAsExpression(
   if (ts.isAsExpression(node) && !isAsConstExpression(node)) {
     return true;
   }
-  if (ts.isPropertyAccessExpression(node)) {
+  if (
+    ts.isPropertyAccessExpression(node) ||
+    ts.isElementAccessExpression(node)
+  ) {
     if (hasAsExpression(node.expression, context, ts)) {
       return true;
     }

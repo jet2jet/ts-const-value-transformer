@@ -115,7 +115,9 @@ console.log(
 // don't transform here
 declare let o: object;
 console.log((o as typeof constObject).a);
+console.log((o as typeof constObject)['a']);
 console.log((o as typeof constObject).h.h1);
+console.log((o as typeof constObject).h['h1']);
 
 const nonConstObject = {
   a: true,
