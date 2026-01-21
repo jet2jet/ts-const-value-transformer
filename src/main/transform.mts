@@ -109,6 +109,18 @@ function visitNodeChildren(
   if (ts.isSatisfiesExpression(newNode)) {
     return newNode;
   }
+
+  // skip statements which would not have 'value' expressions
+  if (
+    ts.isInterfaceDeclaration(newNode) ||
+    ts.isTypeAliasDeclaration(newNode) ||
+    // Identifies in import clause should not be parsed
+    ts.isImportDeclaration(newNode) ||
+    ts.isTypeOnlyExportDeclaration(newNode)
+  ) {
+    return newNode;
+  }
+
   return ts.visitEachChild(
     newNode,
     (node) =>
