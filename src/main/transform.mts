@@ -167,6 +167,9 @@ function visitNodeAndReplaceIfNeeded(
     ts.isPropertyAccessExpression(node) ||
     ts.isElementAccessExpression(node)
   ) {
+    if (!isHoistablePropertyAccess(node, program, ts)) {
+      return node;
+    }
     if (
       (!options.hoistProperty && !isEnumAccess(node, program, ts)) ||
       (!options.hoistEnumValues &&
@@ -517,6 +520,30 @@ function isReadonlyExpression(
     return isReadonlyPropertyAccess(node, typeChecker, ts);
   }
   return null;
+}
+
+function isHoistablePropertyAccess(
+  a: ts.PropertyAccessExpression | ts.ElementAccessExpression,
+  program: ts.Program,
+  tsInstance: typeof ts
+) {
+  const ts = tsInstance;
+  const typeChecker = program.getTypeChecker();
+  const type = typeChecker.getTypeAtLocation(a.expression);
+  const memberName = ts.isPropertyAccessExpression(a)
+    ? a.name.getText()
+    : getNameFromElementAccessExpression(a, typeChecker);
+  if (memberName == null) {
+    return false;
+  }
+  if (type.getFlags() & ts.TypeFlags.Object) {
+    const prop = type.getProperty(memberName);
+    // If the property access uses indexed access, `prop` will be undefined
+    if (prop) {
+      return true;
+    }
+  }
+  return false;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

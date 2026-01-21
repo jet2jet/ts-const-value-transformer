@@ -121,6 +121,12 @@ const [, tuple2] = tuple;
 console.log(2 /* tuple2 */);
 // don't transform satisfies expression
 tuple2;
+// don't transform assignment
+const record1 = {};
+record1.foo = true;
+record1['bar'] = true;
+// don't transform indexed access
+console.log(record1.foo, record1.baz);
 export {};
 //# sourceMappingURL=index.mjs.map"
 `;

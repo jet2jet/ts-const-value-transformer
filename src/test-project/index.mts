@@ -190,4 +190,11 @@ console.log(tuple2);
 // don't transform satisfies expression
 tuple2 satisfies 2;
 
+// don't transform assignment
+const record1: Record<string, true> = {};
+record1.foo = true;
+record1['bar'] = true;
+// don't transform indexed access
+console.log(record1.foo, record1.baz);
+
 export {};
