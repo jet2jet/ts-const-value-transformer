@@ -348,3 +348,71 @@ export {};
   "version": 3,
 }
 `;
+
+exports[`loader transforming causes unchanged: generated source 1`] = `
+"(()=>{"use strict";var e={d:(o,r)=>{for(var t in r)e.o(r,t)&&!e.o(o,t)&&Object.defineProperty(o,t,{enumerable:!0,get:r[t]})},o:(e,o)=>Object.prototype.hasOwnProperty.call(e,o),r:e=>{"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})}},o={};e.r(o),e.d(o,{Hoge:()=>r,Piyo:()=>t});const r=1,t=2;var l=exports;for(var n in o)l[n]=o[n];o.__esModule&&Object.defineProperty(l,"__esModule",{value:!0})})();
+//# sourceMappingURL=index.js.map"
+`;
+
+exports[`loader transforming causes unchanged: generated source map 1`] = `
+{
+  "file": "index.js",
+  "ignoreList": [],
+  "mappings": "mBACA,IAAIA,EAAsB,CCA1BA,EAAwB,CAACC,EAASC,KACjC,IAAI,IAAIC,KAAOD,EACXF,EAAoBI,EAAEF,EAAYC,KAASH,EAAoBI,EAAEH,EAASE,IAC5EE,OAAOC,eAAeL,EAASE,EAAK,CAAEI,YAAY,EAAMC,IAAKN,EAAWC,MCJ3EH,EAAwB,CAACS,EAAKC,IAAUL,OAAOM,UAAUC,eAAeC,KAAKJ,EAAKC,GCClFV,EAAyBC,IACH,oBAAXa,QAA0BA,OAAOC,aAC1CV,OAAOC,eAAeL,EAASa,OAAOC,YAAa,CAAEC,MAAO,WAE7DX,OAAOC,eAAeL,EAAS,aAAc,CAAEe,OAAO,M,2CCLhD,MAAMC,EAAO,EACPC,EAAO,E",
+  "names": [
+    "__webpack_require__",
+    "exports",
+    "definition",
+    "key",
+    "o",
+    "Object",
+    "defineProperty",
+    "enumerable",
+    "get",
+    "obj",
+    "prop",
+    "prototype",
+    "hasOwnProperty",
+    "call",
+    "Symbol",
+    "toStringTag",
+    "value",
+    "Hoge",
+    "Piyo",
+  ],
+  "sourceRoot": "",
+  "sources": [
+    "webpack://ts-const-value-transformer/webpack/bootstrap",
+    "webpack://ts-const-value-transformer/webpack/runtime/define property getters",
+    "webpack://ts-const-value-transformer/webpack/runtime/hasOwnProperty shorthand",
+    "webpack://ts-const-value-transformer/webpack/runtime/make namespace object",
+    "webpack://ts-const-value-transformer/./src/test-project/mod.mts",
+  ],
+  "sourcesContent": [
+    "// The require scope
+var __webpack_require__ = {};
+
+",
+    "// define getter functions for harmony exports
+__webpack_require__.d = (exports, definition) => {
+	for(var key in definition) {
+		if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+			Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+		}
+	}
+};",
+    "__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))",
+    "// define __esModule on exports
+__webpack_require__.r = (exports) => {
+	if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+		Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+	}
+	Object.defineProperty(exports, '__esModule', { value: true });
+};",
+    "export const Hoge = 1;
+export const Piyo = 2;
+",
+  ],
+  "version": 3,
+}
+`;

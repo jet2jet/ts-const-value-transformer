@@ -73,10 +73,13 @@ const loader: webpack.LoaderDefinitionFunction<
       if (!sourceFile) {
         throw new Error(`'${this.resource}' is not in the TypeScript project.`);
       }
-      sourceFile.update(content, {
-        span: { start: 0, length: sourceFile.end },
-        newLength: content.length,
-      });
+      // If input content is changed, replace it
+      if (sourceFile.getFullText() !== content) {
+        sourceFile.update(content, {
+          span: { start: 0, length: sourceFile.end },
+          newLength: content.length,
+        });
+      }
 
       const transformer = createTransformer(program, {
         options: { ...options, ts },
@@ -86,8 +89,14 @@ const loader: webpack.LoaderDefinitionFunction<
         [transformer],
         program.getCompilerOptions()
       );
+      const transformedSource = result.transformed[0]!;
+      // If unchanged, return base file as-is
+      if (transformedSource === sourceFile) {
+        this.callback(null, content, sourceMap);
+        return;
+      }
       const printed = printSourceWithMap(
-        result.transformed[0]!,
+        transformedSource,
         this.resource,
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         typeof sourceMap === 'string' ? JSON.parse(sourceMap) : sourceMap
