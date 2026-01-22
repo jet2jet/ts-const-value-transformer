@@ -98,16 +98,15 @@ export function getIgnoreFilesFunction(
 export function transformSource(
   sourceFile: ts.SourceFile,
   program: ts.Program,
-  context: ts.TransformationContext,
+  context: ts.TransformationContext | undefined,
   options?: TransformOptions
 ): ts.SourceFile {
-  return visitNodeChildren(
+  const requiredOptions = assignDefaultValues(options);
+  return ts.visitEachChild(
     sourceFile,
-    sourceFile,
-    sourceFile,
-    program,
-    context,
-    assignDefaultValues(options)
+    (node) =>
+      visitNodeChildren(node, sourceFile, sourceFile, program, requiredOptions),
+    context
   );
 }
 
@@ -116,7 +115,6 @@ function visitNodeChildren(
   parent: ts.Node,
   sourceFile: ts.SourceFile,
   program: ts.Program,
-  context: ts.TransformationContext,
   options: NonNullableTransformOptions
 ): ts.SourceFile;
 function visitNodeChildren(
@@ -124,7 +122,6 @@ function visitNodeChildren(
   parent: ts.Node,
   sourceFile: ts.SourceFile,
   program: ts.Program,
-  context: ts.TransformationContext,
   options: NonNullableTransformOptions
 ): ts.Node;
 
@@ -133,15 +130,14 @@ function visitNodeChildren(
   parent: ts.Node,
   sourceFile: ts.SourceFile,
   program: ts.Program,
-  context: ts.TransformationContext,
   options: NonNullableTransformOptions
 ): ts.Node {
+  const ts = options.ts;
   const newNode = visitNodeAndReplaceIfNeeded(
     node,
     parent,
     sourceFile,
     program,
-    context,
     options
   );
   if ((newNode as NodeWithSymbols)[SYMBOL_ORIGINAL_NODE]) {
@@ -161,9 +157,8 @@ function visitNodeChildren(
 
   return ts.visitEachChild(
     newNode,
-    (node) =>
-      visitNodeChildren(node, newNode, sourceFile, program, context, options),
-    context
+    (node) => visitNodeChildren(node, newNode, sourceFile, program, options),
+    void 0
   );
 }
 
@@ -172,7 +167,6 @@ function visitNodeAndReplaceIfNeeded(
   parent: ts.Node,
   sourceFile: ts.SourceFile,
   program: ts.Program,
-  context: ts.TransformationContext,
   options: NonNullableTransformOptions
 ): ts.SourceFile;
 function visitNodeAndReplaceIfNeeded(
@@ -180,7 +174,6 @@ function visitNodeAndReplaceIfNeeded(
   parent: ts.Node,
   sourceFile: ts.SourceFile,
   program: ts.Program,
-  context: ts.TransformationContext,
   options: NonNullableTransformOptions
 ): ts.Node;
 
@@ -189,7 +182,6 @@ function visitNodeAndReplaceIfNeeded(
   parent: ts.Node,
   sourceFile: ts.SourceFile,
   program: ts.Program,
-  context: ts.TransformationContext,
   options: NonNullableTransformOptions
 ): ts.Node {
   const ts = options.ts;
@@ -252,8 +244,7 @@ function visitNodeAndReplaceIfNeeded(
 
   if (
     !options.unsafeHoistAsExpresion &&
-    (hasAsExpression(node, context, ts) ||
-      hasParentAsExpression(parent, context, ts))
+    (hasAsExpression(node, ts) || hasParentAsExpression(parent, ts))
   ) {
     return node;
   }
@@ -274,33 +265,29 @@ function visitNodeAndReplaceIfNeeded(
       return node;
     }
     if (type.isStringLiteral()) {
-      newNode = context.factory.createStringLiteral(type.value);
+      newNode = ts.factory.createStringLiteral(type.value);
     } else if (type.isNumberLiteral()) {
       if (type.value < 0) {
-        newNode = context.factory.createPrefixUnaryExpression(
+        newNode = ts.factory.createPrefixUnaryExpression(
           ts.SyntaxKind.MinusToken,
-          context.factory.createNumericLiteral(-type.value)
+          ts.factory.createNumericLiteral(-type.value)
         );
       } else {
-        newNode = context.factory.createNumericLiteral(type.value);
+        newNode = ts.factory.createNumericLiteral(type.value);
       }
     } else if (flags & ts.TypeFlags.BigIntLiteral) {
-      newNode = context.factory.createBigIntLiteral(
-        typeChecker.typeToString(type)
-      );
+      newNode = ts.factory.createBigIntLiteral(typeChecker.typeToString(type));
     } else if (flags & ts.TypeFlags.BooleanLiteral) {
       const text = typeChecker.typeToString(type);
       newNode =
-        text === 'true'
-          ? context.factory.createTrue()
-          : context.factory.createFalse();
+        text === 'true' ? ts.factory.createTrue() : ts.factory.createFalse();
     } else if (flags & ts.TypeFlags.Null) {
-      newNode = context.factory.createNull();
+      newNode = ts.factory.createNull();
     } else if (flags & ts.TypeFlags.Undefined) {
       if (options.useUndefinedSymbolForUndefinedValue) {
-        newNode = context.factory.createIdentifier('undefined');
+        newNode = ts.factory.createIdentifier('undefined');
       } else {
-        newNode = context.factory.createVoidZero();
+        newNode = ts.factory.createVoidZero();
       }
     } else {
       return node;
@@ -401,11 +388,7 @@ function isAsConstExpression(node: ts.AsExpression): boolean {
   return node.type.getText() === 'const';
 }
 
-function hasAsExpression(
-  node: ts.Node,
-  context: ts.TransformationContext,
-  tsInstance: typeof ts
-): boolean {
+function hasAsExpression(node: ts.Node, tsInstance: typeof ts): boolean {
   const ts = tsInstance;
   // including 'as const'
   if (ts.isAsExpression(node)) {
@@ -416,18 +399,17 @@ function hasAsExpression(
     node,
     (node) => {
       if (!found) {
-        found = hasAsExpression(node, context, ts);
+        found = hasAsExpression(node, ts);
       }
       return node;
     },
-    context
+    void 0
   );
   return found;
 }
 
 function hasParentAsExpression(
   node: ts.Node | null | undefined,
-  context: ts.TransformationContext,
   tsInstance: typeof ts
 ): boolean {
   const ts = tsInstance;
@@ -442,11 +424,11 @@ function hasParentAsExpression(
     ts.isPropertyAccessExpression(node) ||
     ts.isElementAccessExpression(node)
   ) {
-    if (hasAsExpression(node.expression, context, ts)) {
+    if (hasAsExpression(node.expression, ts)) {
       return true;
     }
   }
-  return hasParentAsExpression(node.parent, context, ts);
+  return hasParentAsExpression(node.parent, ts);
 }
 
 function hasPureAnnotation(

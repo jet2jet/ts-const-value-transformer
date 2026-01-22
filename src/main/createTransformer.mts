@@ -9,24 +9,29 @@ interface Config {
   options?: TransformOptions;
 }
 
+// Accepts undefined for the factory
+export type TransformerFactory = (
+  context?: ts.TransformationContext
+) => (sourceFile: ts.SourceFile) => ts.SourceFile;
+
 export default function createTransformer(
   program: ts.Program,
   // for ttypescript and ts-patch
   config?: Config,
   // for ts-patch
   extras?: { ts?: typeof ts }
-): ts.TransformerFactory<ts.SourceFile> {
+): TransformerFactory {
   const options: TransformOptions = {
     ...config?.options,
     ...(extras?.ts && { ts: extras?.ts }),
   };
   const ignoreFiles = getIgnoreFilesFunction(options.ignoreFiles);
-  return (context) => {
+  return ((context) => {
     return (sourceFile) => {
       if (ignoreFiles(sourceFile.fileName)) {
         return sourceFile;
       }
       return transformSource(sourceFile, program, context, options);
     };
-  };
+  }) satisfies TransformerFactory satisfies ts.TransformerFactory<ts.SourceFile>;
 }
