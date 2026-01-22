@@ -13,8 +13,11 @@ import {
 const require = createRequire(import.meta.url);
 
 export interface CreatePortalTransformerOptions extends TransformOptions {
+  /** Path to tsconfig.json. If omitted, `tsconfig.json` will be used. */
   project?: string;
+  /** Package path to `typescript` or `typescript` namespace object. */
   typescript?: string | typeof tsNamespace;
+  /** The current directory for file search. Also affects to `project` option. */
   cwd?: string;
   /**
    * Speficies the count. When the transformation count reaches this value, `program` instance will be recreated (and count will be reset).

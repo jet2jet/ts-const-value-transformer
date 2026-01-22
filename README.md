@@ -279,7 +279,24 @@ See [Transform options](#transform-options).
 Creates 'portal transformer', which can be used the transformer easily from the code which does not use TypeScript Compiler API.  
 The return object has `transform` method with signature: `(content: string, fileName: string, sourceMap?: string | RawSourceMap | null, options?: TransformOptions) => [newSource: string, newSourceMap: RawSourceMap | undefined]`. You can call to transform TypeScript source code. (Note that this API does not transpile to JavaScript; the output code is still TypeScript code.)
 
-`CreatePortalTransformerOptions` has three optional options: `project` (path to tsconfig.json), `typescript` (package path to `typescript` or `typescript` namespace object), and `cwd` (current directory for file search). Also, `ignoreFiles` can be used.
+`CreatePortalTransformerOptions` has a following signature. Also, `ignoreFiles` of `TransformOptions` can be used.
+
+```ts
+interface CreatePortalTransformerOptions extends TransformOptions {
+  /** Path to tsconfig.json. If omitted, `tsconfig.json` will be used. */
+  project?: string;
+  /** Package path to `typescript` or `typescript` namespace object. */
+  typescript?: string | typeof tsNamespace;
+  /** The current directory for file search. Also affects to `project` option. */
+  cwd?: string;
+  /**
+   * Speficies the count. When the transformation count reaches this value, `program` instance will be recreated (and count will be reset).
+   * This is useful if the project is big and out-of-memory occurs during transformation, but the process may be slower.
+   * If 0 or `undefined`, recreation will not be performed.
+   */
+  recreateProgramOnTransformCount?: number;
+}
+```
 
 If `Promise` cannot be used for some reason, use `createPortalTransformerSync` instead.
 

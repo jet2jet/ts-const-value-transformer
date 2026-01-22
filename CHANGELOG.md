@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.6.0
+
+- Remove skipping satisfies expression
+- Accept `undefined` for `context` and remove dependencies for `context`
+- Fix referring `ts` instance and add `ts` parameter for printSource
+- Add cache to createPortalTransformer
+- Add `recreateProgramOnTransformCount` option for PortalTransformer
+- Fix to use `createPortalTransformerSync` for webpack loader
+- Search tsconfig before loading
+
 ## v0.5.1
 
 - Fix missing for handling `ignoreFiles` for `createTransformer` (used from ts-loader, etc.)
