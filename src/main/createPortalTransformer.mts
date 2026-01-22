@@ -133,7 +133,8 @@ function createPortalTransformerImpl(
       const printed = printSourceWithMap(
         transformedSource,
         fileName,
-        rawSourceMap
+        rawSourceMap,
+        ts
       );
       return printed;
     },

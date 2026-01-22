@@ -1,5 +1,6 @@
 import * as sourceMap from 'source-map';
-import * as ts from 'typescript';
+import * as tsNamespace from 'typescript';
+import type * as ts from 'typescript';
 // for JSDoc
 import type createPortalTransformer from './createPortalTransformer.mjs';
 
@@ -54,7 +55,7 @@ function assignDefaultValues(
 ): NonNullableTransformOptions {
   return {
     // avoid using spread syntax to override `undefined` (not missing) values
-    ts: options.ts ?? ts,
+    ts: options.ts ?? tsNamespace,
     hoistProperty: options.hoistProperty ?? true,
     hoistEnumValues: options.hoistEnumValues ?? true,
     hoistExternalValues: options.hoistExternalValues ?? true,
@@ -102,7 +103,7 @@ export function transformSource(
   options?: TransformOptions
 ): ts.SourceFile {
   const requiredOptions = assignDefaultValues(options);
-  return ts.visitEachChild(
+  return requiredOptions.ts.visitEachChild(
     sourceFile,
     (node) =>
       visitNodeChildren(node, sourceFile, sourceFile, program, requiredOptions),
@@ -237,7 +238,7 @@ function visitNodeAndReplaceIfNeeded(
 
   if (
     !options.hoistExternalValues &&
-    isExternalReference(node, program, options.externalNames)
+    isExternalReference(node, program, options.externalNames, ts)
   ) {
     return node;
   }
@@ -331,8 +332,10 @@ function isEnumIdentifier(
 function isExternalReference(
   node: ts.Node,
   program: ts.Program,
-  externalNames: ReadonlyArray<string | RegExp>
+  externalNames: ReadonlyArray<string | RegExp>,
+  tsInstance: typeof ts
 ): boolean {
+  const ts = tsInstance;
   const typeChecker = program.getTypeChecker();
   const nodeSym = typeChecker.getSymbolAtLocation(node);
   let nodeFrom: ts.Node | undefined = nodeSym?.getDeclarations()?.[0];
@@ -615,7 +618,7 @@ function isUndefinedIdentifier(
   }
   if (
     type.isUnionOrIntersection() ||
-    !(type.getFlags() & ts.TypeFlags.Undefined)
+    !(type.getFlags() & tsInstance.TypeFlags.Undefined)
   ) {
     return false;
   }
@@ -624,18 +627,22 @@ function isUndefinedIdentifier(
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export function printSource(sourceFile: ts.SourceFile): string {
-  return printSourceImpl(sourceFile)[0];
+export function printSource(
+  sourceFile: ts.SourceFile,
+  tsInstance?: typeof ts
+): string {
+  return printSourceImpl(tsInstance, sourceFile)[0];
 }
 
 export function printSourceWithMap(
   sourceFile: ts.SourceFile,
   originalSourceName: string,
-  startOfSourceMap?: sourceMap.RawSourceMap
+  startOfSourceMap?: sourceMap.RawSourceMap,
+  tsInstance?: typeof ts
 ): [string, sourceMap.RawSourceMap] {
   const generator = new sourceMap.SourceMapGenerator(startOfSourceMap);
   generator.setSourceContent(originalSourceName, sourceFile.getFullText());
-  return printSourceImpl(sourceFile, originalSourceName, generator);
+  return printSourceImpl(tsInstance, sourceFile, originalSourceName, generator);
 }
 
 interface PositionContext {
@@ -663,20 +670,27 @@ function positionToLineAndColumn(
   return { line, column: pos - lastLinePos + generatedDiff };
 }
 
-function printSourceImpl(sourceFile: ts.SourceFile): [string];
 function printSourceImpl(
+  tsInstance: typeof ts | null | undefined,
+  sourceFile: ts.SourceFile
+): [string];
+function printSourceImpl(
+  tsInstance: typeof ts | null | undefined,
   sourceFile: ts.SourceFile,
   originalSourceName: string,
   mapGenerator: sourceMap.SourceMapGenerator
 ): [string, sourceMap.RawSourceMap];
 
 function printSourceImpl(
+  tsInstance: typeof ts | null | undefined,
   sourceFile: ts.SourceFile,
   originalSourceName?: string,
   mapGenerator?: sourceMap.SourceMapGenerator
 ): [string, sourceMap.RawSourceMap?] {
+  const ts = tsInstance ?? tsNamespace;
   const printer = ts.createPrinter({ removeComments: true });
   const r = printNode(
+    ts,
     printer,
     sourceFile.getFullText(),
     sourceFile,
@@ -689,6 +703,7 @@ function printSourceImpl(
 }
 
 function printNode(
+  tsInstance: typeof ts,
   printer: ts.Printer,
   baseSource: string,
   sourceFile: ts.SourceFile,
@@ -699,8 +714,12 @@ function printNode(
 ): string {
   const originalNode = (node as NodeWithSymbols)[SYMBOL_ORIGINAL_NODE];
   if (originalNode) {
-    let result = printer.printNode(ts.EmitHint.Unspecified, node, sourceFile);
-    const comments = ts.getSyntheticTrailingComments(node);
+    let result = printer.printNode(
+      tsInstance.EmitHint.Unspecified,
+      node,
+      sourceFile
+    );
+    const comments = tsInstance.getSyntheticTrailingComments(node);
     if (comments) {
       for (const comment of comments) {
         result += ` /*${comment.text}*/`;
@@ -736,7 +755,7 @@ function printNode(
   let output = '';
   let headPrinted = false;
   let lastChildPos = 0;
-  ts.visitEachChild(
+  tsInstance.visitEachChild(
     node,
     (child) => {
       if (!headPrinted) {
@@ -754,6 +773,7 @@ function printNode(
         posContext.pos = child.pos;
       }
       output += printNode(
+        tsInstance,
         printer,
         baseSource,
         sourceFile,
