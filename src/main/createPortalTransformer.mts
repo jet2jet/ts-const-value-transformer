@@ -142,11 +142,12 @@ function createPortalTransformerImpl(
         return [content as string, rawSourceMap];
       }
       // If input content is changed, replace it
-      if (content != null && sourceFile.getFullText() !== content) {
+      if (content != null && sourceFile.text !== content) {
         sourceFile.update(content, {
           span: { start: 0, length: sourceFile.end },
           newLength: content.length,
         });
+        sourceFile.text = content;
       }
       const transformer = createTransformer(program, {
         options: { ...options, ...individualOptions, ts },
@@ -159,7 +160,7 @@ function createPortalTransformerImpl(
       const transformedSource = transformResult.transformed[0]!;
       // If unchanged, return base file as-is
       if (transformedSource === sourceFile) {
-        return [content ?? sourceFile.getFullText(), rawSourceMap];
+        return [content ?? sourceFile.text, rawSourceMap];
       }
       const result = printSourceWithMap(
         transformedSource,
