@@ -33,7 +33,7 @@ describe('loader', () => {
               {
                 loader: path.resolve(PROJECT_DIR, 'src/main/loader.mts'),
                 options: {
-                  project: path.resolve(TEST_PROJECT_DIR, 'tsconfig.json'),
+                  project: 'tsconfig.json',
                 },
               },
             ],
@@ -106,7 +106,7 @@ describe('loader', () => {
               {
                 loader: path.resolve(PROJECT_DIR, 'src/main/loader.mts'),
                 options: {
-                  project: path.resolve(TEST_PROJECT_DIR, 'tsconfig.json'),
+                  project: 'tsconfig.json',
                 },
               },
             ],

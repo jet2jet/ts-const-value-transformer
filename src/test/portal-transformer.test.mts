@@ -8,7 +8,8 @@ const TEST_PROJECT_DIR = path.resolve(THIS_DIR, '../test-project');
 describe('createPortalTransformer', () => {
   it('test', async () => {
     const transformer = await createPortalTransformer({
-      project: path.resolve(TEST_PROJECT_DIR, 'tsconfig.json'),
+      project: 'tsconfig.json',
+      cwd: path.resolve(TEST_PROJECT_DIR),
     });
     const result = transformer.transform(
       null,
@@ -28,7 +29,8 @@ describe('createPortalTransformer', () => {
 
   it('transforming causes unchanged', async () => {
     const transformer = await createPortalTransformer({
-      project: path.resolve(TEST_PROJECT_DIR, 'tsconfig.json'),
+      project: 'tsconfig.json',
+      cwd: path.resolve(TEST_PROJECT_DIR),
     });
     const result = transformer.transform(
       null,

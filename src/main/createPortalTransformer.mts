@@ -82,8 +82,16 @@ function createPortalTransformerImpl(
   const recreateProgramOnTransformCount =
     options.recreateProgramOnTransformCount ?? 0;
 
+  // eslint-disable-next-line @typescript-eslint/unbound-method
+  const foundConfigPath = ts.findConfigFile(cwd, ts.sys.fileExists, project);
+  if (foundConfigPath == null) {
+    throw new Error(
+      `[ts-const-value-transformer] Unable to load tsconfig file (effective name = '${project}')`
+    );
+  }
+
   const getCurrentDirectory = () => cwd;
-  const config = ts.getParsedCommandLineOfConfigFile(project, void 0, {
+  const config = ts.getParsedCommandLineOfConfigFile(foundConfigPath, void 0, {
     fileExists: fs.existsSync,
     getCurrentDirectory,
     // eslint-disable-next-line @typescript-eslint/unbound-method
@@ -106,7 +114,7 @@ function createPortalTransformerImpl(
   });
   if (!config) {
     throw new Error(
-      `[ts-const-value-transformer] Unable to load tsconfig file (effective name = '${project}')`
+      `[ts-const-value-transformer] Unable to load tsconfig file (effective name = '${foundConfigPath}')`
     );
   }
 
