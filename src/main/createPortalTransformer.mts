@@ -16,6 +16,12 @@ export interface CreatePortalTransformerOptions extends TransformOptions {
   project?: string;
   typescript?: string | typeof tsNamespace;
   cwd?: string;
+  /**
+   * Speficies the count. When the transformation count reaches this value, `program` instance will be recreated (and count will be reset).
+   * This is useful if the project is big and out-of-memory occurs during transformation, but the process may be slower.
+   * If 0 or `undefined`, recreation will not be performed.
+   */
+  recreateProgramOnTransformCount?: number;
 }
 
 export interface PortalTransformer {
@@ -25,6 +31,8 @@ export interface PortalTransformer {
   readonly program: tsNamespace.Program;
   /** Clears transformed cache. */
   clearCache(): void;
+  /** Forces `program` recreation. The transformation count for `recreateProgramOnTransformCount` will also be resetted. */
+  recreateProgram(): void;
   /**
    * Performs transformation.
    * @param content Base source code. If null, uses loaded source code in the TS project.
@@ -71,6 +79,9 @@ function createPortalTransformerImpl(
   const project = options.project ?? 'tsconfig.json';
   const ignoreFiles = getIgnoreFilesFunction(options.ignoreFiles);
   const cwd = options.cwd ?? process.cwd();
+  const recreateProgramOnTransformCount =
+    options.recreateProgramOnTransformCount ?? 0;
+
   const getCurrentDirectory = () => cwd;
   const config = ts.getParsedCommandLineOfConfigFile(project, void 0, {
     fileExists: fs.existsSync,
@@ -98,10 +109,23 @@ function createPortalTransformerImpl(
       `[ts-const-value-transformer] Unable to load tsconfig file (effective name = '${project}')`
     );
   }
-  const program = ts.createProgram({
+
+  let program = ts.createProgram({
     options: config.options,
     rootNames: config.fileNames,
   });
+  let transformationCount = 0;
+
+  const recreateProgram = () => {
+    const oldProgram = program;
+    program = ts.createProgram({
+      options: config.options,
+      rootNames: config.fileNames,
+      oldProgram,
+    });
+    instance.program = program;
+    transformationCount = 0;
+  };
 
   const cache = new Map<
     string,
@@ -112,10 +136,11 @@ function createPortalTransformerImpl(
     }
   >();
 
-  return {
+  const instance = {
     ts,
     program,
     clearCache: () => cache.clear(),
+    recreateProgram,
     transform: (content, fileName, sourceMap, individualOptions) => {
       const individualOptionsJson = optionsToString(individualOptions ?? {});
       const cachedData = cache.get(fileName);
@@ -137,10 +162,19 @@ function createPortalTransformerImpl(
         return [content as string, rawSourceMap];
       }
 
+      transformationCount++;
+      if (
+        recreateProgramOnTransformCount > 0 &&
+        transformationCount >= recreateProgramOnTransformCount
+      ) {
+        recreateProgram();
+      }
+
       const sourceFile = program.getSourceFile(fileName);
       if (!sourceFile) {
         return [content as string, rawSourceMap];
       }
+
       // If input content is changed, replace it
       if (content != null && sourceFile.text !== content) {
         sourceFile.update(content, {
@@ -171,7 +205,8 @@ function createPortalTransformerImpl(
       cache.set(fileName, { content, optJson: individualOptionsJson, result });
       return result;
     },
-  };
+  } satisfies PortalTransformer;
+  return instance;
 }
 
 /**

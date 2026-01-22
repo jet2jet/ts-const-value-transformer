@@ -1,15 +1,12 @@
 import * as path from 'path';
-import type * as tsNamespace from 'typescript';
 import type * as webpack from 'webpack';
 import createPortalTransformer, {
+  type CreatePortalTransformerOptions,
   type PortalTransformer,
 } from './createPortalTransformer.mjs';
-import type { TransformOptions } from './transform.mjs';
 
-export interface TsConstValueTransformerLoaderOptions extends TransformOptions {
-  project?: string;
-  typescript?: string | typeof tsNamespace;
-}
+export type TsConstValueTransformerLoaderOptions =
+  CreatePortalTransformerOptions;
 
 const transformerMap: Map<string, PortalTransformer> = new Map();
 
@@ -24,8 +21,8 @@ const loader: webpack.LoaderDefinitionFunction<
       let transformer = transformerMap.get(project);
       if (!transformer) {
         transformer = await createPortalTransformer({
-          ...options,
           cwd: path.dirname(this.resourcePath),
+          ...options,
         });
         transformerMap.set(project, transformer);
       }
