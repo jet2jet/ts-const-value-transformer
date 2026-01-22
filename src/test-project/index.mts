@@ -204,6 +204,13 @@ console.log(tuple2);
 
 // don't transform satisfies expression
 tuple2 satisfies 2;
+switch (tuple2) {
+  case 2:
+    break;
+  default:
+    tuple2 satisfies never;
+    break;
+}
 
 // don't transform assignment
 const record1: Record<string, true> = {};
@@ -211,5 +218,19 @@ record1.foo = true;
 record1['bar'] = true;
 // don't transform indexed access
 console.log(record1.foo, record1.baz);
+
+// do transform constant values in initializers
+const value1 = constValue1;
+const array1 = [constValue1, constValue2] as const;
+const array2 = [constValue3, constValue4] as const satisfies ReadonlyArray<
+  string | number
+>;
+const object1 = {
+  x: constValue3,
+  constValue4,
+  y: mod.Hoge,
+  z: BarEnum.B,
+} satisfies Record<string, unknown>;
+console.log(value1, array1, array2, object1);
 
 export {};

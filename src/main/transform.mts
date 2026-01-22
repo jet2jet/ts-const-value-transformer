@@ -147,10 +147,6 @@ function visitNodeChildren(
   if ((newNode as NodeWithSymbols)[SYMBOL_ORIGINAL_NODE]) {
     return newNode;
   }
-  // skip children for satisifes expression
-  if (ts.isSatisfiesExpression(newNode)) {
-    return newNode;
-  }
 
   // skip statements which would not have 'value' expressions
   if (

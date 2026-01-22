@@ -132,13 +132,31 @@ const tuple = [1, 2];
 const [, tuple2] = tuple;
 console.log(2 /* tuple2 */);
 // don't transform satisfies expression
-tuple2;
+2 /* tuple2 */;
+switch (tuple2) {
+    case 2:
+        break;
+    default:
+        tuple2;
+        break;
+}
 // don't transform assignment
 const record1 = {};
 record1.foo = true;
 record1['bar'] = true;
 // don't transform indexed access
 console.log(record1.foo, record1.baz);
+// do transform constant values in initializers
+const value1 = 1 /* constValue1 */;
+const array1 = [1 /* constValue1 */, 0.1 /* constValue2 */];
+const array2 = [-1 /* constValue3 */, "foo" /* constValue4 */];
+const object1 = {
+    x: -1 /* constValue3 */,
+    constValue4,
+    y: mod.Hoge,
+    z: "hoge" /* BarEnum.B */,
+};
+console.log(1 /* value1 */, array1, array2, object1);
 export {};
 //# sourceMappingURL=index.mjs.map"
 `;
