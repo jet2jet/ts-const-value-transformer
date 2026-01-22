@@ -23,6 +23,8 @@ export interface PortalTransformer {
   readonly ts: typeof tsNamespace;
   /** Active `Program` instance for the transformer */
   readonly program: tsNamespace.Program;
+  /** Clears transformed cache. */
+  clearCache(): void;
   /**
    * Performs transformation.
    * @param content Base source code. If null, uses loaded source code in the TS project.
@@ -51,6 +53,15 @@ export interface PortalTransformer {
     sourceMap?: string | RawSourceMap | null,
     options?: TransformOptions
   ): [newSource: string | null, newSourceMap: RawSourceMap | undefined];
+}
+
+function optionsToString(options: TransformOptions) {
+  return JSON.stringify(options, (_, value: unknown) => {
+    if (typeof value === 'function' || value instanceof RegExp) {
+      return value.toString();
+    }
+    return value;
+  });
 }
 
 function createPortalTransformerImpl(
@@ -92,10 +103,30 @@ function createPortalTransformerImpl(
     rootNames: config.fileNames,
   });
 
+  const cache = new Map<
+    string,
+    {
+      content: string | null;
+      optJson: string;
+      result: [newSource: string, newSourceMap: RawSourceMap | undefined];
+    }
+  >();
+
   return {
     ts,
     program,
+    clearCache: () => cache.clear(),
     transform: (content, fileName, sourceMap, individualOptions) => {
+      const individualOptionsJson = optionsToString(individualOptions ?? {});
+      const cachedData = cache.get(fileName);
+      if (
+        cachedData &&
+        cachedData.content === content &&
+        cachedData.optJson === individualOptionsJson
+      ) {
+        return cachedData.result;
+      }
+
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const rawSourceMap: RawSourceMap | undefined =
         typeof sourceMap === 'string'
@@ -120,23 +151,24 @@ function createPortalTransformerImpl(
       const transformer = createTransformer(program, {
         options: { ...options, ...individualOptions, ts },
       });
-      const result = ts.transform(
+      const transformResult = ts.transform(
         sourceFile,
         [transformer],
         program.getCompilerOptions()
       );
-      const transformedSource = result.transformed[0]!;
+      const transformedSource = transformResult.transformed[0]!;
       // If unchanged, return base file as-is
       if (transformedSource === sourceFile) {
         return [content ?? sourceFile.getFullText(), rawSourceMap];
       }
-      const printed = printSourceWithMap(
+      const result = printSourceWithMap(
         transformedSource,
         fileName,
         rawSourceMap,
         ts
       );
-      return printed;
+      cache.set(fileName, { content, optJson: individualOptionsJson, result });
+      return result;
     },
   };
 }
