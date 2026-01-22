@@ -64,9 +64,12 @@ export interface PortalTransformer {
 }
 
 function optionsToString(options: TransformOptions) {
-  return JSON.stringify(options, (_, value: unknown) => {
+  return JSON.stringify(options, (key, value: unknown) => {
     if (typeof value === 'function' || value instanceof RegExp) {
       return value.toString();
+    }
+    if (key === 'typescript' && typeof value === 'object' && value != null) {
+      return '[object typescript]';
     }
     return value;
   });
