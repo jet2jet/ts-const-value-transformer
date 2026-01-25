@@ -59,6 +59,15 @@ if (constValue1 && (writableValue1 || !constValue5)) {
   console.log('');
 }
 
+// Test code for print
+console.log(
+  -constValue3,
+  -constValue1.toString(),
+  constValue2.toString(),
+  constValue3.toString(),
+  constValue10.toString()
+);
+
 function setWritableValue1() {
   writableValue1 = !!Math.random();
 }

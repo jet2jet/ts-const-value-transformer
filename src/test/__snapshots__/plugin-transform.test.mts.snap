@@ -16,9 +16,9 @@ const constValue8 = \`aaa
 bbb\`;
 const constValue9 = \`bbb\${n}\`;
 const constValue10 = !0;
-const constValue11 = void 0 /* undefined */;
+const constValue11 = (void 0) /* undefined */;
 let writableValue1 = true;
-console.log(1 /* constValue1 */, 0.1 /* constValue2 */, -1 /* constValue3 */, 
+console.log(1 /* constValue1 */, 0.1 /* constValue2 */, (-1) /* constValue3 */, 
 /* the comment */
 /* the comment */
 "foo" /* constValue4 */, 
@@ -31,9 +31,9 @@ constValue9.toString(),
 // don't transform for asserted type
 n.toString(), true /* constValue10 */, 
 // 'constValue11 || 12345' is literal type, but don't transform (instead transform 'constValue11')
-void 0 /* constValue11 */ || 12345, 
+(void 0) /* constValue11 */ || 12345, 
 // 'constValue1 ? constValue2 : constValue3' is literal type, but don't transform
-1 /* constValue1 */ ? 0.1 /* constValue2 */ : -1 /* constValue3 */, 
+1 /* constValue1 */ ? 0.1 /* constValue2 */ : (-1) /* constValue3 */, 
 // writableValue1 is literal type, but don't transform unless \`unsafeHoistWritableValues\` is true
 writableValue1);
 export { constValue1, constValue2, constValue3, constValue4, constValue5, constValue6, constValue7, constValue8, constValue9, };
@@ -41,6 +41,8 @@ setWritableValue1();
 if (1 /* constValue1 */ && (writableValue1 || !true /* constValue5 */)) {
     console.log('');
 }
+// Test code for print
+console.log(-(-1) /* constValue3 */, -1 /* constValue1 */.toString(), 0.1 /* constValue2 */.toString(), (-1) /* constValue3 */.toString(), true /* constValue10 */.toString());
 function setWritableValue1() {
     writableValue1 = !!Math.random();
 }
@@ -52,7 +54,7 @@ export const constObject = {
     b: 'bar',
     c: false,
     d: null,
-    e: void 0 /* undefined */,
+    e: (void 0) /* undefined */,
     f: 20n,
     g: -30n,
     h: {
@@ -111,8 +113,8 @@ console.log(constObject["a" /* name_a */]);
 const objWithComputedName = { ["a" /* name_a */]: 432 };
 console.log(objWithComputedName["a" /* name_a */]);
 (() => {
-    const { a, b: b2, e = -1 /* constValue3 */ } = constObject;
-    console.log(4 /* a */, "bar" /* b2 */, -1 /* e */);
+    const { a, b: b2, e = (-1) /* constValue3 */ } = constObject;
+    console.log(4 /* a */, "bar" /* b2 */, (-1) /* e */);
 })();
 ((x = 0.1 /* constValue2 */) => {
     console.log(x);
@@ -124,7 +126,7 @@ console.log(fn2());
 // with annotation
 console.log(/*@__PURE__*/ fn2(), /*#__PURE__*/ fn2());
 // don't transform spread element and parameter declarations
-console.log([...Array(5)].map((u, i) => (void 0 /* u */ == null ? i : 0)));
+console.log([...Array(5)].map((u, i) => ((void 0) /* u */ == null ? i : 0)));
 const fn1 = (...args) => args.length;
 console.log(fn1(...Array(5)));
 // don't transform omitted expression
@@ -149,9 +151,9 @@ console.log(record1.foo, record1.baz);
 // do transform constant values in initializers
 const value1 = 1 /* constValue1 */;
 const array1 = [1 /* constValue1 */, 0.1 /* constValue2 */];
-const array2 = [-1 /* constValue3 */, "foo" /* constValue4 */];
+const array2 = [(-1) /* constValue3 */, "foo" /* constValue4 */];
 const object1 = {
-    x: -1 /* constValue3 */,
+    x: (-1) /* constValue3 */,
     constValue4,
     y: mod.Hoge,
     z: "hoge" /* BarEnum.B */,

@@ -4,7 +4,12 @@ import type * as ts from 'typescript';
 // for JSDoc
 import type createPortalTransformer from './createPortalTransformer.mjs';
 
-type OriginalNodeDataType = [text: string, pos: number, end: number];
+type OriginalNodeDataType = [
+  text: string,
+  newText: string,
+  pos: number,
+  end: number,
+];
 const SYMBOL_ORIGINAL_NODE_DATA = Symbol('originalNodeData');
 
 export interface TransformOptions {
@@ -266,30 +271,58 @@ function visitNodeAndReplaceIfNeeded(
     if (type.isUnionOrIntersection()) {
       return node;
     }
+    let newSource: string;
     if (type.isStringLiteral()) {
       newNode = ts.factory.createStringLiteral(type.value);
+      newSource =
+        // TypeScript namespace may export `function escapeNonAsciiString(s: string, quoteChar?: CharacterCodes.doubleQuote | CharacterCodes.singleQuote | CharacterCodes.backtick): string`
+        'escapeNonAsciiString' in ts
+          ? `"${(
+              ts.escapeNonAsciiString as (
+                s: string,
+                quoteChar: number
+              ) => string
+            )(
+              type.value,
+              'CharacterCodes' in ts
+                ? (ts.CharacterCodes as { doubleQuote: number }).doubleQuote
+                : 34 /* doubleQuote */
+            )}"`
+          : JSON.stringify(type.value);
     } else if (type.isNumberLiteral()) {
       if (type.value < 0) {
-        newNode = ts.factory.createPrefixUnaryExpression(
-          ts.SyntaxKind.MinusToken,
-          ts.factory.createNumericLiteral(-type.value)
+        newNode = ts.factory.createParenthesizedExpression(
+          ts.factory.createPrefixUnaryExpression(
+            ts.SyntaxKind.MinusToken,
+            ts.factory.createNumericLiteral(-type.value)
+          )
         );
+        newSource = `(-${-type.value})`;
       } else {
         newNode = ts.factory.createNumericLiteral(type.value);
+        newSource = `${type.value}`;
       }
     } else if (flags & ts.TypeFlags.BigIntLiteral) {
-      newNode = ts.factory.createBigIntLiteral(typeChecker.typeToString(type));
+      const text = typeChecker.typeToString(type);
+      newNode = ts.factory.createBigIntLiteral(text);
+      newSource = text;
     } else if (flags & ts.TypeFlags.BooleanLiteral) {
       const text = typeChecker.typeToString(type);
       newNode =
         text === 'true' ? ts.factory.createTrue() : ts.factory.createFalse();
+      newSource = text;
     } else if (flags & ts.TypeFlags.Null) {
       newNode = ts.factory.createNull();
+      newSource = 'null';
     } else if (flags & ts.TypeFlags.Undefined) {
       if (options.useUndefinedSymbolForUndefinedValue) {
         newNode = ts.factory.createIdentifier('undefined');
+        newSource = 'undefined';
       } else {
-        newNode = ts.factory.createVoidZero();
+        newNode = ts.factory.createParenthesizedExpression(
+          ts.factory.createVoidZero()
+        );
+        newSource = '(void 0)';
       }
     } else {
       return node;
@@ -303,6 +336,7 @@ function visitNodeAndReplaceIfNeeded(
     ts.setTextRange(result, node);
     (result as NodeWithSymbols)[SYMBOL_ORIGINAL_NODE_DATA] = [
       node.getText(sourceFile),
+      newSource,
       node.pos,
       node.end,
     ];
@@ -693,10 +727,8 @@ function printSourceImpl(
   mapGenerator?: sourceMap.SourceMapGenerator
 ): [string, sourceMap.RawSourceMap?] {
   const ts = tsInstance ?? tsNamespace;
-  const printer = ts.createPrinter({ removeComments: true });
   const r = printNode(
     ts,
-    printer,
     sourceFile.getFullText(),
     sourceFile,
     sourceFile,
@@ -709,7 +741,6 @@ function printSourceImpl(
 
 function printNode(
   tsInstance: typeof ts,
-  printer: ts.Printer,
   baseSource: string,
   sourceFile: ts.SourceFile,
   node: ts.Node,
@@ -719,11 +750,7 @@ function printNode(
 ): string {
   const originalNodeData = (node as NodeWithSymbols)[SYMBOL_ORIGINAL_NODE_DATA];
   if (originalNodeData) {
-    let result = printer.printNode(
-      tsInstance.EmitHint.Unspecified,
-      node,
-      sourceFile
-    );
+    let result = originalNodeData[1];
     const comments = tsInstance.getSyntheticTrailingComments(node);
     if (comments) {
       for (const comment of comments) {
@@ -732,8 +759,8 @@ function printNode(
     }
     const old = originalNodeData[0];
     const oldFull = baseSource.substring(
-      originalNodeData[1],
-      originalNodeData[2]
+      originalNodeData[2],
+      originalNodeData[3]
     );
     const i = oldFull.lastIndexOf(old);
     const leadingUnchanged = i < 0 ? 0 : i;
@@ -782,7 +809,6 @@ function printNode(
       }
       output += printNode(
         tsInstance,
-        printer,
         baseSource,
         sourceFile,
         child,
