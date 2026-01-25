@@ -131,11 +131,15 @@ function createPortalTransformerImpl(
   let transformationCount = 0;
 
   const recreateProgram = () => {
-    const oldProgram = program;
+    // @ts-expect-error: We must clear reference first to give change for gc
+    delete instance.program;
+    // @ts-expect-error: We must clear reference first to give change for gc
+    program = null;
+    // We don't pass `oldProgram` because the transformed source codes should not be necessary (the transformation does not change logics and types)
+    // If we pass `oldProgram`, temporal memory usage may increase because gc cannot release `oldProgram` before creating new program
     program = ts.createProgram({
       options: config.options,
       rootNames: config.fileNames,
-      oldProgram,
     });
     instance.program = program;
     transformationCount = 0;
