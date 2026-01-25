@@ -1,7 +1,6 @@
 import * as path from 'path';
 import type * as webpack from 'webpack';
-import {
-  createPortalTransformerSync,
+import createPortalTransformer, {
   type CreatePortalTransformerOptions,
   type PortalTransformer,
 } from './createPortalTransformer.mjs';
@@ -17,13 +16,13 @@ const loader: webpack.LoaderDefinitionFunction<
   // eslint-disable-next-line @typescript-eslint/no-unused-expressions, @typescript-eslint/strict-boolean-expressions
   this.cacheable && this.cacheable();
   this.async();
-  void Promise.resolve().then(() => {
+  void (async () => {
     try {
       const options = this.getOptions() || {};
       const project = options.project ?? 'tsconfig.json';
       let transformer = transformerMap.get(project);
       if (!transformer) {
-        transformer = createPortalTransformerSync({
+        transformer = await createPortalTransformer({
           cwd: path.dirname(this.resourcePath),
           ...options,
         });
@@ -34,6 +33,6 @@ const loader: webpack.LoaderDefinitionFunction<
     } catch (e) {
       this.callback(e as Error);
     }
-  });
+  })();
 };
 export default loader;

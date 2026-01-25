@@ -255,7 +255,9 @@ export default async function createPortalTransformer(
   let ts;
   if (options.typescript != null) {
     if (typeof options.typescript === 'string') {
-      ts = (await import(options.typescript)) as typeof tsNamespace;
+      // Use eval to avoid webpack warnings
+      // eslint-disable-next-line no-eval
+      ts = (await eval('import(options.typescript)')) as typeof tsNamespace;
     } else {
       ts = options.typescript;
     }

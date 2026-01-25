@@ -27,6 +27,28 @@ describe('createPortalTransformer', () => {
     expect(result[1]).toMatchSnapshot('generated source map');
   });
 
+  it('transform with explicitly specifying typescript package', async () => {
+    const transformer = await createPortalTransformer({
+      project: 'tsconfig.json',
+      cwd: path.resolve(TEST_PROJECT_DIR),
+      typescript: 'typescript',
+    });
+    const result = transformer.transform(
+      null,
+      path.resolve(TEST_PROJECT_DIR, 'index.mts')
+    );
+    if (result[1]?.sources) {
+      for (let i = 0; i < result[1].sources.length; ++i) {
+        result[1].sources[i] = path.relative(
+          path.resolve(TEST_PROJECT_DIR),
+          result[1].sources[i]!
+        );
+      }
+    }
+    expect(result[0]).toMatchSnapshot('generated source');
+    expect(result[1]).toMatchSnapshot('generated source map');
+  });
+
   it('transforming causes unchanged', async () => {
     const transformer = await createPortalTransformer({
       project: 'tsconfig.json',
