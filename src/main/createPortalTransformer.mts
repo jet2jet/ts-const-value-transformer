@@ -27,6 +27,15 @@ export interface CreatePortalTransformerOptions extends TransformOptions {
   recreateProgramOnTransformCount?: number;
 }
 
+export type PortalTransformerResult = [
+  newSource: string | null,
+  newSourceMap: RawSourceMap | undefined,
+];
+export type PortalTransformerResultNonNull = [
+  newSource: string,
+  newSourceMap: RawSourceMap | undefined,
+];
+
 export interface PortalTransformer {
   /** The `typescript` namespace object */
   readonly ts: typeof tsNamespace;
@@ -49,7 +58,7 @@ export interface PortalTransformer {
     fileName: string,
     sourceMap?: string | RawSourceMap | null,
     options?: TransformOptions
-  ): [newSource: string, newSourceMap: RawSourceMap | undefined];
+  ): PortalTransformerResultNonNull;
   /**
    * Performs transformation.
    * @param content Base source code. If null, uses loaded source code in the TS project.
@@ -63,7 +72,7 @@ export interface PortalTransformer {
     fileName: string,
     sourceMap?: string | RawSourceMap | null,
     options?: TransformOptions
-  ): [newSource: string | null, newSourceMap: RawSourceMap | undefined];
+  ): PortalTransformerResult;
 }
 
 function optionsToString(options: TransformOptions) {
@@ -150,7 +159,7 @@ function createPortalTransformerImpl(
     {
       content: string | null;
       optJson: string;
-      result: [newSource: string, newSourceMap: RawSourceMap | undefined];
+      result: PortalTransformerResultNonNull;
     }
   >();
 
@@ -210,16 +219,18 @@ function createPortalTransformerImpl(
         program.getCompilerOptions()
       );
       const transformedSource = transformResult.transformed[0]!;
+      let result: PortalTransformerResultNonNull;
       // If unchanged, return base file as-is
       if (transformedSource === sourceFile) {
-        return [content ?? sourceFile.text, rawSourceMap];
+        result = [content ?? sourceFile.text, rawSourceMap];
+      } else {
+        result = printSourceWithMap(
+          transformedSource,
+          fileName,
+          rawSourceMap,
+          ts
+        );
       }
-      const result = printSourceWithMap(
-        transformedSource,
-        fileName,
-        rawSourceMap,
-        ts
-      );
       cache.set(fileName, { content, optJson: individualOptionsJson, result });
       return result;
     },
