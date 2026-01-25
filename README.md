@@ -295,6 +295,8 @@ interface CreatePortalTransformerOptions extends TransformOptions {
    * If 0 or `undefined`, recreation will not be performed.
    */
   recreateProgramOnTransformCount?: number;
+  /** Specifies to cache base (original) source code for check if the input is changed. Default is false. */
+  cacheBaseSource?: boolean;
 }
 ```
 

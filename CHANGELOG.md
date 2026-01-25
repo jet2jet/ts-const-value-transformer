@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.7.0
+
+- Fix for printing 'minus numeric value' and 'void 0', and remove using `ts.createPrinter`
+- Fix that `recreateProgram` creates the new fresh program instead of passing `oldProgram`
+- Fix to cache source code with no transformation
+- Add option to disable caching original source content (changed to false by default)
+- Fix some codes for better memory usage
+
 ## v0.6.0
 
 - Remove skipping satisfies expression
