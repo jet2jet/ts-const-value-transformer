@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.7.1
+
+- Fix to wrap import() with eval to prevent from static analysis
+
 ## v0.7.0
 
 - Fix for printing 'minus numeric value' and 'void 0', and remove using `ts.createPrinter`
