@@ -736,7 +736,15 @@ function printSourceImpl(
     originalSourceName,
     mapGenerator
   );
-  return [r, mapGenerator?.toJSON()];
+
+  // This forces to concatenate strings into flatten one to reduce object trees for ConsString
+  void ((r as unknown as number) | 0);
+
+  const json = mapGenerator?.toJSON();
+  if (json) {
+    void ((json.mappings as unknown as number) | 0);
+  }
+  return [r, json];
 }
 
 function printNode(
