@@ -4,7 +4,8 @@ import type * as ts from 'typescript';
 // for JSDoc
 import type createPortalTransformer from './createPortalTransformer.mjs';
 
-const SYMBOL_ORIGINAL_NODE = Symbol('originalNode');
+type OriginalNodeDataType = [text: string, pos: number, end: number];
+const SYMBOL_ORIGINAL_NODE_DATA = Symbol('originalNodeData');
 
 export interface TransformOptions {
   /** `typescript` namespace object */
@@ -47,7 +48,7 @@ export interface TransformOptions {
 type NonNullableTransformOptions = Required<TransformOptions>;
 
 interface NodeWithSymbols extends ts.Node {
-  [SYMBOL_ORIGINAL_NODE]?: ts.Node;
+  [SYMBOL_ORIGINAL_NODE_DATA]?: OriginalNodeDataType;
 }
 
 function assignDefaultValues(
@@ -141,7 +142,7 @@ function visitNodeChildren(
     program,
     options
   );
-  if ((newNode as NodeWithSymbols)[SYMBOL_ORIGINAL_NODE]) {
+  if ((newNode as NodeWithSymbols)[SYMBOL_ORIGINAL_NODE_DATA]) {
     return newNode;
   }
 
@@ -300,7 +301,11 @@ function visitNodeAndReplaceIfNeeded(
       ` ${node.getText(sourceFile)} `
     );
     ts.setTextRange(result, node);
-    (result as NodeWithSymbols)[SYMBOL_ORIGINAL_NODE] = node;
+    (result as NodeWithSymbols)[SYMBOL_ORIGINAL_NODE_DATA] = [
+      node.getText(sourceFile),
+      node.pos,
+      node.end,
+    ];
     return result;
   } catch {
     return node;
@@ -712,8 +717,8 @@ function printNode(
   originalSourceName?: string,
   mapGenerator?: sourceMap.SourceMapGenerator
 ): string {
-  const originalNode = (node as NodeWithSymbols)[SYMBOL_ORIGINAL_NODE];
-  if (originalNode) {
+  const originalNodeData = (node as NodeWithSymbols)[SYMBOL_ORIGINAL_NODE_DATA];
+  if (originalNodeData) {
     let result = printer.printNode(
       tsInstance.EmitHint.Unspecified,
       node,
@@ -725,8 +730,11 @@ function printNode(
         result += ` /*${comment.text}*/`;
       }
     }
-    const old = originalNode.getText(sourceFile);
-    const oldFull = baseSource.substring(originalNode.pos, originalNode.end);
+    const old = originalNodeData[0];
+    const oldFull = baseSource.substring(
+      originalNodeData[1],
+      originalNodeData[2]
+    );
     const i = oldFull.lastIndexOf(old);
     const leadingUnchanged = i < 0 ? 0 : i;
     const newText =
