@@ -20,11 +20,13 @@ export interface CreatePortalTransformerOptions extends TransformOptions {
   /** The current directory for file search. Also affects to `project` option. */
   cwd?: string;
   /**
-   * Speficies the count. When the transformation count reaches this value, `program` instance will be recreated (and count will be reset).
+   * Specifies the count. When the transformation count reaches this value, `program` instance will be recreated (and count will be reset).
    * This is useful if the project is big and out-of-memory occurs during transformation, but the process may be slower.
    * If 0 or `undefined`, recreation will not be performed.
    */
   recreateProgramOnTransformCount?: number;
+  /** Specifies to cache base (original) source code for check if the input is changed. Default is false. */
+  cacheBaseSource?: boolean;
 }
 
 export type PortalTransformerResult = [
@@ -96,6 +98,7 @@ function createPortalTransformerImpl(
   const cwd = options.cwd ?? process.cwd();
   const recreateProgramOnTransformCount =
     options.recreateProgramOnTransformCount ?? 0;
+  const cacheBaseSource = options.cacheBaseSource ?? false;
 
   // eslint-disable-next-line @typescript-eslint/unbound-method
   const foundConfigPath = ts.findConfigFile(cwd, ts.sys.fileExists, project);
@@ -173,7 +176,7 @@ function createPortalTransformerImpl(
       const cachedData = cache.get(fileName);
       if (
         cachedData &&
-        cachedData.content === content &&
+        (!cacheBaseSource || cachedData.content === content) &&
         cachedData.optJson === individualOptionsJson
       ) {
         return cachedData.result;
@@ -189,17 +192,17 @@ function createPortalTransformerImpl(
         return [content as string, rawSourceMap];
       }
 
+      const sourceFile = program.getSourceFile(fileName);
+      if (!sourceFile) {
+        return [content as string, rawSourceMap];
+      }
+
       transformationCount++;
       if (
         recreateProgramOnTransformCount > 0 &&
         transformationCount >= recreateProgramOnTransformCount
       ) {
         recreateProgram();
-      }
-
-      const sourceFile = program.getSourceFile(fileName);
-      if (!sourceFile) {
-        return [content as string, rawSourceMap];
       }
 
       // If input content is changed, replace it
@@ -231,7 +234,11 @@ function createPortalTransformerImpl(
           ts
         );
       }
-      cache.set(fileName, { content, optJson: individualOptionsJson, result });
+      cache.set(fileName, {
+        content: cacheBaseSource ? content : '',
+        optJson: individualOptionsJson,
+        result,
+      });
       return result;
     },
   } satisfies PortalTransformer;
