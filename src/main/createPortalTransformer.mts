@@ -240,6 +240,13 @@ function createPortalTransformerImpl(
         );
       }
       if (cacheResult) {
+        // This forces to concatenate strings into flatten one, to reduce object trees for ConsString
+        void ((result[0] as unknown as number) | 0);
+        const json = result[1];
+        if (json) {
+          void ((json.mappings as unknown as number) | 0);
+        }
+
         cache.set(fileName, {
           content: cacheBaseSource ? content : '',
           optJson: individualOptionsJson,
