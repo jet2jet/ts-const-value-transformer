@@ -27,7 +27,7 @@ export interface CreatePortalTransformerOptions extends TransformOptions {
   recreateProgramOnTransformCount?: number;
   /** Specifies to cache base (original) source code for check if the input is changed. Default is false. */
   cacheBaseSource?: boolean;
-  /** Specifies to cache result source code. Default is true. If the latter process has cache system, specifies false to reduce memory usage. */
+  /** Specifies to cache result source code. Default is true (false for webpack loader). If the latter process has cache system, specifies false to reduce memory usage. */
   cacheResult?: boolean;
 }
 

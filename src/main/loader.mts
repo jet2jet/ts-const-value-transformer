@@ -20,11 +20,14 @@ const loader: webpack.LoaderDefinitionFunction<
     try {
       const options = this.getOptions() || {};
       const project = options.project ?? 'tsconfig.json';
+      // Use webpack's cache system by default
+      const cacheResult = options.cacheResult ?? false;
       let transformer = transformerMap.get(project);
       if (!transformer) {
         transformer = await createPortalTransformer({
           cwd: path.dirname(this.resourcePath),
           ...options,
+          cacheResult,
         });
         transformerMap.set(project, transformer);
       }
