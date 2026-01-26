@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.8.0
+
+- Add `cacheResult` option (enable by default but disable by default for webpack loader)
+- Fix for treating `as` expression (don't see parent expression)
+- Fix some codes
+
 ## v0.7.1
 
 - Fix to wrap import() with eval to prevent from static analysis

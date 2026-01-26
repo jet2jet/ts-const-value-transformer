@@ -279,7 +279,7 @@ See [Transform options](#transform-options).
 Creates 'portal transformer', which can be used the transformer easily from the code which does not use TypeScript Compiler API.  
 The return object has `transform` method with signature: `(content: string, fileName: string, sourceMap?: string | RawSourceMap | null, options?: TransformOptions) => [newSource: string, newSourceMap: RawSourceMap | undefined]`. You can call to transform TypeScript source code. (Note that this API does not transpile to JavaScript; the output code is still TypeScript code.)
 
-`CreatePortalTransformerOptions` has a following signature. Also, `ignoreFiles` of `TransformOptions` can be used.
+`CreatePortalTransformerOptions` has a following signature. Also, `TransformOptions` fields, including `ignoreFiles`, can be used.
 
 ```ts
 interface CreatePortalTransformerOptions extends TransformOptions {
@@ -297,6 +297,8 @@ interface CreatePortalTransformerOptions extends TransformOptions {
   recreateProgramOnTransformCount?: number;
   /** Specifies to cache base (original) source code for check if the input is changed. Default is false. */
   cacheBaseSource?: boolean;
+  /** Specifies to cache result source code. Default is true (false for webpack loader). If the latter process has cache system, specifies false to reduce memory usage. */
+  cacheResult?: boolean;
 }
 ```
 
