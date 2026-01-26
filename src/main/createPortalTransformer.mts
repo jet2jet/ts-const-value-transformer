@@ -27,6 +27,8 @@ export interface CreatePortalTransformerOptions extends TransformOptions {
   recreateProgramOnTransformCount?: number;
   /** Specifies to cache base (original) source code for check if the input is changed. Default is false. */
   cacheBaseSource?: boolean;
+  /** Specifies to cache result source code. Default is true. If the latter process has cache system, specifies false to reduce memory usage. */
+  cacheResult?: boolean;
 }
 
 export type PortalTransformerResult = [
@@ -99,6 +101,7 @@ function createPortalTransformerImpl(
   const recreateProgramOnTransformCount =
     options.recreateProgramOnTransformCount ?? 0;
   const cacheBaseSource = options.cacheBaseSource ?? false;
+  const cacheResult = options.cacheResult ?? true;
 
   // eslint-disable-next-line @typescript-eslint/unbound-method
   const foundConfigPath = ts.findConfigFile(cwd, ts.sys.fileExists, project);
@@ -173,13 +176,15 @@ function createPortalTransformerImpl(
     recreateProgram,
     transform: (content, fileName, sourceMap, individualOptions) => {
       const individualOptionsJson = optionsToString(individualOptions ?? {});
-      const cachedData = cache.get(fileName);
-      if (
-        cachedData &&
-        (!cacheBaseSource || cachedData.content === content) &&
-        cachedData.optJson === individualOptionsJson
-      ) {
-        return cachedData.result;
+      if (cacheResult) {
+        const cachedData = cache.get(fileName);
+        if (
+          cachedData &&
+          (!cacheBaseSource || cachedData.content === content) &&
+          cachedData.optJson === individualOptionsJson
+        ) {
+          return cachedData.result;
+        }
       }
 
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -234,11 +239,13 @@ function createPortalTransformerImpl(
           ts
         );
       }
-      cache.set(fileName, {
-        content: cacheBaseSource ? content : '',
-        optJson: individualOptionsJson,
-        result,
-      });
+      if (cacheResult) {
+        cache.set(fileName, {
+          content: cacheBaseSource ? content : '',
+          optJson: individualOptionsJson,
+          result,
+        });
+      }
       return result;
     },
   } satisfies PortalTransformer;
