@@ -249,10 +249,7 @@ function visitNodeAndReplaceIfNeeded(
     return node;
   }
 
-  if (
-    !options.unsafeHoistAsExpresion &&
-    (hasAsExpression(node, ts) || hasParentAsExpression(parent, ts))
-  ) {
+  if (!options.unsafeHoistAsExpresion && hasAsExpression(node, ts)) {
     return node;
   }
 
@@ -426,10 +423,6 @@ function isExternalReference(
   return false;
 }
 
-function isAsConstExpression(node: ts.AsExpression): boolean {
-  return node.type.getText() === 'const';
-}
-
 function hasAsExpression(node: ts.Node, tsInstance: typeof ts): boolean {
   const ts = tsInstance;
   // including 'as const'
@@ -448,29 +441,6 @@ function hasAsExpression(node: ts.Node, tsInstance: typeof ts): boolean {
     void 0
   );
   return found;
-}
-
-function hasParentAsExpression(
-  node: ts.Node | null | undefined,
-  tsInstance: typeof ts
-): boolean {
-  const ts = tsInstance;
-  if (node == null) {
-    return false;
-  }
-  // excluding 'as const'
-  if (ts.isAsExpression(node) && !isAsConstExpression(node)) {
-    return true;
-  }
-  if (
-    ts.isPropertyAccessExpression(node) ||
-    ts.isElementAccessExpression(node)
-  ) {
-    if (hasAsExpression(node.expression, ts)) {
-      return true;
-    }
-  }
-  return hasParentAsExpression(node.parent, ts);
 }
 
 function hasPureAnnotation(

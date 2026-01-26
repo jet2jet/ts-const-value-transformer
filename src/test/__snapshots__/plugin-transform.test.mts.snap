@@ -159,6 +159,12 @@ const object1 = {
     z: "hoge" /* BarEnum.B */,
 };
 console.log(1 /* value1 */, array1, array2, object1);
+// for \`as\` expression
+const as_1 = [1 /* constValue1 */, 0.1 /* constValue2 */]; // do transform
+const as_2 = constObject.b; // do transform
+const as_3 = [1 /* BarEnum.A */, "hoge" /* BarEnum.B */].includes(2); // do transform
+const as_4 = constObject.b; // don't transform unless unsafeHoistAsExpresion
+console.log(as_1, as_2, as_3, "bar" /* as_4 */);
 export {};
 //# sourceMappingURL=index.mjs.map"
 `;

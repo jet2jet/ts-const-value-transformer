@@ -121,7 +121,7 @@ console.log(
   constObject['d']
 );
 
-// don't transform here
+// don't transform here unless unsafeHoistAsExpresion is true
 declare let o: object;
 console.log((o as typeof constObject).a);
 console.log((o as typeof constObject)['a']);
@@ -241,5 +241,12 @@ const object1 = {
   z: BarEnum.B,
 } satisfies Record<string, unknown>;
 console.log(value1, array1, array2, object1);
+
+// for `as` expression
+const as_1 = [constValue1, constValue2] as number[]; // do transform
+const as_2 = constObject.b as string; // do transform
+const as_3 = [BarEnum.A as number, BarEnum.B as string].includes(2); // do transform
+const as_4 = (constObject as { readonly b: 'bar' }).b; // don't transform unless unsafeHoistAsExpresion
+console.log(as_1, as_2, as_3, as_4);
 
 export {};
