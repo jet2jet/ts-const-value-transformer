@@ -112,7 +112,14 @@ export function transformSource(
   return requiredOptions.ts.visitEachChild(
     sourceFile,
     (node) =>
-      visitNodeChildren(node, sourceFile, sourceFile, program, requiredOptions),
+      visitNodeChildren(
+        node,
+        sourceFile,
+        sourceFile,
+        program,
+        requiredOptions,
+        context
+      ),
     context
   );
 }
@@ -122,14 +129,16 @@ function visitNodeChildren(
   parent: ts.Node,
   sourceFile: ts.SourceFile,
   program: ts.Program,
-  options: NonNullableTransformOptions
+  options: NonNullableTransformOptions,
+  context: ts.TransformationContext | undefined
 ): ts.SourceFile;
 function visitNodeChildren(
   node: ts.Node,
   parent: ts.Node,
   sourceFile: ts.SourceFile,
   program: ts.Program,
-  options: NonNullableTransformOptions
+  options: NonNullableTransformOptions,
+  context: ts.TransformationContext | undefined
 ): ts.Node;
 
 function visitNodeChildren(
@@ -137,7 +146,8 @@ function visitNodeChildren(
   parent: ts.Node,
   sourceFile: ts.SourceFile,
   program: ts.Program,
-  options: NonNullableTransformOptions
+  options: NonNullableTransformOptions,
+  context: ts.TransformationContext | undefined
 ): ts.Node {
   const ts = options.ts;
   const newNode = visitNodeAndReplaceIfNeeded(
@@ -145,7 +155,8 @@ function visitNodeChildren(
     parent,
     sourceFile,
     program,
-    options
+    options,
+    context
   );
   if ((newNode as NodeWithSymbols)[SYMBOL_ORIGINAL_NODE_DATA]) {
     return newNode;
@@ -164,8 +175,9 @@ function visitNodeChildren(
 
   return ts.visitEachChild(
     newNode,
-    (node) => visitNodeChildren(node, newNode, sourceFile, program, options),
-    void 0
+    (node) =>
+      visitNodeChildren(node, newNode, sourceFile, program, options, context),
+    context
   );
 }
 
@@ -174,14 +186,16 @@ function visitNodeAndReplaceIfNeeded(
   parent: ts.Node,
   sourceFile: ts.SourceFile,
   program: ts.Program,
-  options: NonNullableTransformOptions
+  options: NonNullableTransformOptions,
+  context: ts.TransformationContext | undefined
 ): ts.SourceFile;
 function visitNodeAndReplaceIfNeeded(
   node: ts.Node,
   parent: ts.Node,
   sourceFile: ts.SourceFile,
   program: ts.Program,
-  options: NonNullableTransformOptions
+  options: NonNullableTransformOptions,
+  context: ts.TransformationContext | undefined
 ): ts.Node;
 
 function visitNodeAndReplaceIfNeeded(
@@ -189,7 +203,8 @@ function visitNodeAndReplaceIfNeeded(
   parent: ts.Node,
   sourceFile: ts.SourceFile,
   program: ts.Program,
-  options: NonNullableTransformOptions
+  options: NonNullableTransformOptions,
+  context: ts.TransformationContext | undefined
 ): ts.Node {
   const ts = options.ts;
   if (ts.isCallLikeExpression(node)) {
@@ -249,7 +264,7 @@ function visitNodeAndReplaceIfNeeded(
     return node;
   }
 
-  if (!options.unsafeHoistAsExpresion && hasAsExpression(node, ts)) {
+  if (!options.unsafeHoistAsExpresion && hasAsExpression(node, ts, context)) {
     return node;
   }
 
@@ -423,7 +438,11 @@ function isExternalReference(
   return false;
 }
 
-function hasAsExpression(node: ts.Node, tsInstance: typeof ts): boolean {
+function hasAsExpression(
+  node: ts.Node,
+  tsInstance: typeof ts,
+  context: ts.TransformationContext | undefined
+): boolean {
   const ts = tsInstance;
   // including 'as const'
   if (ts.isAsExpression(node)) {
@@ -434,11 +453,11 @@ function hasAsExpression(node: ts.Node, tsInstance: typeof ts): boolean {
     node,
     (node) => {
       if (!found) {
-        found = hasAsExpression(node, ts);
+        found = hasAsExpression(node, ts, context);
       }
       return node;
     },
-    void 0
+    context
   );
   return found;
 }
