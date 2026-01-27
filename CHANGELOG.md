@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.8.1
+
+- Fix to parenthesize expression with multi-line
+- Reduce mappings to only have position changings
+- Minor changes in development environment
+
 ## v0.8.0
 
 - Add `cacheResult` option (enable by default but disable by default for webpack loader)
