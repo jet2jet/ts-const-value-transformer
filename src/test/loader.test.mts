@@ -85,6 +85,152 @@ describe('loader', () => {
     expect(JSON.parse(mapFile)).toMatchSnapshot('generated source map');
   }, 15000);
 
+  it('test with babel-loader', async () => {
+    const volume = new memFs.Volume();
+    const fsInMemory = memFs.createFsFromVolume(volume);
+    const compiler = webpack({
+      mode: 'production',
+      module: {
+        rules: [
+          {
+            test: /\.mts$/,
+            use: [
+              {
+                loader: 'babel-loader',
+                options: {
+                  presets: ['@babel/preset-typescript'],
+                },
+              },
+              {
+                loader: path.resolve(PROJECT_DIR, 'src/main/loader.mts'),
+                options: {
+                  project: 'tsconfig.json',
+                },
+              },
+            ],
+          },
+        ],
+      },
+      devtool: 'source-map',
+      resolve: {
+        extensionAlias: {
+          '.mjs': ['.mts', '.mjs'],
+        },
+      },
+      entry: {
+        index: path.resolve(TEST_PROJECT_DIR, 'index.mts'),
+      },
+      // for test, don't bundle 'typescript' module
+      externals: {
+        typescript: {
+          root: 'typescript',
+        },
+      },
+      output: {
+        path: '/dummy',
+        library: {
+          type: 'commonjs',
+        },
+      },
+    });
+
+    compiler.outputFileSystem = fsInMemory as webpackNamespace.OutputFileSystem;
+    await new Promise<webpackNamespace.Stats>((resolve, reject) => {
+      compiler.run((err, result: webpackNamespace.Stats | undefined) => {
+        if (result) {
+          if (result.hasErrors()) {
+            reject(result.compilation.errors[0]);
+          } else {
+            resolve(result);
+          }
+        } else {
+          reject(err);
+        }
+      });
+    });
+    const jsFile = volume.readFileSync('/dummy/index.js', 'utf-8').toString();
+    const mapFile = volume
+      .readFileSync('/dummy/index.js.map', 'utf-8')
+      .toString();
+    expect(jsFile).toMatchSnapshot('generated source');
+    expect(JSON.parse(mapFile)).toMatchSnapshot('generated source map');
+  }, 15000);
+
+  it('test with swc-loader', async () => {
+    const volume = new memFs.Volume();
+    const fsInMemory = memFs.createFsFromVolume(volume);
+    const compiler = webpack({
+      mode: 'production',
+      module: {
+        rules: [
+          {
+            test: /\.mts$/,
+            use: [
+              {
+                loader: 'swc-loader',
+                options: {
+                  jsc: {
+                    parser: {
+                      syntax: 'typescript',
+                    },
+                  },
+                },
+              },
+              {
+                loader: path.resolve(PROJECT_DIR, 'src/main/loader.mts'),
+                options: {
+                  project: 'tsconfig.json',
+                },
+              },
+            ],
+          },
+        ],
+      },
+      devtool: 'source-map',
+      resolve: {
+        extensionAlias: {
+          '.mjs': ['.mts', '.mjs'],
+        },
+      },
+      entry: {
+        index: path.resolve(TEST_PROJECT_DIR, 'index.mts'),
+      },
+      // for test, don't bundle 'typescript' module
+      externals: {
+        typescript: {
+          root: 'typescript',
+        },
+      },
+      output: {
+        path: '/dummy',
+        library: {
+          type: 'commonjs',
+        },
+      },
+    });
+
+    compiler.outputFileSystem = fsInMemory as webpackNamespace.OutputFileSystem;
+    await new Promise<webpackNamespace.Stats>((resolve, reject) => {
+      compiler.run((err, result: webpackNamespace.Stats | undefined) => {
+        if (result) {
+          if (result.hasErrors()) {
+            reject(result.compilation.errors[0]);
+          } else {
+            resolve(result);
+          }
+        } else {
+          reject(err);
+        }
+      });
+    });
+    const jsFile = volume.readFileSync('/dummy/index.js', 'utf-8').toString();
+    const mapFile = volume
+      .readFileSync('/dummy/index.js.map', 'utf-8')
+      .toString();
+    expect(jsFile).toMatchSnapshot('generated source');
+    expect(JSON.parse(mapFile)).toMatchSnapshot('generated source map');
+  }, 15000);
+
   it('transforming causes unchanged', async () => {
     const volume = new memFs.Volume();
     const fsInMemory = memFs.createFsFromVolume(volume);

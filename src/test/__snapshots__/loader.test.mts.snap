@@ -1,5 +1,729 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
+exports[`loader test with babel-loader: generated source 1`] = `
+"(()=>{"use strict";var l={d:(o,n)=>{for(var e in n)l.o(n,e)&&!l.o(o,e)&&Object.defineProperty(o,e,{enumerable:!0,get:n[e]})},o:(o,n)=>Object.prototype.hasOwnProperty.call(o,n),r:o=>{"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(o,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(o,"__esModule",{value:!0})}},e={};l.r(e),l.d(e,{constObject:()=>d,constValue1:()=>t,constValue2:()=>c,constValue3:()=>s,constValue4:()=>r,constValue5:()=>g,constValue6:()=>a,constValue7:()=>b,constValue8:()=>i,constValue9:()=>u});const t=1,c=.1,s=-1,r="foo",g=!0,a=10n,b=-10n,i="aaa\\nbbb",u=\`bbb\${n}\`;let S=!0;console.log(1,.1,-1,"foo",!0,10n,-10n,"aaa\\nbbb".toString(),u.toString(),n.toString(),!0,12345,.1,S),S=!!Math.random(),S&&console.log(""),console.log(1,-1..toString(),.1.toString(),(-1).toString(),(!0).toString()),console.log(133,"5.5","5.5","5.5"),console.log(1,1===n||2===n);const d={a:4,b:"bar",c:!1,d:null,e:void 0,f:20n,g:-30n,h:{h1:1,h2:-3.14,h3:{}}};console.log(4,"bar",!1,null,void 0,20n,-30n,d.h,1,-3.14,d.h.h3,4..toString(),"bar".toString(),(!1).toString(),20n.toString(),-30n.toString(),1..toString(),(-3.14).toString(),4,null),console.log(o.a),console.log(o.a),console.log(o.h.h1),console.log(o.h.h1);const h={a:!1,b:2};console.log(h.a,h.b);const f={p:null,q:"q",r:{s:!1,t:2}};function y(){return 12345}f.r.s=!0,console.log(f.p,"q",f.r.s,2),console.log(1,"hoge"),console.log(2,"piyo"),console.log(2,"piyo"),console.log(4),console.log(432),(()=>{const{a:o,b:n,e:l=-1}=d;console.log(4,"bar",-1)})(),((o=.1)=>{console.log(o)})(),console.log(12345),console.log(y(),y()),console.log([...Array(5)].map((o,n)=>n)),console.log(((...o)=>o.length)(...Array(5)));const[,p]=[1,2];console.log(2);const V={foo:!0,bar:!0};console.log(V.foo,V.baz);const v={x:-1,constValue4:r,y:1,z:"hoge"};console.log(1,[1,.1],[-1,"foo"],v);const O=[1,"hoge"].includes(2);d.b,console.log([1,.1],"bar",O,"bar"),console.log(20n),console.log(4..toFixed(2));var j=exports;for(var m in e)j[m]=e[m];e.__esModule&&Object.defineProperty(j,"__esModule",{value:!0})})();
+//# sourceMappingURL=index.js.map"
+`;
+
+exports[`loader test with babel-loader: generated source map 1`] = `
+{
+  "file": "index.js",
+  "ignoreList": [],
+  "mappings": "mBACA,IAAIA,EAAsB,CCA1BA,EAAwB,CAACC,EAASC,KACjC,IAAI,IAAIC,KAAOD,EACXF,EAAoBI,EAAEF,EAAYC,KAASH,EAAoBI,EAAEH,EAASE,IAC5EE,OAAOC,eAAeL,EAASE,EAAK,CAAEI,YAAY,EAAMC,IAAKN,EAAWC,MCJ3EH,EAAwB,CAACS,EAAKC,IAAUL,OAAOM,UAAUC,eAAeC,KAAKJ,EAAKC,GCClFV,EAAyBC,IACH,oBAAXa,QAA0BA,OAAOC,aAC1CV,OAAOC,eAAeL,EAASa,OAAOC,YAAa,CAAEC,MAAO,WAE7DX,OAAOC,eAAeL,EAAS,aAAc,CAAEe,OAAO,M,qSCgBrD,EACA,IACA,EAGA,OAEA,EACA,KACA,IAEA,WAAWC,W,2BAKX,EAEY,MAEE,G,qBAgBDC,G,+BAOZ,GAAWD,WACZ,GAAWA,aACX,GAAWA,aACX,GAAYA,Y,YASZ,IACA,MACA,MACA,O,YAGU,EAA4B,IAApBE,GAAkD,IAAtBA,G,wCAO3C,E,mBAIG,E,6BAMN,EACA,OACA,EACA,UACA,EACA,KACA,I,IAEA,GACA,K,OAGA,GAAaF,WACb,MAAaA,aACb,GAAaA,WACb,IAAaA,YACb,IAAaA,WACb,GAAgBA,aAChB,MAAgBA,WAEhB,EACA,M,yMAwCA,I,MAEA,G,YAOU,EAAW,Q,YAMX,EAAW,Q,YAEX,EAAc,Q,YAId,G,YAIA,K,yBAGY,GAAWG,E,YACrB,EAAG,OAAI,E,SAGP,M,gGAYuCC,I,yEAOzC,G,6DA0BP,E,gBAEA,E,EACA,Q,YAEO,E,CAVI,EAAa,I,EACb,EAAa,OASXC,G,SAKJ,EAAqB,QAASC,SAAA,G,iBAF9B,EAAa,IACd,M,EAGiB,O,YAK5B,K,YAMO,GAGNC,QAAA,I",
+  "names": [
+    "__webpack_require__",
+    "exports",
+    "definition",
+    "key",
+    "o",
+    "Object",
+    "defineProperty",
+    "enumerable",
+    "get",
+    "obj",
+    "prop",
+    "prototype",
+    "hasOwnProperty",
+    "call",
+    "Symbol",
+    "toStringTag",
+    "value",
+    "toString",
+    "writableValue1",
+    "n",
+    "constObject",
+    "i",
+    "object1",
+    "includes",
+    "toFixed",
+  ],
+  "sourceRoot": "",
+  "sources": [
+    "webpack://ts-const-value-transformer/webpack/bootstrap",
+    "webpack://ts-const-value-transformer/webpack/runtime/define property getters",
+    "webpack://ts-const-value-transformer/webpack/runtime/hasOwnProperty shorthand",
+    "webpack://ts-const-value-transformer/webpack/runtime/make namespace object",
+    "webpack://ts-const-value-transformer/./src/test-project/index.mts",
+  ],
+  "sourcesContent": [
+    "// The require scope
+var __webpack_require__ = {};
+
+",
+    "// define getter functions for harmony exports
+__webpack_require__.d = (exports, definition) => {
+	for(var key in definition) {
+		if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+			Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+		}
+	}
+};",
+    "__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))",
+    "// define __esModule on exports
+__webpack_require__.r = (exports) => {
+	if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+		Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+	}
+	Object.defineProperty(exports, '__esModule', { value: true });
+};",
+    "import * as ts from 'typescript';
+import { versionMajorMinor as vmm } from 'typescript';
+import { versionMajorMinor } from 'typescript';
+import * as mod from './mod.mjs';
+
+const constValue1 = 1;
+const constValue2 = 0.1;
+const constValue3 = -1;
+const constValue4 = 'foo';
+const constValue5 = true;
+const constValue6 = 10n;
+const constValue7 = -10n;
+const constValue8 = \`aaa
+bbb\`;
+declare let n: number;
+const constValue9 = \`bbb\${n}\`;
+const constValue10 = !0;
+const constValue11 = undefined;
+let writableValue1 = true;
+
+console.log(
+  constValue1,
+  constValue2,
+  constValue3,
+  /* the comment */
+  /* the comment */
+  constValue4,
+  /* the comment */
+  constValue5,
+  constValue6 /* the comment */,
+  constValue7,
+  /* the comment */
+  constValue8.toString() /* the comment */,
+  // don't transform because constValue9 is not a literal type
+  constValue9.toString(),
+  // don't transform for asserted type
+  (n as 10).toString(),
+  constValue10,
+  // 'constValue11 || 12345' is literal type, but don't transform (instead transform 'constValue11')
+  constValue11 || 12345,
+  // 'constValue1 ? constValue2 : constValue3' is literal type, but don't transform
+  constValue1 ? constValue2 : constValue3,
+  // writableValue1 is literal type, but don't transform unless \`unsafeHoistWritableValues\` is true
+  writableValue1
+);
+export {
+  constValue1,
+  constValue2,
+  constValue3,
+  constValue4,
+  constValue5,
+  constValue6,
+  constValue7,
+  constValue8,
+  constValue9,
+};
+setWritableValue1();
+if (constValue1 && (writableValue1 || !constValue5)) {
+  console.log('');
+}
+
+// Test code for print
+console.log(
+  -constValue3,
+  -constValue1.toString(),
+  constValue2.toString(),
+  constValue3.toString(),
+  constValue10.toString()
+);
+
+function setWritableValue1() {
+  writableValue1 = !!Math.random();
+}
+
+// External values
+console.log(
+  ts.SyntaxKind.AnyKeyword,
+  ts.versionMajorMinor,
+  versionMajorMinor,
+  vmm
+);
+
+console.log(mod.Hoge, (n as number) === mod.Hoge || (n as number) === mod.Piyo);
+
+export const constObject = {
+  a: 4,
+  b: 'bar',
+  c: false,
+  d: null,
+  e: undefined,
+  f: 20n,
+  g: -30n,
+  h: {
+    h1: constValue1,
+    h2: -3.14,
+    h3: {},
+  },
+} as const;
+console.log(
+  constObject.a,
+  constObject.b,
+  constObject.c,
+  constObject.d,
+  constObject.e,
+  constObject.f,
+  constObject.g,
+  constObject.h,
+  constObject.h.h1,
+  constObject.h.h2,
+  constObject.h.h3,
+  //
+  constObject.a.toString(),
+  constObject.b.toString(),
+  constObject.c.toString(),
+  constObject.f.toString(),
+  constObject.g.toString(),
+  constObject.h.h1.toString(),
+  constObject.h.h2.toString(),
+  // element accesses are hoistable by default
+  constObject['a'],
+  constObject['d']
+);
+
+// don't transform here unless unsafeHoistAsExpresion is true
+declare let o: object;
+console.log((o as typeof constObject).a);
+console.log((o as typeof constObject)['a']);
+console.log((o as typeof constObject).h.h1);
+console.log((o as typeof constObject).h['h1']);
+
+const nonConstObject = {
+  a: true,
+  b: 1,
+};
+nonConstObject.a = false;
+nonConstObject.b = 2;
+// don't transform \`a\` unless \`unsafeHoistWritableValues\` is true
+console.log(nonConstObject.a, nonConstObject.b);
+
+interface WithReadonlyObject {
+  p: number | null;
+  readonly q: 'q';
+  readonly r: {
+    s: boolean;
+    readonly t: 2;
+  };
+}
+const partialConstObject: WithReadonlyObject = {
+  p: 1,
+  q: 'q',
+  r: {
+    s: false,
+    t: 2,
+  },
+};
+partialConstObject.p = null;
+partialConstObject.r.s = true;
+// don't transform \`p\` and \`r.s\` unless \`unsafeHoistWritableValues\` is true
+console.log(
+  partialConstObject.p,
+  partialConstObject.q,
+  partialConstObject.r.s,
+  partialConstObject.r.t
+);
+
+const enum BarEnum {
+  A = 1,
+  B = 'hoge',
+}
+console.log(BarEnum.A, BarEnum.B);
+
+enum BazEnum {
+  C = 2,
+  D = 'piyo',
+}
+console.log(BazEnum.C, BazEnum.D);
+// element access
+console.log(BazEnum['C'], BazEnum['D']);
+
+// Element access with constant name
+const name_a = 'a';
+console.log(constObject[name_a]);
+
+// Object initializer with computed name
+const objWithComputedName = { [name_a]: 432 } as const;
+console.log(objWithComputedName[name_a]);
+
+(() => {
+  const { a, b: b2, e = constValue3 } = constObject;
+  console.log(a, b2, e);
+})();
+
+((x: number = constValue2) => {
+  console.log(x);
+})();
+
+function fn2() {
+  return 12345 as const;
+}
+console.log(fn2());
+// with annotation
+console.log(/*@__PURE__*/ fn2(), /*#__PURE__*/ fn2());
+
+// don't transform spread element and parameter declarations
+console.log([...Array<undefined>(5)].map((u, i) => (u == null ? i : 0)));
+const fn1 = (...args: undefined[]) => args.length;
+console.log(fn1(...Array<undefined>(5)));
+
+// don't transform omitted expression
+const tuple = [1, 2] as const;
+const [, tuple2] = tuple;
+console.log(tuple2);
+
+// don't transform satisfies expression
+tuple2 satisfies 2;
+switch (tuple2) {
+  case 2:
+    break;
+  default:
+    tuple2 satisfies never;
+    break;
+}
+
+// don't transform assignment
+const record1: Record<string, true> = {};
+record1.foo = true;
+record1['bar'] = true;
+// don't transform indexed access
+console.log(record1.foo, record1.baz);
+
+// do transform constant values in initializers
+const value1 = constValue1;
+const array1 = [constValue1, constValue2] as const;
+const array2 = [constValue3, constValue4] as const satisfies ReadonlyArray<
+  string | number
+>;
+const object1 = {
+  x: constValue3,
+  constValue4,
+  y: mod.Hoge,
+  z: BarEnum.B,
+} satisfies Record<string, unknown>;
+console.log(value1, array1, array2, object1);
+
+// for \`as\` expression
+const as_1 = [constValue1, constValue2] as number[]; // do transform
+const as_2 = constObject.b as string; // do transform
+const as_3 = [BarEnum.A as number, BarEnum.B as string].includes(2); // do transform
+const as_4 = (constObject as { readonly b: 'bar' }).b; // don't transform unless unsafeHoistAsExpresion
+console.log(as_1, as_2, as_3, as_4);
+
+// for multiline expression
+// e.g. \`as XXX\` requires to have an expression in the same line ('X as Y' is ok, 'X\\n as Y' is invalid)
+console.log(
+  constObject[
+    // here
+    'f'
+  ] as unknown
+);
+function multilineTest() {
+  return constObject[
+    /* here */
+    'a'
+  ].toFixed(2);
+}
+console.log(multilineTest());
+
+export {};
+",
+  ],
+  "version": 3,
+}
+`;
+
+exports[`loader test with swc-loader: generated source 1`] = `
+"(()=>{"use strict";var e={d:(o,n)=>{for(var r in n)e.o(n,r)&&!e.o(o,r)&&Object.defineProperty(o,r,{enumerable:!0,get:n[r]})},o:(o,n)=>Object.prototype.hasOwnProperty.call(o,n),r:o=>{"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(o,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(o,"__esModule",{value:!0})}},r={};function t(o,n){(null==n||n>o.length)&&(n=o.length);for(var e=0,r=new Array(n);e<n;e++)r[e]=o[e];return r}function l(o){return function(o){if(Array.isArray(o))return t(o)}(o)||function(o){if("undefined"!=typeof Symbol&&null!=o[Symbol.iterator]||null!=o["@@iterator"])return Array.from(o)}(o)||a(o)||function(){throw new TypeError("Invalid attempt to spread non-iterable instance.\\\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}function a(o,n){if(o){if("string"==typeof o)return t(o,n);var e=Object.prototype.toString.call(o).slice(8,-1);return"Object"===e&&o.constructor&&(e=o.constructor.name),"Map"===e||"Set"===e?Array.from(e):"Arguments"===e||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(e)?t(o,n):void 0}}e.r(r),e.d(r,{constObject:()=>v,constValue1:()=>c,constValue2:()=>i,constValue3:()=>u,constValue4:()=>s,constValue5:()=>g,constValue6:()=>b,constValue7:()=>f,constValue8:()=>y,constValue9:()=>d});var c=1,i=.1,u=-1,s="foo",g=!0,b=10n,f=-10n,y="aaa\\nbbb",d="bbb".concat(n),h=!0;console.log(1,.1,-1,"foo",!0,10n,-10n,"aaa\\nbbb".toString(),d.toString(),n.toString(),!0,12345,.1,h),(h=!!Math.random())&&console.log(""),console.log(1,-1..toString(),.1.toString(),(-1).toString(),(!0).toString()),console.log(133,"5.5","5.5","5.5"),console.log(1,1===n||2===n);var v={a:4,b:"bar",c:!1,d:null,e:void 0,f:20n,g:-30n,h:{h1:1,h2:-3.14,h3:{}}};console.log(4,"bar",!1,null,void 0,20n,-30n,v.h,1,-3.14,v.h.h3,4..toString(),"bar".toString(),(!1).toString(),20n.toString(),-30n.toString(),1..toString(),(-3.14).toString(),4,null),console.log(o.a),console.log(o.a),console.log(o.h.h1),console.log(o.h.h1);var p={a:!1,b:2};console.log(p.a,p.b);var S,m,A={p:null,q:"q",r:{s:!1,t:2}};function j(){return 12345}A.r.s=!0,console.log(A.p,"q",A.r.s,2),console.log(1,"hoge"),console.log(2,"piyo"),console.log(2,"piyo"),console.log(4),"a"in(S={})?Object.defineProperty(S,"a",{value:432,enumerable:!0,configurable:!0,writable:!0}):S.a=432,console.log(432),v.a,v.b,v.e,console.log(4,"bar",-1),function(){var o=arguments.length>0&&void 0!==arguments[0]?arguments[0]:.1;console.log(o)}(),console.log(12345),console.log(j(),j()),console.log(l(Array(5)).map(function(o,n){return n})),console.log(function(){for(var o=arguments.length,n=new Array(o),e=0;e<o;e++)n[e]=arguments[e];return n.length}.apply(void 0,l(Array(5)))),(function(o){if(Array.isArray(o))return o}(m=[1,2])||function(o){var n=null==o?null:"undefined"!=typeof Symbol&&o[Symbol.iterator]||o["@@iterator"];if(null!=n){var e,r,t=[],l=!0,a=!1;try{for(n=n.call(o);!(l=(e=n.next()).done)&&(t.push(e.value),2!==t.length);l=!0);}catch(o){a=!0,r=o}finally{try{l||null==n.return||n.return()}finally{if(a)throw r}}return t}}(m)||a(m,2)||function(){throw new TypeError("Invalid attempt to destructure non-iterable instance.\\\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}())[1],console.log(2);var O={foo:!0,bar:!0};console.log(O.foo,O.baz);var V={x:-1,constValue4:s,y:1,z:"hoge"};console.log(1,[1,.1],[-1,"foo"],V);var w=[1,"hoge"].includes(2);v.b,console.log([1,.1],"bar",w,"bar"),console.log(20n),console.log(4..toFixed(2));var M=exports;for(var P in r)M[P]=r[P];r.__esModule&&Object.defineProperty(M,"__esModule",{value:!0})})();
+//# sourceMappingURL=index.js.map"
+`;
+
+exports[`loader test with swc-loader: generated source map 1`] = `
+{
+  "file": "index.js",
+  "ignoreList": [],
+  "mappings": "mBACA,IAAIA,EAAsB,CCA1BA,EAAwB,CAACC,EAASC,KACjC,IAAI,IAAIC,KAAOD,EACXF,EAAoBI,EAAEF,EAAYC,KAASH,EAAoBI,EAAEH,EAASE,IAC5EE,OAAOC,eAAeL,EAASE,EAAK,CAAEI,YAAY,EAAMC,IAAKN,EAAWC,MCJ3EH,EAAwB,CAACS,EAAKC,IAAUL,OAAOM,UAAUC,eAAeC,KAAKJ,EAAKC,GCClFV,EAAyBC,IACH,oBAAXa,QAA0BA,OAAOC,aAC1CV,OAAOC,eAAeL,EAASa,OAAOC,YAAa,CAAEC,MAAO,WAE7DX,OAAOC,eAAeL,EAAS,aAAc,CAAEe,OAAO,M,yhCCgBrDC,EACAC,IACAC,EAGAC,OAEAC,EACAC,KACAC,IAEAC,WAAW,W,2BAKXC,EAEY,MAEEP,G,uDAuBbD,GAAW,WACZC,GADY,aAEZC,GAAW,aACXM,GAAY,Y,YASZC,IACAC,MACAC,MACAC,O,YAGUC,EAA4BA,IAApB,GAAkDC,IAAtB,G,sCAO3CC,E,mBAIGf,E,6BAMNgB,EACAC,OACAC,EACAC,UACAC,EACAC,KACAC,IAAa,IAEbC,GACAC,KAAAA,EAAAA,EAAAA,GAGAR,GAAa,WACbC,MAAa,aACbC,GAAa,WACbG,IAAa,YACbC,IAAa,WACbC,GAAgB,aAChBC,MAAgB,WAEhBC,EACAC,M,yMAwCAC,IAAoB,MAEpBC,G,YAOUC,EAAWC,Q,YAMXC,EAAWC,Q,YAEXC,EAAcC,Q,YAIdC,GAGmBC,M,8BAAAA,I,OAAM,I,gDAAA,I,YACzBC,KAGuB,Y,YACrBC,EAAGC,OAAIC,G,wEAGPvC,G,2GAYuC,C,isBAOzCwC,G,yDA0BPvC,E,gBAEAW,E,EACAiB,Q,YAEOY,E,CAVI1C,EAAaC,I,EACbC,EAAaC,OASX,G,OAKJ0B,EAAqBC,QAAS,Y,iBAF9B9B,EAAaC,IACdgB,M,EAGiB0B,O,YAK5BC,K,YAMOC,GAGN,Y",
+  "names": [
+    "__webpack_require__",
+    "exports",
+    "definition",
+    "key",
+    "o",
+    "Object",
+    "defineProperty",
+    "enumerable",
+    "get",
+    "obj",
+    "prop",
+    "prototype",
+    "hasOwnProperty",
+    "call",
+    "Symbol",
+    "toStringTag",
+    "value",
+    "constValue1",
+    "constValue2",
+    "constValue3",
+    "constValue4",
+    "constValue5",
+    "constValue6",
+    "constValue7",
+    "constValue8",
+    "constValue10",
+    "ts.SyntaxKind.AnyKeyword",
+    "ts.versionMajorMinor",
+    "versionMajorMinor",
+    "vmm",
+    "mod.Hoge",
+    "mod.Piyo",
+    "undefined",
+    "constObject.a",
+    "constObject.b",
+    "constObject.c",
+    "constObject.d",
+    "constObject.e",
+    "constObject.f",
+    "constObject.g",
+    "constObject.h.h1",
+    "constObject.h.h2",
+    "constObject['a']",
+    "constObject['d']",
+    "partialConstObject.q",
+    "partialConstObject.r.t",
+    "BarEnum.A",
+    "BarEnum.B",
+    "BazEnum.C",
+    "BazEnum.D",
+    "BazEnum['C']",
+    "BazEnum['D']",
+    "constObject[name_a]",
+    "name_a",
+    "objWithComputedName[name_a]",
+    "a",
+    "b2",
+    "e",
+    "tuple2",
+    "value1",
+    "as_4",
+    "constObject[
+    // here
+    'f'
+  ]",
+    "constObject[
+    /* here */
+    'a'
+  ]",
+  ],
+  "sourceRoot": "",
+  "sources": [
+    "webpack://ts-const-value-transformer/webpack/bootstrap",
+    "webpack://ts-const-value-transformer/webpack/runtime/define property getters",
+    "webpack://ts-const-value-transformer/webpack/runtime/hasOwnProperty shorthand",
+    "webpack://ts-const-value-transformer/webpack/runtime/make namespace object",
+    "webpack://ts-const-value-transformer/./src/test-project/index.mts",
+  ],
+  "sourcesContent": [
+    "// The require scope
+var __webpack_require__ = {};
+
+",
+    "// define getter functions for harmony exports
+__webpack_require__.d = (exports, definition) => {
+	for(var key in definition) {
+		if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+			Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+		}
+	}
+};",
+    "__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))",
+    "// define __esModule on exports
+__webpack_require__.r = (exports) => {
+	if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+		Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+	}
+	Object.defineProperty(exports, '__esModule', { value: true });
+};",
+    "import * as ts from 'typescript';
+import { versionMajorMinor as vmm } from 'typescript';
+import { versionMajorMinor } from 'typescript';
+import * as mod from './mod.mjs';
+
+const constValue1 = 1;
+const constValue2 = 0.1;
+const constValue3 = -1;
+const constValue4 = 'foo';
+const constValue5 = true;
+const constValue6 = 10n;
+const constValue7 = -10n;
+const constValue8 = \`aaa
+bbb\`;
+declare let n: number;
+const constValue9 = \`bbb\${n}\`;
+const constValue10 = !0;
+const constValue11 = undefined;
+let writableValue1 = true;
+
+console.log(
+  constValue1,
+  constValue2,
+  constValue3,
+  /* the comment */
+  /* the comment */
+  constValue4,
+  /* the comment */
+  constValue5,
+  constValue6 /* the comment */,
+  constValue7,
+  /* the comment */
+  constValue8.toString() /* the comment */,
+  // don't transform because constValue9 is not a literal type
+  constValue9.toString(),
+  // don't transform for asserted type
+  (n as 10).toString(),
+  constValue10,
+  // 'constValue11 || 12345' is literal type, but don't transform (instead transform 'constValue11')
+  constValue11 || 12345,
+  // 'constValue1 ? constValue2 : constValue3' is literal type, but don't transform
+  constValue1 ? constValue2 : constValue3,
+  // writableValue1 is literal type, but don't transform unless \`unsafeHoistWritableValues\` is true
+  writableValue1
+);
+export {
+  constValue1,
+  constValue2,
+  constValue3,
+  constValue4,
+  constValue5,
+  constValue6,
+  constValue7,
+  constValue8,
+  constValue9,
+};
+setWritableValue1();
+if (constValue1 && (writableValue1 || !constValue5)) {
+  console.log('');
+}
+
+// Test code for print
+console.log(
+  -constValue3,
+  -constValue1.toString(),
+  constValue2.toString(),
+  constValue3.toString(),
+  constValue10.toString()
+);
+
+function setWritableValue1() {
+  writableValue1 = !!Math.random();
+}
+
+// External values
+console.log(
+  ts.SyntaxKind.AnyKeyword,
+  ts.versionMajorMinor,
+  versionMajorMinor,
+  vmm
+);
+
+console.log(mod.Hoge, (n as number) === mod.Hoge || (n as number) === mod.Piyo);
+
+export const constObject = {
+  a: 4,
+  b: 'bar',
+  c: false,
+  d: null,
+  e: undefined,
+  f: 20n,
+  g: -30n,
+  h: {
+    h1: constValue1,
+    h2: -3.14,
+    h3: {},
+  },
+} as const;
+console.log(
+  constObject.a,
+  constObject.b,
+  constObject.c,
+  constObject.d,
+  constObject.e,
+  constObject.f,
+  constObject.g,
+  constObject.h,
+  constObject.h.h1,
+  constObject.h.h2,
+  constObject.h.h3,
+  //
+  constObject.a.toString(),
+  constObject.b.toString(),
+  constObject.c.toString(),
+  constObject.f.toString(),
+  constObject.g.toString(),
+  constObject.h.h1.toString(),
+  constObject.h.h2.toString(),
+  // element accesses are hoistable by default
+  constObject['a'],
+  constObject['d']
+);
+
+// don't transform here unless unsafeHoistAsExpresion is true
+declare let o: object;
+console.log((o as typeof constObject).a);
+console.log((o as typeof constObject)['a']);
+console.log((o as typeof constObject).h.h1);
+console.log((o as typeof constObject).h['h1']);
+
+const nonConstObject = {
+  a: true,
+  b: 1,
+};
+nonConstObject.a = false;
+nonConstObject.b = 2;
+// don't transform \`a\` unless \`unsafeHoistWritableValues\` is true
+console.log(nonConstObject.a, nonConstObject.b);
+
+interface WithReadonlyObject {
+  p: number | null;
+  readonly q: 'q';
+  readonly r: {
+    s: boolean;
+    readonly t: 2;
+  };
+}
+const partialConstObject: WithReadonlyObject = {
+  p: 1,
+  q: 'q',
+  r: {
+    s: false,
+    t: 2,
+  },
+};
+partialConstObject.p = null;
+partialConstObject.r.s = true;
+// don't transform \`p\` and \`r.s\` unless \`unsafeHoistWritableValues\` is true
+console.log(
+  partialConstObject.p,
+  partialConstObject.q,
+  partialConstObject.r.s,
+  partialConstObject.r.t
+);
+
+const enum BarEnum {
+  A = 1,
+  B = 'hoge',
+}
+console.log(BarEnum.A, BarEnum.B);
+
+enum BazEnum {
+  C = 2,
+  D = 'piyo',
+}
+console.log(BazEnum.C, BazEnum.D);
+// element access
+console.log(BazEnum['C'], BazEnum['D']);
+
+// Element access with constant name
+const name_a = 'a';
+console.log(constObject[name_a]);
+
+// Object initializer with computed name
+const objWithComputedName = { [name_a]: 432 } as const;
+console.log(objWithComputedName[name_a]);
+
+(() => {
+  const { a, b: b2, e = constValue3 } = constObject;
+  console.log(a, b2, e);
+})();
+
+((x: number = constValue2) => {
+  console.log(x);
+})();
+
+function fn2() {
+  return 12345 as const;
+}
+console.log(fn2());
+// with annotation
+console.log(/*@__PURE__*/ fn2(), /*#__PURE__*/ fn2());
+
+// don't transform spread element and parameter declarations
+console.log([...Array<undefined>(5)].map((u, i) => (u == null ? i : 0)));
+const fn1 = (...args: undefined[]) => args.length;
+console.log(fn1(...Array<undefined>(5)));
+
+// don't transform omitted expression
+const tuple = [1, 2] as const;
+const [, tuple2] = tuple;
+console.log(tuple2);
+
+// don't transform satisfies expression
+tuple2 satisfies 2;
+switch (tuple2) {
+  case 2:
+    break;
+  default:
+    tuple2 satisfies never;
+    break;
+}
+
+// don't transform assignment
+const record1: Record<string, true> = {};
+record1.foo = true;
+record1['bar'] = true;
+// don't transform indexed access
+console.log(record1.foo, record1.baz);
+
+// do transform constant values in initializers
+const value1 = constValue1;
+const array1 = [constValue1, constValue2] as const;
+const array2 = [constValue3, constValue4] as const satisfies ReadonlyArray<
+  string | number
+>;
+const object1 = {
+  x: constValue3,
+  constValue4,
+  y: mod.Hoge,
+  z: BarEnum.B,
+} satisfies Record<string, unknown>;
+console.log(value1, array1, array2, object1);
+
+// for \`as\` expression
+const as_1 = [constValue1, constValue2] as number[]; // do transform
+const as_2 = constObject.b as string; // do transform
+const as_3 = [BarEnum.A as number, BarEnum.B as string].includes(2); // do transform
+const as_4 = (constObject as { readonly b: 'bar' }).b; // don't transform unless unsafeHoistAsExpresion
+console.log(as_1, as_2, as_3, as_4);
+
+// for multiline expression
+// e.g. \`as XXX\` requires to have an expression in the same line ('X as Y' is ok, 'X\\n as Y' is invalid)
+console.log(
+  constObject[
+    // here
+    'f'
+  ] as unknown
+);
+function multilineTest() {
+  return constObject[
+    /* here */
+    'a'
+  ].toFixed(2);
+}
+console.log(multilineTest());
+
+export {};
+",
+  ],
+  "version": 3,
+}
+`;
+
 exports[`loader test: generated source 1`] = `
 "(()=>{"use strict";var l={d:(o,n)=>{for(var e in n)l.o(n,e)&&!l.o(o,e)&&Object.defineProperty(o,e,{enumerable:!0,get:n[e]})},o:(o,n)=>Object.prototype.hasOwnProperty.call(o,n),r:o=>{"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(o,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(o,"__esModule",{value:!0})}},e={};l.r(e),l.d(e,{constObject:()=>S,constValue1:()=>t,constValue2:()=>c,constValue3:()=>s,constValue4:()=>r,constValue5:()=>g,constValue6:()=>a,constValue7:()=>i,constValue8:()=>b,constValue9:()=>u}),require(void 0);const t=1,c=.1,s=-1,r="foo",g=!0,a=10n,i=-10n,b="aaa\\nbbb",u=\`bbb\${n}\`;let d=!0;console.log(1,.1,-1,"foo",!0,10n,-10n,"aaa\\nbbb".toString(),u.toString(),n.toString(),!0,12345,.1,d),d=!!Math.random(),d&&console.log(""),console.log(1,-1..toString(),.1.toString(),(-1).toString(),(!0).toString()),console.log(133,"5.5","5.5","5.5"),console.log(1,1===n||2===n);const S={a:4,b:"bar",c:!1,d:null,e:void 0,f:20n,g:-30n,h:{h1:1,h2:-3.14,h3:{}}};console.log(4,"bar",!1,null,void 0,20n,-30n,S.h,1,-3.14,S.h.h3,4..toString(),"bar".toString(),(!1).toString(),20n.toString(),-30n.toString(),1..toString(),(-3.14).toString(),4,null),console.log(o.a),console.log(o.a),console.log(o.h.h1),console.log(o.h.h1);const h={a:!1,b:2};console.log(h.a,h.b);const f={p:1,q:"q",r:{s:!1,t:2}};var p,y;function v(){return 12345}f.p=null,f.r.s=!0,console.log(f.p,"q",f.r.s,2),function(o){o[o.A=1]="A",o.B="hoge"}(p||(p={})),console.log(1,"hoge"),function(o){o[o.C=2]="C",o.D="piyo"}(y||(y={})),console.log(2,"piyo"),console.log(2,"piyo"),console.log(4),console.log(432),(()=>{const{a:o,b:n,e:l=-1}=S;console.log(4,"bar",-1)})(),((o=.1)=>{console.log(o)})(),console.log(12345),console.log(v(),v()),console.log([...Array(5)].map((o,n)=>n)),console.log(((...o)=>o.length)(...Array(5)));const[,V]=[1,2];console.log(2);const O={foo:!0,bar:!0};console.log(O.foo,O.baz);const j={x:-1,constValue4:r,y:1,z:"hoge"};console.log(1,[1,.1],[-1,"foo"],j);const m=[1,"hoge"].includes(2);S.b,console.log([1,.1],"bar",m,"bar"),console.log(20n),console.log(4..toFixed(2));var _=exports;for(var M in e)_[M]=e[M];e.__esModule&&Object.defineProperty(_,"__esModule",{value:!0})})();
 //# sourceMappingURL=index.js.map"
