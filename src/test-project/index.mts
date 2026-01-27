@@ -249,4 +249,20 @@ const as_3 = [BarEnum.A as number, BarEnum.B as string].includes(2); // do trans
 const as_4 = (constObject as { readonly b: 'bar' }).b; // don't transform unless unsafeHoistAsExpresion
 console.log(as_1, as_2, as_3, as_4);
 
+// for multiline expression
+// e.g. `as XXX` requires to have an expression in the same line ('X as Y' is ok, 'X\n as Y' is invalid)
+console.log(
+  constObject[
+    // here
+    'f'
+  ] as unknown
+);
+function multilineTest() {
+  return constObject[
+    /* here */
+    'a'
+  ].toFixed(2);
+}
+console.log(multilineTest());
+
 export {};

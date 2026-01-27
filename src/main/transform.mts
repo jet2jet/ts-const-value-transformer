@@ -279,7 +279,7 @@ function visitNodeAndReplaceIfNeeded(
     const typeChecker = program.getTypeChecker();
     const type = typeChecker.getTypeAtLocation(node);
     const flags = type.getFlags();
-    let newNode: ts.Node;
+    let newNode: ts.Expression;
     if (type.isUnionOrIntersection()) {
       return node;
     }
@@ -340,14 +340,21 @@ function visitNodeAndReplaceIfNeeded(
       return node;
     }
 
-    const result = ts.addSyntheticTrailingComment(
+    const originalSource = node.getText(sourceFile);
+    const comment = ` ${originalSource.replace(/\/\*/g, ' *').replace(/\*\//g, '* ')} `;
+    let result = ts.addSyntheticTrailingComment(
       newNode,
       ts.SyntaxKind.MultiLineCommentTrivia,
-      ` ${node.getText(sourceFile)} `
+      comment
     );
+    newSource = `${newSource} /*${comment}*/`;
+    if (/[\r\n]/m.test(originalSource)) {
+      result = ts.factory.createParenthesizedExpression(result);
+      newSource = `(${newSource})`;
+    }
     ts.setTextRange(result, node);
     (result as NodeWithSymbols)[SYMBOL_ORIGINAL_NODE_DATA] = [
-      node.getText(sourceFile),
+      originalSource,
       newSource,
       node.pos,
       node.end,
@@ -739,13 +746,7 @@ function printNode(
 ): string {
   const originalNodeData = (node as NodeWithSymbols)[SYMBOL_ORIGINAL_NODE_DATA];
   if (originalNodeData) {
-    let result = originalNodeData[1];
-    const comments = tsInstance.getSyntheticTrailingComments(node);
-    if (comments) {
-      for (const comment of comments) {
-        result += ` /*${comment.text}*/`;
-      }
-    }
+    const result = originalNodeData[1];
     const old = originalNodeData[0];
     const oldFull = baseSource.substring(
       originalNodeData[2],
