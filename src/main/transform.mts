@@ -759,22 +759,12 @@ function printNode(
         ? result
         : oldFull.substring(0, i) + result + oldFull.substring(i + old.length);
 
-    if (mapGenerator) {
-      if (posContext.pos < node.pos) {
-        addMappingForCurrent();
-      }
-      posContext.pos = node.pos;
-      if (leadingUnchanged > 0) {
-        addMappingForCurrent();
-      }
-      posContext.pos = node.pos + leadingUnchanged;
-      addMappingForCurrent(old);
-    }
+    posContext.pos = node.pos + leadingUnchanged;
+    addMappingForCurrent(old);
     posContext.diff += result.length - old.length;
     posContext.pos += old.length;
     addMappingForCurrent();
     posContext.pos = node.end;
-    addMappingForCurrent();
     return newText;
   }
   let output = '';
@@ -788,13 +778,11 @@ function printNode(
         if (child.pos > node.pos) {
           const text = baseSource.substring(node.pos, child.pos);
           output += text;
-          addMappingForCurrent();
           posContext.pos = child.pos;
         }
       } else if (child.pos > lastChildPos) {
         const text = baseSource.substring(lastChildPos, child.pos);
         output += text;
-        addMappingForCurrent();
         posContext.pos = child.pos;
       }
       output += printNode(
@@ -813,15 +801,12 @@ function printNode(
   );
   if (!headPrinted) {
     output = baseSource.substring(node.pos, node.end);
-    addMappingForCurrent();
     posContext.pos = node.end;
   } else if (lastChildPos < node.end) {
     const text = baseSource.substring(lastChildPos, node.end);
     output += text;
-    addMappingForCurrent();
     posContext.pos = node.end;
   }
-  addMappingForCurrent();
   return output;
 
   function addMappingForCurrent(name?: string) {
@@ -829,13 +814,6 @@ function printNode(
     if (original.line !== posContext.lastLine) {
       posContext.diff = 0;
       posContext.lastLine = original.line;
-      if (mapGenerator && original.column > 0) {
-        mapGenerator.addMapping({
-          original: { line: original.line, column: 0 },
-          generated: { line: original.line, column: 0 },
-          source: originalSourceName!,
-        });
-      }
     }
     if (mapGenerator) {
       mapGenerator.addMapping({

@@ -9,7 +9,7 @@ exports[`loader test: generated source map 1`] = `
 {
   "file": "index.js",
   "ignoreList": [],
-  "mappings": "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",
+  "mappings": "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",
   "names": [
     "__webpack_require__",
     "exports",
@@ -30,9 +30,6 @@ exports[`loader test: generated source map 1`] = `
     "value",
     "require",
     "undefined",
-    "n",
-    "console",
-    "log",
     "constValue1",
     "constValue2",
     "constValue3",
@@ -41,17 +38,33 @@ exports[`loader test: generated source map 1`] = `
     "constValue6",
     "constValue7",
     "constValue8",
+    "constValue9",
+    "n",
+    "writableValue1",
+    "console",
+    "log",
     "toString",
     "constValue10",
     "Math",
     "random",
-    "writableValue1",
     "ts.SyntaxKind.AnyKeyword",
     "ts.versionMajorMinor",
     "versionMajorMinor",
     "vmm",
     "mod.Hoge",
     "mod.Piyo",
+    "constObject",
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f",
+    "g",
+    "h",
+    "h1",
+    "h2",
+    "h3",
     "constObject.a",
     "constObject.b",
     "constObject.c",
@@ -59,20 +72,20 @@ exports[`loader test: generated source map 1`] = `
     "constObject.e",
     "constObject.f",
     "constObject.g",
-    "h",
     "constObject.h.h1",
     "constObject.h.h2",
-    "h3",
     "constObject['a']",
     "constObject['d']",
-    "a",
-    "h1",
     "nonConstObject",
-    "b",
     "partialConstObject",
     "p",
+    "q",
     "r",
     "s",
+    "t",
+    "BarEnum",
+    "BazEnum",
+    "fn2",
     "partialConstObject.q",
     "partialConstObject.r.t",
     "BarEnum.A",
@@ -84,9 +97,7 @@ exports[`loader test: generated source map 1`] = `
     "constObject[name_a]",
     "objWithComputedName[name_a]",
     "b2",
-    "e",
     "x",
-    "fn2",
     "Array",
     "map",
     "u",
@@ -98,9 +109,11 @@ exports[`loader test: generated source map 1`] = `
     "record1",
     "foo",
     "baz",
+    "object1",
+    "y",
+    "z",
     "value1",
-    "includes",
-    "constObject",
+    "as_3",
     "as_4",
     "constObject[
     // here
@@ -110,7 +123,6 @@ exports[`loader test: generated source map 1`] = `
     /* here */
     'a'
   ]",
-    "toFixed",
   ],
   "sourceRoot": "",
   "sources": [
@@ -119,6 +131,7 @@ exports[`loader test: generated source map 1`] = `
     "webpack://ts-const-value-transformer/webpack/runtime/hasOwnProperty shorthand",
     "webpack://ts-const-value-transformer/webpack/runtime/make namespace object",
     "webpack://ts-const-value-transformer/external commonjs {"root":"typescript"}",
+    "webpack://ts-const-value-transformer/./src/test-project/index.mts?0ff5",
     "webpack://ts-const-value-transformer/./src/test-project/index.mts",
   ],
   "sourcesContent": [
@@ -143,6 +156,275 @@ __webpack_require__.r = (exports) => {
 	Object.defineProperty(exports, '__esModule', { value: true });
 };",
     "const __WEBPACK_NAMESPACE_OBJECT__ = require(undefined);",
+    "import * as ts from 'typescript';
+import { versionMajorMinor as vmm } from 'typescript';
+import { versionMajorMinor } from 'typescript';
+import * as mod from './mod.mjs';
+
+const constValue1 = 1;
+const constValue2 = 0.1;
+const constValue3 = -1;
+const constValue4 = 'foo';
+const constValue5 = true;
+const constValue6 = 10n;
+const constValue7 = -10n;
+const constValue8 = \`aaa
+bbb\`;
+declare let n: number;
+const constValue9 = \`bbb\${n}\`;
+const constValue10 = !0;
+const constValue11 = (void 0) /* undefined */;
+let writableValue1 = true;
+
+console.log(
+  1 /* constValue1 */,
+  0.1 /* constValue2 */,
+  (-1) /* constValue3 */,
+  /* the comment */
+  /* the comment */
+  "foo" /* constValue4 */,
+  /* the comment */
+  true /* constValue5 */,
+  10n /* constValue6 */ /* the comment */,
+  -10n /* constValue7 */,
+  /* the comment */
+  "aaa\\nbbb" /* constValue8 */.toString() /* the comment */,
+  // don't transform because constValue9 is not a literal type
+  constValue9.toString(),
+  // don't transform for asserted type
+  (n as 10).toString(),
+  true /* constValue10 */,
+  // 'constValue11 || 12345' is literal type, but don't transform (instead transform 'constValue11')
+  (void 0) /* constValue11 */ || 12345,
+  // 'constValue1 ? constValue2 : constValue3' is literal type, but don't transform
+  1 /* constValue1 */ ? 0.1 /* constValue2 */ : (-1) /* constValue3 */,
+  // writableValue1 is literal type, but don't transform unless \`unsafeHoistWritableValues\` is true
+  writableValue1
+);
+export {
+  constValue1,
+  constValue2,
+  constValue3,
+  constValue4,
+  constValue5,
+  constValue6,
+  constValue7,
+  constValue8,
+  constValue9,
+};
+setWritableValue1();
+if (1 /* constValue1 */ && (writableValue1 || !true /* constValue5 */)) {
+  console.log('');
+}
+
+// Test code for print
+console.log(
+  -(-1) /* constValue3 */,
+  -1 /* constValue1 */.toString(),
+  0.1 /* constValue2 */.toString(),
+  (-1) /* constValue3 */.toString(),
+  true /* constValue10 */.toString()
+);
+
+function setWritableValue1() {
+  writableValue1 = !!Math.random();
+}
+
+// External values
+console.log(
+  133 /* ts.SyntaxKind.AnyKeyword */,
+  "5.5" /* ts.versionMajorMinor */,
+  "5.5" /* versionMajorMinor */,
+  "5.5" /* vmm */
+);
+
+console.log(1 /* mod.Hoge */, (n as number) === 1 /* mod.Hoge */ || (n as number) === 2 /* mod.Piyo */);
+
+export const constObject = {
+  a: 4,
+  b: 'bar',
+  c: false,
+  d: null,
+  e: (void 0) /* undefined */,
+  f: 20n,
+  g: -30n,
+  h: {
+    h1: 1 /* constValue1 */,
+    h2: -3.14,
+    h3: {},
+  },
+} as const;
+console.log(
+  4 /* constObject.a */,
+  "bar" /* constObject.b */,
+  false /* constObject.c */,
+  null /* constObject.d */,
+  (void 0) /* constObject.e */,
+  20n /* constObject.f */,
+  -30n /* constObject.g */,
+  constObject.h,
+  1 /* constObject.h.h1 */,
+  (-3.14) /* constObject.h.h2 */,
+  constObject.h.h3,
+  //
+  4 /* constObject.a */.toString(),
+  "bar" /* constObject.b */.toString(),
+  false /* constObject.c */.toString(),
+  20n /* constObject.f */.toString(),
+  -30n /* constObject.g */.toString(),
+  1 /* constObject.h.h1 */.toString(),
+  (-3.14) /* constObject.h.h2 */.toString(),
+  // element accesses are hoistable by default
+  4 /* constObject['a'] */,
+  null /* constObject['d'] */
+);
+
+// don't transform here unless unsafeHoistAsExpresion is true
+declare let o: object;
+console.log((o as typeof constObject).a);
+console.log((o as typeof constObject)['a']);
+console.log((o as typeof constObject).h.h1);
+console.log((o as typeof constObject).h['h1']);
+
+const nonConstObject = {
+  a: true,
+  b: 1,
+};
+nonConstObject.a = false;
+nonConstObject.b = 2;
+// don't transform \`a\` unless \`unsafeHoistWritableValues\` is true
+console.log(nonConstObject.a, nonConstObject.b);
+
+interface WithReadonlyObject {
+  p: number | null;
+  readonly q: 'q';
+  readonly r: {
+    s: boolean;
+    readonly t: 2;
+  };
+}
+const partialConstObject: WithReadonlyObject = {
+  p: 1,
+  q: 'q',
+  r: {
+    s: false,
+    t: 2,
+  },
+};
+partialConstObject.p = null;
+partialConstObject.r.s = true;
+// don't transform \`p\` and \`r.s\` unless \`unsafeHoistWritableValues\` is true
+console.log(
+  partialConstObject.p,
+  "q" /* partialConstObject.q */,
+  partialConstObject.r.s,
+  2 /* partialConstObject.r.t */
+);
+
+const enum BarEnum {
+  A = 1,
+  B = 'hoge',
+}
+console.log(1 /* BarEnum.A */, "hoge" /* BarEnum.B */);
+
+enum BazEnum {
+  C = 2,
+  D = 'piyo',
+}
+console.log(2 /* BazEnum.C */, "piyo" /* BazEnum.D */);
+// element access
+console.log(2 /* BazEnum['C'] */, "piyo" /* BazEnum['D'] */);
+
+// Element access with constant name
+const name_a = 'a';
+console.log(4 /* constObject[name_a] */);
+
+// Object initializer with computed name
+const objWithComputedName = { ["a" /* name_a */]: 432 } as const;
+console.log(432 /* objWithComputedName[name_a] */);
+
+(() => {
+  const { a, b: b2, e = (-1) /* constValue3 */ } = constObject;
+  console.log(4 /* a */, "bar" /* b2 */, (-1) /* e */);
+})();
+
+((x: number = 0.1 /* constValue2 */) => {
+  console.log(x);
+})();
+
+function fn2() {
+  return 12345 as const;
+}
+console.log(fn2());
+// with annotation
+console.log(/*@__PURE__*/ fn2(), /*#__PURE__*/ fn2());
+
+// don't transform spread element and parameter declarations
+console.log([...Array<undefined>(5)].map((u, i) => ((void 0) /* u */ == null ? i : 0)));
+const fn1 = (...args: undefined[]) => args.length;
+console.log(fn1(...Array<undefined>(5)));
+
+// don't transform omitted expression
+const tuple = [1, 2] as const;
+const [, tuple2] = tuple;
+console.log(2 /* tuple2 */);
+
+// don't transform satisfies expression
+2 /* tuple2 */ satisfies 2;
+switch (tuple2) {
+  case 2:
+    break;
+  default:
+    tuple2 satisfies never;
+    break;
+}
+
+// don't transform assignment
+const record1: Record<string, true> = {};
+record1.foo = true;
+record1['bar'] = true;
+// don't transform indexed access
+console.log(record1.foo, record1.baz);
+
+// do transform constant values in initializers
+const value1 = 1 /* constValue1 */;
+const array1 = [1 /* constValue1 */, 0.1 /* constValue2 */] as const;
+const array2 = [(-1) /* constValue3 */, "foo" /* constValue4 */] as const satisfies ReadonlyArray<
+  string | number
+>;
+const object1 = {
+  x: (-1) /* constValue3 */,
+  constValue4,
+  y: 1 /* mod.Hoge */,
+  z: "hoge" /* BarEnum.B */,
+} satisfies Record<string, unknown>;
+console.log(1 /* value1 */, array1, array2, object1);
+
+// for \`as\` expression
+const as_1 = [1 /* constValue1 */, 0.1 /* constValue2 */] as number[]; // do transform
+const as_2 = "bar" /* constObject.b */ as string; // do transform
+const as_3 = [1 /* BarEnum.A */ as number, "hoge" /* BarEnum.B */ as string].includes(2); // do transform
+const as_4 = (constObject as { readonly b: 'bar' }).b; // don't transform unless unsafeHoistAsExpresion
+console.log(as_1, as_2, as_3, "bar" /* as_4 */);
+
+// for multiline expression
+// e.g. \`as XXX\` requires to have an expression in the same line ('X as Y' is ok, 'X\\n as Y' is invalid)
+console.log(
+  (20n /* constObject[
+    // here
+    'f'
+  ] */) as unknown
+);
+function multilineTest() {
+  return (4 /* constObject[
+     * here * 
+    'a'
+  ] */).toFixed(2);
+}
+console.log(multilineTest());
+
+export {};
+",
     "import * as ts from 'typescript';
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
