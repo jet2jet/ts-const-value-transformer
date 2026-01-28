@@ -500,22 +500,6 @@ function getNameFromElementAccessExpression(
   return null;
 }
 
-function getMemberName(m: ts.TypeElement | undefined, tsInstance: typeof ts) {
-  if (!m || !m.name) {
-    return '';
-  }
-  const name = m.name;
-  if (tsInstance.isIdentifier(name)) {
-    return name.escapedText;
-  } else if (tsInstance.isPrivateIdentifier(name)) {
-    return name.escapedText;
-  } else if (tsInstance.isStringLiteral(name)) {
-    return name.text;
-  } else {
-    return '';
-  }
-}
-
 function isReadonlyPropertyAccess(
   a: ts.PropertyAccessExpression | ts.ElementAccessExpression,
   typeChecker: ts.TypeChecker,
@@ -530,44 +514,50 @@ function isReadonlyPropertyAccess(
     return false;
   }
   if (type.getFlags() & ts.TypeFlags.Object) {
-    const dummyTypeNode = typeChecker.typeToTypeNode(
-      type,
-      a,
-      ts.NodeBuilderFlags.NoTruncation
-    );
-    if (dummyTypeNode && ts.isTypeLiteralNode(dummyTypeNode)) {
-      for (let i = 0; i < dummyTypeNode.members.length; ++i) {
-        const m = dummyTypeNode.members[i];
-        if (
-          m &&
-          getMemberName(m, ts) === memberName &&
-          ts.isPropertySignature(m)
-        ) {
-          if (
-            m.modifiers?.some((m) => m.kind === ts.SyntaxKind.ReadonlyKeyword)
-          ) {
-            return true;
-          }
+    const prop = type.getProperty(memberName);
+    if (prop) {
+      // Use internal but exported function to improve memory performance
+      if (
+        'getCheckFlags' in ts &&
+        'CheckFlags' in ts &&
+        (ts.CheckFlags as Record<string, number>).Readonly != null
+      ) {
+        const checkFlags = (ts.getCheckFlags as (symbol: ts.Symbol) => number)(
+          prop
+        );
+        if (checkFlags & (ts.CheckFlags as Record<string, number>).Readonly!) {
+          return true;
         }
       }
-    }
-    const prop = type.getProperty(memberName);
-    if (prop && prop.declarations && prop.declarations.length > 0) {
-      const decl = prop.declarations[0]!;
-      if (
-        ts.isPropertySignature(decl) &&
-        decl.modifiers?.some((m) => m.kind === ts.SyntaxKind.ReadonlyKeyword)
-      ) {
-        return true;
+      if ('getDeclarationModifierFlagsFromSymbol' in ts) {
+        const modifierFlags = (
+          ts.getDeclarationModifierFlagsFromSymbol as (
+            s: ts.Symbol,
+            isWrite?: boolean
+          ) => ts.ModifierFlags
+        )(prop);
+        if (modifierFlags & ts.ModifierFlags.Readonly) {
+          return true;
+        }
       }
-      if (
-        ts.isVariableDeclaration(decl) &&
-        // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-        decl.parent &&
-        ts.isVariableDeclarationList(decl.parent) &&
-        decl.parent.flags & ts.NodeFlags.Const
-      ) {
-        return true;
+
+      if (prop.declarations && prop.declarations.length > 0) {
+        const decl = prop.declarations[0]!;
+        if (
+          ts.isPropertySignature(decl) &&
+          decl.modifiers?.some((m) => m.kind === ts.SyntaxKind.ReadonlyKeyword)
+        ) {
+          return true;
+        }
+        if (
+          ts.isVariableDeclaration(decl) &&
+          // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+          decl.parent &&
+          ts.isVariableDeclarationList(decl.parent) &&
+          decl.parent.flags & ts.NodeFlags.Const
+        ) {
+          return true;
+        }
       }
     }
   }
