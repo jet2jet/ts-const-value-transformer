@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.8.2
+
+- Fix to use internal functions to reduce memory usage
+
 ## v0.8.1
 
 - Fix to parenthesize expression with multi-line
