@@ -109,7 +109,8 @@ export function transformSource(
   options?: TransformOptions
 ): ts.SourceFile {
   const requiredOptions = assignDefaultValues(options);
-  return requiredOptions.ts.visitEachChild(
+  const ts = requiredOptions.ts;
+  return ts.visitEachChild(
     sourceFile,
     (node) =>
       visitNodeChildren(
@@ -118,94 +119,180 @@ export function transformSource(
         sourceFile,
         program,
         requiredOptions,
-        context
+        context,
+        (node) => {
+          // skip statements which would not have 'value' expressions
+          if (
+            ts.isInterfaceDeclaration(node) ||
+            ts.isTypeAliasDeclaration(node) ||
+            // Identifies in import clause should not be parsed
+            ts.isImportDeclaration(node) ||
+            ts.isTypeOnlyExportDeclaration(node)
+          ) {
+            return false;
+          }
+          return true;
+        }
       ),
     context
   );
 }
 
-function visitNodeChildren(
-  node: ts.SourceFile,
+function visitNodeChildren<Node extends ts.Node>(
+  node: Node,
   parent: ts.Node,
   sourceFile: ts.SourceFile,
   program: ts.Program,
   options: NonNullableTransformOptions,
-  context: ts.TransformationContext | undefined
-): ts.SourceFile;
-function visitNodeChildren(
-  node: ts.Node,
+  context: ts.TransformationContext | undefined,
+  fnVisit: (node: ts.Node, parent: ts.Node) => boolean
+): Node;
+function visitNodeChildren<Node extends ts.Node, VisitContext>(
+  node: Node,
   parent: ts.Node,
   sourceFile: ts.SourceFile,
   program: ts.Program,
   options: NonNullableTransformOptions,
-  context: ts.TransformationContext | undefined
-): ts.Node;
+  context: ts.TransformationContext | undefined,
+  fnVisit: (
+    node: ts.Node,
+    parent: ts.Node,
+    visitContext: VisitContext
+  ) => boolean,
+  visitContext: VisitContext,
+  fnVisitBeforeReplace: (
+    node: ts.Node,
+    parent: ts.Node,
+    visitContext: VisitContext
+  ) => void,
+  fnVisitBeforeChild: (
+    node: ts.Node,
+    parent: ts.Node,
+    visitContext: VisitContext
+  ) => VisitContext,
+  fnVisitAfterChild: (
+    node: ts.Node,
+    parent: ts.Node,
+    childVisitContext: VisitContext
+  ) => void,
+  fnReplace?: (
+    newSource: string,
+    originalSource: string,
+    oldStart: number,
+    oldEnd: number,
+    visitContext: VisitContext
+  ) => void
+): Node;
 
-function visitNodeChildren(
-  node: ts.Node,
+function visitNodeChildren<Node extends ts.Node, VisitContext>(
+  node: Node,
   parent: ts.Node,
   sourceFile: ts.SourceFile,
   program: ts.Program,
   options: NonNullableTransformOptions,
-  context: ts.TransformationContext | undefined
-): ts.Node {
+  context: ts.TransformationContext | undefined,
+  fnVisit: (
+    node: ts.Node,
+    parent: ts.Node,
+    visitContext: VisitContext
+  ) => boolean,
+  visitContext?: VisitContext,
+  fnVisitBeforeReplace?:
+    | ((node: ts.Node, parent: ts.Node, visitContext: VisitContext) => void)
+    | null,
+  fnVisitBeforeChild?:
+    | ((
+        node: ts.Node,
+        parent: ts.Node,
+        visitContext: VisitContext
+      ) => VisitContext)
+    | null,
+  fnVisitAfterChild?:
+    | ((
+        node: ts.Node,
+        parent: ts.Node,
+        childVisitContext: VisitContext
+      ) => void)
+    | null,
+  fnReplace?: (
+    newSource: string,
+    originalSource: string,
+    oldStart: number,
+    oldEnd: number,
+    visitContext: VisitContext
+  ) => void
+): Node {
   const ts = options.ts;
+  if (fnVisitBeforeReplace) {
+    fnVisitBeforeReplace(node, parent, visitContext!);
+  }
   const newNode = visitNodeAndReplaceIfNeeded(
     node,
     parent,
     sourceFile,
     program,
     options,
-    context
+    context,
+    visitContext!,
+    fnReplace ?? 'create'
   );
-  if ((newNode as NodeWithSymbols)[SYMBOL_ORIGINAL_NODE_DATA]) {
-    return newNode;
+  if (newNode == null) {
+    return node;
+  }
+  if (newNode !== node) {
+    return newNode as Node;
   }
 
-  // skip statements which would not have 'value' expressions
-  if (
-    ts.isInterfaceDeclaration(newNode) ||
-    ts.isTypeAliasDeclaration(newNode) ||
-    // Identifies in import clause should not be parsed
-    ts.isImportDeclaration(newNode) ||
-    ts.isTypeOnlyExportDeclaration(newNode)
-  ) {
-    return newNode;
+  if (!fnVisit(node, parent, visitContext!)) {
+    return node;
   }
 
-  return ts.visitEachChild(
-    newNode,
-    (node) =>
-      visitNodeChildren(node, newNode, sourceFile, program, options, context),
+  const childVisitContext = fnVisitBeforeChild
+    ? fnVisitBeforeChild(node, parent, visitContext!)
+    : visitContext;
+  const r = ts.visitEachChild(
+    node,
+    (nodeChild) =>
+      visitNodeChildren(
+        nodeChild,
+        node,
+        sourceFile,
+        program,
+        options,
+        context,
+        fnVisit,
+        childVisitContext!,
+        fnVisitBeforeReplace!,
+        fnVisitBeforeChild!,
+        fnVisitAfterChild!,
+        fnReplace
+      ),
     context
   );
+  if (fnVisitAfterChild) {
+    fnVisitAfterChild(node, parent, childVisitContext!);
+  }
+  return r;
 }
 
-function visitNodeAndReplaceIfNeeded(
-  node: ts.SourceFile,
-  parent: ts.Node,
-  sourceFile: ts.SourceFile,
-  program: ts.Program,
-  options: NonNullableTransformOptions,
-  context: ts.TransformationContext | undefined
-): ts.SourceFile;
-function visitNodeAndReplaceIfNeeded(
+function visitNodeAndReplaceIfNeeded<VisitContext>(
   node: ts.Node,
   parent: ts.Node,
   sourceFile: ts.SourceFile,
   program: ts.Program,
   options: NonNullableTransformOptions,
-  context: ts.TransformationContext | undefined
-): ts.Node;
-
-function visitNodeAndReplaceIfNeeded(
-  node: ts.Node,
-  parent: ts.Node,
-  sourceFile: ts.SourceFile,
-  program: ts.Program,
-  options: NonNullableTransformOptions,
-  context: ts.TransformationContext | undefined
-): ts.Node {
+  context: ts.TransformationContext | undefined,
+  visitContext: VisitContext,
+  replaceOption:
+    | 'create'
+    | ((
+        newSource: string,
+        originalSource: string,
+        oldStart: number,
+        oldEnd: number,
+        visitContext: VisitContext
+      ) => void)
+): ts.Node | undefined {
   const ts = options.ts;
   if (ts.isCallLikeExpression(node)) {
     if (
@@ -279,13 +366,15 @@ function visitNodeAndReplaceIfNeeded(
     const typeChecker = program.getTypeChecker();
     const type = typeChecker.getTypeAtLocation(node);
     const flags = type.getFlags();
-    let newNode: ts.Expression;
+    let newNode: ts.Expression | undefined;
     if (type.isUnionOrIntersection()) {
       return node;
     }
     let newSource: string;
     if (type.isStringLiteral()) {
-      newNode = ts.factory.createStringLiteral(type.value);
+      if (replaceOption === 'create') {
+        newNode = ts.factory.createStringLiteral(type.value);
+      }
       newSource =
         // TypeScript namespace may export `function escapeNonAsciiString(s: string, quoteChar?: CharacterCodes.doubleQuote | CharacterCodes.singleQuote | CharacterCodes.backtick): string`
         'escapeNonAsciiString' in ts
@@ -303,37 +392,51 @@ function visitNodeAndReplaceIfNeeded(
           : JSON.stringify(type.value);
     } else if (type.isNumberLiteral()) {
       if (type.value < 0) {
-        newNode = ts.factory.createParenthesizedExpression(
-          ts.factory.createPrefixUnaryExpression(
-            ts.SyntaxKind.MinusToken,
-            ts.factory.createNumericLiteral(-type.value)
-          )
-        );
+        if (replaceOption === 'create') {
+          newNode = ts.factory.createParenthesizedExpression(
+            ts.factory.createPrefixUnaryExpression(
+              ts.SyntaxKind.MinusToken,
+              ts.factory.createNumericLiteral(-type.value)
+            )
+          );
+        }
         newSource = `(-${-type.value})`;
       } else {
-        newNode = ts.factory.createNumericLiteral(type.value);
+        if (replaceOption === 'create') {
+          newNode = ts.factory.createNumericLiteral(type.value);
+        }
         newSource = `${type.value}`;
       }
     } else if (flags & ts.TypeFlags.BigIntLiteral) {
       const text = typeChecker.typeToString(type);
-      newNode = ts.factory.createBigIntLiteral(text);
+      if (replaceOption === 'create') {
+        newNode = ts.factory.createBigIntLiteral(text);
+      }
       newSource = text;
     } else if (flags & ts.TypeFlags.BooleanLiteral) {
       const text = typeChecker.typeToString(type);
-      newNode =
-        text === 'true' ? ts.factory.createTrue() : ts.factory.createFalse();
+      if (replaceOption === 'create') {
+        newNode =
+          text === 'true' ? ts.factory.createTrue() : ts.factory.createFalse();
+      }
       newSource = text;
     } else if (flags & ts.TypeFlags.Null) {
-      newNode = ts.factory.createNull();
+      if (replaceOption === 'create') {
+        newNode = ts.factory.createNull();
+      }
       newSource = 'null';
     } else if (flags & ts.TypeFlags.Undefined) {
       if (options.useUndefinedSymbolForUndefinedValue) {
-        newNode = ts.factory.createIdentifier('undefined');
+        if (replaceOption === 'create') {
+          newNode = ts.factory.createIdentifier('undefined');
+        }
         newSource = 'undefined';
       } else {
-        newNode = ts.factory.createParenthesizedExpression(
-          ts.factory.createVoidZero()
-        );
+        if (replaceOption === 'create') {
+          newNode = ts.factory.createParenthesizedExpression(
+            ts.factory.createVoidZero()
+          );
+        }
         newSource = '(void 0)';
       }
     } else {
@@ -342,23 +445,38 @@ function visitNodeAndReplaceIfNeeded(
 
     const originalSource = node.getText(sourceFile);
     const comment = ` ${originalSource.replace(/\/\*/g, ' *').replace(/\*\//g, '* ')} `;
-    let result = ts.addSyntheticTrailingComment(
-      newNode,
-      ts.SyntaxKind.MultiLineCommentTrivia,
-      comment
-    );
+    let result = newNode
+      ? ts.addSyntheticTrailingComment(
+          newNode,
+          ts.SyntaxKind.MultiLineCommentTrivia,
+          comment
+        )
+      : undefined;
     newSource = `${newSource} /*${comment}*/`;
     if (/[\r\n]/m.test(originalSource)) {
-      result = ts.factory.createParenthesizedExpression(result);
+      if (result) {
+        result = ts.factory.createParenthesizedExpression(result);
+      }
       newSource = `(${newSource})`;
     }
-    ts.setTextRange(result, node);
-    (result as NodeWithSymbols)[SYMBOL_ORIGINAL_NODE_DATA] = [
-      originalSource,
-      newSource,
-      node.pos,
-      node.end,
-    ];
+    if (result) {
+      ts.setTextRange(result, node);
+      (result as NodeWithSymbols)[SYMBOL_ORIGINAL_NODE_DATA] = [
+        originalSource,
+        newSource,
+        node.pos,
+        node.end,
+      ];
+    }
+    if (replaceOption !== 'create') {
+      replaceOption(
+        newSource,
+        originalSource,
+        node.pos,
+        node.end,
+        visitContext
+      );
+    }
     return result;
   } catch {
     return node;
@@ -797,6 +915,194 @@ function printNode(
     output += text;
     posContext.pos = node.end;
   }
+  return output;
+
+  function addMappingForCurrent(name?: string) {
+    const original = positionToLineAndColumn(sourceFile, posContext.pos, 0);
+    if (original.line !== posContext.lastLine) {
+      posContext.diff = 0;
+      posContext.lastLine = original.line;
+    }
+    if (mapGenerator) {
+      mapGenerator.addMapping({
+        original,
+        generated: positionToLineAndColumn(
+          sourceFile,
+          posContext.pos,
+          posContext.diff
+        ),
+        source: originalSourceName!,
+        name,
+      });
+    }
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+export function transformAndPrintSource(
+  sourceFile: ts.SourceFile,
+  program: ts.Program,
+  context: ts.TransformationContext | undefined,
+  options?: TransformOptions
+): string {
+  return transformAndPrintSourceImpl(sourceFile, program, context, options)[0];
+}
+
+export function transformAndPrintSourceWithMap(
+  sourceFile: ts.SourceFile,
+  program: ts.Program,
+  context: ts.TransformationContext | undefined,
+  originalSourceName: string,
+  options?: TransformOptions,
+  startOfSourceMap?: sourceMap.RawSourceMap
+): [string, sourceMap.RawSourceMap] {
+  const generator = new sourceMap.SourceMapGenerator(startOfSourceMap);
+  return transformAndPrintSourceImpl(
+    sourceFile,
+    program,
+    context,
+    options,
+    originalSourceName,
+    generator
+  );
+}
+
+function transformAndPrintSourceImpl(
+  sourceFile: ts.SourceFile,
+  program: ts.Program,
+  context: ts.TransformationContext | undefined,
+  options?: TransformOptions
+): [string, sourceMap.RawSourceMap?];
+function transformAndPrintSourceImpl(
+  sourceFile: ts.SourceFile,
+  program: ts.Program,
+  context: ts.TransformationContext | undefined,
+  options: TransformOptions | undefined,
+  originalSourceName: string,
+  mapGenerator: sourceMap.SourceMapGenerator
+): [string, sourceMap.RawSourceMap];
+
+function transformAndPrintSourceImpl(
+  sourceFile: ts.SourceFile,
+  program: ts.Program,
+  context: ts.TransformationContext | undefined,
+  options?: TransformOptions,
+  originalSourceName?: string,
+  mapGenerator?: sourceMap.SourceMapGenerator
+): [string, sourceMap.RawSourceMap?] {
+  const requiredOptions = assignDefaultValues(options);
+  if (mapGenerator) {
+    mapGenerator.setSourceContent(
+      originalSourceName!,
+      sourceFile.getFullText()
+    );
+  }
+  const r = transformAndPrintNode(
+    { pos: 0, diff: 0, lastLine: 0 },
+    sourceFile.getFullText(),
+    sourceFile,
+    program,
+    context,
+    requiredOptions,
+    originalSourceName,
+    mapGenerator
+  );
+  return [r, mapGenerator?.toJSON()];
+}
+
+interface TransformAndPrintNodeVisitContext {
+  headPrinted: boolean;
+  lastChildPos: number;
+}
+
+function transformAndPrintNode(
+  posContext: PositionContext,
+  baseSource: string,
+  sourceFile: ts.SourceFile,
+  program: ts.Program,
+  context: ts.TransformationContext | undefined,
+  options: NonNullableTransformOptions,
+  originalSourceName?: string,
+  mapGenerator?: sourceMap.SourceMapGenerator
+): string {
+  let output = '';
+  visitNodeChildren<ts.Node, TransformAndPrintNodeVisitContext>(
+    sourceFile,
+    sourceFile,
+    sourceFile,
+    program,
+    options,
+    context,
+    // fnVisit
+    (child, _parent, visitContext) => {
+      visitContext.lastChildPos = child.end;
+      return true;
+    },
+    // visitContext
+    {
+      headPrinted: false,
+      lastChildPos: 0,
+    },
+    // fnVisitBeforeReplace
+    (child, parent, visitContext) => {
+      if (!visitContext.headPrinted) {
+        visitContext.headPrinted = true;
+        if (child.pos > parent.pos) {
+          const text = baseSource.substring(parent.pos, child.pos);
+          output += text;
+          posContext.pos = child.pos;
+        }
+      } else if (child.pos > visitContext.lastChildPos) {
+        const text = baseSource.substring(visitContext.lastChildPos, child.pos);
+        output += text;
+        posContext.pos = child.pos;
+      }
+    },
+    // fnVisitBeforeChild
+    (): TransformAndPrintNodeVisitContext => {
+      return {
+        headPrinted: false,
+        lastChildPos: 0,
+      };
+    },
+    // fnVisitAfterChild
+    (node, _parent, childVisitContext) => {
+      if (!childVisitContext.headPrinted) {
+        output += baseSource.substring(node.pos, node.end);
+        posContext.pos = node.end;
+      } else if (childVisitContext.lastChildPos < node.end) {
+        const text = baseSource.substring(
+          childVisitContext.lastChildPos,
+          node.end
+        );
+        output += text;
+        posContext.pos = node.end;
+      }
+    },
+    // fnReplace
+    (newSource, originalSource, pos, end, visitContext) => {
+      const oldFull = baseSource.substring(pos, end);
+      const i = oldFull.lastIndexOf(originalSource);
+      const leadingUnchanged = i < 0 ? 0 : i;
+      const newText =
+        i < 0
+          ? newSource
+          : oldFull.substring(0, i) +
+            newSource +
+            oldFull.substring(i + originalSource.length);
+
+      posContext.pos = pos + leadingUnchanged;
+      addMappingForCurrent(originalSource);
+      posContext.diff += newSource.length - originalSource.length;
+      posContext.pos += originalSource.length;
+      addMappingForCurrent();
+      posContext.pos = end;
+
+      output += newText;
+      visitContext.lastChildPos = end;
+    }
+  );
   return output;
 
   function addMappingForCurrent(name?: string) {

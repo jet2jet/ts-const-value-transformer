@@ -3,10 +3,9 @@ import { createRequire } from 'module';
 import * as path from 'path';
 import type { RawSourceMap } from 'source-map';
 import type * as tsNamespace from 'typescript';
-import createTransformer from './createTransformer.mjs';
 import {
   getIgnoreFilesFunction,
-  printSourceWithMap,
+  transformAndPrintSourceWithMap,
   type TransformOptions,
 } from './transform.mjs';
 
@@ -218,26 +217,17 @@ function createPortalTransformerImpl(
         });
         sourceFile.text = content;
       }
-      const transformer = createTransformer(program, {
-        options: { ...options, ...individualOptions, ts },
-      });
-      const transformResult = ts.transform(
-        sourceFile,
-        [transformer],
-        program.getCompilerOptions()
-      );
-      const transformedSource = transformResult.transformed[0]!;
-      let result: PortalTransformerResultNonNull;
-      // If unchanged, return base file as-is
-      if (transformedSource === sourceFile) {
-        result = [content ?? sourceFile.text, rawSourceMap];
-      } else {
-        result = printSourceWithMap(
-          transformedSource,
+      const result: PortalTransformerResultNonNull =
+        transformAndPrintSourceWithMap(
+          sourceFile,
+          program,
+          undefined,
           fileName,
-          rawSourceMap,
-          ts
+          { ...options, ...individualOptions, ts },
+          rawSourceMap
         );
+      if (sourceFile.text === result[0]) {
+        result[1] = undefined;
       }
       if (cacheResult) {
         // This forces to concatenate strings into flatten one, to reduce object trees for ConsString
