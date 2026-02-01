@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.9.0
+
+- Add `transformAndPrintSource` and `transformAndPrintSourceWithMap` to visit nodes only once, and use them in portal transformer
+
 ## v0.8.2
 
 - Fix to use internal functions to reduce memory usage

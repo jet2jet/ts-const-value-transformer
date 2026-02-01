@@ -260,6 +260,17 @@ Prints (generates) source code from `SourceFile`, along with raw source-map data
 - `originalSourceName` would be the file name of `sourceFile`, but you can specify another name.
 - `startOfSourceMap` is a base source map (if original source file is a generated-content) if available.
 
+#### transformAndPrintSource: (sourceFile: ts.SourceFile, program: ts.Program, context: ts.TransformationContext | undefined, options?: TransformOptions) => string
+
+Transforms the source file with TypeScript project and prints a new source code. This acts like combination of `transformSource` and `printSource`, but performs in one loop, so if transformed AST is not necessary, this function is suitable.
+
+#### transformAndPrintSourceWithMap: (sourceFile: ts.SourceFile, program: ts.Program, context: ts.TransformationContext | undefined, originalSourceName: string, options?: TransformOptions, startOfSourceMap?: RawSourceMap) => [string, RawSourceMap]
+
+Transforms the source file with TypeScript project and prints a new source code. This acts like combination of `transformSource` and `printSourceWithMap`, but performs in one loop, so if transformed AST is not necessary, this function is suitable.
+
+- `originalSourceName` would be the file name of `sourceFile`, but you can specify another name.
+- `startOfSourceMap` is a base source map (if original source file is a generated-content) if available.
+
 #### transformSource: (sourceFile: ts.SourceFile, program: ts.Program, context: ts.TransformationContext, options?: TransformOptions) => ts.SourceFile
 
 Transforms the source file with TypeScript project. You don't need to call this function directly; use `createTransformer` or `createPortalTransformer` instead.

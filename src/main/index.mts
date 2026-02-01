@@ -11,6 +11,8 @@ import version from './version.mjs';
 export {
   printSource,
   printSourceWithMap,
+  transformAndPrintSource,
+  transformAndPrintSourceWithMap,
   transformSource,
   type TransformOptions,
 } from './transform.mjs';
