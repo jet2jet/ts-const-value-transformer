@@ -16,6 +16,8 @@ declare let n: number;
 const constValue9 = `bbb${n}`;
 const constValue10 = !0;
 const constValue11 = undefined;
+// will be replaced by actual string literal if hoistConstTemplateLiteral is true
+const constValue12 = `ccc${constValue4}`;
 let writableValue1 = true;
 
 console.log(
@@ -38,6 +40,7 @@ console.log(
   constValue10,
   // 'constValue11 || 12345' is literal type, but don't transform (instead transform 'constValue11')
   constValue11 || 12345,
+  constValue12,
   // 'constValue1 ? constValue2 : constValue3' is literal type, but don't transform
   constValue1 ? constValue2 : constValue3,
   // writableValue1 is literal type, but don't transform unless `unsafeHoistWritableValues` is true

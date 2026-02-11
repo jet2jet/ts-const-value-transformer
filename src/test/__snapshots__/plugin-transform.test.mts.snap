@@ -17,6 +17,8 @@ bbb\`;
 const constValue9 = \`bbb\${n}\`;
 const constValue10 = !0;
 const constValue11 = (void 0) /* undefined */;
+// will be replaced by actual string literal if hoistConstTemplateLiteral is true
+const constValue12 = \`ccc\${constValue4}\`;
 let writableValue1 = true;
 console.log(1 /* constValue1 */, 0.1 /* constValue2 */, (-1) /* constValue3 */, 
 /* the comment */
@@ -31,7 +33,7 @@ constValue9.toString(),
 // don't transform for asserted type
 n.toString(), true /* constValue10 */, 
 // 'constValue11 || 12345' is literal type, but don't transform (instead transform 'constValue11')
-(void 0) /* constValue11 */ || 12345, 
+(void 0) /* constValue11 */ || 12345, "cccfoo" /* constValue12 */, 
 // 'constValue1 ? constValue2 : constValue3' is literal type, but don't transform
 1 /* constValue1 */ ? 0.1 /* constValue2 */ : (-1) /* constValue3 */, 
 // writableValue1 is literal type, but don't transform unless \`unsafeHoistWritableValues\` is true

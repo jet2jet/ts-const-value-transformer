@@ -19,6 +19,8 @@ declare let n: number;
 const constValue9 = \`bbb\${n}\`;
 const constValue10 = !0;
 const constValue11 = (void 0) /* undefined */;
+// will be replaced by actual string literal if hoistConstTemplateLiteral is true
+const constValue12 = \`ccc\${constValue4}\`;
 let writableValue1 = true;
 
 console.log(
@@ -41,6 +43,7 @@ console.log(
   true /* constValue10 */,
   // 'constValue11 || 12345' is literal type, but don't transform (instead transform 'constValue11')
   (void 0) /* constValue11 */ || 12345,
+  "cccfoo" /* constValue12 */,
   // 'constValue1 ? constValue2 : constValue3' is literal type, but don't transform
   1 /* constValue1 */ ? 0.1 /* constValue2 */ : (-1) /* constValue3 */,
   // writableValue1 is literal type, but don't transform unless \`unsafeHoistWritableValues\` is true
@@ -274,7 +277,7 @@ export {};
 
 exports[`createPortalTransformer test: generated source map 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;EAI5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;;EAEZT,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZE,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEhB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBgB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;;YAI1BC,2BAAmB;;;+BAGAC,gBAAM;YACzBC,qCAA2B;;;wBAGfnC,sBAAW;cACrBoC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRvC,qBAAW;;;;;;;;;;;;oDAY2BwC,gBAAC;;;;;;;YAOzCC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS1C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXY,gBAAQ;KACRgB,sBAAS;;YAEFa,cAAM;;;cAGJ3C,mBAAW,EAAEC,qBAAW;aACzBgB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEdc,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEjB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBiB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;;YAI1BC,2BAAmB;;;+BAGAC,gBAAM;YACzBC,qCAA2B;;;wBAGfpC,sBAAW;cACrBqC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRxC,qBAAW;;;;;;;;;;;;oDAY2ByC,gBAAC;;;;;;;YAOzCC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS3C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRgB,sBAAS;;YAEFa,cAAM;;;cAGJ5C,mBAAW,EAAEC,qBAAW;aACzBiB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEdc,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -287,6 +290,7 @@ exports[`createPortalTransformer test: generated source map 1`] = `
     "constValue8",
     "constValue10",
     "constValue11",
+    "constValue12",
     "ts.SyntaxKind.AnyKeyword",
     "ts.versionMajorMinor",
     "versionMajorMinor",
@@ -353,6 +357,8 @@ declare let n: number;
 const constValue9 = \`bbb\${n}\`;
 const constValue10 = !0;
 const constValue11 = undefined;
+// will be replaced by actual string literal if hoistConstTemplateLiteral is true
+const constValue12 = \`ccc\${constValue4}\`;
 let writableValue1 = true;
 
 console.log(
@@ -375,6 +381,7 @@ console.log(
   constValue10,
   // 'constValue11 || 12345' is literal type, but don't transform (instead transform 'constValue11')
   constValue11 || 12345,
+  constValue12,
   // 'constValue1 ? constValue2 : constValue3' is literal type, but don't transform
   constValue1 ? constValue2 : constValue3,
   // writableValue1 is literal type, but don't transform unless \`unsafeHoistWritableValues\` is true
@@ -628,6 +635,8 @@ declare let n: number;
 const constValue9 = \`bbb\${n}\`;
 const constValue10 = !0;
 const constValue11 = (void 0) /* undefined */;
+// will be replaced by actual string literal if hoistConstTemplateLiteral is true
+const constValue12 = \`ccc\${constValue4}\`;
 let writableValue1 = true;
 
 console.log(
@@ -650,6 +659,7 @@ console.log(
   true /* constValue10 */,
   // 'constValue11 || 12345' is literal type, but don't transform (instead transform 'constValue11')
   (void 0) /* constValue11 */ || 12345,
+  "cccfoo" /* constValue12 */,
   // 'constValue1 ? constValue2 : constValue3' is literal type, but don't transform
   1 /* constValue1 */ ? 0.1 /* constValue2 */ : (-1) /* constValue3 */,
   // writableValue1 is literal type, but don't transform unless \`unsafeHoistWritableValues\` is true
@@ -883,7 +893,7 @@ export {};
 
 exports[`createPortalTransformer transform with explicitly specifying typescript package: generated source map 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;EAI5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;;EAEZT,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZE,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEhB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBgB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;;YAI1BC,2BAAmB;;;+BAGAC,gBAAM;YACzBC,qCAA2B;;;wBAGfnC,sBAAW;cACrBoC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRvC,qBAAW;;;;;;;;;;;;oDAY2BwC,gBAAC;;;;;;;YAOzCC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS1C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXY,gBAAQ;KACRgB,sBAAS;;YAEFa,cAAM;;;cAGJ3C,mBAAW,EAAEC,qBAAW;aACzBgB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEdc,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEjB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBiB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;;YAI1BC,2BAAmB;;;+BAGAC,gBAAM;YACzBC,qCAA2B;;;wBAGfpC,sBAAW;cACrBqC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRxC,qBAAW;;;;;;;;;;;;oDAY2ByC,gBAAC;;;;;;;YAOzCC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS3C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRgB,sBAAS;;YAEFa,cAAM;;;cAGJ5C,mBAAW,EAAEC,qBAAW;aACzBiB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEdc,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -896,6 +906,7 @@ exports[`createPortalTransformer transform with explicitly specifying typescript
     "constValue8",
     "constValue10",
     "constValue11",
+    "constValue12",
     "ts.SyntaxKind.AnyKeyword",
     "ts.versionMajorMinor",
     "versionMajorMinor",
@@ -962,6 +973,8 @@ declare let n: number;
 const constValue9 = \`bbb\${n}\`;
 const constValue10 = !0;
 const constValue11 = undefined;
+// will be replaced by actual string literal if hoistConstTemplateLiteral is true
+const constValue12 = \`ccc\${constValue4}\`;
 let writableValue1 = true;
 
 console.log(
@@ -984,6 +997,7 @@ console.log(
   constValue10,
   // 'constValue11 || 12345' is literal type, but don't transform (instead transform 'constValue11')
   constValue11 || 12345,
+  constValue12,
   // 'constValue1 ? constValue2 : constValue3' is literal type, but don't transform
   constValue1 ? constValue2 : constValue3,
   // writableValue1 is literal type, but don't transform unless \`unsafeHoistWritableValues\` is true

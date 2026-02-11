@@ -196,4 +196,19 @@ describe('createTransformer and printSourceWithMap', () => {
     expect(resultData[0]).toMatchSnapshot('transformed source');
     expect(resultData[1]).toMatchSnapshot('source map object');
   });
+  it('test with hoistConstTemplateLiteral=true', () => {
+    const [program, sourceFile] = prepareSource();
+    const transformer = createTransformer(program, {
+      options: { hoistConstTemplateLiteral: true },
+    });
+    const result = ts.transform(
+      sourceFile,
+      [transformer],
+      program.getCompilerOptions()
+    );
+    const transformedSource = result.transformed[0]!;
+    const resultData = printSourceWithMap(transformedSource, 'index.mts');
+    expect(resultData[0]).toMatchSnapshot('transformed source');
+    expect(resultData[1]).toMatchSnapshot('source map object');
+  });
 });
