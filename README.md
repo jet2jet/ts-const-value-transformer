@@ -166,6 +166,8 @@ export interface TransformOptions {
   useUndefinedSymbolForUndefinedValue?: boolean | undefined;
   /** Hoist `undefined` symbol to `void 0` (or `undefined` if useUndefinedSymbolForUndefinedValue is true). Default is true. */
   hoistUndefinedSymbol?: boolean | undefined;
+  /** Hoist template literals with constant (not including variables). Default is false because it is not necessary for ES2015 or later; Script minifiers would optimize for those values. For ES5 (which will be deprecated in the future), TypeScript converts template literals to such as `''.concat(...)`, which is not treated as constant values. */
+  hoistConstTemplateLiteral?: boolean | undefined;
   /**
    * External names (tested with `.includes()` for string, with `.test()` for RegExp) for `hoistExternalValues` settings (If `hoistExternalValues` is not specified, this setting will be used).
    * - Path separators for input file name are always normalized to '/' internally.

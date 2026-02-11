@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.9.1
+
+- Add `hoistConstTemplateLiteral` option
+- Fix for the return type of `getCustomTransformers`
+
 ## v0.9.0
 
 - Add `transformAndPrintSource` and `transformAndPrintSourceWithMap` to visit nodes only once, and use them in portal transformer
