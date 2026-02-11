@@ -165,6 +165,12 @@ export default defineConfig(
     extends: [tseslint.configs.disableTypeChecked],
   },
   {
+    files: ['**/*.cjs'],
+    rules: {
+      '@typescript-eslint/no-require-imports': 'off',
+    },
+  },
+  {
     files: ['./*.js', 'examples/**/*.js', 'tools/**/*.js'],
     languageOptions: {
       globals: globals.node,

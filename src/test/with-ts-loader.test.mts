@@ -1,6 +1,9 @@
+import { exec as execBase, type ExecException } from 'child_process';
+import * as fs from 'fs/promises';
 import { createRequire } from 'module';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
+import { promisify } from 'util';
 import type * as tsloaderNamespace from 'ts-loader';
 import type * as webpackNamespace from 'webpack';
 import createTransformer from '@/createTransformer.mjs';
@@ -9,8 +12,10 @@ const require = createRequire(import.meta.url);
 const memFs = require('memfs') as typeof import('memfs');
 const webpack = require('webpack') as WebpackFunction;
 
+const exec = promisify(execBase);
+
 const THIS_DIR = path.dirname(fileURLToPath(import.meta.url));
-// const PROJECT_DIR = path.resolve(THIS_DIR, '../..');
+const PROJECT_DIR = path.resolve(THIS_DIR, '../..');
 const TEST_PROJECT_DIR = path.resolve(THIS_DIR, '../test-project');
 
 describe('loader', () => {
@@ -81,4 +86,45 @@ describe('loader', () => {
     expect(jsFile).toMatchSnapshot('generated source');
     expect(JSON.parse(mapFile)).toMatchSnapshot('generated source map');
   }, 15000);
+
+  describe('with webpack cli', () => {
+    beforeAll(async () => {
+      process.chdir(PROJECT_DIR);
+      console.log('Run `npm run build` before running tests.');
+      try {
+        await exec(`npm run build`);
+        console.log('Building finished.');
+      } catch (e) {
+        console.log('Build failure');
+        if (typeof e === 'object' && e && 'stdout' in e) {
+          console.log((e as ExecException).stdout);
+        }
+        throw e;
+      }
+    }, 20000);
+
+    test('run webpack', async () => {
+      const dist = path.join(TEST_PROJECT_DIR, 'dist2');
+
+      try {
+        await fs.rm(dist, { force: true, recursive: true });
+      } catch {}
+
+      await exec(
+        `webpack --config "${path.join(THIS_DIR, 'webpack.config.cjs')}"`
+      );
+
+      const files = await fs.readdir(dist, { recursive: true });
+      expect(files).toMatchSnapshot('emitted files');
+      await Promise.all(
+        files.map(async (file) => {
+          if (!/\.js$/i.test(file)) {
+            return;
+          }
+          const content = await fs.readFile(path.join(dist, file), 'utf-8');
+          expect(content).toMatchSnapshot(`emit file '${file}'`);
+        })
+      );
+    }, 20000);
+  });
 });
