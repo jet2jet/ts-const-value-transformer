@@ -3,11 +3,8 @@ import { createRequire } from 'module';
 import * as path from 'path';
 import type { RawSourceMap } from 'source-map';
 import type * as tsNamespace from 'typescript';
-import {
-  getIgnoreFilesFunction,
-  transformAndPrintSourceWithMap,
-  type TransformOptions,
-} from './transform.mjs';
+import { getIgnoreFilesFunction, type TransformOptions } from './transform.mjs';
+import { transformAndPrintSourceWithMap } from './tscTransformer.mjs';
 
 const require = createRequire(import.meta.url);
 

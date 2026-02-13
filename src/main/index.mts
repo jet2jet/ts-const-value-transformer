@@ -9,13 +9,21 @@ import createTransformer from './createTransformer.mjs';
 import version from './version.mjs';
 
 export {
+  printSourceWithProxy,
+  printSourceWithMapWithProxy,
+  transformAndPrintSourceWithProxy,
+  transformAndPrintSourceWithMapWithProxy,
+  transformSourceWithProxy,
+  type TransformOptions,
+} from './transform.mjs';
+
+export {
   printSource,
   printSourceWithMap,
   transformAndPrintSource,
   transformAndPrintSourceWithMap,
   transformSource,
-  type TransformOptions,
-} from './transform.mjs';
+} from './tscTransformer.mjs';
 
 export {
   createPortalTransformer,

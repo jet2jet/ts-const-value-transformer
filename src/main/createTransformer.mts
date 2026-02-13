@@ -1,9 +1,6 @@
 import type * as ts from 'typescript';
-import {
-  getIgnoreFilesFunction,
-  transformSource,
-  type TransformOptions,
-} from './transform.mjs';
+import { getIgnoreFilesFunction, type TransformOptions } from './transform.mjs';
+import { transformSource } from './tscTransformer.mjs';
 
 interface Config {
   options?: TransformOptions;

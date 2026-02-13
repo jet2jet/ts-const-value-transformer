@@ -1,8 +1,8 @@
 import * as sourceMap from 'source-map';
-import * as tsNamespace from 'typescript';
 import type * as ts from 'typescript';
 // for JSDoc
 import type createPortalTransformer from './createPortalTransformer.mjs';
+import type { ApiProxy, ProxyTypes } from './TsProxy.mjs';
 
 type OriginalNodeDataType = [
   text: string,
@@ -52,18 +52,17 @@ export interface TransformOptions {
     | ((fileName: string) => boolean);
 }
 
-type NonNullableTransformOptions = Required<TransformOptions>;
+type NonNullableTransformOptions = Required<Omit<TransformOptions, 'ts'>>;
 
 interface NodeWithSymbols extends ts.Node {
   [SYMBOL_ORIGINAL_NODE_DATA]?: OriginalNodeDataType;
 }
 
 function assignDefaultValues(
-  options: TransformOptions = {}
+  options: Omit<TransformOptions, 'ts'> = {}
 ): NonNullableTransformOptions {
   return {
     // avoid using spread syntax to override `undefined` (not missing) values
-    ts: options.ts ?? tsNamespace,
     hoistProperty: options.hoistProperty ?? true,
     hoistEnumValues: options.hoistEnumValues ?? true,
     hoistExternalValues: options.hoistExternalValues ?? true,
@@ -105,32 +104,46 @@ export function getIgnoreFilesFunction(
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export function transformSource(
-  sourceFile: ts.SourceFile,
-  program: ts.Program,
-  context: ts.TransformationContext | undefined,
+export function transformSourceWithProxy<TTransformationContext = void>(
+  sourceFile: ProxyTypes.SourceFile,
+  proxy: ApiProxy<TTransformationContext>,
+  context: TTransformationContext | undefined,
   options?: TransformOptions
-): ts.SourceFile {
+): ProxyTypes.SourceFile {
   const requiredOptions = assignDefaultValues(options);
-  const ts = requiredOptions.ts;
-  return ts.visitEachChild(
+  return transformSourceWithProxyImpl(
+    sourceFile,
+    proxy,
+    context,
+    requiredOptions
+  );
+}
+
+// @internal
+export function transformSourceWithProxyImpl<TTransformationContext = void>(
+  sourceFile: ProxyTypes.SourceFile,
+  proxy: ApiProxy<TTransformationContext>,
+  context: TTransformationContext | undefined,
+  requiredOptions: NonNullableTransformOptions
+): ProxyTypes.SourceFile {
+  return proxy.visitEachChild(
     sourceFile,
     (node) =>
       visitNodeChildren(
         node,
         sourceFile,
         sourceFile,
-        program,
+        proxy,
         requiredOptions,
         context,
         (node) => {
           // skip statements which would not have 'value' expressions
           if (
-            ts.isInterfaceDeclaration(node) ||
-            ts.isTypeAliasDeclaration(node) ||
+            proxy.isInterfaceDeclaration(node) ||
+            proxy.isTypeAliasDeclaration(node) ||
             // Identifies in import clause should not be parsed
-            ts.isImportDeclaration(node) ||
-            ts.isTypeOnlyExportDeclaration(node)
+            proxy.isImportDeclaration(node) ||
+            proxy.isTypeOnlyExportDeclaration(node)
           ) {
             return false;
           }
@@ -141,41 +154,48 @@ export function transformSource(
   );
 }
 
-function visitNodeChildren<Node extends ts.Node>(
+function visitNodeChildren<
+  Node extends ProxyTypes.Node,
+  TTransformationContext = void,
+>(
   node: Node,
-  parent: ts.Node,
-  sourceFile: ts.SourceFile,
-  program: ts.Program,
+  parent: ProxyTypes.Node,
+  sourceFile: ProxyTypes.SourceFile,
+  proxy: ApiProxy<TTransformationContext>,
   options: NonNullableTransformOptions,
-  context: ts.TransformationContext | undefined,
-  fnVisit: (node: ts.Node, parent: ts.Node) => boolean
+  context: TTransformationContext | undefined,
+  fnVisit: (node: ProxyTypes.Node, parent: ProxyTypes.Node) => boolean
 ): Node;
-function visitNodeChildren<Node extends ts.Node, VisitContext>(
+function visitNodeChildren<
+  Node extends ProxyTypes.Node,
+  VisitContext,
+  TTransformationContext = void,
+>(
   node: Node,
-  parent: ts.Node,
-  sourceFile: ts.SourceFile,
-  program: ts.Program,
+  parent: ProxyTypes.Node,
+  sourceFile: ProxyTypes.SourceFile,
+  proxy: ApiProxy<TTransformationContext>,
   options: NonNullableTransformOptions,
-  context: ts.TransformationContext | undefined,
+  context: TTransformationContext | undefined,
   fnVisit: (
-    node: ts.Node,
-    parent: ts.Node,
+    node: ProxyTypes.Node,
+    parent: ProxyTypes.Node,
     visitContext: VisitContext
   ) => boolean,
   visitContext: VisitContext,
   fnVisitBeforeReplace: (
-    node: ts.Node,
-    parent: ts.Node,
+    node: ProxyTypes.Node,
+    parent: ProxyTypes.Node,
     visitContext: VisitContext
   ) => void,
   fnVisitBeforeChild: (
-    node: ts.Node,
-    parent: ts.Node,
+    node: ProxyTypes.Node,
+    parent: ProxyTypes.Node,
     visitContext: VisitContext
   ) => VisitContext,
   fnVisitAfterChild: (
-    node: ts.Node,
-    parent: ts.Node,
+    node: ProxyTypes.Node,
+    parent: ProxyTypes.Node,
     childVisitContext: VisitContext
   ) => void,
   fnReplace?: (
@@ -187,33 +207,41 @@ function visitNodeChildren<Node extends ts.Node, VisitContext>(
   ) => void
 ): Node;
 
-function visitNodeChildren<Node extends ts.Node, VisitContext>(
+function visitNodeChildren<
+  Node extends ProxyTypes.Node,
+  VisitContext,
+  TTransformationContext = void,
+>(
   node: Node,
-  parent: ts.Node,
-  sourceFile: ts.SourceFile,
-  program: ts.Program,
+  parent: ProxyTypes.Node,
+  sourceFile: ProxyTypes.SourceFile,
+  proxy: ApiProxy<TTransformationContext>,
   options: NonNullableTransformOptions,
-  context: ts.TransformationContext | undefined,
+  context: TTransformationContext | undefined,
   fnVisit: (
-    node: ts.Node,
-    parent: ts.Node,
+    node: ProxyTypes.Node,
+    parent: ProxyTypes.Node,
     visitContext: VisitContext
   ) => boolean,
   visitContext?: VisitContext,
   fnVisitBeforeReplace?:
-    | ((node: ts.Node, parent: ts.Node, visitContext: VisitContext) => void)
+    | ((
+        node: ProxyTypes.Node,
+        parent: ProxyTypes.Node,
+        visitContext: VisitContext
+      ) => void)
     | null,
   fnVisitBeforeChild?:
     | ((
-        node: ts.Node,
-        parent: ts.Node,
+        node: ProxyTypes.Node,
+        parent: ProxyTypes.Node,
         visitContext: VisitContext
       ) => VisitContext)
     | null,
   fnVisitAfterChild?:
     | ((
-        node: ts.Node,
-        parent: ts.Node,
+        node: ProxyTypes.Node,
+        parent: ProxyTypes.Node,
         childVisitContext: VisitContext
       ) => void)
     | null,
@@ -225,7 +253,6 @@ function visitNodeChildren<Node extends ts.Node, VisitContext>(
     visitContext: VisitContext
   ) => void
 ): Node {
-  const ts = options.ts;
   if (fnVisitBeforeReplace) {
     fnVisitBeforeReplace(node, parent, visitContext!);
   }
@@ -233,7 +260,7 @@ function visitNodeChildren<Node extends ts.Node, VisitContext>(
     node,
     parent,
     sourceFile,
-    program,
+    proxy,
     options,
     context,
     visitContext!,
@@ -253,14 +280,14 @@ function visitNodeChildren<Node extends ts.Node, VisitContext>(
   const childVisitContext = fnVisitBeforeChild
     ? fnVisitBeforeChild(node, parent, visitContext!)
     : visitContext;
-  const r = ts.visitEachChild(
+  const r = proxy.visitEachChild(
     node,
     (nodeChild) =>
       visitNodeChildren(
         nodeChild,
         node,
         sourceFile,
-        program,
+        proxy,
         options,
         context,
         fnVisit,
@@ -278,13 +305,16 @@ function visitNodeChildren<Node extends ts.Node, VisitContext>(
   return r;
 }
 
-function visitNodeAndReplaceIfNeeded<VisitContext>(
-  node: ts.Node,
-  parent: ts.Node,
-  sourceFile: ts.SourceFile,
-  program: ts.Program,
+function visitNodeAndReplaceIfNeeded<
+  VisitContext,
+  TTransformationContext = void,
+>(
+  node: ProxyTypes.Node,
+  parent: ProxyTypes.Node,
+  sourceFile: ProxyTypes.SourceFile,
+  proxy: ApiProxy<TTransformationContext>,
   options: NonNullableTransformOptions,
-  context: ts.TransformationContext | undefined,
+  context: TTransformationContext | undefined,
   visitContext: VisitContext,
   replaceOption:
     | 'create'
@@ -295,55 +325,55 @@ function visitNodeAndReplaceIfNeeded<VisitContext>(
         oldEnd: number,
         visitContext: VisitContext
       ) => void)
-): ts.Node | undefined {
-  const ts = options.ts;
-  if (ts.isCallLikeExpression(node)) {
+): ProxyTypes.Node | undefined {
+  if (proxy.isCallLikeExpression(node)) {
     if (
-      !ts.isExpression(node) ||
+      !proxy.isExpression(node) ||
       (!options.unsafeHoistFunctionCall &&
         (!options.hoistPureFunctionCall ||
-          !hasPureAnnotation(node, sourceFile, ts)))
+          !proxy.hasPureAnnotation(node, sourceFile)))
     ) {
       return node;
     }
-  } else if (ts.isIdentifier(node)) {
+  } else if (proxy.isIdentifier(node)) {
     if (
-      !ts.isComputedPropertyName(parent) &&
-      ((!ts.isExpression(parent) &&
+      !proxy.isComputedPropertyName(parent) &&
+      ((!proxy.isExpression(parent) &&
         (!('initializer' in parent) || node !== parent.initializer)) ||
-        (ts.isPropertyAccessExpression(parent) && node === parent.name))
+        (proxy.isPropertyAccessExpression(parent) && node === parent.name))
     ) {
       return node;
     }
-    if (!options.hoistEnumValues && isEnumIdentifier(node, program, ts)) {
+    if (!options.hoistEnumValues && proxy.isEnumIdentifier(node, sourceFile)) {
       return node;
     }
     if (
       !options.hoistUndefinedSymbol &&
-      isUndefinedIdentifier(node, parent, program, ts)
+      proxy.isUndefinedIdentifier(node, parent, sourceFile)
     ) {
       return node;
     }
   } else if (
-    ts.isPropertyAccessExpression(node) ||
-    ts.isElementAccessExpression(node)
+    proxy.isPropertyAccessExpression(node) ||
+    proxy.isElementAccessExpression(node)
   ) {
-    if (!isHoistablePropertyAccess(node, program, ts)) {
+    if (!proxy.isHoistablePropertyAccess(node, sourceFile)) {
       return node;
     }
     if (
-      (!options.hoistProperty && !isEnumAccess(node, program, ts)) ||
+      (!options.hoistProperty && !proxy.isEnumAccess(node, sourceFile)) ||
       (!options.hoistEnumValues &&
-        (isEnumAccess(node, program, ts) ||
-          (ts.isIdentifier(node) && isEnumIdentifier(node, program, ts))))
+        (proxy.isEnumAccess(node, sourceFile) ||
+          (proxy.isIdentifier(node) &&
+            proxy.isEnumIdentifier(node, sourceFile))))
     ) {
       return node;
     }
-  } else if (ts.isAsExpression(node)) {
+  } else if (proxy.isAsExpression(node)) {
     if (!options.unsafeHoistAsExpresion) {
       return node;
     }
-  } else if (ts.isTemplateExpression(node)) {
+  } else if (proxy.isTemplateExpression(node)) {
     if (!options.hoistConstTemplateLiteral) {
       return node;
     }
@@ -353,95 +383,83 @@ function visitNodeAndReplaceIfNeeded<VisitContext>(
 
   if (
     !options.hoistExternalValues &&
-    isExternalReference(node, program, options.externalNames, ts)
+    proxy.isExternalReference(node, options.externalNames, sourceFile)
   ) {
     return node;
   }
 
-  if (!options.unsafeHoistAsExpresion && hasAsExpression(node, ts, context)) {
+  if (
+    !options.unsafeHoistAsExpresion &&
+    hasAsExpression(node, proxy, context)
+  ) {
     return node;
   }
 
   if (!options.unsafeHoistWritableValues) {
-    const r = isReadonlyExpression(node, program, ts);
+    const r = proxy.isReadonlyExpression(node, sourceFile);
     if (r === false) {
       return node;
     }
   }
 
   try {
-    const typeChecker = program.getTypeChecker();
-    const type = typeChecker.getTypeAtLocation(node);
-    const flags = type.getFlags();
-    let newNode: ts.Expression | undefined;
-    if (type.isUnionOrIntersection()) {
+    const type = proxy.getTypeAtLocation(node, sourceFile);
+    let newNode: ProxyTypes.Expression | undefined;
+    if (!type) {
       return node;
     }
     let newSource: string;
-    if (type.isStringLiteral()) {
-      if (replaceOption === 'create') {
-        newNode = ts.factory.createStringLiteral(type.value);
+    if (proxy.isStringLiteral(type)) {
+      if (replaceOption === 'create' && proxy.factory) {
+        newNode = proxy.factory.createStringLiteral(type.value);
       }
-      newSource =
-        // TypeScript namespace may export `function escapeNonAsciiString(s: string, quoteChar?: CharacterCodes.doubleQuote | CharacterCodes.singleQuote | CharacterCodes.backtick): string`
-        'escapeNonAsciiString' in ts
-          ? `"${(
-              ts.escapeNonAsciiString as (
-                s: string,
-                quoteChar: number
-              ) => string
-            )(
-              type.value,
-              'CharacterCodes' in ts
-                ? (ts.CharacterCodes as { doubleQuote: number }).doubleQuote
-                : 34 /* doubleQuote */
-            )}"`
-          : JSON.stringify(type.value);
-    } else if (type.isNumberLiteral()) {
+      newSource = proxy.makeStringLiteralSource(type.value);
+    } else if (proxy.isNumberLiteral(type)) {
       if (type.value < 0) {
-        if (replaceOption === 'create') {
-          newNode = ts.factory.createParenthesizedExpression(
-            ts.factory.createPrefixUnaryExpression(
-              ts.SyntaxKind.MinusToken,
-              ts.factory.createNumericLiteral(-type.value)
+        if (replaceOption === 'create' && proxy.factory) {
+          newNode = proxy.factory.createParenthesizedExpression(
+            proxy.factory.createExpressionWithMinusToken(
+              proxy.factory.createNumericLiteral(-type.value)
             )
           );
         }
         newSource = `(-${-type.value})`;
       } else {
-        if (replaceOption === 'create') {
-          newNode = ts.factory.createNumericLiteral(type.value);
+        if (replaceOption === 'create' && proxy.factory) {
+          newNode = proxy.factory.createNumericLiteral(type.value);
         }
         newSource = `${type.value}`;
       }
-    } else if (flags & ts.TypeFlags.BigIntLiteral) {
-      const text = typeChecker.typeToString(type);
-      if (replaceOption === 'create') {
-        newNode = ts.factory.createBigIntLiteral(text);
+    } else if (proxy.isBigIntLiteral(type)) {
+      const text = proxy.typeToString(type);
+      if (replaceOption === 'create' && proxy.factory) {
+        newNode = proxy.factory.createBigIntLiteral(text);
       }
       newSource = text;
-    } else if (flags & ts.TypeFlags.BooleanLiteral) {
-      const text = typeChecker.typeToString(type);
-      if (replaceOption === 'create') {
+    } else if (proxy.isBooleanLiteral(type)) {
+      const text = proxy.typeToString(type);
+      if (replaceOption === 'create' && proxy.factory) {
         newNode =
-          text === 'true' ? ts.factory.createTrue() : ts.factory.createFalse();
+          text === 'true'
+            ? proxy.factory.createTrue()
+            : proxy.factory.createFalse();
       }
       newSource = text;
-    } else if (flags & ts.TypeFlags.Null) {
-      if (replaceOption === 'create') {
-        newNode = ts.factory.createNull();
+    } else if (proxy.isNullType(type)) {
+      if (replaceOption === 'create' && proxy.factory) {
+        newNode = proxy.factory.createNull();
       }
       newSource = 'null';
-    } else if (flags & ts.TypeFlags.Undefined) {
+    } else if (proxy.isUndefinedType(type)) {
       if (options.useUndefinedSymbolForUndefinedValue) {
-        if (replaceOption === 'create') {
-          newNode = ts.factory.createIdentifier('undefined');
+        if (replaceOption === 'create' && proxy.factory) {
+          newNode = proxy.factory.createIdentifier('undefined');
         }
         newSource = 'undefined';
       } else {
-        if (replaceOption === 'create') {
-          newNode = ts.factory.createParenthesizedExpression(
-            ts.factory.createVoidZero()
+        if (replaceOption === 'create' && proxy.factory) {
+          newNode = proxy.factory.createParenthesizedExpression(
+            proxy.factory.createVoidZero()
           );
         }
         newSource = '(void 0)';
@@ -450,24 +468,20 @@ function visitNodeAndReplaceIfNeeded<VisitContext>(
       return node;
     }
 
-    const originalSource = node.getText(sourceFile);
+    const originalSource = proxy.getNodeText(node, sourceFile);
     const comment = ` ${originalSource.replace(/\/\*/g, ' *').replace(/\*\//g, '* ')} `;
     let result = newNode
-      ? ts.addSyntheticTrailingComment(
-          newNode,
-          ts.SyntaxKind.MultiLineCommentTrivia,
-          comment
-        )
+      ? proxy.appendMultiLineComment(newNode, comment)
       : undefined;
     newSource = `${newSource} /*${comment}*/`;
     if (/[\r\n]/m.test(originalSource)) {
-      if (result) {
-        result = ts.factory.createParenthesizedExpression(result);
+      if (result && proxy.factory) {
+        result = proxy.factory.createParenthesizedExpression(result);
       }
       newSource = `(${newSource})`;
     }
     if (result) {
-      ts.setTextRange(result, node);
+      proxy.setTextRange(result, node);
       (result as NodeWithSymbols)[SYMBOL_ORIGINAL_NODE_DATA] = [
         originalSource,
         newSource,
@@ -490,102 +504,21 @@ function visitNodeAndReplaceIfNeeded<VisitContext>(
   }
 }
 
-function isEnumAccess(
-  node: ts.PropertyAccessExpression | ts.ElementAccessExpression,
-  program: ts.Program,
-  tsInstance: typeof ts
+function hasAsExpression<TTransformationContext = void>(
+  node: ProxyTypes.Node,
+  proxy: ApiProxy<TTransformationContext>,
+  context: TTransformationContext | undefined
 ): boolean {
-  const ts = tsInstance;
-  const typeChecker = program.getTypeChecker();
-  const type = typeChecker.getTypeAtLocation(node);
-  return (type.getFlags() & ts.TypeFlags.EnumLiteral) !== 0;
-}
-
-function isEnumIdentifier(
-  node: ts.Identifier,
-  program: ts.Program,
-  tsInstance: typeof ts
-): boolean {
-  const ts = tsInstance;
-  const typeChecker = program.getTypeChecker();
-  const type = typeChecker.getTypeAtLocation(node);
-  return (type.getFlags() & ts.TypeFlags.EnumLiteral) !== 0;
-}
-
-function isExternalReference(
-  node: ts.Node,
-  program: ts.Program,
-  externalNames: ReadonlyArray<string | RegExp>,
-  tsInstance: typeof ts
-): boolean {
-  const ts = tsInstance;
-  const typeChecker = program.getTypeChecker();
-  const nodeSym = typeChecker.getSymbolAtLocation(node);
-  let nodeFrom: ts.Node | undefined = nodeSym?.getDeclarations()?.[0];
-  while (nodeFrom) {
-    const sourceFileName = nodeFrom.getSourceFile();
-    if (externalNames.length === 0) {
-      if (/[\\/]node_modules[\\/]/.test(sourceFileName.fileName)) {
-        return true;
-      }
-    } else {
-      if (
-        externalNames.some((part) => {
-          if (typeof part === 'string') {
-            return sourceFileName.fileName.replace(/\\/g, '/').includes(part);
-          } else {
-            return part.test(sourceFileName.fileName);
-          }
-        })
-      ) {
-        return true;
-      }
-    }
-    // Walk into the 'import' variables
-    if (!ts.isImportSpecifier(nodeFrom)) {
-      break;
-    }
-    const baseName = nodeFrom.propertyName ?? nodeFrom.name;
-    const baseSym = typeChecker.getSymbolAtLocation(baseName);
-    // We must follow 'aliased' symbol for parsing the symbol which name is not changed from the exported symbol name
-    const exportedSym =
-      baseSym && baseSym.getFlags() & ts.SymbolFlags.Alias
-        ? typeChecker.getAliasedSymbol(baseSym)
-        : baseSym;
-    nodeFrom = exportedSym?.getDeclarations()?.[0];
-  }
-  const type = typeChecker.getTypeAtLocation(node);
-  const sym = type.getSymbol();
-  if (!sym) {
-    return false;
-  }
-  const def = sym.getDeclarations()?.[0];
-  if (!def) {
-    return false;
-  }
-  const typeDefinitionSource = def.getSourceFile();
-  if (program.isSourceFileFromExternalLibrary(typeDefinitionSource)) {
-    return true;
-  }
-  return false;
-}
-
-function hasAsExpression(
-  node: ts.Node,
-  tsInstance: typeof ts,
-  context: ts.TransformationContext | undefined
-): boolean {
-  const ts = tsInstance;
   // including 'as const'
-  if (ts.isAsExpression(node)) {
+  if (proxy.isAsExpression(node)) {
     return true;
   }
   let found = false;
-  ts.visitEachChild(
+  proxy.visitEachChild(
     node,
     (node) => {
       if (!found) {
-        found = hasAsExpression(node, ts, context);
+        found = hasAsExpression(node, proxy, context);
       }
       return node;
     },
@@ -594,218 +527,24 @@ function hasAsExpression(
   return found;
 }
 
-function hasPureAnnotation(
-  node: ts.Node,
-  sourceFile: ts.SourceFile,
-  tsInstance: typeof ts
-): boolean {
-  const ts = tsInstance;
-  const fullText = node.getFullText(sourceFile);
-  const ranges = ts.getLeadingCommentRanges(fullText, 0) ?? [];
-  for (const range of ranges) {
-    if (range.kind !== ts.SyntaxKind.MultiLineCommentTrivia) {
-      continue;
-    }
-    const text = fullText.slice(range.pos + 2, range.end - 2).trim();
-    if ((text[0] === '@' || text[0] === '#') && text.slice(1) === '__PURE__') {
-      return true;
-    }
-  }
-  return false;
-}
-
-function getNameFromElementAccessExpression(
-  node: ts.ElementAccessExpression,
-  typeChecker: ts.TypeChecker
-) {
-  const type = typeChecker.getTypeAtLocation(node.argumentExpression);
-  if (type.isStringLiteral() || type.isNumberLiteral()) {
-    return `${type.value}`;
-  }
-  return null;
-}
-
-function isReadonlyPropertyAccess(
-  a: ts.PropertyAccessExpression | ts.ElementAccessExpression,
-  typeChecker: ts.TypeChecker,
-  tsInstance: typeof ts
-) {
-  const ts = tsInstance;
-  const type = typeChecker.getTypeAtLocation(a.expression);
-  const memberName = ts.isPropertyAccessExpression(a)
-    ? a.name.getText()
-    : getNameFromElementAccessExpression(a, typeChecker);
-  if (memberName == null) {
-    return false;
-  }
-  if (type.getFlags() & ts.TypeFlags.Object) {
-    const prop = type.getProperty(memberName);
-    if (prop) {
-      // Use internal but exported function to improve memory performance
-      if (
-        'getCheckFlags' in ts &&
-        'CheckFlags' in ts &&
-        (ts.CheckFlags as Record<string, number>).Readonly != null
-      ) {
-        const checkFlags = (ts.getCheckFlags as (symbol: ts.Symbol) => number)(
-          prop
-        );
-        if (checkFlags & (ts.CheckFlags as Record<string, number>).Readonly!) {
-          return true;
-        }
-      }
-      if ('getDeclarationModifierFlagsFromSymbol' in ts) {
-        const modifierFlags = (
-          ts.getDeclarationModifierFlagsFromSymbol as (
-            s: ts.Symbol,
-            isWrite?: boolean
-          ) => ts.ModifierFlags
-        )(prop);
-        if (modifierFlags & ts.ModifierFlags.Readonly) {
-          return true;
-        }
-      }
-
-      if (prop.declarations && prop.declarations.length > 0) {
-        const decl = prop.declarations[0]!;
-        if (
-          ts.isPropertySignature(decl) &&
-          decl.modifiers?.some((m) => m.kind === ts.SyntaxKind.ReadonlyKeyword)
-        ) {
-          return true;
-        }
-        if (
-          ts.isVariableDeclaration(decl) &&
-          // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-          decl.parent &&
-          ts.isVariableDeclarationList(decl.parent) &&
-          decl.parent.flags & ts.NodeFlags.Const
-        ) {
-          return true;
-        }
-      }
-    }
-  }
-  return false;
-}
-
-function isReadonlyExpression(
-  node: ts.Node,
-  program: ts.Program,
-  tsInstance: typeof ts
-): boolean | null {
-  const ts = tsInstance;
-  const typeChecker = program.getTypeChecker();
-  if (
-    ts.isIdentifier(node) &&
-    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-    node.parent &&
-    !ts.isPropertyAccessExpression(node.parent)
-  ) {
-    const nodeSym = typeChecker.getSymbolAtLocation(node);
-    if (nodeSym?.valueDeclaration) {
-      let target: ts.Node = nodeSym.valueDeclaration;
-      for (;;) {
-        // Parameters are writable
-        if (ts.isParameter(target)) {
-          return false;
-        }
-        if (ts.isVariableDeclarationList(target)) {
-          if (target.flags & ts.NodeFlags.Const) {
-            return true;
-          } else {
-            return false;
-          }
-        }
-        // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-        if (!target.parent || target === target.parent) {
-          return false;
-        }
-        target = target.parent;
-      }
-    }
-  }
-  if (
-    ts.isPropertyAccessExpression(node) ||
-    ts.isElementAccessExpression(node)
-  ) {
-    if (isEnumAccess(node, program, ts)) {
-      return true;
-    }
-    return isReadonlyPropertyAccess(node, typeChecker, ts);
-  }
-  return null;
-}
-
-function isHoistablePropertyAccess(
-  a: ts.PropertyAccessExpression | ts.ElementAccessExpression,
-  program: ts.Program,
-  tsInstance: typeof ts
-) {
-  const ts = tsInstance;
-  const typeChecker = program.getTypeChecker();
-  const type = typeChecker.getTypeAtLocation(a.expression);
-  const memberName = ts.isPropertyAccessExpression(a)
-    ? a.name.getText()
-    : getNameFromElementAccessExpression(a, typeChecker);
-  if (memberName == null) {
-    return false;
-  }
-  if (type.getFlags() & ts.TypeFlags.Object) {
-    const prop = type.getProperty(memberName);
-    // If the property access uses indexed access, `prop` will be undefined
-    if (prop) {
-      return true;
-    }
-  }
-  return false;
-}
-
-function isUndefinedIdentifier(
-  node: ts.Identifier,
-  parent: ts.Node,
-  program: ts.Program,
-  tsInstance: typeof ts
-): boolean {
-  if (
-    tsInstance.isPropertyAccessExpression(parent) ||
-    tsInstance.isElementAccessExpression(parent)
-  ) {
-    return false;
-  }
-  const typeChecker = program.getTypeChecker();
-  const type = typeChecker.getTypeAtLocation(node);
-  const sym = typeChecker.getSymbolAtLocation(node);
-  if (!sym || sym.getEscapedName().toString() !== 'undefined') {
-    return false;
-  }
-  if (
-    type.isUnionOrIntersection() ||
-    !(type.getFlags() & tsInstance.TypeFlags.Undefined)
-  ) {
-    return false;
-  }
-  return true;
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 
-export function printSource(
-  sourceFile: ts.SourceFile,
-  tsInstance?: typeof ts
+export function printSourceWithProxy<TTransformationContext = void>(
+  sourceFile: ProxyTypes.SourceFile,
+  proxy: ApiProxy<TTransformationContext>
 ): string {
-  return printSourceImpl(tsInstance, sourceFile)[0];
+  return printSourceImpl(proxy, sourceFile)[0];
 }
 
-export function printSourceWithMap(
-  sourceFile: ts.SourceFile,
+export function printSourceWithMapWithProxy<TTransformationContext = void>(
+  sourceFile: ProxyTypes.SourceFile,
   originalSourceName: string,
-  startOfSourceMap?: sourceMap.RawSourceMap,
-  tsInstance?: typeof ts
+  proxy: ApiProxy<TTransformationContext>,
+  startOfSourceMap?: sourceMap.RawSourceMap
 ): [string, sourceMap.RawSourceMap] {
   const generator = new sourceMap.SourceMapGenerator(startOfSourceMap);
-  generator.setSourceContent(originalSourceName, sourceFile.getFullText());
-  return printSourceImpl(tsInstance, sourceFile, originalSourceName, generator);
+  generator.setSourceContent(originalSourceName, sourceFile.text);
+  return printSourceImpl(proxy, sourceFile, originalSourceName, generator);
 }
 
 interface PositionContext {
@@ -816,14 +555,15 @@ interface PositionContext {
   lastLine: number;
 }
 
-function positionToLineAndColumn(
-  sourceFile: ts.SourceFile,
+function positionToLineAndColumn<TTransformationContext = void>(
+  proxy: ApiProxy<TTransformationContext>,
+  sourceFile: ProxyTypes.SourceFile,
   pos: number,
   generatedDiff: number
 ): sourceMap.Position {
   let line = 0;
   let lastLinePos = 0;
-  for (const linePos of sourceFile.getLineStarts()) {
+  for (const linePos of proxy.getLineStarts(sourceFile)) {
     if (pos < linePos) {
       break;
     }
@@ -833,27 +573,26 @@ function positionToLineAndColumn(
   return { line, column: pos - lastLinePos + generatedDiff };
 }
 
-function printSourceImpl(
-  tsInstance: typeof ts | null | undefined,
-  sourceFile: ts.SourceFile
+function printSourceImpl<TTransformationContext = void>(
+  proxy: ApiProxy<TTransformationContext>,
+  sourceFile: ProxyTypes.SourceFile
 ): [string];
-function printSourceImpl(
-  tsInstance: typeof ts | null | undefined,
-  sourceFile: ts.SourceFile,
+function printSourceImpl<TTransformationContext = void>(
+  proxy: ApiProxy<TTransformationContext>,
+  sourceFile: ProxyTypes.SourceFile,
   originalSourceName: string,
   mapGenerator: sourceMap.SourceMapGenerator
 ): [string, sourceMap.RawSourceMap];
 
-function printSourceImpl(
-  tsInstance: typeof ts | null | undefined,
-  sourceFile: ts.SourceFile,
+function printSourceImpl<TTransformationContext = void>(
+  proxy: ApiProxy<TTransformationContext>,
+  sourceFile: ProxyTypes.SourceFile,
   originalSourceName?: string,
   mapGenerator?: sourceMap.SourceMapGenerator
 ): [string, sourceMap.RawSourceMap?] {
-  const ts = tsInstance ?? tsNamespace;
   const r = printNode(
-    ts,
-    sourceFile.getFullText(),
+    proxy,
+    sourceFile.text,
     sourceFile,
     sourceFile,
     { pos: 0, diff: 0, lastLine: 0 },
@@ -863,11 +602,11 @@ function printSourceImpl(
   return [r, mapGenerator?.toJSON()];
 }
 
-function printNode(
-  tsInstance: typeof ts,
+function printNode<TTransformationContext = void>(
+  proxy: ApiProxy<TTransformationContext>,
   baseSource: string,
-  sourceFile: ts.SourceFile,
-  node: ts.Node,
+  sourceFile: ProxyTypes.SourceFile,
+  node: ProxyTypes.Node,
   posContext: PositionContext,
   originalSourceName?: string,
   mapGenerator?: sourceMap.SourceMapGenerator
@@ -898,7 +637,7 @@ function printNode(
   let output = '';
   let headPrinted = false;
   let lastChildPos = 0;
-  tsInstance.visitEachChild(
+  proxy.visitEachChild(
     node,
     (child) => {
       if (!headPrinted) {
@@ -914,7 +653,7 @@ function printNode(
         posContext.pos = child.pos;
       }
       output += printNode(
-        tsInstance,
+        proxy,
         baseSource,
         sourceFile,
         child,
@@ -938,7 +677,12 @@ function printNode(
   return output;
 
   function addMappingForCurrent(name?: string) {
-    const original = positionToLineAndColumn(sourceFile, posContext.pos, 0);
+    const original = positionToLineAndColumn(
+      proxy,
+      sourceFile,
+      posContext.pos,
+      0
+    );
     if (original.line !== posContext.lastLine) {
       posContext.diff = 0;
       posContext.lastLine = original.line;
@@ -947,6 +691,7 @@ function printNode(
       mapGenerator.addMapping({
         original,
         generated: positionToLineAndColumn(
+          proxy,
           sourceFile,
           posContext.pos,
           posContext.diff
@@ -960,19 +705,21 @@ function printNode(
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export function transformAndPrintSource(
-  sourceFile: ts.SourceFile,
-  program: ts.Program,
-  context: ts.TransformationContext | undefined,
+export function transformAndPrintSourceWithProxy<TTransformationContext = void>(
+  sourceFile: ProxyTypes.SourceFile,
+  proxy: ApiProxy<TTransformationContext>,
+  context: TTransformationContext | undefined,
   options?: TransformOptions
 ): string {
-  return transformAndPrintSourceImpl(sourceFile, program, context, options)[0];
+  return transformAndPrintSourceImpl(sourceFile, proxy, context, options)[0];
 }
 
-export function transformAndPrintSourceWithMap(
-  sourceFile: ts.SourceFile,
-  program: ts.Program,
-  context: ts.TransformationContext | undefined,
+export function transformAndPrintSourceWithMapWithProxy<
+  TTransformationContext = void,
+>(
+  sourceFile: ProxyTypes.SourceFile,
+  proxy: ApiProxy<TTransformationContext>,
+  context: TTransformationContext | undefined,
   originalSourceName: string,
   options?: TransformOptions,
   startOfSourceMap?: sourceMap.RawSourceMap
@@ -980,7 +727,7 @@ export function transformAndPrintSourceWithMap(
   const generator = new sourceMap.SourceMapGenerator(startOfSourceMap);
   return transformAndPrintSourceImpl(
     sourceFile,
-    program,
+    proxy,
     context,
     options,
     originalSourceName,
@@ -988,41 +735,38 @@ export function transformAndPrintSourceWithMap(
   );
 }
 
-function transformAndPrintSourceImpl(
-  sourceFile: ts.SourceFile,
-  program: ts.Program,
-  context: ts.TransformationContext | undefined,
+function transformAndPrintSourceImpl<TTransformationContext = void>(
+  sourceFile: ProxyTypes.SourceFile,
+  proxy: ApiProxy<TTransformationContext>,
+  context: TTransformationContext | undefined,
   options?: TransformOptions
 ): [string, sourceMap.RawSourceMap?];
-function transformAndPrintSourceImpl(
-  sourceFile: ts.SourceFile,
-  program: ts.Program,
-  context: ts.TransformationContext | undefined,
+function transformAndPrintSourceImpl<TTransformationContext = void>(
+  sourceFile: ProxyTypes.SourceFile,
+  proxy: ApiProxy<TTransformationContext>,
+  context: TTransformationContext | undefined,
   options: TransformOptions | undefined,
   originalSourceName: string,
   mapGenerator: sourceMap.SourceMapGenerator
 ): [string, sourceMap.RawSourceMap];
 
-function transformAndPrintSourceImpl(
-  sourceFile: ts.SourceFile,
-  program: ts.Program,
-  context: ts.TransformationContext | undefined,
+function transformAndPrintSourceImpl<TTransformationContext = void>(
+  sourceFile: ProxyTypes.SourceFile,
+  proxy: ApiProxy<TTransformationContext>,
+  context: TTransformationContext | undefined,
   options?: TransformOptions,
   originalSourceName?: string,
   mapGenerator?: sourceMap.SourceMapGenerator
 ): [string, sourceMap.RawSourceMap?] {
   const requiredOptions = assignDefaultValues(options);
   if (mapGenerator) {
-    mapGenerator.setSourceContent(
-      originalSourceName!,
-      sourceFile.getFullText()
-    );
+    mapGenerator.setSourceContent(originalSourceName!, sourceFile.text);
   }
   const r = transformAndPrintNode(
     { pos: 0, diff: 0, lastLine: 0 },
-    sourceFile.getFullText(),
+    sourceFile.text,
     sourceFile,
-    program,
+    proxy,
     context,
     requiredOptions,
     originalSourceName,
@@ -1036,22 +780,26 @@ interface TransformAndPrintNodeVisitContext {
   lastChildPos: number;
 }
 
-function transformAndPrintNode(
+function transformAndPrintNode<TTransformationContext = void>(
   posContext: PositionContext,
   baseSource: string,
-  sourceFile: ts.SourceFile,
-  program: ts.Program,
-  context: ts.TransformationContext | undefined,
+  sourceFile: ProxyTypes.SourceFile,
+  proxy: ApiProxy<TTransformationContext>,
+  context: TTransformationContext | undefined,
   options: NonNullableTransformOptions,
   originalSourceName?: string,
   mapGenerator?: sourceMap.SourceMapGenerator
 ): string {
   let output = '';
-  visitNodeChildren<ts.Node, TransformAndPrintNodeVisitContext>(
+  visitNodeChildren<
+    ProxyTypes.Node,
+    TransformAndPrintNodeVisitContext,
+    TTransformationContext
+  >(
     sourceFile,
     sourceFile,
     sourceFile,
-    program,
+    proxy,
     options,
     context,
     // fnVisit
@@ -1126,7 +874,12 @@ function transformAndPrintNode(
   return output;
 
   function addMappingForCurrent(name?: string) {
-    const original = positionToLineAndColumn(sourceFile, posContext.pos, 0);
+    const original = positionToLineAndColumn(
+      proxy,
+      sourceFile,
+      posContext.pos,
+      0
+    );
     if (original.line !== posContext.lastLine) {
       posContext.diff = 0;
       posContext.lastLine = original.line;
@@ -1135,6 +888,7 @@ function transformAndPrintNode(
       mapGenerator.addMapping({
         original,
         generated: positionToLineAndColumn(
+          proxy,
           sourceFile,
           posContext.pos,
           posContext.diff
