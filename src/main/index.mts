@@ -5,6 +5,11 @@ import createPortalTransformer, {
   type PortalTransformerResult,
   type PortalTransformerResultNonNull,
 } from './createPortalTransformer.mjs';
+import createPortalTransformerWithTsLs, {
+  createPortalTransformerSyncWithTsLs,
+  type CreatePortalTransformerWithTsLsOptions,
+  type PortalTransformerWithTsLs,
+} from './createPortalTransformerWithTsLs.mjs';
 import createTransformer from './createTransformer.mjs';
 import version from './version.mjs';
 
@@ -33,5 +38,9 @@ export {
   type PortalTransformer,
   type PortalTransformerResult,
   type PortalTransformerResultNonNull,
+  createPortalTransformerWithTsLs,
+  createPortalTransformerSyncWithTsLs,
+  type CreatePortalTransformerWithTsLsOptions,
+  type PortalTransformerWithTsLs,
   version,
 };
