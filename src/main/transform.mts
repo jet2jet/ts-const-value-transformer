@@ -704,11 +704,24 @@ function isReadonlyExpression(
   ) {
     const nodeSym = typeChecker.getSymbolAtLocation(node);
     if (nodeSym?.valueDeclaration) {
-      if (ts.isVariableDeclarationList(nodeSym.valueDeclaration.parent)) {
-        if (nodeSym.valueDeclaration.parent.flags & ts.NodeFlags.Const) {
-          return true;
+      let target: ts.Node = nodeSym.valueDeclaration;
+      for (;;) {
+        // Parameters are writable
+        if (ts.isParameter(target)) {
+          return false;
         }
-        return false;
+        if (ts.isVariableDeclarationList(target)) {
+          if (target.flags & ts.NodeFlags.Const) {
+            return true;
+          } else {
+            return false;
+          }
+        }
+        // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+        if (!target.parent || target === target.parent) {
+          return false;
+        }
+        target = target.parent;
       }
     }
   }

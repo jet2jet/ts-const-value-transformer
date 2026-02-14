@@ -2,7 +2,7 @@
 
 exports[`createTransformer and printSourceWithMap test with default options: source map object 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEjB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBiB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;;YAI1BC,2BAAmB;;;+BAGAC,gBAAM;YACzBC,qCAA2B;;;wBAGfpC,sBAAW;cACrBqC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRxC,qBAAW;;;;;;;;;;;;oDAY2ByC,gBAAC;;;;;;;YAOzCC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS3C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRgB,sBAAS;;YAEFa,cAAM;;;cAGJ5C,mBAAW,EAAEC,qBAAW;aACzBiB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEdc,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEjB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBiB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;;YAI1BC,2BAAmB;;;+BAGAC,gBAAM;YACzBC,qCAA2B;;;wBAGfpC,sBAAW;cACrBqC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRxC,qBAAW;;;;;;;;;;;;;;;;;;;YAmBbyC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS1C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRgB,sBAAS;;YAEFY,cAAM;;;cAGJ3C,mBAAW,EAAEC,qBAAW;aACzBiB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEda,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -47,7 +47,6 @@ exports[`createTransformer and printSourceWithMap test with default options: sou
     "a",
     "b2",
     "e",
-    "u",
     "tuple2",
     "value1",
     "as_4",
@@ -549,7 +548,7 @@ console.log(fn2());
 console.log(/*@__PURE__*/ fn2(), /*#__PURE__*/ fn2());
 
 // don't transform spread element and parameter declarations
-console.log([...Array<undefined>(5)].map((u, i) => ((void 0) /* u */ == null ? i : 0)));
+console.log([...Array<undefined>(5)].map((u, i) => (u == null ? i : 0)));
 const fn1 = (...args: undefined[]) => args.length;
 console.log(fn1(...Array<undefined>(5)));
 
@@ -618,7 +617,7 @@ export {};
 
 exports[`createTransformer and printSourceWithMap test with hoistConstTemplateLiteral=true: source map object 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;qBAETC,kCAAmB;;;;EAItCC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzElB,wBAAS;;;;QAINE,mBAAW;;;;;;EAMjBiB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;;YAI1BC,2BAAmB;;;+BAGAC,gBAAM;YACzBC,qCAA2B;;;wBAGfpC,sBAAW;cACrBqC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRxC,qBAAW;;;;;;;;;;;;oDAY2ByC,gBAAC;;;;;;;YAOzCC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS3C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRgB,sBAAS;;YAEFa,cAAM;;;cAGJ5C,mBAAW,EAAEC,qBAAW;aACzBiB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEdc,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;qBAETC,kCAAmB;;;;EAItCC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzElB,wBAAS;;;;QAINE,mBAAW;;;;;;EAMjBiB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;;YAI1BC,2BAAmB;;;+BAGAC,gBAAM;YACzBC,qCAA2B;;;wBAGfpC,sBAAW;cACrBqC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRxC,qBAAW;;;;;;;;;;;;;;;;;;;YAmBbyC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS1C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRgB,sBAAS;;YAEFY,cAAM;;;cAGJ3C,mBAAW,EAAEC,qBAAW;aACzBiB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEda,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "\`ccc\${constValue4}\`",
@@ -664,7 +663,6 @@ exports[`createTransformer and printSourceWithMap test with hoistConstTemplateLi
     "a",
     "b2",
     "e",
-    "u",
     "tuple2",
     "value1",
     "as_4",
@@ -1166,7 +1164,7 @@ console.log(fn2());
 console.log(/*@__PURE__*/ fn2(), /*#__PURE__*/ fn2());
 
 // don't transform spread element and parameter declarations
-console.log([...Array<undefined>(5)].map((u, i) => ((void 0) /* u */ == null ? i : 0)));
+console.log([...Array<undefined>(5)].map((u, i) => (u == null ? i : 0)));
 const fn1 = (...args: undefined[]) => args.length;
 console.log(fn1(...Array<undefined>(5)));
 
@@ -1235,7 +1233,7 @@ export {};
 
 exports[`createTransformer and printSourceWithMap test with hoistEnumValues=false: source map object 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;;EAUZG,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEhB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBgB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;;;;;;;;;;;;;YAmBZC,2BAAmB;;;+BAGAC,gBAAM;YACzBC,qCAA2B;;;wBAGf7B,sBAAW;cACrB8B,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRjC,qBAAW;;;;;;;;;;;;oDAY2BkC,gBAAC;;;;;;;YAOzCC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBSpC,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXY,gBAAQ;;;YAGDuB,cAAM;;;cAGJrC,mBAAW,EAAEC,qBAAW;aACzBgB,yBAAa;;;8BAGIqB,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;;EAUZG,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEhB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBgB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;;;;;;;;;;;;;YAmBZC,2BAAmB;;;+BAGAC,gBAAM;YACzBC,qCAA2B;;;wBAGf7B,sBAAW;cACrB8B,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRjC,qBAAW;;;;;;;;;;;;;;;;;;;YAmBbkC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBSnC,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXY,gBAAQ;;;YAGDsB,cAAM;;;cAGJpC,mBAAW,EAAEC,qBAAW;aACzBgB,yBAAa;;;8BAGIoB,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -1273,7 +1271,6 @@ exports[`createTransformer and printSourceWithMap test with hoistEnumValues=fals
     "a",
     "b2",
     "e",
-    "u",
     "tuple2",
     "value1",
     "as_4",
@@ -1775,7 +1772,7 @@ console.log(fn2());
 console.log(/*@__PURE__*/ fn2(), /*#__PURE__*/ fn2());
 
 // don't transform spread element and parameter declarations
-console.log([...Array<undefined>(5)].map((u, i) => ((void 0) /* u */ == null ? i : 0)));
+console.log([...Array<undefined>(5)].map((u, i) => (u == null ? i : 0)));
 const fn1 = (...args: undefined[]) => args.length;
 console.log(fn1(...Array<undefined>(5)));
 
@@ -1844,7 +1841,7 @@ export {};
 
 exports[`createTransformer and printSourceWithMap test with hoistExternalValues=false and additionalExternalDirectories: source map object 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;;;;;;;;;;;;;;KAsBTT,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBW,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;;YAI1BC,2BAAmB;;;+BAGAC,gBAAM;YACzBC,qCAA2B;;;wBAGf9B,sBAAW;cACrB+B,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRlC,qBAAW;;;;;;;;;;;;oDAY2BmC,gBAAC;;;;;;;YAOzCC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBSrC,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;;KAGXuB,sBAAS;;YAEFa,cAAM;;;cAGJtC,mBAAW,EAAEC,qBAAW;aACzBW,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEdc,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;;;;;;;;;;;;;;KAsBTT,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBW,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;;YAI1BC,2BAAmB;;;+BAGAC,gBAAM;YACzBC,qCAA2B;;;wBAGf9B,sBAAW;cACrB+B,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRlC,qBAAW;;;;;;;;;;;;;;;;;;;YAmBbmC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBSpC,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;;KAGXuB,sBAAS;;YAEFY,cAAM;;;cAGJrC,mBAAW,EAAEC,qBAAW;aACzBW,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEda,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -1883,7 +1880,6 @@ exports[`createTransformer and printSourceWithMap test with hoistExternalValues=
     "a",
     "b2",
     "e",
-    "u",
     "tuple2",
     "value1",
     "as_4",
@@ -2385,7 +2381,7 @@ console.log(fn2());
 console.log(/*@__PURE__*/ fn2(), /*#__PURE__*/ fn2());
 
 // don't transform spread element and parameter declarations
-console.log([...Array<undefined>(5)].map((u, i) => ((void 0) /* u */ == null ? i : 0)));
+console.log([...Array<undefined>(5)].map((u, i) => (u == null ? i : 0)));
 const fn1 = (...args: undefined[]) => args.length;
 console.log(fn1(...Array<undefined>(5)));
 
@@ -2454,7 +2450,7 @@ export {};
 
 exports[`createTransformer and printSourceWithMap test with hoistExternalValues=false: source map object 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;;;;;;;YAeFG,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEb,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBa,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;;YAI1BC,2BAAmB;;;+BAGAC,gBAAM;YACzBC,qCAA2B;;;wBAGfhC,sBAAW;cACrBiC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRpC,qBAAW;;;;;;;;;;;;oDAY2BqC,gBAAC;;;;;;;YAOzCC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBSvC,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXS,gBAAQ;KACRgB,sBAAS;;YAEFa,cAAM;;;cAGJxC,mBAAW,EAAEC,qBAAW;aACzBa,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEdc,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;;;;;;;YAeFG,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEb,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBa,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;;YAI1BC,2BAAmB;;;+BAGAC,gBAAM;YACzBC,qCAA2B;;;wBAGfhC,sBAAW;cACrBiC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRpC,qBAAW;;;;;;;;;;;;;;;;;;;YAmBbqC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBStC,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXS,gBAAQ;KACRgB,sBAAS;;YAEFY,cAAM;;;cAGJvC,mBAAW,EAAEC,qBAAW;aACzBa,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEda,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -2495,7 +2491,6 @@ exports[`createTransformer and printSourceWithMap test with hoistExternalValues=
     "a",
     "b2",
     "e",
-    "u",
     "tuple2",
     "value1",
     "as_4",
@@ -2997,7 +2992,7 @@ console.log(fn2());
 console.log(/*@__PURE__*/ fn2(), /*#__PURE__*/ fn2());
 
 // don't transform spread element and parameter declarations
-console.log([...Array<undefined>(5)].map((u, i) => ((void 0) /* u */ == null ? i : 0)));
+console.log([...Array<undefined>(5)].map((u, i) => (u == null ? i : 0)));
 const fn1 = (...args: undefined[]) => args.length;
 console.log(fn1(...Array<undefined>(5)));
 
@@ -3066,7 +3061,7 @@ export {};
 
 exports[`createTransformer and printSourceWithMap test with hoistProperty=false: source map object 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;;EAExBC,6BAAiB;EACjBC,eAAG;;;;;;;;;;KAUAd,wBAAS;;;;QAINC,mBAAW;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;YA4EPc,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;;wBAIdC,gBAAM;;;+BAGCA,gBAAM;gCACLA,gBAAM;;;wBAGdlB,sBAAW;cACrBmB,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRtB,qBAAW;;;;;;;;;;;;oDAY2BuB,gBAAC;;;;;;;YAOzCC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBSzB,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;;KAGXa,sBAAS;;YAEFW,cAAM;;;cAGJ1B,mBAAW,EAAEC,qBAAW;;cAExBa,iBAAS,YAAYC,sBAAS;;8BAEdY,gBAAI",
+  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;;EAExBC,6BAAiB;EACjBC,eAAG;;;;;;;;;;KAUAd,wBAAS;;;;QAINC,mBAAW;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;YA4EPc,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;;wBAIdC,gBAAM;;;+BAGCA,gBAAM;gCACLA,gBAAM;;;wBAGdlB,sBAAW;cACrBmB,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRtB,qBAAW;;;;;;;;;;;;;;;;;;;YAmBbuB,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBSxB,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;;KAGXa,sBAAS;;YAEFU,cAAM;;;cAGJzB,mBAAW,EAAEC,qBAAW;;cAExBa,iBAAS,YAAYC,sBAAS;;8BAEdW,gBAAI",
   "names": [
     "undefined",
     "constValue1",
@@ -3093,7 +3088,6 @@ exports[`createTransformer and printSourceWithMap test with hoistProperty=false:
     "a",
     "b2",
     "e",
-    "u",
     "tuple2",
     "value1",
     "as_4",
@@ -3587,7 +3581,7 @@ console.log(fn2());
 console.log(/*@__PURE__*/ fn2(), /*#__PURE__*/ fn2());
 
 // don't transform spread element and parameter declarations
-console.log([...Array<undefined>(5)].map((u, i) => ((void 0) /* u */ == null ? i : 0)));
+console.log([...Array<undefined>(5)].map((u, i) => (u == null ? i : 0)));
 const fn1 = (...args: undefined[]) => args.length;
 console.log(fn1(...Array<undefined>(5)));
 
@@ -3656,7 +3650,7 @@ export {};
 
 exports[`createTransformer and printSourceWithMap test with hoistPureFunctionCall: source map object 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEjB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBiB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;;YAI1BC,2BAAmB;;;+BAGAC,gBAAM;YACzBC,qCAA2B;;;wBAGfpC,sBAAW;cACrBqC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRxC,qBAAW;;;;;;;;;0BASCyC,iBAAK,gBAAgBA,iBAAK;;;oDAGAC,gBAAC;;;;;;;YAOzCC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS5C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRgB,sBAAS;;YAEFc,cAAM;;;cAGJ7C,mBAAW,EAAEC,qBAAW;aACzBiB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEjB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBiB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;;YAI1BC,2BAAmB;;;+BAGAC,gBAAM;YACzBC,qCAA2B;;;wBAGfpC,sBAAW;cACrBqC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRxC,qBAAW;;;;;;;;;0BASCyC,iBAAK,gBAAgBA,iBAAK;;;;;;;;;;YAUxCC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS3C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRgB,sBAAS;;YAEFa,cAAM;;;cAGJ5C,mBAAW,EAAEC,qBAAW;aACzBiB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEdc,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -3702,7 +3696,6 @@ exports[`createTransformer and printSourceWithMap test with hoistPureFunctionCal
     "b2",
     "e",
     "fn2()",
-    "u",
     "tuple2",
     "value1",
     "as_4",
@@ -4204,7 +4197,7 @@ console.log(fn2());
 console.log(/*@__PURE__*/ 12345 /* fn2() */, /*#__PURE__*/ 12345 /* fn2() */);
 
 // don't transform spread element and parameter declarations
-console.log([...Array<undefined>(5)].map((u, i) => ((void 0) /* u */ == null ? i : 0)));
+console.log([...Array<undefined>(5)].map((u, i) => (u == null ? i : 0)));
 const fn1 = (...args: undefined[]) => args.length;
 console.log(fn1(...Array<undefined>(5)));
 
@@ -4273,7 +4266,7 @@ export {};
 
 exports[`createTransformer and printSourceWithMap test with hoistUndefinedSymbol=false: source map object 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;EAuBEA,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;;;;;QAWtEhB,mBAAW;;;;;;EAMjBiB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;;YAI1BC,2BAAmB;;;+BAGAC,gBAAM;YACzBC,qCAA2B;;;wBAGfpC,sBAAW;cACrBqC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRxC,qBAAW;;;;;;;;;;;;oDAY2ByC,gBAAC;;;;;;;YAOzCC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS3C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRgB,sBAAS;;YAEFa,cAAM;;;cAGJ5C,mBAAW,EAAEC,qBAAW;aACzBiB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEdc,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;EAuBEA,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;;;;;QAWtEhB,mBAAW;;;;;;EAMjBiB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;;YAI1BC,2BAAmB;;;+BAGAC,gBAAM;YACzBC,qCAA2B;;;wBAGfpC,sBAAW;cACrBqC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRxC,qBAAW;;;;;;;;;;;;;;;;;;;YAmBbyC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS1C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRgB,sBAAS;;YAEFY,cAAM;;;cAGJ3C,mBAAW,EAAEC,qBAAW;aACzBiB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEda,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "constValue1",
     "constValue2",
@@ -4317,7 +4310,6 @@ exports[`createTransformer and printSourceWithMap test with hoistUndefinedSymbol
     "a",
     "b2",
     "e",
-    "u",
     "tuple2",
     "value1",
     "as_4",
@@ -4819,7 +4811,7 @@ console.log(fn2());
 console.log(/*@__PURE__*/ fn2(), /*#__PURE__*/ fn2());
 
 // don't transform spread element and parameter declarations
-console.log([...Array<undefined>(5)].map((u, i) => ((void 0) /* u */ == null ? i : 0)));
+console.log([...Array<undefined>(5)].map((u, i) => (u == null ? i : 0)));
 const fn1 = (...args: undefined[]) => args.length;
 console.log(fn1(...Array<undefined>(5)));
 
@@ -4888,7 +4880,7 @@ export {};
 
 exports[`createTransformer and printSourceWithMap test with unsafeHoistAsExpresion: source map object 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;GAIVC,gBAAO;EACRC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZX,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXO,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzElB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBkB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;YAKNC,mCAA2B;YAC3BC,sCAA8B;YAC9BC,sCAA8B;YAC9BC,yCAAiC;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAgC3CC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;;YAI1BC,2BAAmB;;;+BAGAC,gBAAM;YACzBC,qCAA2B;;;wBAGfzC,sBAAW;cACrB0C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR7C,qBAAW;;;;;SAKhB8C,0BAAc;;;;;;;oDAO6BC,gBAAC;;;;;;;YAOzCC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBSjD,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXc,gBAAQ;KACRoB,sBAAS;;YAEFc,cAAM;;;cAGJlD,mBAAW,EAAEC,qBAAW;aACzBkB,yBAAa;cACZgB,iBAAS,YAAYC,sBAAS;aAC/Be,oDAAwC;8BACvBC,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;GAIVC,gBAAO;EACRC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZX,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXO,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzElB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBkB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;YAKNC,mCAA2B;YAC3BC,sCAA8B;YAC9BC,sCAA8B;YAC9BC,yCAAiC;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAgC3CC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;;YAI1BC,2BAAmB;;;+BAGAC,gBAAM;YACzBC,qCAA2B;;;wBAGfzC,sBAAW;cACrB0C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR7C,qBAAW;;;;;SAKhB8C,0BAAc;;;;;;;;;;;;;;YAcXC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBShD,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXc,gBAAQ;KACRoB,sBAAS;;YAEFa,cAAM;;;cAGJjD,mBAAW,EAAEC,qBAAW;aACzBkB,yBAAa;cACZgB,iBAAS,YAAYC,sBAAS;aAC/Bc,oDAAwC;8BACvBC,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -4939,7 +4931,6 @@ exports[`createTransformer and printSourceWithMap test with unsafeHoistAsExpresi
     "b2",
     "e",
     "12345 as const",
-    "u",
     "tuple2",
     "value1",
     "(constObject as { readonly b: 'bar' }).b",
@@ -5442,7 +5433,7 @@ console.log(fn2());
 console.log(/*@__PURE__*/ fn2(), /*#__PURE__*/ fn2());
 
 // don't transform spread element and parameter declarations
-console.log([...Array<undefined>(5)].map((u, i) => ((void 0) /* u */ == null ? i : 0)));
+console.log([...Array<undefined>(5)].map((u, i) => (u == null ? i : 0)));
 const fn1 = (...args: undefined[]) => args.length;
 console.log(fn1(...Array<undefined>(5)));
 
@@ -5511,7 +5502,7 @@ export {};
 
 exports[`createTransformer and printSourceWithMap test with unsafeHoistFunctionCall: source map object 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEjB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBiB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;;YAI1BC,2BAAmB;;;+BAGAC,gBAAM;YACzBC,qCAA2B;;;wBAGfpC,sBAAW;cACrBqC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRxC,qBAAW;;;;;;;YAObyC,iBAAK;;0BAESA,iBAAK,gBAAgBA,iBAAK;;;oDAGAC,gBAAC;;;;;;;YAOzCC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS5C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRgB,sBAAS;;YAEFc,cAAM;;;cAGJ7C,mBAAW,EAAEC,qBAAW;aACzBiB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEjB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBiB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;;YAI1BC,2BAAmB;;;+BAGAC,gBAAM;YACzBC,qCAA2B;;;wBAGfpC,sBAAW;cACrBqC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRxC,qBAAW;;;;;;;YAObyC,iBAAK;;0BAESA,iBAAK,gBAAgBA,iBAAK;;;;;;;;;;YAUxCC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS3C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRgB,sBAAS;;YAEFa,cAAM;;;cAGJ5C,mBAAW,EAAEC,qBAAW;aACzBiB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEdc,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -5557,7 +5548,6 @@ exports[`createTransformer and printSourceWithMap test with unsafeHoistFunctionC
     "b2",
     "e",
     "fn2()",
-    "u",
     "tuple2",
     "value1",
     "as_4",
@@ -6059,7 +6049,7 @@ console.log(12345 /* fn2() */);
 console.log(/*@__PURE__*/ 12345 /* fn2() */, /*#__PURE__*/ 12345 /* fn2() */);
 
 // don't transform spread element and parameter declarations
-console.log([...Array<undefined>(5)].map((u, i) => ((void 0) /* u */ == null ? i : 0)));
+console.log([...Array<undefined>(5)].map((u, i) => (u == null ? i : 0)));
 const fn1 = (...args: undefined[]) => args.length;
 console.log(fn1(...Array<undefined>(5)));
 
@@ -6748,7 +6738,7 @@ export {};
 
 exports[`createTransformer and printSourceWithMap test with useUndefinedSymbolForUndefinedValue=true: source map object 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,yBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,4BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEjB,yBAAS;;;;QAINC,mBAAW;;;;;;EAMjBiB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,6BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;;YAI1BC,2BAAmB;;;+BAGAC,gBAAM;YACzBC,qCAA2B;;;wBAGfpC,sBAAW;cACrBqC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRxC,qBAAW;;;;;;;;;;;;oDAY2ByC,iBAAC;;;;;;;YAOzCC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS3C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRgB,sBAAS;;YAEFa,cAAM;;;cAGJ5C,mBAAW,EAAEC,qBAAW;aACzBiB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEdc,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,yBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,4BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEjB,yBAAS;;;;QAINC,mBAAW;;;;;;EAMjBiB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,6BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;;YAI1BC,2BAAmB;;;+BAGAC,gBAAM;YACzBC,qCAA2B;;;wBAGfpC,sBAAW;cACrBqC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRxC,qBAAW;;;;;;;;;;;;;;;;;;;YAmBbyC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS1C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRgB,sBAAS;;YAEFY,cAAM;;;cAGJ3C,mBAAW,EAAEC,qBAAW;aACzBiB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEda,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -6793,7 +6783,6 @@ exports[`createTransformer and printSourceWithMap test with useUndefinedSymbolFo
     "a",
     "b2",
     "e",
-    "u",
     "tuple2",
     "value1",
     "as_4",
@@ -7295,7 +7284,7 @@ console.log(fn2());
 console.log(/*@__PURE__*/ fn2(), /*#__PURE__*/ fn2());
 
 // don't transform spread element and parameter declarations
-console.log([...Array<undefined>(5)].map((u, i) => (undefined /* u */ == null ? i : 0)));
+console.log([...Array<undefined>(5)].map((u, i) => (u == null ? i : 0)));
 const fn1 = (...args: undefined[]) => args.length;
 console.log(fn1(...Array<undefined>(5)));
 
