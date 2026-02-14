@@ -7,6 +7,7 @@ export namespace ProxyTypes {
   export interface Node {
     readonly pos: number;
     readonly end: number;
+    parent?: Node;
   }
   export interface SourceFile extends Node {
     readonly text: string;
