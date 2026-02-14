@@ -183,9 +183,29 @@ console.log(2 /* BazEnum.C */, "piyo" /* BazEnum.D */);
 // element access
 console.log(2 /* BazEnum['C'] */, "piyo" /* BazEnum['D'] */);
 
+// Type is enum literal, not actual literal type
+const valueUsingEnumValue = 1 /* BarEnum.A */;
+console.log(1 /* valueUsingEnumValue */);
+
 // Element access with constant name
 const name_a = 'a';
 console.log(4 /* constObject[name_a] */);
+// Nested element access
+const tempObjForElementAccess = {
+  o: 'a',
+  p: 'o',
+  q: 'p',
+  r: 'q',
+} as const;
+console.log(
+  (4 /* constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ] */)
+);
 
 // Object initializer with computed name
 const objWithComputedName = { ["a" /* name_a */]: 432 } as const;
@@ -277,7 +297,7 @@ export {};
 
 exports[`createPortalTransformer test: generated source map 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEjB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBiB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;;YAI1BC,2BAAmB;;;+BAGAC,gBAAM;YACzBC,qCAA2B;;;wBAGfpC,sBAAW;cACrBqC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRxC,qBAAW;;;;;;;;;;;;;;;;;;;YAmBbyC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS1C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRgB,sBAAS;;YAEFY,cAAM;;;cAGJ3C,mBAAW,EAAEC,qBAAW;aACzBiB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEda,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEjB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBiB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;;YAInBC,2BAAmB;;;;;;;;;EAS7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGftC,sBAAW;cACrBuC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR1C,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb2C,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS5C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRgB,sBAAS;;YAEFc,cAAM;;;cAGJ7C,mBAAW,EAAEC,qBAAW;aACzBiB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -316,7 +336,15 @@ exports[`createPortalTransformer test: generated source map 1`] = `
     "BazEnum.D",
     "BazEnum['C']",
     "BazEnum['D']",
+    "valueUsingEnumValue",
     "constObject[name_a]",
+    "constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ]",
     "name_a",
     "objWithComputedName[name_a]",
     "a",
@@ -520,9 +548,29 @@ console.log(BazEnum.C, BazEnum.D);
 // element access
 console.log(BazEnum['C'], BazEnum['D']);
 
+// Type is enum literal, not actual literal type
+const valueUsingEnumValue = BarEnum.A;
+console.log(valueUsingEnumValue);
+
 // Element access with constant name
 const name_a = 'a';
 console.log(constObject[name_a]);
+// Nested element access
+const tempObjForElementAccess = {
+  o: 'a',
+  p: 'o',
+  q: 'p',
+  r: 'q',
+} as const;
+console.log(
+  constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ]
+);
 
 // Object initializer with computed name
 const objWithComputedName = { [name_a]: 432 } as const;
@@ -798,9 +846,29 @@ console.log(2 /* BazEnum.C */, "piyo" /* BazEnum.D */);
 // element access
 console.log(2 /* BazEnum['C'] */, "piyo" /* BazEnum['D'] */);
 
+// Type is enum literal, not actual literal type
+const valueUsingEnumValue = 1 /* BarEnum.A */;
+console.log(1 /* valueUsingEnumValue */);
+
 // Element access with constant name
 const name_a = 'a';
 console.log(4 /* constObject[name_a] */);
+// Nested element access
+const tempObjForElementAccess = {
+  o: 'a',
+  p: 'o',
+  q: 'p',
+  r: 'q',
+} as const;
+console.log(
+  (4 /* constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ] */)
+);
 
 // Object initializer with computed name
 const objWithComputedName = { ["a" /* name_a */]: 432 } as const;
@@ -892,7 +960,7 @@ export {};
 
 exports[`createPortalTransformer transform with explicitly specifying typescript package: generated source map 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEjB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBiB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;;YAI1BC,2BAAmB;;;+BAGAC,gBAAM;YACzBC,qCAA2B;;;wBAGfpC,sBAAW;cACrBqC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRxC,qBAAW;;;;;;;;;;;;;;;;;;;YAmBbyC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS1C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRgB,sBAAS;;YAEFY,cAAM;;;cAGJ3C,mBAAW,EAAEC,qBAAW;aACzBiB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEda,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEjB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBiB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;;YAInBC,2BAAmB;;;;;;;;;EAS7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGftC,sBAAW;cACrBuC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR1C,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb2C,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS5C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRgB,sBAAS;;YAEFc,cAAM;;;cAGJ7C,mBAAW,EAAEC,qBAAW;aACzBiB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -931,7 +999,15 @@ exports[`createPortalTransformer transform with explicitly specifying typescript
     "BazEnum.D",
     "BazEnum['C']",
     "BazEnum['D']",
+    "valueUsingEnumValue",
     "constObject[name_a]",
+    "constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ]",
     "name_a",
     "objWithComputedName[name_a]",
     "a",
@@ -1135,9 +1211,29 @@ console.log(BazEnum.C, BazEnum.D);
 // element access
 console.log(BazEnum['C'], BazEnum['D']);
 
+// Type is enum literal, not actual literal type
+const valueUsingEnumValue = BarEnum.A;
+console.log(valueUsingEnumValue);
+
 // Element access with constant name
 const name_a = 'a';
 console.log(constObject[name_a]);
+// Nested element access
+const tempObjForElementAccess = {
+  o: 'a',
+  p: 'o',
+  q: 'p',
+  r: 'q',
+} as const;
+console.log(
+  constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ]
+);
 
 // Object initializer with computed name
 const objWithComputedName = { [name_a]: 432 } as const;

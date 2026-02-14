@@ -2,7 +2,7 @@
 
 exports[`createTransformer and printSourceWithMap test with default options: source map object 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEjB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBiB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;;YAI1BC,2BAAmB;;;+BAGAC,gBAAM;YACzBC,qCAA2B;;;wBAGfpC,sBAAW;cACrBqC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRxC,qBAAW;;;;;;;;;;;;;;;;;;;YAmBbyC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS1C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRgB,sBAAS;;YAEFY,cAAM;;;cAGJ3C,mBAAW,EAAEC,qBAAW;aACzBiB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEda,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEjB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBiB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;;YAInBC,2BAAmB;;;;;;;;;EAS7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGftC,sBAAW;cACrBuC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR1C,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb2C,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS5C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRgB,sBAAS;;YAEFc,cAAM;;;cAGJ7C,mBAAW,EAAEC,qBAAW;aACzBiB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -41,7 +41,15 @@ exports[`createTransformer and printSourceWithMap test with default options: sou
     "BazEnum.D",
     "BazEnum['C']",
     "BazEnum['D']",
+    "valueUsingEnumValue",
     "constObject[name_a]",
+    "constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ]",
     "name_a",
     "objWithComputedName[name_a]",
     "a",
@@ -245,9 +253,29 @@ console.log(BazEnum.C, BazEnum.D);
 // element access
 console.log(BazEnum['C'], BazEnum['D']);
 
+// Type is enum literal, not actual literal type
+const valueUsingEnumValue = BarEnum.A;
+console.log(valueUsingEnumValue);
+
 // Element access with constant name
 const name_a = 'a';
 console.log(constObject[name_a]);
+// Nested element access
+const tempObjForElementAccess = {
+  o: 'a',
+  p: 'o',
+  q: 'p',
+  r: 'q',
+} as const;
+console.log(
+  constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ]
+);
 
 // Object initializer with computed name
 const objWithComputedName = { [name_a]: 432 } as const;
@@ -523,9 +551,29 @@ console.log(2 /* BazEnum.C */, "piyo" /* BazEnum.D */);
 // element access
 console.log(2 /* BazEnum['C'] */, "piyo" /* BazEnum['D'] */);
 
+// Type is enum literal, not actual literal type
+const valueUsingEnumValue = 1 /* BarEnum.A */;
+console.log(1 /* valueUsingEnumValue */);
+
 // Element access with constant name
 const name_a = 'a';
 console.log(4 /* constObject[name_a] */);
+// Nested element access
+const tempObjForElementAccess = {
+  o: 'a',
+  p: 'o',
+  q: 'p',
+  r: 'q',
+} as const;
+console.log(
+  (4 /* constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ] */)
+);
 
 // Object initializer with computed name
 const objWithComputedName = { ["a" /* name_a */]: 432 } as const;
@@ -617,7 +665,7 @@ export {};
 
 exports[`createTransformer and printSourceWithMap test with hoistConstTemplateLiteral=true: source map object 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;qBAETC,kCAAmB;;;;EAItCC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzElB,wBAAS;;;;QAINE,mBAAW;;;;;;EAMjBiB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;;YAI1BC,2BAAmB;;;+BAGAC,gBAAM;YACzBC,qCAA2B;;;wBAGfpC,sBAAW;cACrBqC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRxC,qBAAW;;;;;;;;;;;;;;;;;;;YAmBbyC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS1C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRgB,sBAAS;;YAEFY,cAAM;;;cAGJ3C,mBAAW,EAAEC,qBAAW;aACzBiB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEda,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;qBAETC,kCAAmB;;;;EAItCC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzElB,wBAAS;;;;QAINE,mBAAW;;;;;;EAMjBiB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;;YAInBC,2BAAmB;;;;;;;;;EAS7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGftC,sBAAW;cACrBuC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR1C,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb2C,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS5C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRgB,sBAAS;;YAEFc,cAAM;;;cAGJ7C,mBAAW,EAAEC,qBAAW;aACzBiB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "\`ccc\${constValue4}\`",
@@ -657,7 +705,15 @@ exports[`createTransformer and printSourceWithMap test with hoistConstTemplateLi
     "BazEnum.D",
     "BazEnum['C']",
     "BazEnum['D']",
+    "valueUsingEnumValue",
     "constObject[name_a]",
+    "constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ]",
     "name_a",
     "objWithComputedName[name_a]",
     "a",
@@ -861,9 +917,29 @@ console.log(BazEnum.C, BazEnum.D);
 // element access
 console.log(BazEnum['C'], BazEnum['D']);
 
+// Type is enum literal, not actual literal type
+const valueUsingEnumValue = BarEnum.A;
+console.log(valueUsingEnumValue);
+
 // Element access with constant name
 const name_a = 'a';
 console.log(constObject[name_a]);
+// Nested element access
+const tempObjForElementAccess = {
+  o: 'a',
+  p: 'o',
+  q: 'p',
+  r: 'q',
+} as const;
+console.log(
+  constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ]
+);
 
 // Object initializer with computed name
 const objWithComputedName = { [name_a]: 432 } as const;
@@ -1139,9 +1215,29 @@ console.log(2 /* BazEnum.C */, "piyo" /* BazEnum.D */);
 // element access
 console.log(2 /* BazEnum['C'] */, "piyo" /* BazEnum['D'] */);
 
+// Type is enum literal, not actual literal type
+const valueUsingEnumValue = 1 /* BarEnum.A */;
+console.log(1 /* valueUsingEnumValue */);
+
 // Element access with constant name
 const name_a = 'a';
 console.log(4 /* constObject[name_a] */);
+// Nested element access
+const tempObjForElementAccess = {
+  o: 'a',
+  p: 'o',
+  q: 'p',
+  r: 'q',
+} as const;
+console.log(
+  (4 /* constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ] */)
+);
 
 // Object initializer with computed name
 const objWithComputedName = { ["a" /* name_a */]: 432 } as const;
@@ -1233,7 +1329,7 @@ export {};
 
 exports[`createTransformer and printSourceWithMap test with hoistEnumValues=false: source map object 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;;EAUZG,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEhB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBgB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;;;;;;;;;;;;;YAmBZC,2BAAmB;;;+BAGAC,gBAAM;YACzBC,qCAA2B;;;wBAGf7B,sBAAW;cACrB8B,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRjC,qBAAW;;;;;;;;;;;;;;;;;;;YAmBbkC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBSnC,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXY,gBAAQ;;;YAGDsB,cAAM;;;cAGJpC,mBAAW,EAAEC,qBAAW;aACzBgB,yBAAa;;;8BAGIoB,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;;EAUZG,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEhB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBgB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;;;;;;;;;;;;;;;;;YAuBZC,2BAAmB;;;;;;;;;EAS7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGf9B,sBAAW;cACrB+B,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRlC,qBAAW;;;;;;;;;;;;;;;;;;;YAmBbmC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBSpC,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXY,gBAAQ;;;YAGDuB,cAAM;;;cAGJrC,mBAAW,EAAEC,qBAAW;aACzBgB,yBAAa;;;8BAGIqB,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -1266,6 +1362,13 @@ exports[`createTransformer and printSourceWithMap test with hoistEnumValues=fals
     "partialConstObject.q",
     "partialConstObject.r.t",
     "constObject[name_a]",
+    "constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ]",
     "name_a",
     "objWithComputedName[name_a]",
     "a",
@@ -1469,9 +1572,29 @@ console.log(BazEnum.C, BazEnum.D);
 // element access
 console.log(BazEnum['C'], BazEnum['D']);
 
+// Type is enum literal, not actual literal type
+const valueUsingEnumValue = BarEnum.A;
+console.log(valueUsingEnumValue);
+
 // Element access with constant name
 const name_a = 'a';
 console.log(constObject[name_a]);
+// Nested element access
+const tempObjForElementAccess = {
+  o: 'a',
+  p: 'o',
+  q: 'p',
+  r: 'q',
+} as const;
+console.log(
+  constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ]
+);
 
 // Object initializer with computed name
 const objWithComputedName = { [name_a]: 432 } as const;
@@ -1747,9 +1870,29 @@ console.log(BazEnum.C, BazEnum.D);
 // element access
 console.log(BazEnum['C'], BazEnum['D']);
 
+// Type is enum literal, not actual literal type
+const valueUsingEnumValue = BarEnum.A;
+console.log(valueUsingEnumValue);
+
 // Element access with constant name
 const name_a = 'a';
 console.log(4 /* constObject[name_a] */);
+// Nested element access
+const tempObjForElementAccess = {
+  o: 'a',
+  p: 'o',
+  q: 'p',
+  r: 'q',
+} as const;
+console.log(
+  (4 /* constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ] */)
+);
 
 // Object initializer with computed name
 const objWithComputedName = { ["a" /* name_a */]: 432 } as const;
@@ -1841,7 +1984,7 @@ export {};
 
 exports[`createTransformer and printSourceWithMap test with hoistExternalValues=false and additionalExternalDirectories: source map object 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;;;;;;;;;;;;;;KAsBTT,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBW,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;;YAI1BC,2BAAmB;;;+BAGAC,gBAAM;YACzBC,qCAA2B;;;wBAGf9B,sBAAW;cACrB+B,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRlC,qBAAW;;;;;;;;;;;;;;;;;;;YAmBbmC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBSpC,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;;KAGXuB,sBAAS;;YAEFY,cAAM;;;cAGJrC,mBAAW,EAAEC,qBAAW;aACzBW,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEda,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;;;;;;;;;;;;;;KAsBTT,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBW,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;;YAInBC,2BAAmB;;;;;;;;;EAS7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGfhC,sBAAW;cACrBiC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRpC,qBAAW;;;;;;;;;;;;;;;;;;;YAmBbqC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBStC,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;;KAGXuB,sBAAS;;YAEFc,cAAM;;;cAGJvC,mBAAW,EAAEC,qBAAW;aACzBW,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -1874,7 +2017,15 @@ exports[`createTransformer and printSourceWithMap test with hoistExternalValues=
     "BazEnum.D",
     "BazEnum['C']",
     "BazEnum['D']",
+    "valueUsingEnumValue",
     "constObject[name_a]",
+    "constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ]",
     "name_a",
     "objWithComputedName[name_a]",
     "a",
@@ -2078,9 +2229,29 @@ console.log(BazEnum.C, BazEnum.D);
 // element access
 console.log(BazEnum['C'], BazEnum['D']);
 
+// Type is enum literal, not actual literal type
+const valueUsingEnumValue = BarEnum.A;
+console.log(valueUsingEnumValue);
+
 // Element access with constant name
 const name_a = 'a';
 console.log(constObject[name_a]);
+// Nested element access
+const tempObjForElementAccess = {
+  o: 'a',
+  p: 'o',
+  q: 'p',
+  r: 'q',
+} as const;
+console.log(
+  constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ]
+);
 
 // Object initializer with computed name
 const objWithComputedName = { [name_a]: 432 } as const;
@@ -2356,9 +2527,29 @@ console.log(2 /* BazEnum.C */, "piyo" /* BazEnum.D */);
 // element access
 console.log(2 /* BazEnum['C'] */, "piyo" /* BazEnum['D'] */);
 
+// Type is enum literal, not actual literal type
+const valueUsingEnumValue = 1 /* BarEnum.A */;
+console.log(1 /* valueUsingEnumValue */);
+
 // Element access with constant name
 const name_a = 'a';
 console.log(4 /* constObject[name_a] */);
+// Nested element access
+const tempObjForElementAccess = {
+  o: 'a',
+  p: 'o',
+  q: 'p',
+  r: 'q',
+} as const;
+console.log(
+  (4 /* constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ] */)
+);
 
 // Object initializer with computed name
 const objWithComputedName = { ["a" /* name_a */]: 432 } as const;
@@ -2450,7 +2641,7 @@ export {};
 
 exports[`createTransformer and printSourceWithMap test with hoistExternalValues=false: source map object 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;;;;;;;YAeFG,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEb,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBa,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;;YAI1BC,2BAAmB;;;+BAGAC,gBAAM;YACzBC,qCAA2B;;;wBAGfhC,sBAAW;cACrBiC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRpC,qBAAW;;;;;;;;;;;;;;;;;;;YAmBbqC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBStC,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXS,gBAAQ;KACRgB,sBAAS;;YAEFY,cAAM;;;cAGJvC,mBAAW,EAAEC,qBAAW;aACzBa,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEda,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;;;;;;;YAeFG,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEb,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBa,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;;YAInBC,2BAAmB;;;;;;;;;EAS7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGflC,sBAAW;cACrBmC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRtC,qBAAW;;;;;;;;;;;;;;;;;;;YAmBbuC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBSxC,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXS,gBAAQ;KACRgB,sBAAS;;YAEFc,cAAM;;;cAGJzC,mBAAW,EAAEC,qBAAW;aACzBa,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -2485,7 +2676,15 @@ exports[`createTransformer and printSourceWithMap test with hoistExternalValues=
     "BazEnum.D",
     "BazEnum['C']",
     "BazEnum['D']",
+    "valueUsingEnumValue",
     "constObject[name_a]",
+    "constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ]",
     "name_a",
     "objWithComputedName[name_a]",
     "a",
@@ -2689,9 +2888,29 @@ console.log(BazEnum.C, BazEnum.D);
 // element access
 console.log(BazEnum['C'], BazEnum['D']);
 
+// Type is enum literal, not actual literal type
+const valueUsingEnumValue = BarEnum.A;
+console.log(valueUsingEnumValue);
+
 // Element access with constant name
 const name_a = 'a';
 console.log(constObject[name_a]);
+// Nested element access
+const tempObjForElementAccess = {
+  o: 'a',
+  p: 'o',
+  q: 'p',
+  r: 'q',
+} as const;
+console.log(
+  constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ]
+);
 
 // Object initializer with computed name
 const objWithComputedName = { [name_a]: 432 } as const;
@@ -2967,9 +3186,29 @@ console.log(2 /* BazEnum.C */, "piyo" /* BazEnum.D */);
 // element access
 console.log(2 /* BazEnum['C'] */, "piyo" /* BazEnum['D'] */);
 
+// Type is enum literal, not actual literal type
+const valueUsingEnumValue = 1 /* BarEnum.A */;
+console.log(1 /* valueUsingEnumValue */);
+
 // Element access with constant name
 const name_a = 'a';
 console.log(4 /* constObject[name_a] */);
+// Nested element access
+const tempObjForElementAccess = {
+  o: 'a',
+  p: 'o',
+  q: 'p',
+  r: 'q',
+} as const;
+console.log(
+  (4 /* constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ] */)
+);
 
 // Object initializer with computed name
 const objWithComputedName = { ["a" /* name_a */]: 432 } as const;
@@ -3061,7 +3300,7 @@ export {};
 
 exports[`createTransformer and printSourceWithMap test with hoistProperty=false: source map object 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;;EAExBC,6BAAiB;EACjBC,eAAG;;;;;;;;;;KAUAd,wBAAS;;;;QAINC,mBAAW;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;YA4EPc,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;;wBAIdC,gBAAM;;;+BAGCA,gBAAM;gCACLA,gBAAM;;;wBAGdlB,sBAAW;cACrBmB,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRtB,qBAAW;;;;;;;;;;;;;;;;;;;YAmBbuB,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBSxB,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;;KAGXa,sBAAS;;YAEFU,cAAM;;;cAGJzB,mBAAW,EAAEC,qBAAW;;cAExBa,iBAAS,YAAYC,sBAAS;;8BAEdW,gBAAI",
+  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;;EAExBC,6BAAiB;EACjBC,eAAG;;;;;;;;;;KAUAd,wBAAS;;;;QAINC,mBAAW;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;YA4EPc,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;;wBAIPC,gBAAM;;;;;;;;;;;;;;;;;;;+BAmBCA,gBAAM;gCACLA,gBAAM;;;wBAGdnB,sBAAW;cACrBoB,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRvB,qBAAW;;;;;;;;;;;;;;;;;;;YAmBbwB,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBSzB,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;;KAGXa,sBAAS;;YAEFW,cAAM;;;cAGJ1B,mBAAW,EAAEC,qBAAW;;cAExBa,iBAAS,YAAYC,sBAAS;;8BAEdY,gBAAI",
   "names": [
     "undefined",
     "constValue1",
@@ -3084,6 +3323,7 @@ exports[`createTransformer and printSourceWithMap test with hoistProperty=false:
     "BazEnum.D",
     "BazEnum['C']",
     "BazEnum['D']",
+    "valueUsingEnumValue",
     "name_a",
     "a",
     "b2",
@@ -3278,9 +3518,29 @@ console.log(BazEnum.C, BazEnum.D);
 // element access
 console.log(BazEnum['C'], BazEnum['D']);
 
+// Type is enum literal, not actual literal type
+const valueUsingEnumValue = BarEnum.A;
+console.log(valueUsingEnumValue);
+
 // Element access with constant name
 const name_a = 'a';
 console.log(constObject[name_a]);
+// Nested element access
+const tempObjForElementAccess = {
+  o: 'a',
+  p: 'o',
+  q: 'p',
+  r: 'q',
+} as const;
+console.log(
+  constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ]
+);
 
 // Object initializer with computed name
 const objWithComputedName = { [name_a]: 432 } as const;
@@ -3556,9 +3816,29 @@ console.log(2 /* BazEnum.C */, "piyo" /* BazEnum.D */);
 // element access
 console.log(2 /* BazEnum['C'] */, "piyo" /* BazEnum['D'] */);
 
+// Type is enum literal, not actual literal type
+const valueUsingEnumValue = 1 /* BarEnum.A */;
+console.log(1 /* valueUsingEnumValue */);
+
 // Element access with constant name
 const name_a = 'a';
 console.log(constObject["a" /* name_a */]);
+// Nested element access
+const tempObjForElementAccess = {
+  o: 'a',
+  p: 'o',
+  q: 'p',
+  r: 'q',
+} as const;
+console.log(
+  constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ]
+);
 
 // Object initializer with computed name
 const objWithComputedName = { ["a" /* name_a */]: 432 } as const;
@@ -3650,7 +3930,7 @@ export {};
 
 exports[`createTransformer and printSourceWithMap test with hoistPureFunctionCall: source map object 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEjB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBiB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;;YAI1BC,2BAAmB;;;+BAGAC,gBAAM;YACzBC,qCAA2B;;;wBAGfpC,sBAAW;cACrBqC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRxC,qBAAW;;;;;;;;;0BASCyC,iBAAK,gBAAgBA,iBAAK;;;;;;;;;;YAUxCC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS3C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRgB,sBAAS;;YAEFa,cAAM;;;cAGJ5C,mBAAW,EAAEC,qBAAW;aACzBiB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEdc,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEjB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBiB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;;YAInBC,2BAAmB;;;;;;;;;EAS7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGftC,sBAAW;cACrBuC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR1C,qBAAW;;;;;;;;;0BASC2C,iBAAK,gBAAgBA,iBAAK;;;;;;;;;;YAUxCC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS7C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRgB,sBAAS;;YAEFe,cAAM;;;cAGJ9C,mBAAW,EAAEC,qBAAW;aACzBiB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEdgB,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -3689,7 +3969,15 @@ exports[`createTransformer and printSourceWithMap test with hoistPureFunctionCal
     "BazEnum.D",
     "BazEnum['C']",
     "BazEnum['D']",
+    "valueUsingEnumValue",
     "constObject[name_a]",
+    "constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ]",
     "name_a",
     "objWithComputedName[name_a]",
     "a",
@@ -3894,9 +4182,29 @@ console.log(BazEnum.C, BazEnum.D);
 // element access
 console.log(BazEnum['C'], BazEnum['D']);
 
+// Type is enum literal, not actual literal type
+const valueUsingEnumValue = BarEnum.A;
+console.log(valueUsingEnumValue);
+
 // Element access with constant name
 const name_a = 'a';
 console.log(constObject[name_a]);
+// Nested element access
+const tempObjForElementAccess = {
+  o: 'a',
+  p: 'o',
+  q: 'p',
+  r: 'q',
+} as const;
+console.log(
+  constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ]
+);
 
 // Object initializer with computed name
 const objWithComputedName = { [name_a]: 432 } as const;
@@ -4172,9 +4480,29 @@ console.log(2 /* BazEnum.C */, "piyo" /* BazEnum.D */);
 // element access
 console.log(2 /* BazEnum['C'] */, "piyo" /* BazEnum['D'] */);
 
+// Type is enum literal, not actual literal type
+const valueUsingEnumValue = 1 /* BarEnum.A */;
+console.log(1 /* valueUsingEnumValue */);
+
 // Element access with constant name
 const name_a = 'a';
 console.log(4 /* constObject[name_a] */);
+// Nested element access
+const tempObjForElementAccess = {
+  o: 'a',
+  p: 'o',
+  q: 'p',
+  r: 'q',
+} as const;
+console.log(
+  (4 /* constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ] */)
+);
 
 // Object initializer with computed name
 const objWithComputedName = { ["a" /* name_a */]: 432 } as const;
@@ -4266,7 +4594,7 @@ export {};
 
 exports[`createTransformer and printSourceWithMap test with hoistUndefinedSymbol=false: source map object 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;EAuBEA,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;;;;;QAWtEhB,mBAAW;;;;;;EAMjBiB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;;YAI1BC,2BAAmB;;;+BAGAC,gBAAM;YACzBC,qCAA2B;;;wBAGfpC,sBAAW;cACrBqC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRxC,qBAAW;;;;;;;;;;;;;;;;;;;YAmBbyC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS1C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRgB,sBAAS;;YAEFY,cAAM;;;cAGJ3C,mBAAW,EAAEC,qBAAW;aACzBiB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEda,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;EAuBEA,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;;;;;QAWtEhB,mBAAW;;;;;;EAMjBiB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;;YAInBC,2BAAmB;;;;;;;;;EAS7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGftC,sBAAW;cACrBuC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR1C,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb2C,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS5C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRgB,sBAAS;;YAEFc,cAAM;;;cAGJ7C,mBAAW,EAAEC,qBAAW;aACzBiB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "constValue1",
     "constValue2",
@@ -4304,7 +4632,15 @@ exports[`createTransformer and printSourceWithMap test with hoistUndefinedSymbol
     "BazEnum.D",
     "BazEnum['C']",
     "BazEnum['D']",
+    "valueUsingEnumValue",
     "constObject[name_a]",
+    "constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ]",
     "name_a",
     "objWithComputedName[name_a]",
     "a",
@@ -4508,9 +4844,29 @@ console.log(BazEnum.C, BazEnum.D);
 // element access
 console.log(BazEnum['C'], BazEnum['D']);
 
+// Type is enum literal, not actual literal type
+const valueUsingEnumValue = BarEnum.A;
+console.log(valueUsingEnumValue);
+
 // Element access with constant name
 const name_a = 'a';
 console.log(constObject[name_a]);
+// Nested element access
+const tempObjForElementAccess = {
+  o: 'a',
+  p: 'o',
+  q: 'p',
+  r: 'q',
+} as const;
+console.log(
+  constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ]
+);
 
 // Object initializer with computed name
 const objWithComputedName = { [name_a]: 432 } as const;
@@ -4786,9 +5142,29 @@ console.log(2 /* BazEnum.C */, "piyo" /* BazEnum.D */);
 // element access
 console.log(2 /* BazEnum['C'] */, "piyo" /* BazEnum['D'] */);
 
+// Type is enum literal, not actual literal type
+const valueUsingEnumValue = 1 /* BarEnum.A */;
+console.log(1 /* valueUsingEnumValue */);
+
 // Element access with constant name
 const name_a = 'a';
 console.log(4 /* constObject[name_a] */);
+// Nested element access
+const tempObjForElementAccess = {
+  o: 'a',
+  p: 'o',
+  q: 'p',
+  r: 'q',
+} as const;
+console.log(
+  (4 /* constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ] */)
+);
 
 // Object initializer with computed name
 const objWithComputedName = { ["a" /* name_a */]: 432 } as const;
@@ -4880,7 +5256,7 @@ export {};
 
 exports[`createTransformer and printSourceWithMap test with unsafeHoistAsExpresion: source map object 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;GAIVC,gBAAO;EACRC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZX,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXO,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzElB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBkB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;YAKNC,mCAA2B;YAC3BC,sCAA8B;YAC9BC,sCAA8B;YAC9BC,yCAAiC;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAgC3CC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;;YAI1BC,2BAAmB;;;+BAGAC,gBAAM;YACzBC,qCAA2B;;;wBAGfzC,sBAAW;cACrB0C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR7C,qBAAW;;;;;SAKhB8C,0BAAc;;;;;;;;;;;;;;YAcXC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBShD,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXc,gBAAQ;KACRoB,sBAAS;;YAEFa,cAAM;;;cAGJjD,mBAAW,EAAEC,qBAAW;aACzBkB,yBAAa;cACZgB,iBAAS,YAAYC,sBAAS;aAC/Bc,oDAAwC;8BACvBC,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;GAIVC,gBAAO;EACRC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZX,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXO,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzElB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBkB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;YAKNC,mCAA2B;YAC3BC,sCAA8B;YAC9BC,sCAA8B;YAC9BC,yCAAiC;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAgC3CC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;;YAInBC,2BAAmB;;;;;;;;;EAS7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGf3C,sBAAW;cACrB4C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR/C,qBAAW;;;;;SAKhBgD,0BAAc;;;;;;;;;;;;;;YAcXC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBSlD,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXc,gBAAQ;KACRoB,sBAAS;;YAEFe,cAAM;;;cAGJnD,mBAAW,EAAEC,qBAAW;aACzBkB,yBAAa;cACZgB,iBAAS,YAAYC,sBAAS;aAC/BgB,oDAAwC;8BACvBC,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -4924,7 +5300,15 @@ exports[`createTransformer and printSourceWithMap test with unsafeHoistAsExpresi
     "BazEnum.D",
     "BazEnum['C']",
     "BazEnum['D']",
+    "valueUsingEnumValue",
     "constObject[name_a]",
+    "constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ]",
     "name_a",
     "objWithComputedName[name_a]",
     "a",
@@ -5130,9 +5514,29 @@ console.log(BazEnum.C, BazEnum.D);
 // element access
 console.log(BazEnum['C'], BazEnum['D']);
 
+// Type is enum literal, not actual literal type
+const valueUsingEnumValue = BarEnum.A;
+console.log(valueUsingEnumValue);
+
 // Element access with constant name
 const name_a = 'a';
 console.log(constObject[name_a]);
+// Nested element access
+const tempObjForElementAccess = {
+  o: 'a',
+  p: 'o',
+  q: 'p',
+  r: 'q',
+} as const;
+console.log(
+  constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ]
+);
 
 // Object initializer with computed name
 const objWithComputedName = { [name_a]: 432 } as const;
@@ -5408,9 +5812,29 @@ console.log(2 /* BazEnum.C */, "piyo" /* BazEnum.D */);
 // element access
 console.log(2 /* BazEnum['C'] */, "piyo" /* BazEnum['D'] */);
 
+// Type is enum literal, not actual literal type
+const valueUsingEnumValue = 1 /* BarEnum.A */;
+console.log(1 /* valueUsingEnumValue */);
+
 // Element access with constant name
 const name_a = 'a';
 console.log(4 /* constObject[name_a] */);
+// Nested element access
+const tempObjForElementAccess = {
+  o: 'a',
+  p: 'o',
+  q: 'p',
+  r: 'q',
+} as const;
+console.log(
+  (4 /* constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ] */)
+);
 
 // Object initializer with computed name
 const objWithComputedName = { ["a" /* name_a */]: 432 } as const;
@@ -5502,7 +5926,7 @@ export {};
 
 exports[`createTransformer and printSourceWithMap test with unsafeHoistFunctionCall: source map object 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEjB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBiB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;;YAI1BC,2BAAmB;;;+BAGAC,gBAAM;YACzBC,qCAA2B;;;wBAGfpC,sBAAW;cACrBqC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRxC,qBAAW;;;;;;;YAObyC,iBAAK;;0BAESA,iBAAK,gBAAgBA,iBAAK;;;;;;;;;;YAUxCC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS3C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRgB,sBAAS;;YAEFa,cAAM;;;cAGJ5C,mBAAW,EAAEC,qBAAW;aACzBiB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEdc,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEjB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBiB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;;YAInBC,2BAAmB;;;;;;;;;EAS7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGftC,sBAAW;cACrBuC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR1C,qBAAW;;;;;;;YAOb2C,iBAAK;;0BAESA,iBAAK,gBAAgBA,iBAAK;;;;;;;;;;YAUxCC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS7C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRgB,sBAAS;;YAEFe,cAAM;;;cAGJ9C,mBAAW,EAAEC,qBAAW;aACzBiB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEdgB,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -5541,7 +5965,15 @@ exports[`createTransformer and printSourceWithMap test with unsafeHoistFunctionC
     "BazEnum.D",
     "BazEnum['C']",
     "BazEnum['D']",
+    "valueUsingEnumValue",
     "constObject[name_a]",
+    "constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ]",
     "name_a",
     "objWithComputedName[name_a]",
     "a",
@@ -5746,9 +6178,29 @@ console.log(BazEnum.C, BazEnum.D);
 // element access
 console.log(BazEnum['C'], BazEnum['D']);
 
+// Type is enum literal, not actual literal type
+const valueUsingEnumValue = BarEnum.A;
+console.log(valueUsingEnumValue);
+
 // Element access with constant name
 const name_a = 'a';
 console.log(constObject[name_a]);
+// Nested element access
+const tempObjForElementAccess = {
+  o: 'a',
+  p: 'o',
+  q: 'p',
+  r: 'q',
+} as const;
+console.log(
+  constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ]
+);
 
 // Object initializer with computed name
 const objWithComputedName = { [name_a]: 432 } as const;
@@ -6024,9 +6476,29 @@ console.log(2 /* BazEnum.C */, "piyo" /* BazEnum.D */);
 // element access
 console.log(2 /* BazEnum['C'] */, "piyo" /* BazEnum['D'] */);
 
+// Type is enum literal, not actual literal type
+const valueUsingEnumValue = 1 /* BarEnum.A */;
+console.log(1 /* valueUsingEnumValue */);
+
 // Element access with constant name
 const name_a = 'a';
 console.log(4 /* constObject[name_a] */);
+// Nested element access
+const tempObjForElementAccess = {
+  o: 'a',
+  p: 'o',
+  q: 'p',
+  r: 'q',
+} as const;
+console.log(
+  (4 /* constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ] */)
+);
 
 // Object initializer with computed name
 const objWithComputedName = { ["a" /* name_a */]: 432 } as const;
@@ -6118,7 +6590,7 @@ export {};
 
 exports[`createTransformer and printSourceWithMap test with unsafeHoistWritableValues=true: source map object 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;EAEvCS,yBAAc;;;;;;;;;;;;;;IAcZX,mBAAW,KAAKW,yBAAc,KAAKP,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZI,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzElB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBkB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;YAiBNC,4BAAgB;;;;;;;;;;;;;;;;;;;;;;EAsB1BC,+BAAoB;EACpBC,8BAAoB;EACpBC,iCAAsB;EACtBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;;YAI1BC,2BAAmB;;;+BAGAC,gBAAM;YACzBC,qCAA2B;;;wBAGfxC,sBAAW;cACrByC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR5C,qBAAW;;;;;;;;;;;;oDAY2B6C,gBAAC;;;;;;;YAOzCC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS/C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXc,gBAAQ;KACRmB,sBAAS;;YAEFa,cAAM;;;cAGJhD,mBAAW,EAAEC,qBAAW;aACzBkB,yBAAa;cACZe,iBAAS,YAAYC,sBAAS;;8BAEdc,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;EAEvCS,yBAAc;;;;;;;;;;;;;;IAcZX,mBAAW,KAAKW,yBAAc,KAAKP,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZI,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzElB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBkB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;YAiBNC,4BAAgB;;;;;;;;;;;;;;;;;;;;;;EAsB1BC,+BAAoB;EACpBC,8BAAoB;EACpBC,iCAAsB;EACtBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;;YAInBC,2BAAmB;;;;;;;;;EAS7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGf1C,sBAAW;cACrB2C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR9C,qBAAW;;;;;;;;;;;;oDAY2B+C,gBAAC;;;;;;;YAOzCC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBSjD,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXc,gBAAQ;KACRmB,sBAAS;;YAEFe,cAAM;;;cAGJlD,mBAAW,EAAEC,qBAAW;aACzBkB,yBAAa;cACZe,iBAAS,YAAYC,sBAAS;;8BAEdgB,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -6161,7 +6633,15 @@ exports[`createTransformer and printSourceWithMap test with unsafeHoistWritableV
     "BazEnum.D",
     "BazEnum['C']",
     "BazEnum['D']",
+    "valueUsingEnumValue",
     "constObject[name_a]",
+    "constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ]",
     "name_a",
     "objWithComputedName[name_a]",
     "a",
@@ -6366,9 +6846,29 @@ console.log(BazEnum.C, BazEnum.D);
 // element access
 console.log(BazEnum['C'], BazEnum['D']);
 
+// Type is enum literal, not actual literal type
+const valueUsingEnumValue = BarEnum.A;
+console.log(valueUsingEnumValue);
+
 // Element access with constant name
 const name_a = 'a';
 console.log(constObject[name_a]);
+// Nested element access
+const tempObjForElementAccess = {
+  o: 'a',
+  p: 'o',
+  q: 'p',
+  r: 'q',
+} as const;
+console.log(
+  constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ]
+);
 
 // Object initializer with computed name
 const objWithComputedName = { [name_a]: 432 } as const;
@@ -6644,9 +7144,29 @@ console.log(2 /* BazEnum.C */, "piyo" /* BazEnum.D */);
 // element access
 console.log(2 /* BazEnum['C'] */, "piyo" /* BazEnum['D'] */);
 
+// Type is enum literal, not actual literal type
+const valueUsingEnumValue = 1 /* BarEnum.A */;
+console.log(1 /* valueUsingEnumValue */);
+
 // Element access with constant name
 const name_a = 'a';
 console.log(4 /* constObject[name_a] */);
+// Nested element access
+const tempObjForElementAccess = {
+  o: 'a',
+  p: 'o',
+  q: 'p',
+  r: 'q',
+} as const;
+console.log(
+  (4 /* constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ] */)
+);
 
 // Object initializer with computed name
 const objWithComputedName = { ["a" /* name_a */]: 432 } as const;
@@ -6738,7 +7258,7 @@ export {};
 
 exports[`createTransformer and printSourceWithMap test with useUndefinedSymbolForUndefinedValue=true: source map object 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,yBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,4BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEjB,yBAAS;;;;QAINC,mBAAW;;;;;;EAMjBiB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,6BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;;YAI1BC,2BAAmB;;;+BAGAC,gBAAM;YACzBC,qCAA2B;;;wBAGfpC,sBAAW;cACrBqC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRxC,qBAAW;;;;;;;;;;;;;;;;;;;YAmBbyC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS1C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRgB,sBAAS;;YAEFY,cAAM;;;cAGJ3C,mBAAW,EAAEC,qBAAW;aACzBiB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEda,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,yBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,4BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEjB,yBAAS;;;;QAINC,mBAAW;;;;;;EAMjBiB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,6BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;;YAInBC,2BAAmB;;;;;;;;;EAS7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGftC,sBAAW;cACrBuC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR1C,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb2C,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS5C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRgB,sBAAS;;YAEFc,cAAM;;;cAGJ7C,mBAAW,EAAEC,qBAAW;aACzBiB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -6777,7 +7297,15 @@ exports[`createTransformer and printSourceWithMap test with useUndefinedSymbolFo
     "BazEnum.D",
     "BazEnum['C']",
     "BazEnum['D']",
+    "valueUsingEnumValue",
     "constObject[name_a]",
+    "constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ]",
     "name_a",
     "objWithComputedName[name_a]",
     "a",
@@ -6981,9 +7509,29 @@ console.log(BazEnum.C, BazEnum.D);
 // element access
 console.log(BazEnum['C'], BazEnum['D']);
 
+// Type is enum literal, not actual literal type
+const valueUsingEnumValue = BarEnum.A;
+console.log(valueUsingEnumValue);
+
 // Element access with constant name
 const name_a = 'a';
 console.log(constObject[name_a]);
+// Nested element access
+const tempObjForElementAccess = {
+  o: 'a',
+  p: 'o',
+  q: 'p',
+  r: 'q',
+} as const;
+console.log(
+  constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ]
+);
 
 // Object initializer with computed name
 const objWithComputedName = { [name_a]: 432 } as const;
@@ -7259,9 +7807,29 @@ console.log(2 /* BazEnum.C */, "piyo" /* BazEnum.D */);
 // element access
 console.log(2 /* BazEnum['C'] */, "piyo" /* BazEnum['D'] */);
 
+// Type is enum literal, not actual literal type
+const valueUsingEnumValue = 1 /* BarEnum.A */;
+console.log(1 /* valueUsingEnumValue */);
+
 // Element access with constant name
 const name_a = 'a';
 console.log(4 /* constObject[name_a] */);
+// Nested element access
+const tempObjForElementAccess = {
+  o: 'a',
+  p: 'o',
+  q: 'p',
+  r: 'q',
+} as const;
+console.log(
+  (4 /* constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ] */)
+);
 
 // Object initializer with computed name
 const objWithComputedName = { ["a" /* name_a */]: 432 } as const;

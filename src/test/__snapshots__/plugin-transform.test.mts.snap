@@ -108,9 +108,20 @@ var BazEnum;
 console.log(2 /* BazEnum.C */, "piyo" /* BazEnum.D */);
 // element access
 console.log(2 /* BazEnum['C'] */, "piyo" /* BazEnum['D'] */);
+// Type is enum literal, not actual literal type
+const valueUsingEnumValue = 1 /* BarEnum.A */;
+console.log(1 /* valueUsingEnumValue */);
 // Element access with constant name
 const name_a = 'a';
 console.log(constObject["a" /* name_a */]);
+// Nested element access
+const tempObjForElementAccess = {
+    o: 'a',
+    p: 'o',
+    q: 'p',
+    r: 'q',
+};
+console.log(constObject[tempObjForElementAccess[tempObjForElementAccess[tempObjForElementAccess[tempObjForElementAccess.r]]]]);
 // Object initializer with computed name
 const objWithComputedName = { ["a" /* name_a */]: 432 };
 console.log(objWithComputedName["a" /* name_a */]);
