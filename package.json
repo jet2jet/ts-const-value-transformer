@@ -33,6 +33,16 @@
       "import": "./dist/createPortalTransformer.mjs",
       "types": "./dist/createPortalTransformer.d.mts"
     },
+    "./createPortalTransformerWithTsLs": {
+      "default": "./dist/createPortalTransformerWithTsLs.mjs",
+      "import": "./dist/createPortalTransformerWithTsLs.mjs",
+      "types": "./dist/createPortalTransformerWithTsLs.d.mts"
+    },
+    "./createPortalTransformerWithTsLs.mjs": {
+      "default": "./dist/createPortalTransformerWithTsLs.mjs",
+      "import": "./dist/createPortalTransformerWithTsLs.mjs",
+      "types": "./dist/createPortalTransformerWithTsLs.d.mts"
+    },
     "./getCustomTransformers": {
       "default": "./dist/getCustomTransformers.mjs",
       "import": "./dist/getCustomTransformers.mjs",
@@ -96,6 +106,7 @@
     "@types/node": "~20.19.22",
     "@typescript-eslint/eslint-plugin": "^8.48.0",
     "@typescript-eslint/parser": "^8.48.0",
+    "@typescript/native-preview": "7.0.0-dev.20260211.1",
     "babel-loader": "^10.0.0",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
@@ -119,6 +130,7 @@
     "typescript": ">=5.5"
   },
   "dependencies": {
-    "source-map": "^0.7.6"
+    "source-map": "^0.7.6",
+    "sync-child-process": "^1.0.2"
   }
 }

@@ -5,8 +5,22 @@ import createPortalTransformer, {
   type PortalTransformerResult,
   type PortalTransformerResultNonNull,
 } from './createPortalTransformer.mjs';
+import createPortalTransformerWithTsLs, {
+  createPortalTransformerSyncWithTsLs,
+  type CreatePortalTransformerWithTsLsOptions,
+  type PortalTransformerWithTsLs,
+} from './createPortalTransformerWithTsLs.mjs';
 import createTransformer from './createTransformer.mjs';
 import version from './version.mjs';
+
+export {
+  printSourceWithProxy,
+  printSourceWithMapWithProxy,
+  transformAndPrintSourceWithProxy,
+  transformAndPrintSourceWithMapWithProxy,
+  transformSourceWithProxy,
+  type TransformOptions,
+} from './transform.mjs';
 
 export {
   printSource,
@@ -14,8 +28,7 @@ export {
   transformAndPrintSource,
   transformAndPrintSourceWithMap,
   transformSource,
-  type TransformOptions,
-} from './transform.mjs';
+} from './tscTransformer.mjs';
 
 export {
   createPortalTransformer,
@@ -25,5 +38,9 @@ export {
   type PortalTransformer,
   type PortalTransformerResult,
   type PortalTransformerResultNonNull,
+  createPortalTransformerWithTsLs,
+  createPortalTransformerSyncWithTsLs,
+  type CreatePortalTransformerWithTsLsOptions,
+  type PortalTransformerWithTsLs,
   version,
 };

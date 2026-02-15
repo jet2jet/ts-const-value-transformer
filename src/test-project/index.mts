@@ -180,9 +180,29 @@ console.log(BazEnum.C, BazEnum.D);
 // element access
 console.log(BazEnum['C'], BazEnum['D']);
 
+// Type is enum literal, not actual literal type
+const valueUsingEnumValue = BarEnum.A;
+console.log(valueUsingEnumValue);
+
 // Element access with constant name
 const name_a = 'a';
 console.log(constObject[name_a]);
+// Nested element access
+const tempObjForElementAccess = {
+  o: 'a',
+  p: 'o',
+  q: 'p',
+  r: 'q',
+} as const;
+console.log(
+  constObject[
+    tempObjForElementAccess[
+      tempObjForElementAccess[
+        tempObjForElementAccess[tempObjForElementAccess.r]
+      ]
+    ]
+  ]
+);
 
 // Object initializer with computed name
 const objWithComputedName = { [name_a]: 432 } as const;

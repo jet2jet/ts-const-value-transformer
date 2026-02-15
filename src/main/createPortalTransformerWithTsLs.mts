@@ -3,48 +3,40 @@ import { createRequire } from 'module';
 import * as path from 'path';
 import type { RawSourceMap } from 'source-map';
 import type * as tsNamespace from 'typescript';
+import type {
+  PortalTransformerResult,
+  PortalTransformerResultNonNull,
+} from './createPortalTransformer.mjs';
+import TsLspClient from './lsp/TsLspClient.mjs';
+import { transformAndPrintSourceWithMap } from './lspTransformer.mjs';
 import { getIgnoreFilesFunction, type TransformOptions } from './transform.mjs';
-import { transformAndPrintSourceWithMap } from './tscTransformer.mjs';
 
 const require = createRequire(import.meta.url);
 
-export interface CreatePortalTransformerOptions extends TransformOptions {
-  /** Path to tsconfig.json. If omitted, `tsconfig.json` will be used. */
+export interface CreatePortalTransformerWithTsLsOptions
+  extends TransformOptions {
+  /**
+   * Command to run language server. The first element is used for command name and following elements are used for `argv`.
+   * Default is `['npx', 'tsgo', '--lsp', '--stdio']`.
+   */
+  command?: readonly string[];
+  /** Path to tsconfig.json. If omitted, `tsconfig.json` will be used. **Currently `project` must be path to `tsconfig.json` file name; other than `tsconfig.json` is not supported.** */
   project?: string;
-  /** Package path to `typescript` or `typescript` namespace object. */
+  /** Package path to `typescript` or `typescript` namespace object. This is still necessary to retrieve AST. */
   typescript?: string | typeof tsNamespace;
   /** The current directory for file search. Also affects to `project` option. */
   cwd?: string;
-  /**
-   * Specifies the count. When the transformation count reaches this value, `program` instance will be recreated (and count will be reset).
-   * This is useful if the project is big and out-of-memory occurs during transformation, but the process may be slower.
-   * If 0 or `undefined`, recreation will not be performed.
-   */
-  recreateProgramOnTransformCount?: number;
   /** Specifies to cache base (original) source code for check if the input is changed. Default is false. */
   cacheBaseSource?: boolean;
   /** Specifies to cache result source code. Default is true (false for webpack loader). If the latter process has cache system, specifies false to reduce memory usage. */
   cacheResult?: boolean;
 }
 
-export type PortalTransformerResult = [
-  newSource: string | null,
-  newSourceMap: RawSourceMap | undefined,
-];
-export type PortalTransformerResultNonNull = [
-  newSource: string,
-  newSourceMap: RawSourceMap | undefined,
-];
-
-export interface PortalTransformer {
+export interface PortalTransformerWithTsLs {
   /** The `typescript` namespace object */
   readonly ts: typeof tsNamespace;
-  /** Active `Program` instance for the transformer */
-  readonly program: tsNamespace.Program;
   /** Clears transformed cache. */
   clearCache(): void;
-  /** Forces `program` recreation. The transformation count for `recreateProgramOnTransformCount` will also be resetted. */
-  recreateProgram(): void;
   /**
    * Performs transformation.
    * @param content Base source code. If null, uses loaded source code in the TS project.
@@ -73,6 +65,10 @@ export interface PortalTransformer {
     sourceMap?: string | RawSourceMap | null,
     options?: TransformOptions
   ): PortalTransformerResult;
+  /**
+   * Closes the LSP client.
+   */
+  close(): void;
 }
 
 function optionsToString(options: TransformOptions) {
@@ -88,73 +84,28 @@ function optionsToString(options: TransformOptions) {
 }
 
 function createPortalTransformerImpl(
-  options: CreatePortalTransformerOptions,
+  options: CreatePortalTransformerWithTsLsOptions,
   ts: typeof tsNamespace
-): PortalTransformer {
+): PortalTransformerWithTsLs {
   const project = options.project ?? 'tsconfig.json';
+  if (path.basename(project) !== 'tsconfig.json') {
+    throw new Error(
+      `options.project must be 'tsconfig.json' due to restriction of language-server (actual: "${project}")`
+    );
+  }
+  const commandArray = options.command ?? ['npx', 'tsgo', '--lsp', '--stdio'];
+  if (commandArray.length < 1) {
+    throw new Error(`options.command must have at least one element`);
+  }
   const ignoreFiles = getIgnoreFilesFunction(options.ignoreFiles);
   const cwd = options.cwd ?? process.cwd();
-  const recreateProgramOnTransformCount =
-    options.recreateProgramOnTransformCount ?? 0;
   const cacheBaseSource = options.cacheBaseSource ?? false;
   const cacheResult = options.cacheResult ?? true;
 
-  // eslint-disable-next-line @typescript-eslint/unbound-method
-  const foundConfigPath = ts.findConfigFile(cwd, ts.sys.fileExists, project);
-  if (foundConfigPath == null) {
-    throw new Error(
-      `[ts-const-value-transformer] Unable to load tsconfig file (effective name = '${project}')`
-    );
-  }
+  const workspaceFolder = path.dirname(path.resolve(cwd, project));
 
-  const getCurrentDirectory = () => cwd;
-  const config = ts.getParsedCommandLineOfConfigFile(foundConfigPath, void 0, {
-    fileExists: fs.existsSync,
-    getCurrentDirectory,
-    // eslint-disable-next-line @typescript-eslint/unbound-method
-    readDirectory: ts.sys.readDirectory,
-    readFile: (file) =>
-      fs.readFileSync(
-        path.isAbsolute(file) ? file : path.join(getCurrentDirectory(), file),
-        'utf-8'
-      ),
-    useCaseSensitiveFileNames: ts.sys.useCaseSensitiveFileNames,
-    onUnRecoverableConfigFileDiagnostic: (diag) => {
-      throw new Error(
-        ts.formatDiagnostics([diag], {
-          getCanonicalFileName: (f) => f,
-          getCurrentDirectory,
-          getNewLine: () => '\n',
-        })
-      );
-    },
-  });
-  if (!config) {
-    throw new Error(
-      `[ts-const-value-transformer] Unable to load tsconfig file (effective name = '${foundConfigPath}')`
-    );
-  }
-
-  let program = ts.createProgram({
-    options: config.options,
-    rootNames: config.fileNames,
-  });
-  let transformationCount = 0;
-
-  const recreateProgram = () => {
-    // @ts-expect-error: We must clear reference first to give change for gc
-    delete instance.program;
-    // @ts-expect-error: We must clear reference first to give change for gc
-    program = null;
-    // We don't pass `oldProgram` because the transformed source codes should not be necessary (the transformation does not change logics and types)
-    // If we pass `oldProgram`, temporal memory usage may increase because gc cannot release `oldProgram` before creating new program
-    program = ts.createProgram({
-      options: config.options,
-      rootNames: config.fileNames,
-    });
-    instance.program = program;
-    transformationCount = 0;
-  };
+  const client = new TsLspClient(commandArray[0]!, commandArray.slice(1));
+  let isInitialized = false;
 
   const cache = new Map<
     string,
@@ -164,12 +115,32 @@ function createPortalTransformerImpl(
       result: PortalTransformerResultNonNull;
     }
   >();
+  const sourceFileMap = new Map<string, tsNamespace.SourceFile>();
+
+  const getSourceFile = (
+    fileName: string,
+    content?: string | null
+  ): tsNamespace.SourceFile => {
+    let sourceFile = sourceFileMap.get(fileName);
+    if (!sourceFile) {
+      if (content == null) {
+        content = fs.readFileSync(fileName, 'utf-8');
+      }
+      sourceFile = ts.createSourceFile(
+        fileName,
+        content,
+        ts.ScriptTarget.Latest,
+        true
+      );
+      sourceFileMap.set(fileName, sourceFile);
+      client.openDocument(fileName, content);
+    }
+    return sourceFile;
+  };
 
   const instance = {
     ts,
-    program,
     clearCache: () => cache.clear(),
-    recreateProgram,
     transform: (content, fileName, sourceMap, individualOptions) => {
       const individualOptionsJson = optionsToString(individualOptions ?? {});
       if (cacheResult) {
@@ -193,32 +164,33 @@ function createPortalTransformerImpl(
         return [content as string, rawSourceMap];
       }
 
-      const sourceFile = program.getSourceFile(fileName);
+      if (!isInitialized) {
+        client.initialize(workspaceFolder);
+      }
+
+      let sourceFile = sourceFileMap.get(fileName);
       if (!sourceFile) {
-        return [content as string, rawSourceMap];
+        sourceFile = getSourceFile(fileName, content);
       }
-
-      transformationCount++;
-      if (
-        recreateProgramOnTransformCount > 0 &&
-        transformationCount >= recreateProgramOnTransformCount
-      ) {
-        recreateProgram();
-      }
-
       // If input content is changed, replace it
-      if (content != null && sourceFile.text !== content) {
+      else if (content != null && sourceFile.text !== content) {
         sourceFile.update(content, {
           span: { start: 0, length: sourceFile.end },
           newLength: content.length,
         });
         sourceFile.text = content;
       }
+
+      if (!isInitialized) {
+        client.waitForFirstDiagnosticsReceived();
+        isInitialized = true;
+      }
+
       const result: PortalTransformerResultNonNull =
         transformAndPrintSourceWithMap(
           sourceFile,
-          program,
-          undefined,
+          client,
+          getSourceFile,
           fileName,
           { ...options, ...individualOptions, ts },
           rawSourceMap
@@ -240,19 +212,24 @@ function createPortalTransformerImpl(
           result,
         });
       }
+
+      client.closeDocument(fileName);
       return result;
     },
-  } satisfies PortalTransformer;
+    close: () => {
+      client.exit();
+    },
+  } satisfies PortalTransformerWithTsLs;
   return instance;
 }
 
 /**
- * Creates the new portal transformer instance for the TS project.
- * After creation, the transformation process can be performed by calling {@link PortalTransformer.transform}.
+ * Creates the new portal transformer instance for the TS project using language server.
+ * After creation, the transformation process can be performed by calling {@link PortalTransformerWithTsLs.transform}.
  */
-export default async function createPortalTransformer(
-  options: CreatePortalTransformerOptions = {}
-): Promise<PortalTransformer> {
+export default async function createPortalTransformerWithTsLs(
+  options: CreatePortalTransformerWithTsLsOptions = {}
+): Promise<PortalTransformerWithTsLs> {
   let ts;
   if (options.typescript != null) {
     if (typeof options.typescript === 'string') {
@@ -272,11 +249,11 @@ export default async function createPortalTransformer(
 
 /**
  * Creates the new portal transformer instance for the TS project (using `require` function).
- * After creation, the transformation process can be performed by calling {@link PortalTransformer.transform}.
+ * After creation, the transformation process can be performed by calling {@link PortalTransformerWithTsLs.transform}.
  */
-export function createPortalTransformerSync(
-  options: CreatePortalTransformerOptions = {}
-): PortalTransformer {
+export function createPortalTransformerSyncWithTsLs(
+  options: CreatePortalTransformerWithTsLsOptions = {}
+): PortalTransformerWithTsLs {
   let ts;
   if (options.typescript != null) {
     if (typeof options.typescript === 'string') {
