@@ -33,6 +33,16 @@
       "import": "./dist/createPortalTransformer.mjs",
       "types": "./dist/createPortalTransformer.d.mts"
     },
+    "./createPortalTransformerWithTsLs": {
+      "default": "./dist/createPortalTransformerWithTsLs.mjs",
+      "import": "./dist/createPortalTransformerWithTsLs.mjs",
+      "types": "./dist/createPortalTransformerWithTsLs.d.mts"
+    },
+    "./createPortalTransformerWithTsLs.mjs": {
+      "default": "./dist/createPortalTransformerWithTsLs.mjs",
+      "import": "./dist/createPortalTransformerWithTsLs.mjs",
+      "types": "./dist/createPortalTransformerWithTsLs.d.mts"
+    },
     "./getCustomTransformers": {
       "default": "./dist/getCustomTransformers.mjs",
       "import": "./dist/getCustomTransformers.mjs",
