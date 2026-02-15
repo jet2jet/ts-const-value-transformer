@@ -317,6 +317,37 @@ interface CreatePortalTransformerOptions extends TransformOptions {
 
 If `Promise` cannot be used for some reason, use `createPortalTransformerSync` instead.
 
+#### createPortalTransformerWithTsLs: (options?: CreatePortalTransformerWithTsLsOptions) => Promise<PortalTransformerWithTsLs>
+
+_Experimental_: Creates 'portal transformer' like [`createPortalTransformer`](#createportaltransformer-options-createportaltransformeroptions--promise), but uses TypeScript language server, including [`tsgo`](https://www.npmjs.com/package/@typescript/native-preview), as type information provider.
+
+- To use with `tsgo`, you must install it like `npm install -D @typescript/native-preview`.
+- Currently, `typescript` package is also necessary for parsing source code into AST.
+- Also, tsconfig file must be named with `tsconfig.json` (it is limitation of language server).
+
+`CreatePortalTransformerOptions` has a following signature. Also, `TransformOptions` fields, including `ignoreFiles`, can be used.
+
+```ts
+export interface CreatePortalTransformerWithTsLsOptions
+  extends TransformOptions {
+  /**
+   * Command to run language server. The first element is used for command name and following elements are used for `argv`.
+   * Default is `['npx', 'tsgo', '--lsp', '--stdio']`.
+   */
+  command?: readonly string[];
+  /** Path to tsconfig.json. If omitted, `tsconfig.json` will be used. **Currently `project` must be path to `tsconfig.json` file name; other than `tsconfig.json` is not supported.** */
+  project?: string;
+  /** Package path to `typescript` or `typescript` namespace object. This is still necessary to retrieve AST. */
+  typescript?: string | typeof tsNamespace;
+  /** The current directory for file search. Also affects to `project` option. */
+  cwd?: string;
+  /** Specifies to cache base (original) source code for check if the input is changed. Default is false. */
+  cacheBaseSource?: boolean;
+  /** Specifies to cache result source code. Default is true (false for webpack loader). If the latter process has cache system, specifies false to reduce memory usage. */
+  cacheResult?: boolean;
+}
+```
+
 ## Notice
 
 Starting from v0.4.0, `unsafeHoistWritableValues` option is introduced. Since TypeScript sometimes narrows non-constant values to literal types such as:

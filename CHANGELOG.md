@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.10.0
+
+- Fix to avoid hosting parameters
+- (Experimental) Add features to use language-server (such as `tsgo`)
+
 ## v0.9.1
 
 - Add `hoistConstTemplateLiteral` option
