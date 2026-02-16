@@ -6,10 +6,15 @@ import SyncLspClient from './SyncLspClient.mjs';
 
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 
+// @internal
+export interface Diagnostic {
+  message: string;
+}
+
 export default class TsLspClient extends SyncLspClient {
   private _supportPullDiagnostics: boolean;
   private _firstDiagnosticsReceived: boolean;
-  private readonly _fileForDiagnostics: Map<string, object[]>;
+  private readonly _fileForDiagnostics: Map<string, Diagnostic[]>;
 
   public constructor(
     command: string,
@@ -97,7 +102,7 @@ export default class TsLspClient extends SyncLspClient {
           }
           this._fileForDiagnostics.set(
             params.uri as string,
-            params.diagnostics as object[]
+            params.diagnostics as Diagnostic[]
           );
         }
       );
@@ -116,6 +121,13 @@ export default class TsLspClient extends SyncLspClient {
         throw new Error('Peer closed');
       }
     }
+  }
+
+  public getCachedDiagnostics(fileName: string): Diagnostic[] | null {
+    const uri = pathToFileURL(fileName).href;
+    return this._fileForDiagnostics.has(uri)
+      ? this._fileForDiagnostics.get(uri)!
+      : null;
   }
 
   public openDocument(fileName: string, content: string): void {

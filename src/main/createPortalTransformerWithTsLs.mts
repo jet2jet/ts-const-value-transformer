@@ -102,7 +102,8 @@ function createPortalTransformerImpl(
   const cacheBaseSource = options.cacheBaseSource ?? false;
   const cacheResult = options.cacheResult ?? true;
 
-  const workspaceFolder = path.dirname(path.resolve(cwd, project));
+  const projectFullPath = path.resolve(cwd, project);
+  const workspaceFolder = path.dirname(projectFullPath);
 
   const client = new TsLspClient(commandArray[0]!, commandArray.slice(1));
   let isInitialized = false;
@@ -183,6 +184,12 @@ function createPortalTransformerImpl(
 
       if (!isInitialized) {
         client.waitForFirstDiagnosticsReceived();
+        const diag = client.getCachedDiagnostics(projectFullPath);
+        if (diag && diag.length > 0) {
+          throw new Error(
+            'Error for tsconfig:\n' + diag.map((d) => d.message).join('\n')
+          );
+        }
         isInitialized = true;
       }
 
