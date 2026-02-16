@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.10.1
+
+- Fix for transformation with langage-server
+
 ## v0.10.0
 
 - Fix to avoid hosting parameters
