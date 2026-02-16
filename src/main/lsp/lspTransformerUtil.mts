@@ -577,7 +577,7 @@ function determineIfPropertyIsReadonly(
       break;
     } else if (ts.isAsExpression(parent)) {
       // For definition, 'as const' should be readonly
-      if (parent.type.getText(sourceFile) === 'const') {
+      if (parent.type.getText(defSource) === 'const') {
         return true;
       }
     } else if (ts.isEnumMember(parent)) {
