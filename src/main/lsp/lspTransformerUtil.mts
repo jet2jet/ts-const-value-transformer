@@ -257,10 +257,12 @@ function retrieveActualTypeString(
   tsIntance: typeof ts,
   client: TsLspClient
 ): [hover: string, type: string] {
-  const def = client.getTypeDefitition(fileName, pos.line, pos.column);
-  if (!def) {
+  const defs = client.getTypeDefitition(fileName, pos.line, pos.column);
+  // For enum types (not enum-literal types), the returned definitons will be multiple
+  if (defs.length !== 1) {
     return ['', ''];
   }
+  const def = defs[0]!;
   const o = client.hoverForPosition(def.fileName, def.lineEnd, def.posEnd);
   const code = hoverResultToCode(o);
   return [code, hoverToTypeString(null, code, tsIntance)];

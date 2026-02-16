@@ -183,6 +183,10 @@ console.log(BazEnum['C'], BazEnum['D']);
 // Type is enum literal, not actual literal type
 const valueUsingEnumValue = BarEnum.A;
 console.log(valueUsingEnumValue);
+// Enum type (not enum literal) is not a constant
+const valueTypedEnum: BarEnum =
+  Math.floor(Math.random() * 2) >= 1 ? BarEnum.A : BarEnum.B;
+console.log(valueTypedEnum);
 
 // Element access with constant name
 const name_a = 'a';

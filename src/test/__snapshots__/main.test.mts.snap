@@ -2,7 +2,7 @@
 
 exports[`createTransformer and printSourceWithMap test with default options: source map object 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEjB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBiB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;;YAInBC,2BAAmB;;;;;;;;;EAS7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGftC,sBAAW;cACrBuC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR1C,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb2C,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS5C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRgB,sBAAS;;YAEFc,cAAM;;;cAGJ7C,mBAAW,EAAEC,qBAAW;aACzBiB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEjB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBiB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;EAS7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGftC,sBAAW;cACrBuC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR1C,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb2C,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS5C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRgB,sBAAS;;YAEFc,cAAM;;;cAGJ7C,mBAAW,EAAEC,qBAAW;aACzBiB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -256,6 +256,10 @@ console.log(BazEnum['C'], BazEnum['D']);
 // Type is enum literal, not actual literal type
 const valueUsingEnumValue = BarEnum.A;
 console.log(valueUsingEnumValue);
+// Enum type (not enum literal) is not a constant
+const valueTypedEnum: BarEnum =
+  Math.floor(Math.random() * 2) >= 1 ? BarEnum.A : BarEnum.B;
+console.log(valueTypedEnum);
 
 // Element access with constant name
 const name_a = 'a';
@@ -554,6 +558,10 @@ console.log(2 /* BazEnum['C'] */, "piyo" /* BazEnum['D'] */);
 // Type is enum literal, not actual literal type
 const valueUsingEnumValue = 1 /* BarEnum.A */;
 console.log(1 /* valueUsingEnumValue */);
+// Enum type (not enum literal) is not a constant
+const valueTypedEnum: BarEnum =
+  Math.floor(Math.random() * 2) >= 1 ? 1 /* BarEnum.A */ : "hoge" /* BarEnum.B */;
+console.log(valueTypedEnum);
 
 // Element access with constant name
 const name_a = 'a';

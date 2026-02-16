@@ -259,13 +259,13 @@ export default class TsLspClient extends SyncLspClient {
     fileName: string,
     line: number,
     pos: number
-  ): {
+  ): Array<{
     fileName: string;
     lineStart: number;
     posStart: number;
     lineEnd: number;
     posEnd: number;
-  } | null {
+  }> {
     const uri = pathToFileURL(fileName).href;
     const id = this.sendMessage('textDocument/typeDefinition', {
       textDocument: {
@@ -279,24 +279,22 @@ export default class TsLspClient extends SyncLspClient {
     const r: any = this.receiveMessage(id);
     // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     if (!r) {
-      return null;
+      return [];
     }
-    /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-    const loc = r instanceof Array ? r[0] : r;
-    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-    if (!loc) {
-      return null;
-    }
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    const defFileName = fileURLToPath(loc.uri);
-    return {
-      fileName: defFileName,
-      lineStart: loc.range.start.line,
-      posStart: loc.range.start.character,
-      lineEnd: loc.range.end.line,
-      posEnd: loc.range.end.character,
-    };
-    /* eslint-enable @typescript-eslint/no-unsafe-assignment */
+    const a = r instanceof Array ? r : [r];
+    return a.map((loc) => {
+      /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+      const defFileName = fileURLToPath(loc.uri);
+      return {
+        fileName: defFileName,
+        lineStart: loc.range.start.line,
+        posStart: loc.range.start.character,
+        lineEnd: loc.range.end.line,
+        posEnd: loc.range.end.character,
+      };
+      /* eslint-enable @typescript-eslint/no-unsafe-assignment */
+    });
   }
 
   public sendReplaceText(
