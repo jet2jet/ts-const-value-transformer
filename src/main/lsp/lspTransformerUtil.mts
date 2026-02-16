@@ -286,7 +286,10 @@ function typeStringToLiteralType(
     return tsInstance.TypeFlags.BooleanLiteral;
   }
   // string literal
-  if (/^(["']).*\1$/.test(typeString)) {
+  if (
+    /^"(?:[^"\\]|\\.)*"$/.test(typeString) ||
+    /^'(?:[^'\\]|\\.)*'$/.test(typeString)
+  ) {
     return tsInstance.TypeFlags.StringLiteral;
   }
   // number / bigint
