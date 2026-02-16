@@ -161,7 +161,11 @@ function hoverToTypeString(
         return '';
       }
     }
-  } else if (node && tsInstance.isIdentifier(node) && isFunctionLike(hover)) {
+  } else if (
+    // For node is null, always check function-like type string (used by retrieveActualTypeString)
+    (!node || tsInstance.isIdentifier(node)) &&
+    isFunctionLike(hover)
+  ) {
     if (hover.startsWith('function')) {
       hover = hover.slice(8);
     } else if (hover.startsWith('(local function)')) {
