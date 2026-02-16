@@ -641,13 +641,16 @@ export function isExpressionReadonly(
       isReadonly;
     return isReadonly;
   }
-  return determineIfPropertyIsReadonly(
+  const isReadonly = determineIfPropertyIsReadonly(
     node,
     sourceFile,
     tsInstance,
     client,
     getSourceFile
   );
+  (node as ts.Node as NodeWithReadonlyCache)[READONLY_CACHE_SYMBOL] =
+    isReadonly;
+  return isReadonly;
   // const typeString = nodeToTypeString(node, sourceFile, tsInstance, client);
   // if (typeStringToLiteralType(typeString, tsInstance) === 0) {
   //   return null;
