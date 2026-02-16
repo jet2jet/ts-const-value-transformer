@@ -1,5 +1,5 @@
 import type * as sourceMap from 'source-map';
-import * as ts from 'typescript';
+import type * as ts from 'typescript';
 import type TsLspClient from './TsLspClient.mjs';
 
 const HOVER_CACHE_SYMBOL = Symbol('hover-cache');
@@ -51,7 +51,8 @@ function addToPositionByText(
 function getNodeFromPosition(
   sourceFile: ts.SourceFile,
   line: number,
-  pos: number
+  pos: number,
+  tsInstance: typeof ts
 ) {
   const lines = sourceFile.getLineStarts();
   if (line >= lines.length) {
@@ -67,7 +68,7 @@ function getNodeFromPosition(
     if (node.pos <= nodePos && node.end >= nodePos) {
       foundNode = node;
     }
-    ts.visitEachChild(node, (n) => visit(n, node), undefined);
+    tsInstance.visitEachChild(node, (n) => visit(n, node), undefined);
     return node;
   }
 }
@@ -542,7 +543,7 @@ function determineIfPropertyIsReadonly(
     return false;
   }
   let def;
-  if (ts.isElementAccessExpression(node)) {
+  if (tsInstance.isElementAccessExpression(node)) {
     def = performActualPropertyForElementAccessExpression(
       node,
       sourceFile,
@@ -558,7 +559,12 @@ function determineIfPropertyIsReadonly(
     return false;
   }
   const defSource = getSourceFile(def.fileName);
-  const expr = getNodeFromPosition(defSource, def.lineEnd, def.posEnd);
+  const expr = getNodeFromPosition(
+    defSource,
+    def.lineEnd,
+    def.posEnd,
+    tsInstance
+  );
   if (!expr) {
     return false;
   }
@@ -566,29 +572,29 @@ function determineIfPropertyIsReadonly(
   // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
   while (parent) {
     // For interface/type literal
-    if (ts.isPropertySignature(parent)) {
+    if (tsInstance.isPropertySignature(parent)) {
       if (
         parent.modifiers?.some(
-          (mod) => mod.kind === ts.SyntaxKind.ReadonlyKeyword
+          (mod) => mod.kind === tsInstance.SyntaxKind.ReadonlyKeyword
         )
       ) {
         return true;
       }
       break;
-    } else if (ts.isAsExpression(parent)) {
+    } else if (tsInstance.isAsExpression(parent)) {
       // For definition, 'as const' should be readonly
       if (parent.type.getText(defSource) === 'const') {
         return true;
       }
-    } else if (ts.isEnumMember(parent)) {
+    } else if (tsInstance.isEnumMember(parent)) {
       // Enum member is readonly
       return true;
-    } else if (ts.isVariableDeclaration(parent)) {
+    } else if (tsInstance.isVariableDeclaration(parent)) {
       if (isParentNode(parent.name, expr, parent)) {
         const p = parent.parent;
         // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-        if (p && ts.isVariableDeclarationList(p)) {
-          return (p.flags & ts.NodeFlags.Const) !== 0;
+        if (p && tsInstance.isVariableDeclarationList(p)) {
+          return (p.flags & tsInstance.NodeFlags.Const) !== 0;
         }
       }
       // Reached to top level
@@ -614,13 +620,13 @@ export function isExpressionReadonly(
     return (node as NodeWithReadonlyCache)[READONLY_CACHE_SYMBOL];
   }
   if (
-    !ts.isIdentifier(node) &&
-    !ts.isPropertyAccessExpression(node) &&
-    !ts.isElementAccessExpression(node)
+    !tsInstance.isIdentifier(node) &&
+    !tsInstance.isPropertyAccessExpression(node) &&
+    !tsInstance.isElementAccessExpression(node)
   ) {
     return null;
   }
-  if (ts.isIdentifier(node)) {
+  if (tsInstance.isIdentifier(node)) {
     if (
       // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
       node.parent &&
