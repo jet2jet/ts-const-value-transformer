@@ -632,34 +632,32 @@ export function isExpressionReadonly(
   ) {
     return null;
   }
+  let isReadonly;
   if (tsInstance.isIdentifier(node)) {
     if (
       // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
       node.parent &&
       isUndefinedIdentifier(node, node.parent, sourceFile, tsInstance, client)
     ) {
-      return true;
-    }
-    let hover = getHoverFromNode(node, sourceFile, tsInstance, client);
-    if (hover.startsWith('(alias)')) {
-      hover = hover.slice(7).trim();
-      const lines = hover.split(/\r?\n/g);
-      if (lines.length >= 2 && /^import\b/.test(lines[1]!.trim())) {
-        return true;
+      isReadonly = true;
+    } else {
+      const hover = getHoverFromNode(node, sourceFile, tsInstance, client);
+      if (hover.startsWith('(alias)')) {
+        // Aliased symbols should be import-ed symbols, which are readonly
+        isReadonly = true;
+      } else {
+        isReadonly = /^const\b/.test(hover);
       }
     }
-    const isReadonly = /^const\b/.test(hover);
-    (node as ts.Node as NodeWithReadonlyCache)[READONLY_CACHE_SYMBOL] =
-      isReadonly;
-    return isReadonly;
+  } else {
+    isReadonly = determineIfPropertyIsReadonly(
+      node,
+      sourceFile,
+      tsInstance,
+      client,
+      getSourceFile
+    );
   }
-  const isReadonly = determineIfPropertyIsReadonly(
-    node,
-    sourceFile,
-    tsInstance,
-    client,
-    getSourceFile
-  );
   (node as ts.Node as NodeWithReadonlyCache)[READONLY_CACHE_SYMBOL] =
     isReadonly;
   return isReadonly;
