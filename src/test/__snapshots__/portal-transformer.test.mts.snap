@@ -5,6 +5,8 @@ exports[`createPortalTransformer basic process test: generated source 1`] = `
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
 import * as mod from './mod.mjs';
+import { Piyo, X } from './mod.mjs';
+import Foo from './mod.mjs';
 
 const constValue1 = 1;
 const constValue2 = 0.1;
@@ -86,7 +88,13 @@ console.log(
   "5.5" /* vmm */
 );
 
-console.log(1 /* mod.Hoge */, (n as number) === 1 /* mod.Hoge */ || (n as number) === 2 /* mod.Piyo */);
+console.log(
+  1 /* mod.Hoge */,
+  (n as number) === 1 /* mod.Hoge */ || (n as number) === 2 /* mod.Piyo */,
+  2 /* Piyo */,
+  3 /* Foo */,
+  123 /* X */
+);
 
 export const constObject = {
   a: 4,
@@ -202,7 +210,8 @@ const tempObjForElementAccess = {
   r: 'q',
 } as const;
 console.log(
-  (4 /* constObject[
+  // prettier-ignore
+  (4 /* (constObject)[
     tempObjForElementAccess[
       tempObjForElementAccess[
         tempObjForElementAccess[tempObjForElementAccess.r]
@@ -301,7 +310,7 @@ export {};
 
 exports[`createPortalTransformer basic process test: generated source map 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEjB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBiB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;EAS7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGftC,sBAAW;cACrBuC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR1C,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb2C,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS5C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRgB,sBAAS;;YAEFc,cAAM;;;cAGJ7C,mBAAW,EAAEC,qBAAW;aACzBiB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQEpB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBoB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;EAU7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGfzC,sBAAW;cACrB0C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR7C,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb8C,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS/C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRmB,sBAAS;;YAEFc,cAAM;;;cAGJhD,mBAAW,EAAEC,qBAAW;aACzBoB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -321,6 +330,9 @@ exports[`createPortalTransformer basic process test: generated source map 1`] = 
     "vmm",
     "mod.Hoge",
     "mod.Piyo",
+    "Piyo",
+    "Foo",
+    "X",
     "constObject.a",
     "constObject.b",
     "constObject.c",
@@ -342,7 +354,7 @@ exports[`createPortalTransformer basic process test: generated source map 1`] = 
     "BazEnum['D']",
     "valueUsingEnumValue",
     "constObject[name_a]",
-    "constObject[
+    "(constObject)[
     tempObjForElementAccess[
       tempObjForElementAccess[
         tempObjForElementAccess[tempObjForElementAccess.r]
@@ -374,6 +386,8 @@ exports[`createPortalTransformer basic process test: generated source map 1`] = 
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
 import * as mod from './mod.mjs';
+import { Piyo, X } from './mod.mjs';
+import Foo from './mod.mjs';
 
 const constValue1 = 1;
 const constValue2 = 0.1;
@@ -455,7 +469,13 @@ console.log(
   vmm
 );
 
-console.log(mod.Hoge, (n as number) === mod.Hoge || (n as number) === mod.Piyo);
+console.log(
+  mod.Hoge,
+  (n as number) === mod.Hoge || (n as number) === mod.Piyo,
+  Piyo,
+  Foo,
+  X
+);
 
 export const constObject = {
   a: 4,
@@ -571,7 +591,8 @@ const tempObjForElementAccess = {
   r: 'q',
 } as const;
 console.log(
-  constObject[
+  // prettier-ignore
+  (constObject)[
     tempObjForElementAccess[
       tempObjForElementAccess[
         tempObjForElementAccess[tempObjForElementAccess.r]
@@ -676,6 +697,8 @@ exports[`createPortalTransformer basic process transform with explicitly specify
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
 import * as mod from './mod.mjs';
+import { Piyo, X } from './mod.mjs';
+import Foo from './mod.mjs';
 
 const constValue1 = 1;
 const constValue2 = 0.1;
@@ -757,7 +780,13 @@ console.log(
   "5.5" /* vmm */
 );
 
-console.log(1 /* mod.Hoge */, (n as number) === 1 /* mod.Hoge */ || (n as number) === 2 /* mod.Piyo */);
+console.log(
+  1 /* mod.Hoge */,
+  (n as number) === 1 /* mod.Hoge */ || (n as number) === 2 /* mod.Piyo */,
+  2 /* Piyo */,
+  3 /* Foo */,
+  123 /* X */
+);
 
 export const constObject = {
   a: 4,
@@ -873,7 +902,8 @@ const tempObjForElementAccess = {
   r: 'q',
 } as const;
 console.log(
-  (4 /* constObject[
+  // prettier-ignore
+  (4 /* (constObject)[
     tempObjForElementAccess[
       tempObjForElementAccess[
         tempObjForElementAccess[tempObjForElementAccess.r]
@@ -972,7 +1002,7 @@ export {};
 
 exports[`createPortalTransformer basic process transform with explicitly specifying typescript package: generated source map 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEjB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBiB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;EAS7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGftC,sBAAW;cACrBuC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR1C,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb2C,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS5C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRgB,sBAAS;;YAEFc,cAAM;;;cAGJ7C,mBAAW,EAAEC,qBAAW;aACzBiB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQEpB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBoB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;EAU7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGfzC,sBAAW;cACrB0C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR7C,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb8C,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS/C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRmB,sBAAS;;YAEFc,cAAM;;;cAGJhD,mBAAW,EAAEC,qBAAW;aACzBoB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -992,6 +1022,9 @@ exports[`createPortalTransformer basic process transform with explicitly specify
     "vmm",
     "mod.Hoge",
     "mod.Piyo",
+    "Piyo",
+    "Foo",
+    "X",
     "constObject.a",
     "constObject.b",
     "constObject.c",
@@ -1013,7 +1046,7 @@ exports[`createPortalTransformer basic process transform with explicitly specify
     "BazEnum['D']",
     "valueUsingEnumValue",
     "constObject[name_a]",
-    "constObject[
+    "(constObject)[
     tempObjForElementAccess[
       tempObjForElementAccess[
         tempObjForElementAccess[tempObjForElementAccess.r]
@@ -1045,6 +1078,8 @@ exports[`createPortalTransformer basic process transform with explicitly specify
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
 import * as mod from './mod.mjs';
+import { Piyo, X } from './mod.mjs';
+import Foo from './mod.mjs';
 
 const constValue1 = 1;
 const constValue2 = 0.1;
@@ -1126,7 +1161,13 @@ console.log(
   vmm
 );
 
-console.log(mod.Hoge, (n as number) === mod.Hoge || (n as number) === mod.Piyo);
+console.log(
+  mod.Hoge,
+  (n as number) === mod.Hoge || (n as number) === mod.Piyo,
+  Piyo,
+  Foo,
+  X
+);
 
 export const constObject = {
   a: 4,
@@ -1242,7 +1283,8 @@ const tempObjForElementAccess = {
   r: 'q',
 } as const;
 console.log(
-  constObject[
+  // prettier-ignore
+  (constObject)[
     tempObjForElementAccess[
       tempObjForElementAccess[
         tempObjForElementAccess[tempObjForElementAccess.r]
@@ -1343,8 +1385,12 @@ export {};
 `;
 
 exports[`createPortalTransformer basic process transforming causes unchanged: generated source 1`] = `
-"export const Hoge = 1;
+"import { Baz } from './mod2.mjs';
+export const Hoge = 1;
 export const Piyo = 2;
+const Foo = 3;
+export default Foo;
+export { Baz as X };
 "
 `;
 
@@ -1355,6 +1401,8 @@ exports[`createPortalTransformer with options test with hoistConstTemplateLitera
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
 import * as mod from './mod.mjs';
+import { Piyo, X } from './mod.mjs';
+import Foo from './mod.mjs';
 
 const constValue1 = 1;
 const constValue2 = 0.1;
@@ -1436,7 +1484,13 @@ console.log(
   "5.5" /* vmm */
 );
 
-console.log(1 /* mod.Hoge */, (n as number) === 1 /* mod.Hoge */ || (n as number) === 2 /* mod.Piyo */);
+console.log(
+  1 /* mod.Hoge */,
+  (n as number) === 1 /* mod.Hoge */ || (n as number) === 2 /* mod.Piyo */,
+  2 /* Piyo */,
+  3 /* Foo */,
+  123 /* X */
+);
 
 export const constObject = {
   a: 4,
@@ -1552,7 +1606,8 @@ const tempObjForElementAccess = {
   r: 'q',
 } as const;
 console.log(
-  (4 /* constObject[
+  // prettier-ignore
+  (4 /* (constObject)[
     tempObjForElementAccess[
       tempObjForElementAccess[
         tempObjForElementAccess[tempObjForElementAccess.r]
@@ -1651,7 +1706,7 @@ export {};
 
 exports[`createPortalTransformer with options test with hoistConstTemplateLiteral=true: generated source map 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;qBAETC,kCAAmB;;;;EAItCC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzElB,wBAAS;;;;QAINE,mBAAW;;;;;;EAMjBiB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;EAS7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGftC,sBAAW;cACrBuC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR1C,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb2C,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS5C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRgB,sBAAS;;YAEFc,cAAM;;;cAGJ7C,mBAAW,EAAEC,qBAAW;aACzBiB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;qBAETC,kCAAmB;;;;EAItCC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQErB,wBAAS;;;;QAINE,mBAAW;;;;;;EAMjBoB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;EAU7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGfzC,sBAAW;cACrB0C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR7C,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb8C,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS/C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRmB,sBAAS;;YAEFc,cAAM;;;cAGJhD,mBAAW,EAAEC,qBAAW;aACzBoB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "\`ccc\${constValue4}\`",
@@ -1672,6 +1727,9 @@ exports[`createPortalTransformer with options test with hoistConstTemplateLitera
     "vmm",
     "mod.Hoge",
     "mod.Piyo",
+    "Piyo",
+    "Foo",
+    "X",
     "constObject.a",
     "constObject.b",
     "constObject.c",
@@ -1693,7 +1751,7 @@ exports[`createPortalTransformer with options test with hoistConstTemplateLitera
     "BazEnum['D']",
     "valueUsingEnumValue",
     "constObject[name_a]",
-    "constObject[
+    "(constObject)[
     tempObjForElementAccess[
       tempObjForElementAccess[
         tempObjForElementAccess[tempObjForElementAccess.r]
@@ -1725,6 +1783,8 @@ exports[`createPortalTransformer with options test with hoistConstTemplateLitera
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
 import * as mod from './mod.mjs';
+import { Piyo, X } from './mod.mjs';
+import Foo from './mod.mjs';
 
 const constValue1 = 1;
 const constValue2 = 0.1;
@@ -1806,7 +1866,13 @@ console.log(
   vmm
 );
 
-console.log(mod.Hoge, (n as number) === mod.Hoge || (n as number) === mod.Piyo);
+console.log(
+  mod.Hoge,
+  (n as number) === mod.Hoge || (n as number) === mod.Piyo,
+  Piyo,
+  Foo,
+  X
+);
 
 export const constObject = {
   a: 4,
@@ -1922,7 +1988,8 @@ const tempObjForElementAccess = {
   r: 'q',
 } as const;
 console.log(
-  constObject[
+  // prettier-ignore
+  (constObject)[
     tempObjForElementAccess[
       tempObjForElementAccess[
         tempObjForElementAccess[tempObjForElementAccess.r]
@@ -2027,6 +2094,8 @@ exports[`createPortalTransformer with options test with hoistEnumValues=false: g
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
 import * as mod from './mod.mjs';
+import { Piyo, X } from './mod.mjs';
+import Foo from './mod.mjs';
 
 const constValue1 = 1;
 const constValue2 = 0.1;
@@ -2108,7 +2177,13 @@ console.log(
   "5.5" /* vmm */
 );
 
-console.log(1 /* mod.Hoge */, (n as number) === 1 /* mod.Hoge */ || (n as number) === 2 /* mod.Piyo */);
+console.log(
+  1 /* mod.Hoge */,
+  (n as number) === 1 /* mod.Hoge */ || (n as number) === 2 /* mod.Piyo */,
+  2 /* Piyo */,
+  3 /* Foo */,
+  123 /* X */
+);
 
 export const constObject = {
   a: 4,
@@ -2224,7 +2299,8 @@ const tempObjForElementAccess = {
   r: 'q',
 } as const;
 console.log(
-  (4 /* constObject[
+  // prettier-ignore
+  (4 /* (constObject)[
     tempObjForElementAccess[
       tempObjForElementAccess[
         tempObjForElementAccess[tempObjForElementAccess.r]
@@ -2323,7 +2399,7 @@ export {};
 
 exports[`createPortalTransformer with options test with hoistEnumValues=false: generated source map 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;;EAUZG,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEhB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBgB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;;;;;;;;;;;;;;;;;;;;;YA2BZC,2BAAmB;;;;;;;;;EAS7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGf9B,sBAAW;cACrB+B,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRlC,qBAAW;;;;;;;;;;;;;;;;;;;YAmBbmC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBSpC,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXY,gBAAQ;;;YAGDuB,cAAM;;;cAGJrC,mBAAW,EAAEC,qBAAW;aACzBgB,yBAAa;;;8BAGIqB,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;;EAUZG,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQEnB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBmB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;;;;;;;;;;;;;;;;;;;;;YA2BZC,2BAAmB;;;;;;;;;;EAU7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGfjC,sBAAW;cACrBkC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRrC,qBAAW;;;;;;;;;;;;;;;;;;;YAmBbsC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBSvC,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXY,gBAAQ;;;YAGD0B,cAAM;;;cAGJxC,mBAAW,EAAEC,qBAAW;aACzBmB,yBAAa;;;8BAGIqB,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -2342,6 +2418,9 @@ exports[`createPortalTransformer with options test with hoistEnumValues=false: g
     "vmm",
     "mod.Hoge",
     "mod.Piyo",
+    "Piyo",
+    "Foo",
+    "X",
     "constObject.a",
     "constObject.b",
     "constObject.c",
@@ -2356,7 +2435,7 @@ exports[`createPortalTransformer with options test with hoistEnumValues=false: g
     "partialConstObject.q",
     "partialConstObject.r.t",
     "constObject[name_a]",
-    "constObject[
+    "(constObject)[
     tempObjForElementAccess[
       tempObjForElementAccess[
         tempObjForElementAccess[tempObjForElementAccess.r]
@@ -2388,6 +2467,8 @@ exports[`createPortalTransformer with options test with hoistEnumValues=false: g
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
 import * as mod from './mod.mjs';
+import { Piyo, X } from './mod.mjs';
+import Foo from './mod.mjs';
 
 const constValue1 = 1;
 const constValue2 = 0.1;
@@ -2469,7 +2550,13 @@ console.log(
   vmm
 );
 
-console.log(mod.Hoge, (n as number) === mod.Hoge || (n as number) === mod.Piyo);
+console.log(
+  mod.Hoge,
+  (n as number) === mod.Hoge || (n as number) === mod.Piyo,
+  Piyo,
+  Foo,
+  X
+);
 
 export const constObject = {
   a: 4,
@@ -2585,7 +2672,8 @@ const tempObjForElementAccess = {
   r: 'q',
 } as const;
 console.log(
-  constObject[
+  // prettier-ignore
+  (constObject)[
     tempObjForElementAccess[
       tempObjForElementAccess[
         tempObjForElementAccess[tempObjForElementAccess.r]
@@ -2690,6 +2778,8 @@ exports[`createPortalTransformer with options test with hoistExternalValues=fals
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
 import * as mod from './mod.mjs';
+import { Piyo, X } from './mod.mjs';
+import Foo from './mod.mjs';
 
 const constValue1 = 1;
 const constValue2 = 0.1;
@@ -2771,7 +2861,13 @@ console.log(
   vmm
 );
 
-console.log(mod.Hoge, (n as number) === mod.Hoge || (n as number) === mod.Piyo);
+console.log(
+  mod.Hoge,
+  (n as number) === mod.Hoge || (n as number) === mod.Piyo,
+  Piyo,
+  3 /* Foo */,
+  123 /* X */
+);
 
 export const constObject = {
   a: 4,
@@ -2887,7 +2983,8 @@ const tempObjForElementAccess = {
   r: 'q',
 } as const;
 console.log(
-  (4 /* constObject[
+  // prettier-ignore
+  (4 /* (constObject)[
     tempObjForElementAccess[
       tempObjForElementAccess[
         tempObjForElementAccess[tempObjForElementAccess.r]
@@ -2986,7 +3083,7 @@ export {};
 
 exports[`createPortalTransformer with options test with hoistExternalValues=false and additionalExternalDirectories: generated source map 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;;;;;;;;;;;;;;KAsBTT,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBW,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;EAS7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGfhC,sBAAW;cACrBiC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRpC,qBAAW;;;;;;;;;;;;;;;;;;;YAmBbqC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBStC,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;;KAGXuB,sBAAS;;YAEFc,cAAM;;;cAGJvC,mBAAW,EAAEC,qBAAW;aACzBW,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;;;;;;;;;;;EAmBZG,WAAG;EACHC,WAAC;;;;;;;;KAQEb,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBa,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;EAU7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGflC,sBAAW;cACrBmC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRtC,qBAAW;;;;;;;;;;;;;;;;;;;YAmBbuC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBSxC,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;;KAGXyB,sBAAS;;YAEFc,cAAM;;;cAGJzC,mBAAW,EAAEC,qBAAW;aACzBa,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -3000,6 +3097,8 @@ exports[`createPortalTransformer with options test with hoistExternalValues=fals
     "constValue10",
     "constValue11",
     "constValue12",
+    "Foo",
+    "X",
     "constObject.a",
     "constObject.b",
     "constObject.c",
@@ -3021,7 +3120,7 @@ exports[`createPortalTransformer with options test with hoistExternalValues=fals
     "BazEnum['D']",
     "valueUsingEnumValue",
     "constObject[name_a]",
-    "constObject[
+    "(constObject)[
     tempObjForElementAccess[
       tempObjForElementAccess[
         tempObjForElementAccess[tempObjForElementAccess.r]
@@ -3053,6 +3152,8 @@ exports[`createPortalTransformer with options test with hoistExternalValues=fals
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
 import * as mod from './mod.mjs';
+import { Piyo, X } from './mod.mjs';
+import Foo from './mod.mjs';
 
 const constValue1 = 1;
 const constValue2 = 0.1;
@@ -3134,7 +3235,13 @@ console.log(
   vmm
 );
 
-console.log(mod.Hoge, (n as number) === mod.Hoge || (n as number) === mod.Piyo);
+console.log(
+  mod.Hoge,
+  (n as number) === mod.Hoge || (n as number) === mod.Piyo,
+  Piyo,
+  Foo,
+  X
+);
 
 export const constObject = {
   a: 4,
@@ -3250,7 +3357,8 @@ const tempObjForElementAccess = {
   r: 'q',
 } as const;
 console.log(
-  constObject[
+  // prettier-ignore
+  (constObject)[
     tempObjForElementAccess[
       tempObjForElementAccess[
         tempObjForElementAccess[tempObjForElementAccess.r]
@@ -3355,6 +3463,8 @@ exports[`createPortalTransformer with options test with hoistExternalValues=fals
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
 import * as mod from './mod.mjs';
+import { Piyo, X } from './mod.mjs';
+import Foo from './mod.mjs';
 
 const constValue1 = 1;
 const constValue2 = 0.1;
@@ -3436,7 +3546,13 @@ console.log(
   vmm
 );
 
-console.log(1 /* mod.Hoge */, (n as number) === 1 /* mod.Hoge */ || (n as number) === 2 /* mod.Piyo */);
+console.log(
+  1 /* mod.Hoge */,
+  (n as number) === 1 /* mod.Hoge */ || (n as number) === 2 /* mod.Piyo */,
+  2 /* Piyo */,
+  3 /* Foo */,
+  123 /* X */
+);
 
 export const constObject = {
   a: 4,
@@ -3552,7 +3668,8 @@ const tempObjForElementAccess = {
   r: 'q',
 } as const;
 console.log(
-  (4 /* constObject[
+  // prettier-ignore
+  (4 /* (constObject)[
     tempObjForElementAccess[
       tempObjForElementAccess[
         tempObjForElementAccess[tempObjForElementAccess.r]
@@ -3651,7 +3768,7 @@ export {};
 
 exports[`createPortalTransformer with options test with hoistExternalValues=false: generated source map 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;;;;;;;YAeFG,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEb,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBa,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;EAS7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGflC,sBAAW;cACrBmC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRtC,qBAAW;;;;;;;;;;;;;;;;;;;YAmBbuC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBSxC,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXS,gBAAQ;KACRgB,sBAAS;;YAEFc,cAAM;;;cAGJzC,mBAAW,EAAEC,qBAAW;aACzBa,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;;;;;;;;EAgBZG,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQEhB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBgB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;EAU7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGfrC,sBAAW;cACrBsC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRzC,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb0C,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS3C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXS,gBAAQ;KACRmB,sBAAS;;YAEFc,cAAM;;;cAGJ5C,mBAAW,EAAEC,qBAAW;aACzBgB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -3667,6 +3784,9 @@ exports[`createPortalTransformer with options test with hoistExternalValues=fals
     "constValue12",
     "mod.Hoge",
     "mod.Piyo",
+    "Piyo",
+    "Foo",
+    "X",
     "constObject.a",
     "constObject.b",
     "constObject.c",
@@ -3688,7 +3808,7 @@ exports[`createPortalTransformer with options test with hoistExternalValues=fals
     "BazEnum['D']",
     "valueUsingEnumValue",
     "constObject[name_a]",
-    "constObject[
+    "(constObject)[
     tempObjForElementAccess[
       tempObjForElementAccess[
         tempObjForElementAccess[tempObjForElementAccess.r]
@@ -3720,6 +3840,8 @@ exports[`createPortalTransformer with options test with hoistExternalValues=fals
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
 import * as mod from './mod.mjs';
+import { Piyo, X } from './mod.mjs';
+import Foo from './mod.mjs';
 
 const constValue1 = 1;
 const constValue2 = 0.1;
@@ -3801,7 +3923,13 @@ console.log(
   vmm
 );
 
-console.log(mod.Hoge, (n as number) === mod.Hoge || (n as number) === mod.Piyo);
+console.log(
+  mod.Hoge,
+  (n as number) === mod.Hoge || (n as number) === mod.Piyo,
+  Piyo,
+  Foo,
+  X
+);
 
 export const constObject = {
   a: 4,
@@ -3917,7 +4045,8 @@ const tempObjForElementAccess = {
   r: 'q',
 } as const;
 console.log(
-  constObject[
+  // prettier-ignore
+  (constObject)[
     tempObjForElementAccess[
       tempObjForElementAccess[
         tempObjForElementAccess[tempObjForElementAccess.r]
@@ -4022,6 +4151,8 @@ exports[`createPortalTransformer with options test with hoistProperty=false: gen
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
 import * as mod from './mod.mjs';
+import { Piyo, X } from './mod.mjs';
+import Foo from './mod.mjs';
 
 const constValue1 = 1;
 const constValue2 = 0.1;
@@ -4103,7 +4234,13 @@ console.log(
   "5.5" /* vmm */
 );
 
-console.log(mod.Hoge, (n as number) === mod.Hoge || (n as number) === mod.Piyo);
+console.log(
+  mod.Hoge,
+  (n as number) === mod.Hoge || (n as number) === mod.Piyo,
+  2 /* Piyo */,
+  3 /* Foo */,
+  123 /* X */
+);
 
 export const constObject = {
   a: 4,
@@ -4219,7 +4356,8 @@ const tempObjForElementAccess = {
   r: 'q',
 } as const;
 console.log(
-  constObject[
+  // prettier-ignore
+  (constObject)[
     tempObjForElementAccess[
       tempObjForElementAccess[
         tempObjForElementAccess[tempObjForElementAccess.r]
@@ -4318,7 +4456,7 @@ export {};
 
 exports[`createPortalTransformer with options test with hoistProperty=false: generated source map 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;;EAExBC,6BAAiB;EACjBC,eAAG;;;;;;;;;;KAUAd,wBAAS;;;;QAINC,mBAAW;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;YA4EPc,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;wBAKpCM,gBAAM;;;;;;;;;;;;;;;;;;;+BAmBCA,gBAAM;gCACLA,gBAAM;;;wBAGdnB,sBAAW;cACrBoB,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRvB,qBAAW;;;;;;;;;;;;;;;;;;;YAmBbwB,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBSzB,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;;KAGXa,sBAAS;;YAEFW,cAAM;;;cAGJ1B,mBAAW,EAAEC,qBAAW;;cAExBa,iBAAS,YAAYC,sBAAS;;8BAEdY,gBAAI",
+  "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;;EAExBC,6BAAiB;EACjBC,eAAG;;;;;;EAMHC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQEjB,wBAAS;;;;QAINC,mBAAW;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;YA4EPiB,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;wBAKpCM,gBAAM;;;;;;;;;;;;;;;;;;;;+BAoBCA,gBAAM;gCACLA,gBAAM;;;wBAGdtB,sBAAW;cACrBuB,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR1B,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb2B,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS5B,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;;KAGXgB,sBAAS;;YAEFW,cAAM;;;cAGJ7B,mBAAW,EAAEC,qBAAW;;cAExBgB,iBAAS,YAAYC,sBAAS;;8BAEdY,gBAAI",
   "names": [
     "undefined",
     "constValue1",
@@ -4335,6 +4473,9 @@ exports[`createPortalTransformer with options test with hoistProperty=false: gen
     "ts.SyntaxKind.AnyKeyword",
     "versionMajorMinor",
     "vmm",
+    "Piyo",
+    "Foo",
+    "X",
     "BarEnum.A",
     "BarEnum.B",
     "BazEnum.C",
@@ -4358,6 +4499,8 @@ exports[`createPortalTransformer with options test with hoistProperty=false: gen
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
 import * as mod from './mod.mjs';
+import { Piyo, X } from './mod.mjs';
+import Foo from './mod.mjs';
 
 const constValue1 = 1;
 const constValue2 = 0.1;
@@ -4439,7 +4582,13 @@ console.log(
   vmm
 );
 
-console.log(mod.Hoge, (n as number) === mod.Hoge || (n as number) === mod.Piyo);
+console.log(
+  mod.Hoge,
+  (n as number) === mod.Hoge || (n as number) === mod.Piyo,
+  Piyo,
+  Foo,
+  X
+);
 
 export const constObject = {
   a: 4,
@@ -4555,7 +4704,8 @@ const tempObjForElementAccess = {
   r: 'q',
 } as const;
 console.log(
-  constObject[
+  // prettier-ignore
+  (constObject)[
     tempObjForElementAccess[
       tempObjForElementAccess[
         tempObjForElementAccess[tempObjForElementAccess.r]
@@ -4660,6 +4810,8 @@ exports[`createPortalTransformer with options test with hoistPureFunctionCall: g
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
 import * as mod from './mod.mjs';
+import { Piyo, X } from './mod.mjs';
+import Foo from './mod.mjs';
 
 const constValue1 = 1;
 const constValue2 = 0.1;
@@ -4741,7 +4893,13 @@ console.log(
   "5.5" /* vmm */
 );
 
-console.log(1 /* mod.Hoge */, (n as number) === 1 /* mod.Hoge */ || (n as number) === 2 /* mod.Piyo */);
+console.log(
+  1 /* mod.Hoge */,
+  (n as number) === 1 /* mod.Hoge */ || (n as number) === 2 /* mod.Piyo */,
+  2 /* Piyo */,
+  3 /* Foo */,
+  123 /* X */
+);
 
 export const constObject = {
   a: 4,
@@ -4857,7 +5015,8 @@ const tempObjForElementAccess = {
   r: 'q',
 } as const;
 console.log(
-  (4 /* constObject[
+  // prettier-ignore
+  (4 /* (constObject)[
     tempObjForElementAccess[
       tempObjForElementAccess[
         tempObjForElementAccess[tempObjForElementAccess.r]
@@ -4956,7 +5115,7 @@ export {};
 
 exports[`createPortalTransformer with options test with hoistPureFunctionCall: generated source map 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEjB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBiB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;EAS7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGftC,sBAAW;cACrBuC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR1C,qBAAW;;;;;;;;;0BASC2C,iBAAK,gBAAgBA,iBAAK;;;;;;;;;;YAUxCC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS7C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRgB,sBAAS;;YAEFe,cAAM;;;cAGJ9C,mBAAW,EAAEC,qBAAW;aACzBiB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEdgB,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQEpB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBoB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;EAU7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGfzC,sBAAW;cACrB0C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR7C,qBAAW;;;;;;;;;0BASC8C,iBAAK,gBAAgBA,iBAAK;;;;;;;;;;YAUxCC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBShD,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRmB,sBAAS;;YAEFe,cAAM;;;cAGJjD,mBAAW,EAAEC,qBAAW;aACzBoB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEdgB,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -4976,6 +5135,9 @@ exports[`createPortalTransformer with options test with hoistPureFunctionCall: g
     "vmm",
     "mod.Hoge",
     "mod.Piyo",
+    "Piyo",
+    "Foo",
+    "X",
     "constObject.a",
     "constObject.b",
     "constObject.c",
@@ -4997,7 +5159,7 @@ exports[`createPortalTransformer with options test with hoistPureFunctionCall: g
     "BazEnum['D']",
     "valueUsingEnumValue",
     "constObject[name_a]",
-    "constObject[
+    "(constObject)[
     tempObjForElementAccess[
       tempObjForElementAccess[
         tempObjForElementAccess[tempObjForElementAccess.r]
@@ -5030,6 +5192,8 @@ exports[`createPortalTransformer with options test with hoistPureFunctionCall: g
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
 import * as mod from './mod.mjs';
+import { Piyo, X } from './mod.mjs';
+import Foo from './mod.mjs';
 
 const constValue1 = 1;
 const constValue2 = 0.1;
@@ -5111,7 +5275,13 @@ console.log(
   vmm
 );
 
-console.log(mod.Hoge, (n as number) === mod.Hoge || (n as number) === mod.Piyo);
+console.log(
+  mod.Hoge,
+  (n as number) === mod.Hoge || (n as number) === mod.Piyo,
+  Piyo,
+  Foo,
+  X
+);
 
 export const constObject = {
   a: 4,
@@ -5227,7 +5397,8 @@ const tempObjForElementAccess = {
   r: 'q',
 } as const;
 console.log(
-  constObject[
+  // prettier-ignore
+  (constObject)[
     tempObjForElementAccess[
       tempObjForElementAccess[
         tempObjForElementAccess[tempObjForElementAccess.r]
@@ -5332,6 +5503,8 @@ exports[`createPortalTransformer with options test with hoistUndefinedSymbol=fal
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
 import * as mod from './mod.mjs';
+import { Piyo, X } from './mod.mjs';
+import Foo from './mod.mjs';
 
 const constValue1 = 1;
 const constValue2 = 0.1;
@@ -5413,7 +5586,13 @@ console.log(
   "5.5" /* vmm */
 );
 
-console.log(1 /* mod.Hoge */, (n as number) === 1 /* mod.Hoge */ || (n as number) === 2 /* mod.Piyo */);
+console.log(
+  1 /* mod.Hoge */,
+  (n as number) === 1 /* mod.Hoge */ || (n as number) === 2 /* mod.Piyo */,
+  2 /* Piyo */,
+  3 /* Foo */,
+  123 /* X */
+);
 
 export const constObject = {
   a: 4,
@@ -5529,7 +5708,8 @@ const tempObjForElementAccess = {
   r: 'q',
 } as const;
 console.log(
-  (4 /* constObject[
+  // prettier-ignore
+  (4 /* (constObject)[
     tempObjForElementAccess[
       tempObjForElementAccess[
         tempObjForElementAccess[tempObjForElementAccess.r]
@@ -5628,7 +5808,7 @@ export {};
 
 exports[`createPortalTransformer with options test with hoistUndefinedSymbol=false: generated source map 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;EAuBEA,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;;;;;QAWtEhB,mBAAW;;;;;;EAMjBiB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;EAS7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGftC,sBAAW;cACrBuC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR1C,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb2C,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS5C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRgB,sBAAS;;YAEFc,cAAM;;;cAGJ7C,mBAAW,EAAEC,qBAAW;aACzBiB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;EAyBEA,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;;;;;QAYKnB,mBAAW;;;;;;EAMjBoB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;EAU7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGfzC,sBAAW;cACrB0C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR7C,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb8C,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS/C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRmB,sBAAS;;YAEFc,cAAM;;;cAGJhD,mBAAW,EAAEC,qBAAW;aACzBoB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "constValue1",
     "constValue2",
@@ -5647,6 +5827,9 @@ exports[`createPortalTransformer with options test with hoistUndefinedSymbol=fal
     "vmm",
     "mod.Hoge",
     "mod.Piyo",
+    "Piyo",
+    "Foo",
+    "X",
     "constObject.a",
     "constObject.b",
     "constObject.c",
@@ -5668,7 +5851,7 @@ exports[`createPortalTransformer with options test with hoistUndefinedSymbol=fal
     "BazEnum['D']",
     "valueUsingEnumValue",
     "constObject[name_a]",
-    "constObject[
+    "(constObject)[
     tempObjForElementAccess[
       tempObjForElementAccess[
         tempObjForElementAccess[tempObjForElementAccess.r]
@@ -5700,6 +5883,8 @@ exports[`createPortalTransformer with options test with hoistUndefinedSymbol=fal
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
 import * as mod from './mod.mjs';
+import { Piyo, X } from './mod.mjs';
+import Foo from './mod.mjs';
 
 const constValue1 = 1;
 const constValue2 = 0.1;
@@ -5781,7 +5966,13 @@ console.log(
   vmm
 );
 
-console.log(mod.Hoge, (n as number) === mod.Hoge || (n as number) === mod.Piyo);
+console.log(
+  mod.Hoge,
+  (n as number) === mod.Hoge || (n as number) === mod.Piyo,
+  Piyo,
+  Foo,
+  X
+);
 
 export const constObject = {
   a: 4,
@@ -5897,7 +6088,8 @@ const tempObjForElementAccess = {
   r: 'q',
 } as const;
 console.log(
-  constObject[
+  // prettier-ignore
+  (constObject)[
     tempObjForElementAccess[
       tempObjForElementAccess[
         tempObjForElementAccess[tempObjForElementAccess.r]
@@ -6002,6 +6194,8 @@ exports[`createPortalTransformer with options test with unsafeHoistAsExpresion: 
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
 import * as mod from './mod.mjs';
+import { Piyo, X } from './mod.mjs';
+import Foo from './mod.mjs';
 
 const constValue1 = 1;
 const constValue2 = 0.1;
@@ -6083,7 +6277,13 @@ console.log(
   "5.5" /* vmm */
 );
 
-console.log(1 /* mod.Hoge */, (n as number) === 1 /* mod.Hoge */ || (n as number) === 2 /* mod.Piyo */);
+console.log(
+  1 /* mod.Hoge */,
+  (n as number) === 1 /* mod.Hoge */ || (n as number) === 2 /* mod.Piyo */,
+  2 /* Piyo */,
+  3 /* Foo */,
+  123 /* X */
+);
 
 export const constObject = {
   a: 4,
@@ -6199,7 +6399,8 @@ const tempObjForElementAccess = {
   r: 'q',
 } as const;
 console.log(
-  (4 /* constObject[
+  // prettier-ignore
+  (4 /* (constObject)[
     tempObjForElementAccess[
       tempObjForElementAccess[
         tempObjForElementAccess[tempObjForElementAccess.r]
@@ -6298,7 +6499,7 @@ export {};
 
 exports[`createPortalTransformer with options test with unsafeHoistAsExpresion: generated source map 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;GAIVC,gBAAO;EACRC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZX,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXO,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzElB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBkB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;YAKNC,mCAA2B;YAC3BC,sCAA8B;YAC9BC,sCAA8B;YAC9BC,yCAAiC;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAgC3CC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;EAS7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGf3C,sBAAW;cACrB4C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR/C,qBAAW;;;;;SAKhBgD,0BAAc;;;;;;;;;;;;;;YAcXC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBSlD,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXc,gBAAQ;KACRoB,sBAAS;;YAEFe,cAAM;;;cAGJnD,mBAAW,EAAEC,qBAAW;aACzBkB,yBAAa;cACZgB,iBAAS,YAAYC,sBAAS;aAC/BgB,oDAAwC;8BACvBC,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;GAIVC,gBAAO;EACRC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZX,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXO,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQErB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBqB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;YAKNC,mCAA2B;YAC3BC,sCAA8B;YAC9BC,sCAA8B;YAC9BC,yCAAiC;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAgC3CC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;EAU7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGf9C,sBAAW;cACrB+C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRlD,qBAAW;;;;;SAKhBmD,0BAAc;;;;;;;;;;;;;;YAcXC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBSrD,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXc,gBAAQ;KACRuB,sBAAS;;YAEFe,cAAM;;;cAGJtD,mBAAW,EAAEC,qBAAW;aACzBqB,yBAAa;cACZgB,iBAAS,YAAYC,sBAAS;aAC/BgB,oDAAwC;8BACvBC,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -6319,6 +6520,9 @@ exports[`createPortalTransformer with options test with unsafeHoistAsExpresion: 
     "vmm",
     "mod.Hoge",
     "mod.Piyo",
+    "Piyo",
+    "Foo",
+    "X",
     "constObject.a",
     "constObject.b",
     "constObject.c",
@@ -6344,7 +6548,7 @@ exports[`createPortalTransformer with options test with unsafeHoistAsExpresion: 
     "BazEnum['D']",
     "valueUsingEnumValue",
     "constObject[name_a]",
-    "constObject[
+    "(constObject)[
     tempObjForElementAccess[
       tempObjForElementAccess[
         tempObjForElementAccess[tempObjForElementAccess.r]
@@ -6378,6 +6582,8 @@ exports[`createPortalTransformer with options test with unsafeHoistAsExpresion: 
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
 import * as mod from './mod.mjs';
+import { Piyo, X } from './mod.mjs';
+import Foo from './mod.mjs';
 
 const constValue1 = 1;
 const constValue2 = 0.1;
@@ -6459,7 +6665,13 @@ console.log(
   vmm
 );
 
-console.log(mod.Hoge, (n as number) === mod.Hoge || (n as number) === mod.Piyo);
+console.log(
+  mod.Hoge,
+  (n as number) === mod.Hoge || (n as number) === mod.Piyo,
+  Piyo,
+  Foo,
+  X
+);
 
 export const constObject = {
   a: 4,
@@ -6575,7 +6787,8 @@ const tempObjForElementAccess = {
   r: 'q',
 } as const;
 console.log(
-  constObject[
+  // prettier-ignore
+  (constObject)[
     tempObjForElementAccess[
       tempObjForElementAccess[
         tempObjForElementAccess[tempObjForElementAccess.r]
@@ -6680,6 +6893,8 @@ exports[`createPortalTransformer with options test with unsafeHoistFunctionCall:
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
 import * as mod from './mod.mjs';
+import { Piyo, X } from './mod.mjs';
+import Foo from './mod.mjs';
 
 const constValue1 = 1;
 const constValue2 = 0.1;
@@ -6761,7 +6976,13 @@ console.log(
   "5.5" /* vmm */
 );
 
-console.log(1 /* mod.Hoge */, (n as number) === 1 /* mod.Hoge */ || (n as number) === 2 /* mod.Piyo */);
+console.log(
+  1 /* mod.Hoge */,
+  (n as number) === 1 /* mod.Hoge */ || (n as number) === 2 /* mod.Piyo */,
+  2 /* Piyo */,
+  3 /* Foo */,
+  123 /* X */
+);
 
 export const constObject = {
   a: 4,
@@ -6877,7 +7098,8 @@ const tempObjForElementAccess = {
   r: 'q',
 } as const;
 console.log(
-  (4 /* constObject[
+  // prettier-ignore
+  (4 /* (constObject)[
     tempObjForElementAccess[
       tempObjForElementAccess[
         tempObjForElementAccess[tempObjForElementAccess.r]
@@ -6976,7 +7198,7 @@ export {};
 
 exports[`createPortalTransformer with options test with unsafeHoistFunctionCall: generated source map 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEjB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBiB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;EAS7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGftC,sBAAW;cACrBuC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR1C,qBAAW;;;;;;;YAOb2C,iBAAK;;0BAESA,iBAAK,gBAAgBA,iBAAK;;;;;;;;;;YAUxCC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS7C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRgB,sBAAS;;YAEFe,cAAM;;;cAGJ9C,mBAAW,EAAEC,qBAAW;aACzBiB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEdgB,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQEpB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBoB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;EAU7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGfzC,sBAAW;cACrB0C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR7C,qBAAW;;;;;;;YAOb8C,iBAAK;;0BAESA,iBAAK,gBAAgBA,iBAAK;;;;;;;;;;YAUxCC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBShD,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRmB,sBAAS;;YAEFe,cAAM;;;cAGJjD,mBAAW,EAAEC,qBAAW;aACzBoB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEdgB,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -6996,6 +7218,9 @@ exports[`createPortalTransformer with options test with unsafeHoistFunctionCall:
     "vmm",
     "mod.Hoge",
     "mod.Piyo",
+    "Piyo",
+    "Foo",
+    "X",
     "constObject.a",
     "constObject.b",
     "constObject.c",
@@ -7017,7 +7242,7 @@ exports[`createPortalTransformer with options test with unsafeHoistFunctionCall:
     "BazEnum['D']",
     "valueUsingEnumValue",
     "constObject[name_a]",
-    "constObject[
+    "(constObject)[
     tempObjForElementAccess[
       tempObjForElementAccess[
         tempObjForElementAccess[tempObjForElementAccess.r]
@@ -7050,6 +7275,8 @@ exports[`createPortalTransformer with options test with unsafeHoistFunctionCall:
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
 import * as mod from './mod.mjs';
+import { Piyo, X } from './mod.mjs';
+import Foo from './mod.mjs';
 
 const constValue1 = 1;
 const constValue2 = 0.1;
@@ -7131,7 +7358,13 @@ console.log(
   vmm
 );
 
-console.log(mod.Hoge, (n as number) === mod.Hoge || (n as number) === mod.Piyo);
+console.log(
+  mod.Hoge,
+  (n as number) === mod.Hoge || (n as number) === mod.Piyo,
+  Piyo,
+  Foo,
+  X
+);
 
 export const constObject = {
   a: 4,
@@ -7247,7 +7480,8 @@ const tempObjForElementAccess = {
   r: 'q',
 } as const;
 console.log(
-  constObject[
+  // prettier-ignore
+  (constObject)[
     tempObjForElementAccess[
       tempObjForElementAccess[
         tempObjForElementAccess[tempObjForElementAccess.r]
@@ -7352,6 +7586,8 @@ exports[`createPortalTransformer with options test with unsafeHoistWritableValue
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
 import * as mod from './mod.mjs';
+import { Piyo, X } from './mod.mjs';
+import Foo from './mod.mjs';
 
 const constValue1 = 1;
 const constValue2 = 0.1;
@@ -7433,7 +7669,13 @@ console.log(
   "5.5" /* vmm */
 );
 
-console.log(1 /* mod.Hoge */, (n as number) === 1 /* mod.Hoge */ || (n as number) === 2 /* mod.Piyo */);
+console.log(
+  1 /* mod.Hoge */,
+  (n as number) === 1 /* mod.Hoge */ || (n as number) === 2 /* mod.Piyo */,
+  2 /* Piyo */,
+  3 /* Foo */,
+  123 /* X */
+);
 
 export const constObject = {
   a: 4,
@@ -7549,7 +7791,8 @@ const tempObjForElementAccess = {
   r: 'q',
 } as const;
 console.log(
-  (4 /* constObject[
+  // prettier-ignore
+  (4 /* (constObject)[
     tempObjForElementAccess[
       tempObjForElementAccess[
         tempObjForElementAccess[tempObjForElementAccess.r]
@@ -7648,7 +7891,7 @@ export {};
 
 exports[`createPortalTransformer with options test with unsafeHoistWritableValues=true: generated source map 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;EAEvCS,yBAAc;;;;;;;;;;;;;;IAcZX,mBAAW,KAAKW,yBAAc,KAAKP,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZI,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzElB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBkB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;YAiBNC,4BAAgB;;;;;;;;;;;;;;;;;;;;;;EAsB1BC,+BAAoB;EACpBC,8BAAoB;EACpBC,iCAAsB;EACtBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;EAS7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGf1C,sBAAW;cACrB2C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR9C,qBAAW;;;;;;;;;;;;oDAY2B+C,gBAAC;;;;;;;YAOzCC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBSjD,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXc,gBAAQ;KACRmB,sBAAS;;YAEFe,cAAM;;;cAGJlD,mBAAW,EAAEC,qBAAW;aACzBkB,yBAAa;cACZe,iBAAS,YAAYC,sBAAS;;8BAEdgB,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;EAEvCS,yBAAc;;;;;;;;;;;;;;IAcZX,mBAAW,KAAKW,yBAAc,KAAKP,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZI,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQErB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBqB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;YAiBNC,4BAAgB;;;;;;;;;;;;;;;;;;;;;;EAsB1BC,+BAAoB;EACpBC,8BAAoB;EACpBC,iCAAsB;EACtBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;EAU7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGf7C,sBAAW;cACrB8C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRjD,qBAAW;;;;;;;;;;;;oDAY2BkD,gBAAC;;;;;;;YAOzCC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBSpD,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXc,gBAAQ;KACRsB,sBAAS;;YAEFe,cAAM;;;cAGJrD,mBAAW,EAAEC,qBAAW;aACzBqB,yBAAa;cACZe,iBAAS,YAAYC,sBAAS;;8BAEdgB,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -7669,6 +7912,9 @@ exports[`createPortalTransformer with options test with unsafeHoistWritableValue
     "vmm",
     "mod.Hoge",
     "mod.Piyo",
+    "Piyo",
+    "Foo",
+    "X",
     "constObject.a",
     "constObject.b",
     "constObject.c",
@@ -7693,7 +7939,7 @@ exports[`createPortalTransformer with options test with unsafeHoistWritableValue
     "BazEnum['D']",
     "valueUsingEnumValue",
     "constObject[name_a]",
-    "constObject[
+    "(constObject)[
     tempObjForElementAccess[
       tempObjForElementAccess[
         tempObjForElementAccess[tempObjForElementAccess.r]
@@ -7726,6 +7972,8 @@ exports[`createPortalTransformer with options test with unsafeHoistWritableValue
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
 import * as mod from './mod.mjs';
+import { Piyo, X } from './mod.mjs';
+import Foo from './mod.mjs';
 
 const constValue1 = 1;
 const constValue2 = 0.1;
@@ -7807,7 +8055,13 @@ console.log(
   vmm
 );
 
-console.log(mod.Hoge, (n as number) === mod.Hoge || (n as number) === mod.Piyo);
+console.log(
+  mod.Hoge,
+  (n as number) === mod.Hoge || (n as number) === mod.Piyo,
+  Piyo,
+  Foo,
+  X
+);
 
 export const constObject = {
   a: 4,
@@ -7923,7 +8177,8 @@ const tempObjForElementAccess = {
   r: 'q',
 } as const;
 console.log(
-  constObject[
+  // prettier-ignore
+  (constObject)[
     tempObjForElementAccess[
       tempObjForElementAccess[
         tempObjForElementAccess[tempObjForElementAccess.r]
@@ -8028,6 +8283,8 @@ exports[`createPortalTransformer with options test with useUndefinedSymbolForUnd
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
 import * as mod from './mod.mjs';
+import { Piyo, X } from './mod.mjs';
+import Foo from './mod.mjs';
 
 const constValue1 = 1;
 const constValue2 = 0.1;
@@ -8109,7 +8366,13 @@ console.log(
   "5.5" /* vmm */
 );
 
-console.log(1 /* mod.Hoge */, (n as number) === 1 /* mod.Hoge */ || (n as number) === 2 /* mod.Piyo */);
+console.log(
+  1 /* mod.Hoge */,
+  (n as number) === 1 /* mod.Hoge */ || (n as number) === 2 /* mod.Piyo */,
+  2 /* Piyo */,
+  3 /* Foo */,
+  123 /* X */
+);
 
 export const constObject = {
   a: 4,
@@ -8225,7 +8488,8 @@ const tempObjForElementAccess = {
   r: 'q',
 } as const;
 console.log(
-  (4 /* constObject[
+  // prettier-ignore
+  (4 /* (constObject)[
     tempObjForElementAccess[
       tempObjForElementAccess[
         tempObjForElementAccess[tempObjForElementAccess.r]
@@ -8324,7 +8588,7 @@ export {};
 
 exports[`createPortalTransformer with options test with useUndefinedSymbolForUndefinedValue=true: generated source map 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,yBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,4BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEjB,yBAAS;;;;QAINC,mBAAW;;;;;;EAMjBiB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,6BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;EAS7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGftC,sBAAW;cACrBuC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR1C,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb2C,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS5C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRgB,sBAAS;;YAEFc,cAAM;;;cAGJ7C,mBAAW,EAAEC,qBAAW;aACzBiB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,yBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,4BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQEpB,yBAAS;;;;QAINC,mBAAW;;;;;;EAMjBoB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,6BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;EAU7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGfzC,sBAAW;cACrB0C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR7C,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb8C,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS/C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRmB,sBAAS;;YAEFc,cAAM;;;cAGJhD,mBAAW,EAAEC,qBAAW;aACzBoB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -8344,6 +8608,9 @@ exports[`createPortalTransformer with options test with useUndefinedSymbolForUnd
     "vmm",
     "mod.Hoge",
     "mod.Piyo",
+    "Piyo",
+    "Foo",
+    "X",
     "constObject.a",
     "constObject.b",
     "constObject.c",
@@ -8365,7 +8632,7 @@ exports[`createPortalTransformer with options test with useUndefinedSymbolForUnd
     "BazEnum['D']",
     "valueUsingEnumValue",
     "constObject[name_a]",
-    "constObject[
+    "(constObject)[
     tempObjForElementAccess[
       tempObjForElementAccess[
         tempObjForElementAccess[tempObjForElementAccess.r]
@@ -8397,6 +8664,8 @@ exports[`createPortalTransformer with options test with useUndefinedSymbolForUnd
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
 import * as mod from './mod.mjs';
+import { Piyo, X } from './mod.mjs';
+import Foo from './mod.mjs';
 
 const constValue1 = 1;
 const constValue2 = 0.1;
@@ -8478,7 +8747,13 @@ console.log(
   vmm
 );
 
-console.log(mod.Hoge, (n as number) === mod.Hoge || (n as number) === mod.Piyo);
+console.log(
+  mod.Hoge,
+  (n as number) === mod.Hoge || (n as number) === mod.Piyo,
+  Piyo,
+  Foo,
+  X
+);
 
 export const constObject = {
   a: 4,
@@ -8594,7 +8869,8 @@ const tempObjForElementAccess = {
   r: 'q',
 } as const;
 console.log(
-  constObject[
+  // prettier-ignore
+  (constObject)[
     tempObjForElementAccess[
       tempObjForElementAccess[
         tempObjForElementAccess[tempObjForElementAccess.r]

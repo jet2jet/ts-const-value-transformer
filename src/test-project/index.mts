@@ -2,6 +2,8 @@ import * as ts from 'typescript';
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
 import * as mod from './mod.mjs';
+import { Piyo, X } from './mod.mjs';
+import Foo from './mod.mjs';
 
 const constValue1 = 1;
 const constValue2 = 0.1;
@@ -83,7 +85,13 @@ console.log(
   vmm
 );
 
-console.log(mod.Hoge, (n as number) === mod.Hoge || (n as number) === mod.Piyo);
+console.log(
+  mod.Hoge,
+  (n as number) === mod.Hoge || (n as number) === mod.Piyo,
+  Piyo,
+  Foo,
+  X
+);
 
 export const constObject = {
   a: 4,
@@ -199,7 +207,8 @@ const tempObjForElementAccess = {
   r: 'q',
 } as const;
 console.log(
-  constObject[
+  // prettier-ignore
+  (constObject)[
     tempObjForElementAccess[
       tempObjForElementAccess[
         tempObjForElementAccess[tempObjForElementAccess.r]
