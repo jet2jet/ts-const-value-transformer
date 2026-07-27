@@ -2,7 +2,7 @@
 
 exports[`createTransformer and printSourceWithMap test with default options: source map object 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;qBAiBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;YAGOC,gBAAQ,oBAAoBA,gBAAQ,sBAAsBC,gBAAQ;;;;;;;KAOzEjB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBiB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;EAS7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGftC,sBAAW;cACrBuC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR1C,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb2C,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS5C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRgB,sBAAS;;YAEFc,cAAM;;;cAGJ7C,mBAAW,EAAEC,qBAAW;aACzBiB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQEpB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBoB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;;;EAY7BC;;;;;;GAMC;;;;;;;;;;;;;;;;;;;;+BAoB4BC,gBAAM;YACzBC,qCAA2B;;;wBAGfzC,sBAAW;cACrB0C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR7C,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb8C,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS/C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRmB,sBAAS;;YAEFc,cAAM;;;cAGJhD,mBAAW,EAAEC,qBAAW;aACzBoB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -22,6 +22,9 @@ exports[`createTransformer and printSourceWithMap test with default options: sou
     "vmm",
     "mod.Hoge",
     "mod.Piyo",
+    "Piyo",
+    "Foo",
+    "X",
     "constObject.a",
     "constObject.b",
     "constObject.c",
@@ -43,9 +46,9 @@ exports[`createTransformer and printSourceWithMap test with default options: sou
     "BazEnum['D']",
     "valueUsingEnumValue",
     "constObject[name_a]",
-    "constObject[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
+    "(constObject)[
+    (tempObjForElementAccess)[
+      (tempObjForElementAccess)[
         tempObjForElementAccess[tempObjForElementAccess.r]
       ]
     ]
@@ -75,6 +78,8 @@ exports[`createTransformer and printSourceWithMap test with default options: sou
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
 import * as mod from './mod.mjs';
+import { Piyo, X } from './mod.mjs';
+import Foo from './mod.mjs';
 
 const constValue1 = 1;
 const constValue2 = 0.1;
@@ -156,7 +161,13 @@ console.log(
   vmm
 );
 
-console.log(mod.Hoge, (n as number) === mod.Hoge || (n as number) === mod.Piyo);
+console.log(
+  mod.Hoge,
+  (n as number) === mod.Hoge || (n as number) === mod.Piyo,
+  Piyo,
+  Foo,
+  X
+);
 
 export const constObject = {
   a: 4,
@@ -264,19 +275,38 @@ console.log(valueTypedEnum);
 // Element access with constant name
 const name_a = 'a';
 console.log(constObject[name_a]);
+const uniqueSym = Symbol('aaa');
 // Nested element access
 const tempObjForElementAccess = {
-  o: 'a',
-  p: 'o',
-  q: 'p',
-  r: 'q',
+  // prettier-ignore
+  'o\\\\': 'a',
+  [uniqueSym]: 'o\\\\',
+  1: uniqueSym,
+  r: 1,
 } as const;
 console.log(
-  constObject[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
+  // prettier-ignore
+  (constObject)[
+    (tempObjForElementAccess)[
+      (tempObjForElementAccess)[
         tempObjForElementAccess[tempObjForElementAccess.r]
       ]
+    ]
+  ]
+);
+
+interface TempObjForElementAccess2 {
+  [\`true\`]: 1;
+  1: \`'foo'\`;
+  "'foo'": 'bar';
+  bar: true;
+}
+declare const tempObjForElementAccess2: TempObjForElementAccess2;
+console.log(
+  // prettier-ignore
+  (tempObjForElementAccess2)[
+    (tempObjForElementAccess2)[
+      tempObjForElementAccess2[tempObjForElementAccess2.true]
     ]
   ]
 );
@@ -377,6 +407,8 @@ exports[`createTransformer and printSourceWithMap test with default options: tra
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
 import * as mod from './mod.mjs';
+import { Piyo, X } from './mod.mjs';
+import Foo from './mod.mjs';
 
 const constValue1 = 1;
 const constValue2 = 0.1;
@@ -458,7 +490,13 @@ console.log(
   "5.5" /* vmm */
 );
 
-console.log(1 /* mod.Hoge */, (n as number) === 1 /* mod.Hoge */ || (n as number) === 2 /* mod.Piyo */);
+console.log(
+  1 /* mod.Hoge */,
+  (n as number) === 1 /* mod.Hoge */ || (n as number) === 2 /* mod.Piyo */,
+  2 /* Piyo */,
+  3 /* Foo */,
+  123 /* X */
+);
 
 export const constObject = {
   a: 4,
@@ -566,21 +604,40 @@ console.log(valueTypedEnum);
 // Element access with constant name
 const name_a = 'a';
 console.log(4 /* constObject[name_a] */);
+const uniqueSym = Symbol('aaa');
 // Nested element access
 const tempObjForElementAccess = {
-  o: 'a',
-  p: 'o',
-  q: 'p',
-  r: 'q',
+  // prettier-ignore
+  'o\\\\': 'a',
+  [uniqueSym]: 'o\\\\',
+  1: uniqueSym,
+  r: 1,
 } as const;
 console.log(
-  (4 /* constObject[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
+  // prettier-ignore
+  (4 /* (constObject)[
+    (tempObjForElementAccess)[
+      (tempObjForElementAccess)[
         tempObjForElementAccess[tempObjForElementAccess.r]
       ]
     ]
   ] */)
+);
+
+interface TempObjForElementAccess2 {
+  [\`true\`]: 1;
+  1: \`'foo'\`;
+  "'foo'": 'bar';
+  bar: true;
+}
+declare const tempObjForElementAccess2: TempObjForElementAccess2;
+console.log(
+  // prettier-ignore
+  (tempObjForElementAccess2)[
+    (tempObjForElementAccess2)[
+      tempObjForElementAccess2[tempObjForElementAccess2.true]
+    ]
+  ]
 );
 
 // Object initializer with computed name

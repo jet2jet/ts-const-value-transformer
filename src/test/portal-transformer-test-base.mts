@@ -5,6 +5,10 @@ import type {
   PortalTransformer,
 } from '@/createPortalTransformer.mjs';
 import type {
+  CreatePortalTransformerWithTs7Options,
+  PortalTransformerWithTs7,
+} from '@/createPortalTransformerWithTs7.mjs';
+import type {
   CreatePortalTransformerWithTsLsOptions,
   PortalTransformerWithTsLs,
 } from '@/createPortalTransformerWithTsLs.mjs';
@@ -15,18 +19,33 @@ const TEST_PROJECT_DIR = path.resolve(THIS_DIR, '../test-project');
 export function testPortalTransformer(
   createPortalTransformer: (
     options: CreatePortalTransformerOptions
-  ) => Promise<PortalTransformer>
+  ) => Promise<PortalTransformer>,
+  getPackageOptions: () => Partial<CreatePortalTransformerOptions>,
+  cbJustAfterFinish?: () => void
+): void;
+export function testPortalTransformer(
+  createPortalTransformer: (
+    options: CreatePortalTransformerWithTs7Options
+  ) => Promise<PortalTransformerWithTs7>,
+  getPackageOptions: () => Partial<CreatePortalTransformerWithTs7Options>,
+  cbJustAfterFinish?: () => void
 ): void;
 export function testPortalTransformer(
   createPortalTransformer: (
     options: CreatePortalTransformerWithTsLsOptions
-  ) => Promise<PortalTransformerWithTsLs>
+  ) => Promise<PortalTransformerWithTsLs>,
+  getPackageOptions: () => Partial<CreatePortalTransformerWithTsLsOptions>,
+  cbJustAfterFinish?: () => void
 ): void;
 
 export function testPortalTransformer(
   createPortalTransformer: (
     options: CreatePortalTransformerOptions
-  ) => Promise<PortalTransformer | PortalTransformerWithTsLs>
+  ) => Promise<
+    PortalTransformer | PortalTransformerWithTs7 | PortalTransformerWithTsLs
+  >,
+  getPackageOptions: () => Partial<CreatePortalTransformerOptions>,
+  cbJustAfterFinish?: () => void
 ): void {
   describe('basic process', () => {
     it('test', async () => {
@@ -57,13 +76,14 @@ export function testPortalTransformer(
           transformer.close();
         }
       }
+      cbJustAfterFinish?.();
     });
 
     it('transform with explicitly specifying typescript package', async () => {
       const transformer = await createPortalTransformer({
         project: 'tsconfig.json',
         cwd: path.resolve(TEST_PROJECT_DIR),
-        typescript: 'typescript',
+        ...getPackageOptions(),
       });
       try {
         const result = transformer.transform(
@@ -85,6 +105,7 @@ export function testPortalTransformer(
           transformer.close();
         }
       }
+      cbJustAfterFinish?.();
     });
 
     it('transforming causes unchanged', async () => {
@@ -112,6 +133,7 @@ export function testPortalTransformer(
           transformer.close();
         }
       }
+      cbJustAfterFinish?.();
     });
   });
   describe('with options', () => {
@@ -141,6 +163,7 @@ export function testPortalTransformer(
           transformer.close();
         }
       }
+      cbJustAfterFinish?.();
     });
     it('test with hoistEnumValues=false', async () => {
       const transformer = await createPortalTransformer({
@@ -168,6 +191,7 @@ export function testPortalTransformer(
           transformer.close();
         }
       }
+      cbJustAfterFinish?.();
     });
     it('test with hoistExternalValues=false', async () => {
       const transformer = await createPortalTransformer({
@@ -195,6 +219,7 @@ export function testPortalTransformer(
           transformer.close();
         }
       }
+      cbJustAfterFinish?.();
     });
     it('test with hoistExternalValues=false and additionalExternalDirectories', async () => {
       const transformer = await createPortalTransformer({
@@ -223,6 +248,7 @@ export function testPortalTransformer(
           transformer.close();
         }
       }
+      cbJustAfterFinish?.();
     });
     it('test with unsafeHoistFunctionCall', async () => {
       const transformer = await createPortalTransformer({
@@ -250,6 +276,7 @@ export function testPortalTransformer(
           transformer.close();
         }
       }
+      cbJustAfterFinish?.();
     });
     it('test with hoistPureFunctionCall', async () => {
       const transformer = await createPortalTransformer({
@@ -277,6 +304,7 @@ export function testPortalTransformer(
           transformer.close();
         }
       }
+      cbJustAfterFinish?.();
     });
     it('test with unsafeHoistAsExpresion', async () => {
       const transformer = await createPortalTransformer({
@@ -304,6 +332,7 @@ export function testPortalTransformer(
           transformer.close();
         }
       }
+      cbJustAfterFinish?.();
     });
     it('test with unsafeHoistWritableValues=true', async () => {
       const transformer = await createPortalTransformer({
@@ -331,6 +360,7 @@ export function testPortalTransformer(
           transformer.close();
         }
       }
+      cbJustAfterFinish?.();
     });
     it('test with hoistUndefinedSymbol=false', async () => {
       const transformer = await createPortalTransformer({
@@ -358,6 +388,7 @@ export function testPortalTransformer(
           transformer.close();
         }
       }
+      cbJustAfterFinish?.();
     });
     it('test with useUndefinedSymbolForUndefinedValue=true', async () => {
       const transformer = await createPortalTransformer({
@@ -385,6 +416,7 @@ export function testPortalTransformer(
           transformer.close();
         }
       }
+      cbJustAfterFinish?.();
     });
     it('test with hoistConstTemplateLiteral=true', async () => {
       const transformer = await createPortalTransformer({
@@ -412,6 +444,7 @@ export function testPortalTransformer(
           transformer.close();
         }
       }
+      cbJustAfterFinish?.();
     });
   });
 }

@@ -195,6 +195,8 @@ import {
   createTransformer,
   printSource,
   printSourceWithMap,
+  transformAndPrintSource,
+  transformAndPrintSourceWithMap,
   transformSource,
   version,
   type TransformOptions,
@@ -202,6 +204,16 @@ import {
   createPortalTransformerSync,
   type CreatePortalTransformerOptions,
   type PortalTransformer,
+  type PortalTransformerResult,
+  type PortalTransformerResultNonNull,
+  createPortalTransformerWithTsLs,
+  createPortalTransformerSyncWithTsLs,
+  type CreatePortalTransformerWithTsLsOptions,
+  type PortalTransformerWithTsLs,
+  createPortalTransformerWithTs7,
+  createPortalTransformerSyncWithTs7,
+  type CreatePortalTransformerWithTs7Options,
+  type PortalTransformerWithTs7,
 } from 'ts-const-value-transformer';
 ```
 
@@ -319,10 +331,12 @@ If `Promise` cannot be used for some reason, use `createPortalTransformerSync` i
 
 #### createPortalTransformerWithTsLs: (options?: CreatePortalTransformerWithTsLsOptions) => Promise<PortalTransformerWithTsLs>
 
-_Experimental_: Creates 'portal transformer' like [`createPortalTransformer`](#createportaltransformer-options-createportaltransformeroptions--promise), but uses TypeScript language server, including [`tsgo`](https://www.npmjs.com/package/@typescript/native-preview), as type information provider.
+_Experimental_: Creates 'portal transformer' like [`createPortalTransformer`](#createportaltransformer-options-createportaltransformeroptions--promise), but uses TypeScript language server, including TypeScript 7, as type information provider.
 
-- To use with `tsgo`, you must install it like `npm install -D @typescript/native-preview`.
+- To use with TypeScript 7, you must install it like `npm install -D @typescript/native@npm:typescript@7`.
 - Currently, `typescript` package is also necessary for parsing source code into AST.
+  - For this reason, you must install TypeScript 7 with aliased name.
+  - If you use `@typescript/native-preview` instead of TypeScript 7, you must specify `command` field in `CreatePortalTransformerWithTsLsOptions`.
 - Also, tsconfig file must be named with `tsconfig.json` (it is limitation of language server).
 
 `CreatePortalTransformerOptions` has a following signature. Also, `TransformOptions` fields, including `ignoreFiles`, can be used.
@@ -332,13 +346,50 @@ export interface CreatePortalTransformerWithTsLsOptions
   extends TransformOptions {
   /**
    * Command to run language server. The first element is used for command name and following elements are used for `argv`.
-   * Default is `['npx', 'tsgo', '--lsp', '--stdio']`.
+   * Default is `['npx', 'tsc', '--lsp', '--stdio']`.
    */
   command?: readonly string[];
   /** Path to tsconfig.json. If omitted, `tsconfig.json` will be used. **Currently `project` must be path to `tsconfig.json` file name; other than `tsconfig.json` is not supported.** */
   project?: string;
   /** Package path to `typescript` or `typescript` namespace object. This is still necessary to retrieve AST. */
   typescript?: string | typeof tsNamespace;
+  /** The current directory for file search. Also affects to `project` option. */
+  cwd?: string;
+  /** Specifies to cache base (original) source code for check if the input is changed. Default is false. */
+  cacheBaseSource?: boolean;
+  /** Specifies to cache result source code. Default is true (false for webpack loader). If the latter process has cache system, specifies false to reduce memory usage. */
+  cacheResult?: boolean;
+}
+```
+
+#### createPortalTransformerWithTs7: (options?: CreatePortalTransformerWithTs7Options) => Promise<PortalTransformerWithTs7>
+
+_Experimental_: Creates 'portal transformer' like [`createPortalTransformer`](#createportaltransformer-options-createportaltransformeroptions--promise), but uses TypeScript 7.
+
+- This uses unstable APIs in TypeScript 7, so please be careful.
+- **If you installed TypeScript 7 as `typescript` package, `createPortalTransformer` will automatically use `createPortalTransformerWithTs7`.** If you installed with liased name, you must specify package names in `CreatePortalTransformerWithTs7Options`.
+
+`CreatePortalTransformerWithTs7Options` has a following signature. Also, `TransformOptions` fields, including `ignoreFiles`, can be used.
+
+```ts
+export interface CreatePortalTransformerWithTs7Options
+  extends TransformOptions {
+  /** Path to tsconfig.json. If omitted, `tsconfig.json` will be used. */
+  project?: string;
+  /** Package path to `typescript/unstable/ast` or `typescript/unstable/ast` namespace object. */
+  ts7Ast?: string | typeof ts7Ast;
+  /**
+   * Package path to `typescript/unstable/ast/factory` or `typescript/unstable/ast/factory` namespace object.
+   * If omitted and {@linkcode ts7Ast} is a string value, `ts7Ast + '/factory'` is used.
+   */
+  ts7AstFactory?: string | typeof ts7AstFactory;
+  /**
+   * Package path to `typescript/unstable/ast/utils` or `typescript/unstable/ast/utils` namespace object.
+   * If omitted and {@linkcode ts7Ast} is a string value, `ts7Ast + '/utils'` is used.
+   */
+  ts7AstUtils?: string | typeof ts7AstUtils;
+  /** Package path to `typescript/unstable/sync` or `typescript/unstable/sync` namespace object. */
+  ts7Api?: string | typeof ts7Api;
   /** The current directory for file search. Also affects to `project` option. */
   cwd?: string;
   /** Specifies to cache base (original) source code for check if the input is changed. Default is false. */

@@ -5,6 +5,8 @@ exports[`use transformer in "plugins" run tspc: emit file 'index.mjs' 1`] = `
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
 import * as mod from './mod.mjs';
+import { Piyo, X } from './mod.mjs';
+import Foo from './mod.mjs';
 const constValue1 = 1;
 const constValue2 = 0.1;
 const constValue3 = -1;
@@ -50,7 +52,7 @@ function setWritableValue1() {
 }
 // External values
 console.log(133 /* ts.SyntaxKind.AnyKeyword */, ts.versionMajorMinor, "5.5" /* versionMajorMinor */, "5.5" /* vmm */);
-console.log(mod.Hoge, n === mod.Hoge || n === mod.Piyo);
+console.log(mod.Hoge, n === mod.Hoge || n === mod.Piyo, 2 /* Piyo */, 3 /* Foo */, 123 /* X */);
 export const constObject = {
     a: 4,
     b: 'bar',
@@ -117,14 +119,21 @@ console.log(valueTypedEnum);
 // Element access with constant name
 const name_a = 'a';
 console.log(constObject["a" /* name_a */]);
+const uniqueSym = Symbol('aaa');
 // Nested element access
 const tempObjForElementAccess = {
-    o: 'a',
-    p: 'o',
-    q: 'p',
-    r: 'q',
+    // prettier-ignore
+    'o\\\\': 'a',
+    [uniqueSym]: 'o\\\\',
+    1: uniqueSym,
+    r: 1,
 };
-console.log(constObject[tempObjForElementAccess[tempObjForElementAccess[tempObjForElementAccess[tempObjForElementAccess.r]]]]);
+console.log(
+// prettier-ignore
+(constObject)[(tempObjForElementAccess)[(tempObjForElementAccess)[tempObjForElementAccess[tempObjForElementAccess.r]]]]);
+console.log(
+// prettier-ignore
+(tempObjForElementAccess2)[(tempObjForElementAccess2)[tempObjForElementAccess2[tempObjForElementAccess2.true]]]);
 // Object initializer with computed name
 const objWithComputedName = { ["a" /* name_a */]: 432 };
 console.log(objWithComputedName["a" /* name_a */]);
@@ -197,9 +206,24 @@ export {};
 `;
 
 exports[`use transformer in "plugins" run tspc: emit file 'mod.mjs' 1`] = `
-"export const Hoge = 1;
+"import { Baz } from './mod2.mjs';
+export const Hoge = 1;
 export const Piyo = 2;
+const Foo = 3;
+export default Foo;
+export { Baz as X };
 //# sourceMappingURL=mod.mjs.map"
+`;
+
+exports[`use transformer in "plugins" run tspc: emit file 'mod2.mjs' 1`] = `
+"export { default as Baz } from './mod3.mjs';
+//# sourceMappingURL=mod2.mjs.map"
+`;
+
+exports[`use transformer in "plugins" run tspc: emit file 'mod3.mjs' 1`] = `
+"const TheValue = 123;
+export default TheValue;
+//# sourceMappingURL=mod3.mjs.map"
 `;
 
 exports[`use transformer in "plugins" run tspc: emitted files 1`] = `
@@ -210,5 +234,11 @@ exports[`use transformer in "plugins" run tspc: emitted files 1`] = `
   "mod.d.mts",
   "mod.mjs",
   "mod.mjs.map",
+  "mod2.d.mts",
+  "mod2.mjs",
+  "mod2.mjs.map",
+  "mod3.d.mts",
+  "mod3.mjs",
+  "mod3.mjs.map",
 ]
 `;

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`createPortalTransformer basic process test: generated source 1`] = `
+exports[`createPortalTransformer with TS7 basic process test: generated source 1`] = `
 "import * as ts from 'typescript';
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
@@ -326,7 +326,7 @@ export {};
 "
 `;
 
-exports[`createPortalTransformer basic process test: generated source map 1`] = `
+exports[`createPortalTransformer with TS7 basic process test: generated source map 1`] = `
 {
   "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQEpB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBoB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;;;EAY7BC;;;;;;GAMC;;;;;;;;;;;;;;;;;;;;+BAoB4BC,gBAAM;YACzBC,qCAA2B;;;wBAGfzC,sBAAW;cACrB0C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR7C,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb8C,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS/C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRmB,sBAAS;;YAEFc,cAAM;;;cAGJhD,mBAAW,EAAEC,qBAAW;aACzBoB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
@@ -728,7 +728,7 @@ export {};
 }
 `;
 
-exports[`createPortalTransformer basic process transform with explicitly specifying typescript package: generated source 1`] = `
+exports[`createPortalTransformer with TS7 basic process transform with explicitly specifying typescript package: generated source 1`] = `
 "import * as ts from 'typescript';
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
@@ -1054,7 +1054,7 @@ export {};
 "
 `;
 
-exports[`createPortalTransformer basic process transform with explicitly specifying typescript package: generated source map 1`] = `
+exports[`createPortalTransformer with TS7 basic process transform with explicitly specifying typescript package: generated source map 1`] = `
 {
   "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQEpB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBoB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;;;EAY7BC;;;;;;GAMC;;;;;;;;;;;;;;;;;;;;+BAoB4BC,gBAAM;YACzBC,qCAA2B;;;wBAGfzC,sBAAW;cACrB0C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR7C,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb8C,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS/C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRmB,sBAAS;;YAEFc,cAAM;;;cAGJhD,mBAAW,EAAEC,qBAAW;aACzBoB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
@@ -1456,7 +1456,7 @@ export {};
 }
 `;
 
-exports[`createPortalTransformer basic process transforming causes unchanged: generated source 1`] = `
+exports[`createPortalTransformer with TS7 basic process transforming causes unchanged: generated source 1`] = `
 "import { Baz } from './mod2.mjs';
 export const Hoge = 1;
 export const Piyo = 2;
@@ -1466,9 +1466,9 @@ export { Baz as X };
 "
 `;
 
-exports[`createPortalTransformer basic process transforming causes unchanged: generated source map 1`] = `undefined`;
+exports[`createPortalTransformer with TS7 basic process transforming causes unchanged: generated source map 1`] = `undefined`;
 
-exports[`createPortalTransformer with options test with hoistConstTemplateLiteral=true: generated source 1`] = `
+exports[`createPortalTransformer with TS7 with options test with hoistConstTemplateLiteral=true: generated source 1`] = `
 "import * as ts from 'typescript';
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
@@ -1794,7 +1794,7 @@ export {};
 "
 `;
 
-exports[`createPortalTransformer with options test with hoistConstTemplateLiteral=true: generated source map 1`] = `
+exports[`createPortalTransformer with TS7 with options test with hoistConstTemplateLiteral=true: generated source map 1`] = `
 {
   "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;qBAETC,kCAAmB;;;;EAItCC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQErB,wBAAS;;;;QAINE,mBAAW;;;;;;EAMjBoB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;;;EAY7BC;;;;;;GAMC;;;;;;;;;;;;;;;;;;;;+BAoB4BC,gBAAM;YACzBC,qCAA2B;;;wBAGfzC,sBAAW;cACrB0C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR7C,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb8C,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS/C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRmB,sBAAS;;YAEFc,cAAM;;;cAGJhD,mBAAW,EAAEC,qBAAW;aACzBoB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
@@ -2197,7 +2197,7 @@ export {};
 }
 `;
 
-exports[`createPortalTransformer with options test with hoistEnumValues=false: generated source 1`] = `
+exports[`createPortalTransformer with TS7 with options test with hoistEnumValues=false: generated source 1`] = `
 "import * as ts from 'typescript';
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
@@ -2523,7 +2523,7 @@ export {};
 "
 `;
 
-exports[`createPortalTransformer with options test with hoistEnumValues=false: generated source map 1`] = `
+exports[`createPortalTransformer with TS7 with options test with hoistEnumValues=false: generated source map 1`] = `
 {
   "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;;EAUZG,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQEnB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBmB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;;;;;;;;;;;;;;;;;;;;;YA2BZC,2BAAmB;;;;;;;;;;;;EAY7BC;;;;;;GAMC;;;;;;;;;;;;;;;;;;;;+BAoB4BC,gBAAM;YACzBC,qCAA2B;;;wBAGfjC,sBAAW;cACrBkC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRrC,qBAAW;;;;;;;;;;;;;;;;;;;YAmBbsC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBSvC,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXY,gBAAQ;;;YAGD0B,cAAM;;;cAGJxC,mBAAW,EAAEC,qBAAW;aACzBmB,yBAAa;;;8BAGIqB,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
@@ -2917,7 +2917,7 @@ export {};
 }
 `;
 
-exports[`createPortalTransformer with options test with hoistExternalValues=false and additionalExternalDirectories: generated source 1`] = `
+exports[`createPortalTransformer with TS7 with options test with hoistExternalValues=false and additionalExternalDirectories: generated source 1`] = `
 "import * as ts from 'typescript';
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
@@ -3243,7 +3243,7 @@ export {};
 "
 `;
 
-exports[`createPortalTransformer with options test with hoistExternalValues=false and additionalExternalDirectories: generated source map 1`] = `
+exports[`createPortalTransformer with TS7 with options test with hoistExternalValues=false and additionalExternalDirectories: generated source map 1`] = `
 {
   "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;;;;;;;;;;;EAmBZG,WAAG;EACHC,WAAC;;;;;;;;KAQEb,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBa,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;;;EAY7BC;;;;;;GAMC;;;;;;;;;;;;;;;;;;;;+BAoB4BC,gBAAM;YACzBC,qCAA2B;;;wBAGflC,sBAAW;cACrBmC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRtC,qBAAW;;;;;;;;;;;;;;;;;;;YAmBbuC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBSxC,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;;KAGXyB,sBAAS;;YAEFc,cAAM;;;cAGJzC,mBAAW,EAAEC,qBAAW;aACzBa,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
@@ -3638,7 +3638,7 @@ export {};
 }
 `;
 
-exports[`createPortalTransformer with options test with hoistExternalValues=false: generated source 1`] = `
+exports[`createPortalTransformer with TS7 with options test with hoistExternalValues=false: generated source 1`] = `
 "import * as ts from 'typescript';
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
@@ -3964,7 +3964,7 @@ export {};
 "
 `;
 
-exports[`createPortalTransformer with options test with hoistExternalValues=false: generated source map 1`] = `
+exports[`createPortalTransformer with TS7 with options test with hoistExternalValues=false: generated source map 1`] = `
 {
   "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;;;;;;;;EAgBZG,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQEhB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBgB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;;;EAY7BC;;;;;;GAMC;;;;;;;;;;;;;;;;;;;;+BAoB4BC,gBAAM;YACzBC,qCAA2B;;;wBAGfrC,sBAAW;cACrBsC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRzC,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb0C,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS3C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXS,gBAAQ;KACRmB,sBAAS;;YAEFc,cAAM;;;cAGJ5C,mBAAW,EAAEC,qBAAW;aACzBgB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
@@ -4362,7 +4362,7 @@ export {};
 }
 `;
 
-exports[`createPortalTransformer with options test with hoistProperty=false: generated source 1`] = `
+exports[`createPortalTransformer with TS7 with options test with hoistProperty=false: generated source 1`] = `
 "import * as ts from 'typescript';
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
@@ -4688,7 +4688,7 @@ export {};
 "
 `;
 
-exports[`createPortalTransformer with options test with hoistProperty=false: generated source map 1`] = `
+exports[`createPortalTransformer with TS7 with options test with hoistProperty=false: generated source map 1`] = `
 {
   "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;;EAExBC,6BAAiB;EACjBC,eAAG;;;;;;EAMHC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQEjB,wBAAS;;;;QAINC,mBAAW;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;YA4EPiB,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;wBAKpCM,gBAAM;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;+BAsCCA,gBAAM;gCACLA,gBAAM;;;wBAGdtB,sBAAW;cACrBuB,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR1B,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb2B,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS5B,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;;KAGXgB,sBAAS;;YAEFW,cAAM;;;cAGJ7B,mBAAW,EAAEC,qBAAW;;cAExBgB,iBAAS,YAAYC,sBAAS;;8BAEdY,gBAAI",
   "names": [
@@ -5057,7 +5057,7 @@ export {};
 }
 `;
 
-exports[`createPortalTransformer with options test with hoistPureFunctionCall: generated source 1`] = `
+exports[`createPortalTransformer with TS7 with options test with hoistPureFunctionCall: generated source 1`] = `
 "import * as ts from 'typescript';
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
@@ -5383,7 +5383,7 @@ export {};
 "
 `;
 
-exports[`createPortalTransformer with options test with hoistPureFunctionCall: generated source map 1`] = `
+exports[`createPortalTransformer with TS7 with options test with hoistPureFunctionCall: generated source map 1`] = `
 {
   "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQEpB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBoB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;;;EAY7BC;;;;;;GAMC;;;;;;;;;;;;;;;;;;;;+BAoB4BC,gBAAM;YACzBC,qCAA2B;;;wBAGfzC,sBAAW;cACrB0C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR7C,qBAAW;;;;;;;;;0BASC8C,iBAAK,gBAAgBA,iBAAK;;;;;;;;;;YAUxCC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBShD,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRmB,sBAAS;;YAEFe,cAAM;;;cAGJjD,mBAAW,EAAEC,qBAAW;aACzBoB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEdgB,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
@@ -5786,7 +5786,7 @@ export {};
 }
 `;
 
-exports[`createPortalTransformer with options test with hoistUndefinedSymbol=false: generated source 1`] = `
+exports[`createPortalTransformer with TS7 with options test with hoistUndefinedSymbol=false: generated source 1`] = `
 "import * as ts from 'typescript';
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
@@ -6112,7 +6112,7 @@ export {};
 "
 `;
 
-exports[`createPortalTransformer with options test with hoistUndefinedSymbol=false: generated source map 1`] = `
+exports[`createPortalTransformer with TS7 with options test with hoistUndefinedSymbol=false: generated source map 1`] = `
 {
   "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;EAyBEA,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;;;;;QAYKnB,mBAAW;;;;;;EAMjBoB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;;;EAY7BC;;;;;;GAMC;;;;;;;;;;;;;;;;;;;;+BAoB4BC,gBAAM;YACzBC,qCAA2B;;;wBAGfzC,sBAAW;cACrB0C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR7C,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb8C,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS/C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRmB,sBAAS;;YAEFc,cAAM;;;cAGJhD,mBAAW,EAAEC,qBAAW;aACzBoB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
@@ -6513,7 +6513,7 @@ export {};
 }
 `;
 
-exports[`createPortalTransformer with options test with unsafeHoistAsExpresion: generated source 1`] = `
+exports[`createPortalTransformer with TS7 with options test with unsafeHoistAsExpresion: generated source 1`] = `
 "import * as ts from 'typescript';
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
@@ -6839,7 +6839,7 @@ export {};
 "
 `;
 
-exports[`createPortalTransformer with options test with unsafeHoistAsExpresion: generated source map 1`] = `
+exports[`createPortalTransformer with TS7 with options test with unsafeHoistAsExpresion: generated source map 1`] = `
 {
   "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;GAIVC,gBAAO;EACRC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZX,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXO,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQErB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBqB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;YAKNC,mCAA2B;YAC3BC,sCAA8B;YAC9BC,sCAA8B;YAC9BC,yCAAiC;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAgC3CC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;;;EAY7BC;;;;;;GAMC;;;;;;;;;;;;;;;;;;;;+BAoB4BC,gBAAM;YACzBC,qCAA2B;;;wBAGf9C,sBAAW;cACrB+C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRlD,qBAAW;;;;;SAKhBmD,0BAAc;;;;;;;;;;;;;;YAcXC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBSrD,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXc,gBAAQ;KACRuB,sBAAS;;YAEFe,cAAM;;;cAGJtD,mBAAW,EAAEC,qBAAW;aACzBqB,yBAAa;cACZgB,iBAAS,YAAYC,sBAAS;aAC/BgB,oDAAwC;8BACvBC,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
@@ -7248,7 +7248,7 @@ export {};
 }
 `;
 
-exports[`createPortalTransformer with options test with unsafeHoistFunctionCall: generated source 1`] = `
+exports[`createPortalTransformer with TS7 with options test with unsafeHoistFunctionCall: generated source 1`] = `
 "import * as ts from 'typescript';
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
@@ -7574,7 +7574,7 @@ export {};
 "
 `;
 
-exports[`createPortalTransformer with options test with unsafeHoistFunctionCall: generated source map 1`] = `
+exports[`createPortalTransformer with TS7 with options test with unsafeHoistFunctionCall: generated source map 1`] = `
 {
   "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQEpB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBoB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;;;EAY7BC;;;;;;GAMC;;;;;;;;;;;;;;;;;;;;+BAoB4BC,gBAAM;YACzBC,qCAA2B;;;wBAGfzC,sBAAW;cACrB0C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR7C,qBAAW;;;;;;;YAOb8C,iBAAK;;0BAESA,iBAAK,gBAAgBA,iBAAK;;;;;;;;;;YAUxCC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBShD,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRmB,sBAAS;;YAEFe,cAAM;;;cAGJjD,mBAAW,EAAEC,qBAAW;aACzBoB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEdgB,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
@@ -7977,7 +7977,7 @@ export {};
 }
 `;
 
-exports[`createPortalTransformer with options test with unsafeHoistWritableValues=true: generated source 1`] = `
+exports[`createPortalTransformer with TS7 with options test with unsafeHoistWritableValues=true: generated source 1`] = `
 "import * as ts from 'typescript';
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
@@ -8303,7 +8303,7 @@ export {};
 "
 `;
 
-exports[`createPortalTransformer with options test with unsafeHoistWritableValues=true: generated source map 1`] = `
+exports[`createPortalTransformer with TS7 with options test with unsafeHoistWritableValues=true: generated source map 1`] = `
 {
   "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;EAEvCS,yBAAc;;;;;;;;;;;;;;IAcZX,mBAAW,KAAKW,yBAAc,KAAKP,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZI,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQErB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBqB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;YAiBNC,4BAAgB;;;;;;;;;;;;;;;;;;;;;;EAsB1BC,+BAAoB;EACpBC,8BAAoB;EACpBC,iCAAsB;EACtBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;;;EAY7BC;;;;;;GAMC;;;;;;;;;;;;EAYDC;;;;GAIC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGf9C,sBAAW;cACrB+C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRlD,qBAAW;;;;;;;;;;;;oDAY2BmD,gBAAC;;;;;;;YAOzCC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBSrD,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXc,gBAAQ;KACRsB,sBAAS;;YAEFgB,cAAM;;;cAGJtD,mBAAW,EAAEC,qBAAW;aACzBqB,yBAAa;cACZe,iBAAS,YAAYC,sBAAS;;8BAEdiB,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
@@ -8715,7 +8715,7 @@ export {};
 }
 `;
 
-exports[`createPortalTransformer with options test with useUndefinedSymbolForUndefinedValue=true: generated source 1`] = `
+exports[`createPortalTransformer with TS7 with options test with useUndefinedSymbolForUndefinedValue=true: generated source 1`] = `
 "import * as ts from 'typescript';
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
@@ -9041,7 +9041,7 @@ export {};
 "
 `;
 
-exports[`createPortalTransformer with options test with useUndefinedSymbolForUndefinedValue=true: generated source map 1`] = `
+exports[`createPortalTransformer with TS7 with options test with useUndefinedSymbolForUndefinedValue=true: generated source map 1`] = `
 {
   "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,yBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,4BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQEpB,yBAAS;;;;QAINC,mBAAW;;;;;;EAMjBoB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,6BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;;;EAY7BC;;;;;;GAMC;;;;;;;;;;;;;;;;;;;;+BAoB4BC,gBAAM;YACzBC,qCAA2B;;;wBAGfzC,sBAAW;cACrB0C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR7C,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb8C,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS/C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRmB,sBAAS;;YAEFc,cAAM;;;cAGJhD,mBAAW,EAAEC,qBAAW;aACzBoB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [

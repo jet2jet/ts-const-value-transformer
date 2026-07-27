@@ -1,14 +1,14 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`loader test with babel-loader: generated source 1`] = `
-"(()=>{"use strict";var l={d:(o,n)=>{for(var e in n)l.o(n,e)&&!l.o(o,e)&&Object.defineProperty(o,e,{enumerable:!0,get:n[e]})},o:(o,n)=>Object.prototype.hasOwnProperty.call(o,n),r:o=>{"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(o,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(o,"__esModule",{value:!0})}},e={};l.r(e),l.d(e,{constObject:()=>d,constValue1:()=>t,constValue2:()=>c,constValue3:()=>s,constValue4:()=>g,constValue5:()=>r,constValue6:()=>a,constValue7:()=>b,constValue8:()=>i,constValue9:()=>u});const t=1,c=.1,s=-1,g="foo",r=!0,a=10n,b=-10n,i="aaa\\nbbb",u=\`bbb\${n}\`;let h=!0;console.log(1,.1,-1,"foo",!0,10n,-10n,"aaa\\nbbb".toString(),u.toString(),n.toString(),!0,12345,"cccfoo",.1,h),h=!!Math.random(),h&&console.log(""),console.log(1,-1..toString(),.1.toString(),(-1).toString(),(!0).toString()),console.log(133,"5.5","5.5","5.5"),console.log(1,1===n||2===n);const d={a:4,b:"bar",c:!1,d:null,e:void 0,f:20n,g:-30n,h:{h1:1,h2:-3.14,h3:{}}};console.log(4,"bar",!1,null,void 0,20n,-30n,d.h,1,-3.14,d.h.h3,4..toString(),"bar".toString(),(!1).toString(),20n.toString(),-30n.toString(),1..toString(),(-3.14).toString(),4,null),console.log(o.a),console.log(o.a),console.log(o.h.h1),console.log(o.h.h1);const S={a:!1,b:2};console.log(S.a,S.b);const f={p:null,q:"q",r:{s:!1,t:2}};f.r.s=!0,console.log(f.p,"q",f.r.s,2),console.log(1,"hoge"),console.log(2,"piyo"),console.log(2,"piyo"),console.log(1);const y=Math.floor(2*Math.random())>=1?1:"hoge";function p(){return 12345}console.log(y),console.log(4),console.log(4),console.log(432),(()=>{const{a:o,b:n,e:l=-1}=d;console.log(4,"bar",-1)})(),((o=.1)=>{console.log(o)})(),console.log(12345),console.log(p(),p()),console.log([...Array(5)].map((o,n)=>null==o?n:0)),console.log(((...o)=>o.length)(...Array(5)));const[,V]=[1,2];console.log(2);const v={foo:!0,bar:!0};console.log(v.foo,v.baz);const m={x:-1,constValue4:g,y:1,z:"hoge"};console.log(1,[1,.1],[-1,"foo"],m);const M=[1,"hoge"].includes(2);d.b,console.log([1,.1],"bar",M,"bar"),console.log(20n),console.log(4..toFixed(2));var O=exports;for(var j in e)O[j]=e[j];e.__esModule&&Object.defineProperty(O,"__esModule",{value:!0})})();
+"(()=>{"use strict";var e={d:(o,n)=>{for(var l in n)e.o(n,l)&&!e.o(o,l)&&Object.defineProperty(o,l,{enumerable:!0,get:n[l]})},o:(o,n)=>Object.prototype.hasOwnProperty.call(o,n),r:o=>{"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(o,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(o,"__esModule",{value:!0})}},l={};e.r(l),e.d(l,{constObject:()=>S,constValue1:()=>t,constValue2:()=>c,constValue3:()=>s,constValue4:()=>r,constValue5:()=>g,constValue6:()=>a,constValue7:()=>b,constValue8:()=>i,constValue9:()=>u});const t=1,c=.1,s=-1,r="foo",g=!0,a=10n,b=-10n,i="aaa\\nbbb",u=\`bbb\${n}\`;let h=!0;console.log(1,.1,-1,"foo",!0,10n,-10n,"aaa\\nbbb".toString(),u.toString(),n.toString(),!0,12345,"cccfoo",.1,h),h=!!Math.random(),h&&console.log(""),console.log(1,-1..toString(),.1.toString(),(-1).toString(),(!0).toString()),console.log(133,"5.5","5.5","5.5"),console.log(1,1===n||2===n,2,3,123);const S={a:4,b:"bar",c:!1,d:null,e:void 0,f:20n,g:-30n,h:{h1:1,h2:-3.14,h3:{}}};console.log(4,"bar",!1,null,void 0,20n,-30n,S.h,1,-3.14,S.h.h3,4..toString(),"bar".toString(),(!1).toString(),20n.toString(),-30n.toString(),1..toString(),(-3.14).toString(),4,null),console.log(o.a),console.log(o.a),console.log(o.h.h1),console.log(o.h.h1);const d={a:!1,b:2};console.log(d.a,d.b);const p={p:null,q:"q",r:{s:!1,t:2}};p.r.s=!0,console.log(p.p,"q",p.r.s,2),console.log(1,"hoge"),console.log(2,"piyo"),console.log(2,"piyo"),console.log(1);const f=Math.floor(2*Math.random())>=1?1:"hoge";function m(){return 12345}console.log(f),console.log(4),Symbol("aaa"),console.log(4),console.log(tempObjForElementAccess2[tempObjForElementAccess2[tempObjForElementAccess2[tempObjForElementAccess2.true]]]),console.log(432),(()=>{const{a:o,b:n,e=-1}=S;console.log(4,"bar",-1)})(),((o=.1)=>{console.log(o)})(),console.log(12345),console.log(m(),m()),console.log([...Array(5)].map((o,n)=>null==o?n:0)),console.log(((...o)=>o.length)(...Array(5)));const[,y]=[1,2];console.log(2);const O={foo:!0,bar:!0};console.log(O.foo,O.baz);const j={x:-1,constValue4:r,y:1,z:"hoge"};console.log(1,[1,.1],[-1,"foo"],j);const V=[1,"hoge"].includes(2);S.b,console.log([1,.1],"bar",V,"bar"),console.log(20n),console.log(4..toFixed(2));var v=exports;for(var M in l)v[M]=l[M];l.__esModule&&Object.defineProperty(v,"__esModule",{value:!0})})();
 //# sourceMappingURL=index.js.map"
 `;
 
 exports[`loader test with babel-loader: generated source map 1`] = `
 {
   "file": "index.js",
-  "mappings": "mBACA,IAAIA,EAAsB,CCA1BA,EAAwB,CAACC,EAASC,KACjC,IAAI,IAAIC,KAAOD,EACXF,EAAoBI,EAAEF,EAAYC,KAASH,EAAoBI,EAAEH,EAASE,IAC5EE,OAAOC,eAAeL,EAASE,EAAK,CAAEI,YAAY,EAAMC,IAAKN,EAAWC,MCJ3EH,EAAwB,CAACS,EAAKC,IAAUL,OAAOM,UAAUC,eAAeC,KAAKJ,EAAKC,GCClFV,EAAyBC,IACH,oBAAXa,QAA0BA,OAAOC,aAC1CV,OAAOC,eAAeL,EAASa,OAAOC,YAAa,CAAEC,MAAO,WAE7DX,OAAOC,eAAeL,EAAS,aAAc,CAAEe,OAAO,M,qSCkBrD,EACA,IACA,EAGA,OAEA,EACA,KACA,IAEA,WAAWC,W,2BAKX,EAEY,MACZ,SAEc,G,qBAgBDC,G,+BAOZ,GAAWD,WACZ,GAAWA,aACX,GAAWA,aACX,GAAYA,Y,YASZ,IACA,MACA,MACA,O,YAGU,EAA4B,IAApBE,GAAkD,IAAtBA,G,wCAO3C,E,mBAIG,E,6BAMN,EACA,OACA,EACA,UACA,EACA,KACA,I,IAEA,GACA,K,OAGA,GAAaF,WACb,MAAaA,aACb,GAAaA,WACb,IAAaA,YACb,IAAaA,WACb,GAAgBA,aAChB,MAAgBA,WAEhB,EACA,M,+KAwCA,I,MAEA,G,YAOU,EAAW,Q,YAMX,EAAW,Q,YAEX,EAAc,Q,YAId,G,uCAG2B,EAAY,O,qDAKvC,G,YASV,G,YAWU,K,yBAGY,GAAWG,E,YACrB,EAAG,OAAI,E,SAGP,M,uLAmBF,G,6DA0BP,E,gBAEA,E,EACA,Q,YAEO,E,CAVI,EAAa,I,EACb,EAAa,OASXC,G,SAKJ,EAAqB,QAASC,SAAA,G,iBAF9B,EAAa,IACd,M,EAGiB,O,YAK5B,K,YAMO,GAGNC,QAAA,I",
+  "mappings": "mBACA,IAAIA,EAAsB,CCA1BA,EAAwB,CAACC,EAASC,KACjC,IAAI,IAAIC,KAAOD,EACXF,EAAoBI,EAAEF,EAAYC,KAASH,EAAoBI,EAAEH,EAASE,IAC5EE,OAAOC,eAAeL,EAASE,EAAK,CAAEI,YAAY,EAAMC,IAAKN,EAAWC,MCJ3EH,EAAwB,CAACS,EAAKC,IAAUL,OAAOM,UAAUC,eAAeC,KAAKJ,EAAKC,GCClFV,EAAyBC,IACH,oBAAXa,QAA0BA,OAAOC,aAC1CV,OAAOC,eAAeL,EAASa,OAAOC,YAAa,CAAEC,MAAO,WAE7DX,OAAOC,eAAeL,EAAS,aAAc,CAAEe,OAAO,M,qSCoBrD,EACA,IACA,EAGA,OAEA,EACA,KACA,IAEA,WAAWC,W,2BAKX,EAEY,MACZ,SAEc,G,qBAgBDC,G,+BAOZ,GAAWD,WACZ,GAAWA,aACX,GAAWA,aACX,GAAYA,Y,YASZ,IACA,MACA,MACA,O,YAIA,EACkB,I,GAA8B,IAAtBE,EAC1B,EACA,EACA,K,wCAQG,E,mBAIG,E,6BAMN,EACA,OACA,EACA,UACA,EACA,KACA,I,IAEA,GACA,K,OAGA,GAAaF,WACb,MAAaA,aACb,GAAaA,WACb,IAAaA,YACb,IAAaA,WACb,GAAgBA,aAChB,MAAgBA,WAEhB,EACA,M,+KAwCA,I,MAEA,G,YAOU,EAAW,Q,YAMX,EAAW,Q,YAEX,EAAc,Q,YAId,G,uCAG2B,EAAY,O,qDAKvC,G,0BAYV,G,qIA2BU,K,uBAGY,GAAWG,E,YACrB,EAAG,OAAI,E,SAGP,M,uLAmBF,G,6DA0BP,E,gBAEA,E,EACA,Q,YAEO,E,CAVI,EAAa,I,EACb,EAAa,OASXC,G,SAKJ,EAAqB,QAASC,SAAA,G,iBAF9B,EAAa,IACd,M,EAGiB,O,YAK5B,K,YAMO,GAGNC,QAAA,I",
   "names": [
     "__webpack_require__",
     "exports",
@@ -68,6 +68,8 @@ __webpack_require__.r = (exports) => {
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
 import * as mod from './mod.mjs';
+import { Piyo, X } from './mod.mjs';
+import Foo from './mod.mjs';
 
 const constValue1 = 1;
 const constValue2 = 0.1;
@@ -149,7 +151,13 @@ console.log(
   vmm
 );
 
-console.log(mod.Hoge, (n as number) === mod.Hoge || (n as number) === mod.Piyo);
+console.log(
+  mod.Hoge,
+  (n as number) === mod.Hoge || (n as number) === mod.Piyo,
+  Piyo,
+  Foo,
+  X
+);
 
 export const constObject = {
   a: 4,
@@ -257,19 +265,38 @@ console.log(valueTypedEnum);
 // Element access with constant name
 const name_a = 'a';
 console.log(constObject[name_a]);
+const uniqueSym = Symbol('aaa');
 // Nested element access
 const tempObjForElementAccess = {
-  o: 'a',
-  p: 'o',
-  q: 'p',
-  r: 'q',
+  // prettier-ignore
+  'o\\\\': 'a',
+  [uniqueSym]: 'o\\\\',
+  1: uniqueSym,
+  r: 1,
 } as const;
 console.log(
-  constObject[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
+  // prettier-ignore
+  (constObject)[
+    (tempObjForElementAccess)[
+      (tempObjForElementAccess)[
         tempObjForElementAccess[tempObjForElementAccess.r]
       ]
+    ]
+  ]
+);
+
+interface TempObjForElementAccess2 {
+  [\`true\`]: 1;
+  1: \`'foo'\`;
+  "'foo'": 'bar';
+  bar: true;
+}
+declare const tempObjForElementAccess2: TempObjForElementAccess2;
+console.log(
+  // prettier-ignore
+  (tempObjForElementAccess2)[
+    (tempObjForElementAccess2)[
+      tempObjForElementAccess2[tempObjForElementAccess2.true]
     ]
   ]
 );
@@ -366,14 +393,14 @@ export {};
 `;
 
 exports[`loader test with swc-loader: generated source 1`] = `
-"(()=>{"use strict";var e={d:(o,n)=>{for(var r in n)e.o(n,r)&&!e.o(o,r)&&Object.defineProperty(o,r,{enumerable:!0,get:n[r]})},o:(o,n)=>Object.prototype.hasOwnProperty.call(o,n),r:o=>{"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(o,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(o,"__esModule",{value:!0})}},r={};function t(o,n){(null==n||n>o.length)&&(n=o.length);for(var e=0,r=new Array(n);e<n;e++)r[e]=o[e];return r}function l(o){return function(o){if(Array.isArray(o))return t(o)}(o)||function(o){if("undefined"!=typeof Symbol&&null!=o[Symbol.iterator]||null!=o["@@iterator"])return Array.from(o)}(o)||a(o)||function(){throw new TypeError("Invalid attempt to spread non-iterable instance.\\\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}function a(o,n){if(o){if("string"==typeof o)return t(o,n);var e=Object.prototype.toString.call(o).slice(8,-1);return"Object"===e&&o.constructor&&(e=o.constructor.name),"Map"===e||"Set"===e?Array.from(e):"Arguments"===e||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(e)?t(o,n):void 0}}e.r(r),e.d(r,{constObject:()=>v,constValue1:()=>c,constValue2:()=>i,constValue3:()=>u,constValue4:()=>s,constValue5:()=>g,constValue6:()=>b,constValue7:()=>f,constValue8:()=>y,constValue9:()=>d});var c=1,i=.1,u=-1,s="foo",g=!0,b=10n,f=-10n,y="aaa\\nbbb",d="bbb".concat(n),h=("ccc".concat(s),!0);console.log(1,.1,-1,"foo",!0,10n,-10n,"aaa\\nbbb".toString(),d.toString(),n.toString(),!0,12345,"cccfoo",.1,h),(h=!!Math.random())&&console.log(""),console.log(1,-1..toString(),.1.toString(),(-1).toString(),(!0).toString()),console.log(133,"5.5","5.5","5.5"),console.log(1,1===n||2===n);var v={a:4,b:"bar",c:!1,d:null,e:void 0,f:20n,g:-30n,h:{h1:1,h2:-3.14,h3:{}}};console.log(4,"bar",!1,null,void 0,20n,-30n,v.h,1,-3.14,v.h.h3,4..toString(),"bar".toString(),(!1).toString(),20n.toString(),-30n.toString(),1..toString(),(-3.14).toString(),4,null),console.log(o.a),console.log(o.a),console.log(o.h.h1),console.log(o.h.h1);var p={a:!1,b:2};console.log(p.a,p.b);var S={p:null,q:"q",r:{s:!1,t:2}};S.r.s=!0,console.log(S.p,"q",S.r.s,2),console.log(1,"hoge"),console.log(2,"piyo"),console.log(2,"piyo"),console.log(1);var m,A,j=Math.floor(2*Math.random())>=1?1:"hoge";function O(){return 12345}console.log(j),console.log(4),console.log(4),"a"in(m={})?Object.defineProperty(m,"a",{value:432,enumerable:!0,configurable:!0,writable:!0}):m.a=432,console.log(432),v.a,v.b,v.e,console.log(4,"bar",-1),function(){var o=arguments.length>0&&void 0!==arguments[0]?arguments[0]:.1;console.log(o)}(),console.log(12345),console.log(O(),O()),console.log(l(Array(5)).map(function(o,n){return null==o?n:0})),console.log(function(){for(var o=arguments.length,n=new Array(o),e=0;e<o;e++)n[e]=arguments[e];return n.length}.apply(void 0,l(Array(5)))),(function(o){if(Array.isArray(o))return o}(A=[1,2])||function(o){var n=null==o?null:"undefined"!=typeof Symbol&&o[Symbol.iterator]||o["@@iterator"];if(null!=n){var e,r,t=[],l=!0,a=!1;try{for(n=n.call(o);!(l=(e=n.next()).done)&&(t.push(e.value),2!==t.length);l=!0);}catch(o){a=!0,r=o}finally{try{l||null==n.return||n.return()}finally{if(a)throw r}}return t}}(A)||a(A,2)||function(){throw new TypeError("Invalid attempt to destructure non-iterable instance.\\\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}())[1],console.log(2);var V={foo:!0,bar:!0};console.log(V.foo,V.baz);var w={x:-1,constValue4:s,y:1,z:"hoge"};console.log(1,[1,.1],[-1,"foo"],w);var M=[1,"hoge"].includes(2);v.b,console.log([1,.1],"bar",M,"bar"),console.log(20n),console.log(4..toFixed(2));var P=exports;for(var _ in r)P[_]=r[_];r.__esModule&&Object.defineProperty(P,"__esModule",{value:!0})})();
+"(()=>{"use strict";var e={d:(o,n)=>{for(var r in n)e.o(n,r)&&!e.o(o,r)&&Object.defineProperty(o,r,{enumerable:!0,get:n[r]})},o:(o,n)=>Object.prototype.hasOwnProperty.call(o,n),r:o=>{"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(o,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(o,"__esModule",{value:!0})}},r={};function t(o,n){(null==n||n>o.length)&&(n=o.length);for(var e=0,r=new Array(n);e<n;e++)r[e]=o[e];return r}function l(o,n,e){return n in o?Object.defineProperty(o,n,{value:e,enumerable:!0,configurable:!0,writable:!0}):o[n]=e,o}function a(o){return function(o){if(Array.isArray(o))return t(o)}(o)||function(o){if("undefined"!=typeof Symbol&&null!=o[Symbol.iterator]||null!=o["@@iterator"])return Array.from(o)}(o)||c(o)||function(){throw new TypeError("Invalid attempt to spread non-iterable instance.\\\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}function c(o,n){if(o){if("string"==typeof o)return t(o,n);var e=Object.prototype.toString.call(o).slice(8,-1);return"Object"===e&&o.constructor&&(e=o.constructor.name),"Map"===e||"Set"===e?Array.from(e):"Arguments"===e||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(e)?t(o,n):void 0}}e.r(r),e.d(r,{constObject:()=>p,constValue1:()=>i,constValue2:()=>s,constValue3:()=>u,constValue4:()=>g,constValue5:()=>b,constValue6:()=>f,constValue7:()=>y,constValue8:()=>d,constValue9:()=>h});var i=1,s=.1,u=-1,g="foo",b=!0,f=10n,y=-10n,d="aaa\\nbbb",h="bbb".concat(n),m=("ccc".concat(g),!0);console.log(1,.1,-1,"foo",!0,10n,-10n,"aaa\\nbbb".toString(),h.toString(),n.toString(),!0,12345,"cccfoo",.1,m),(m=!!Math.random())&&console.log(""),console.log(1,-1..toString(),.1.toString(),(-1).toString(),(!0).toString()),console.log(133,"5.5","5.5","5.5"),console.log(1,1===n||2===n,2,3,123);var p={a:4,b:"bar",c:!1,d:null,e:void 0,f:20n,g:-30n,h:{h1:1,h2:-3.14,h3:{}}};console.log(4,"bar",!1,null,void 0,20n,-30n,p.h,1,-3.14,p.h.h3,4..toString(),"bar".toString(),(!1).toString(),20n.toString(),-30n.toString(),1..toString(),(-3.14).toString(),4,null),console.log(o.a),console.log(o.a),console.log(o.h.h1),console.log(o.h.h1);var v={a:!1,b:2};console.log(v.a,v.b);var S={p:null,q:"q",r:{s:!1,t:2}};S.r.s=!0,console.log(S.p,"q",S.r.s,2),console.log(1,"hoge"),console.log(2,"piyo"),console.log(2,"piyo"),console.log(1);var A=Math.floor(2*Math.random())>=1?1:"hoge";console.log(A),console.log(4);var j,O,V=Symbol("aaa");function w(){return 12345}l(j={"o\\\\":"a"},V,"o\\\\"),l(j,1,V),l(j,"r",1),console.log(4),console.log(tempObjForElementAccess2[tempObjForElementAccess2[tempObjForElementAccess2[tempObjForElementAccess2.true]]]),l({},"a",432),console.log(432),p.a,p.b,p.e,console.log(4,"bar",-1),function(){var o=arguments.length>0&&void 0!==arguments[0]?arguments[0]:.1;console.log(o)}(),console.log(12345),console.log(w(),w()),console.log(a(Array(5)).map(function(o,n){return null==o?n:0})),console.log(function(){for(var o=arguments.length,n=new Array(o),e=0;e<o;e++)n[e]=arguments[e];return n.length}.apply(void 0,a(Array(5)))),(function(o){if(Array.isArray(o))return o}(O=[1,2])||function(o){var n=null==o?null:"undefined"!=typeof Symbol&&o[Symbol.iterator]||o["@@iterator"];if(null!=n){var e,r,t=[],l=!0,a=!1;try{for(n=n.call(o);!(l=(e=n.next()).done)&&(t.push(e.value),2!==t.length);l=!0);}catch(o){a=!0,r=o}finally{try{l||null==n.return||n.return()}finally{if(a)throw r}}return t}}(O)||c(O,2)||function(){throw new TypeError("Invalid attempt to destructure non-iterable instance.\\\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}())[1],console.log(2);var M={foo:!0,bar:!0};console.log(M.foo,M.baz);var E={x:-1,constValue4:g,y:1,z:"hoge"};console.log(1,[1,.1],[-1,"foo"],E);var P=[1,"hoge"].includes(2);p.b,console.log([1,.1],"bar",P,"bar"),console.log(20n),console.log(4..toFixed(2));var _=exports;for(var F in r)_[F]=r[F];r.__esModule&&Object.defineProperty(_,"__esModule",{value:!0})})();
 //# sourceMappingURL=index.js.map"
 `;
 
 exports[`loader test with swc-loader: generated source map 1`] = `
 {
   "file": "index.js",
-  "mappings": "mBACA,IAAIA,EAAsB,CCA1BA,EAAwB,CAACC,EAASC,KACjC,IAAI,IAAIC,KAAOD,EACXF,EAAoBI,EAAEF,EAAYC,KAASH,EAAoBI,EAAEH,EAASE,IAC5EE,OAAOC,eAAeL,EAASE,EAAK,CAAEI,YAAY,EAAMC,IAAKN,EAAWC,MCJ3EH,EAAwB,CAACS,EAAKC,IAAUL,OAAOM,UAAUC,eAAeC,KAAKJ,EAAKC,GCClFV,EAAyBC,IACH,oBAAXa,QAA0BA,OAAOC,aAC1CV,OAAOC,eAAeL,EAASa,OAAOC,YAAa,CAAEC,MAAO,WAE7DX,OAAOC,eAAeL,EAAS,aAAc,CAAEe,OAAO,M,2iCCkBrDC,EACAC,IACAC,EAGAC,OAEAC,EACAC,KACAC,IAEAC,WAAW,W,2BAKXC,EAEY,MACZC,SAEcR,G,uDAuBbD,GAAW,WACZC,GADY,aAEZC,GAAW,aACXM,GAAY,Y,YASZE,IACAC,MACAC,MACAC,O,YAGUC,EAA4BA,IAApB,GAAkDC,IAAtB,G,sCAO3CC,E,mBAIGhB,E,6BAMNiB,EACAC,OACAC,EACAC,UACAC,EACAC,KACAC,IAAa,IAEbC,GACAC,KAAAA,EAAAA,EAAAA,GAGAR,GAAa,WACbC,MAAa,aACbC,GAAa,WACbG,IAAa,YACbC,IAAa,WACbC,GAAgB,aAChBC,MAAgB,WAEhBC,EACAC,M,2KAwCAC,IAAoB,MAEpBC,G,YAOUC,EAAWC,Q,YAMXC,EAAWC,Q,YAEXC,EAAcC,Q,YAIdC,G,yCAG2BN,EAAYC,O,qDAKvCM,G,YASVC,GAU6BC,M,8BAAAA,I,OAAM,I,gDAAA,I,YACzBC,KAGuB,Y,YACrBC,EAAGC,OAAIC,G,wEAGP1C,G,uzBAmBF2C,G,yDA0BP1C,E,gBAEAY,E,EACAiB,Q,YAEOc,E,CAVI7C,EAAaC,I,EACbC,EAAaC,OASX,G,OAKJ2B,EAAqBC,QAAS,Y,iBAF9B/B,EAAaC,IACdiB,M,EAGiB4B,O,YAK5BC,K,YAMOC,GAGN,Y",
+  "mappings": "mBACA,IAAIA,EAAsB,CCA1BA,EAAwB,CAACC,EAASC,KACjC,IAAI,IAAIC,KAAOD,EACXF,EAAoBI,EAAEF,EAAYC,KAASH,EAAoBI,EAAEH,EAASE,IAC5EE,OAAOC,eAAeL,EAASE,EAAK,CAAEI,YAAY,EAAMC,IAAKN,EAAWC,MCJ3EH,EAAwB,CAACS,EAAKC,IAAUL,OAAOM,UAAUC,eAAeC,KAAKJ,EAAKC,GCClFV,EAAyBC,IACH,oBAAXa,QAA0BA,OAAOC,aAC1CV,OAAOC,eAAeL,EAASa,OAAOC,YAAa,CAAEC,MAAO,WAE7DX,OAAOC,eAAeL,EAAS,aAAc,CAAEe,OAAO,M,mqCCoBrDC,EACAC,IACAC,EAGAC,OAEAC,EACAC,KACAC,IAEAC,WAAW,W,2BAKXC,EAEY,MACZC,SAEcR,G,uDAuBbD,GAAW,WACZC,GADY,aAEZC,GAAW,aACXM,GAAY,Y,YASZE,IACAC,MACAC,MACAC,O,YAIAC,EACkBA,IADV,GACwCC,IAAtB,EAC1BC,EACAC,EACAC,K,sCAQGC,E,mBAIGnB,E,6BAMNoB,EACAC,OACAC,EACAC,UACAC,EACAC,KACAC,IAAa,IAEbC,GACAC,KAAAA,EAAAA,EAAAA,GAGAR,GAAa,WACbC,MAAa,aACbC,GAAa,WACbG,IAAa,YACbC,IAAa,WACbC,GAAgB,aAChBC,MAAgB,WAEhBC,EACAC,M,2KAwCAC,IAAoB,MAEpBC,G,YAOUC,EAAWC,Q,YAMXC,EAAWC,Q,YAEXC,EAAcC,Q,YAIdC,G,qCAG2BN,EAAYC,O,2BAKvCM,G,2GAYVC,G,8HA0B6BC,IAAM,K,YACzBC,KAGuB,Y,YACrBC,EAAGC,OAAIC,G,wEAGP7C,G,uzBAmBF8C,G,yDA0BP7C,E,gBAEAY,E,EACAoB,Q,YAEOc,E,CAVIhD,EAAaC,I,EACbC,EAAaC,OASX,G,OAKJ8B,EAAqBC,QAAS,Y,iBAF9BlC,EAAaC,IACdoB,M,EAGiB4B,O,YAK5BC,K,YAMOC,GAGN,Y",
   "names": [
     "__webpack_require__",
     "exports",
@@ -408,6 +435,9 @@ exports[`loader test with swc-loader: generated source map 1`] = `
     "vmm",
     "mod.Hoge",
     "mod.Piyo",
+    "Piyo",
+    "Foo",
+    "X",
     "undefined",
     "constObject.a",
     "constObject.b",
@@ -430,9 +460,9 @@ exports[`loader test with swc-loader: generated source map 1`] = `
     "BazEnum['D']",
     "valueUsingEnumValue",
     "constObject[name_a]",
-    "constObject[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
+    "(constObject)[
+    (tempObjForElementAccess)[
+      (tempObjForElementAccess)[
         tempObjForElementAccess[tempObjForElementAccess.r]
       ]
     ]
@@ -487,6 +517,8 @@ __webpack_require__.r = (exports) => {
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
 import * as mod from './mod.mjs';
+import { Piyo, X } from './mod.mjs';
+import Foo from './mod.mjs';
 
 const constValue1 = 1;
 const constValue2 = 0.1;
@@ -568,7 +600,13 @@ console.log(
   vmm
 );
 
-console.log(mod.Hoge, (n as number) === mod.Hoge || (n as number) === mod.Piyo);
+console.log(
+  mod.Hoge,
+  (n as number) === mod.Hoge || (n as number) === mod.Piyo,
+  Piyo,
+  Foo,
+  X
+);
 
 export const constObject = {
   a: 4,
@@ -676,19 +714,38 @@ console.log(valueTypedEnum);
 // Element access with constant name
 const name_a = 'a';
 console.log(constObject[name_a]);
+const uniqueSym = Symbol('aaa');
 // Nested element access
 const tempObjForElementAccess = {
-  o: 'a',
-  p: 'o',
-  q: 'p',
-  r: 'q',
+  // prettier-ignore
+  'o\\\\': 'a',
+  [uniqueSym]: 'o\\\\',
+  1: uniqueSym,
+  r: 1,
 } as const;
 console.log(
-  constObject[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
+  // prettier-ignore
+  (constObject)[
+    (tempObjForElementAccess)[
+      (tempObjForElementAccess)[
         tempObjForElementAccess[tempObjForElementAccess.r]
       ]
+    ]
+  ]
+);
+
+interface TempObjForElementAccess2 {
+  [\`true\`]: 1;
+  1: \`'foo'\`;
+  "'foo'": 'bar';
+  bar: true;
+}
+declare const tempObjForElementAccess2: TempObjForElementAccess2;
+console.log(
+  // prettier-ignore
+  (tempObjForElementAccess2)[
+    (tempObjForElementAccess2)[
+      tempObjForElementAccess2[tempObjForElementAccess2.true]
     ]
   ]
 );
@@ -785,14 +842,14 @@ export {};
 `;
 
 exports[`loader test: generated source 1`] = `
-"(()=>{"use strict";var l={d:(o,n)=>{for(var e in n)l.o(n,e)&&!l.o(o,e)&&Object.defineProperty(o,e,{enumerable:!0,get:n[e]})},o:(o,n)=>Object.prototype.hasOwnProperty.call(o,n),r:o=>{"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(o,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(o,"__esModule",{value:!0})}},e={};l.r(e),l.d(e,{constObject:()=>d,constValue1:()=>t,constValue2:()=>c,constValue3:()=>s,constValue4:()=>r,constValue5:()=>g,constValue6:()=>a,constValue7:()=>i,constValue8:()=>b,constValue9:()=>u}),require(void 0);const t=1,c=.1,s=-1,r="foo",g=!0,a=10n,i=-10n,b="aaa\\nbbb",u=\`bbb\${n}\`;let h=!0;console.log(1,.1,-1,"foo",!0,10n,-10n,"aaa\\nbbb".toString(),u.toString(),n.toString(),!0,12345,"cccfoo",.1,h),h=!!Math.random(),h&&console.log(""),console.log(1,-1..toString(),.1.toString(),(-1).toString(),(!0).toString()),console.log(133,"5.5","5.5","5.5"),console.log(1,1===n||2===n);const d={a:4,b:"bar",c:!1,d:null,e:void 0,f:20n,g:-30n,h:{h1:1,h2:-3.14,h3:{}}};console.log(4,"bar",!1,null,void 0,20n,-30n,d.h,1,-3.14,d.h.h3,4..toString(),"bar".toString(),(!1).toString(),20n.toString(),-30n.toString(),1..toString(),(-3.14).toString(),4,null),console.log(o.a),console.log(o.a),console.log(o.h.h1),console.log(o.h.h1);const f={a:!1,b:2};console.log(f.a,f.b);const S={p:1,q:"q",r:{s:!1,t:2}};var p,y;S.p=null,S.r.s=!0,console.log(S.p,"q",S.r.s,2),function(o){o[o.A=1]="A",o.B="hoge"}(p||(p={})),console.log(1,"hoge"),function(o){o[o.C=2]="C",o.D="piyo"}(y||(y={})),console.log(2,"piyo"),console.log(2,"piyo"),console.log(1);const v=Math.floor(2*Math.random())>=1?1:"hoge";function V(){return 12345}console.log(v),console.log(4),console.log(4),console.log(432),(()=>{const{a:o,b:n,e:l=-1}=d;console.log(4,"bar",-1)})(),((o=.1)=>{console.log(o)})(),console.log(12345),console.log(V(),V()),console.log([...Array(5)].map((o,n)=>null==o?n:0)),console.log(((...o)=>o.length)(...Array(5)));const[,m]=[1,2];console.log(2);const M={foo:!0,bar:!0};console.log(M.foo,M.baz);const O={x:-1,constValue4:r,y:1,z:"hoge"};console.log(1,[1,.1],[-1,"foo"],O);const j=[1,"hoge"].includes(2);d.b,console.log([1,.1],"bar",j,"bar"),console.log(20n),console.log(4..toFixed(2));var _=exports;for(var P in e)_[P]=e[P];e.__esModule&&Object.defineProperty(_,"__esModule",{value:!0})})();
+"(()=>{"use strict";var e={d:(o,n)=>{for(var l in n)e.o(n,l)&&!e.o(o,l)&&Object.defineProperty(o,l,{enumerable:!0,get:n[l]})},o:(o,n)=>Object.prototype.hasOwnProperty.call(o,n),r:o=>{"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(o,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(o,"__esModule",{value:!0})}},l={};e.r(l),e.d(l,{constObject:()=>d,constValue1:()=>t,constValue2:()=>c,constValue3:()=>s,constValue4:()=>r,constValue5:()=>g,constValue6:()=>a,constValue7:()=>b,constValue8:()=>i,constValue9:()=>u}),require(void 0);const t=1,c=.1,s=-1,r="foo",g=!0,a=10n,b=-10n,i="aaa\\nbbb",u=\`bbb\${n}\`;let h=!0;console.log(1,.1,-1,"foo",!0,10n,-10n,"aaa\\nbbb".toString(),u.toString(),n.toString(),!0,12345,"cccfoo",.1,h),h=!!Math.random(),h&&console.log(""),console.log(1,-1..toString(),.1.toString(),(-1).toString(),(!0).toString()),console.log(133,"5.5","5.5","5.5"),console.log(1,1===n||2===n,2,3,123);const d={a:4,b:"bar",c:!1,d:null,e:void 0,f:20n,g:-30n,h:{h1:1,h2:-3.14,h3:{}}};console.log(4,"bar",!1,null,void 0,20n,-30n,d.h,1,-3.14,d.h.h3,4..toString(),"bar".toString(),(!1).toString(),20n.toString(),-30n.toString(),1..toString(),(-3.14).toString(),4,null),console.log(o.a),console.log(o.a),console.log(o.h.h1),console.log(o.h.h1);const p={a:!1,b:2};console.log(p.a,p.b);const S={p:1,q:"q",r:{s:!1,t:2}};var f,y;S.p=null,S.r.s=!0,console.log(S.p,"q",S.r.s,2),function(o){o[o.A=1]="A",o.B="hoge"}(f||(f={})),console.log(1,"hoge"),function(o){o[o.C=2]="C",o.D="piyo"}(y||(y={})),console.log(2,"piyo"),console.log(2,"piyo"),console.log(1);const m=Math.floor(2*Math.random())>=1?1:"hoge";function v(){return 12345}console.log(m),console.log(4),Symbol("aaa"),console.log(4),console.log(tempObjForElementAccess2[tempObjForElementAccess2[tempObjForElementAccess2[tempObjForElementAccess2.true]]]),console.log(432),(()=>{const{a:o,b:n,e=-1}=d;console.log(4,"bar",-1)})(),((o=.1)=>{console.log(o)})(),console.log(12345),console.log(v(),v()),console.log([...Array(5)].map((o,n)=>null==o?n:0)),console.log(((...o)=>o.length)(...Array(5)));const[,O]=[1,2];console.log(2);const j={foo:!0,bar:!0};console.log(j.foo,j.baz);const V={x:-1,constValue4:r,y:1,z:"hoge"};console.log(1,[1,.1],[-1,"foo"],V);const A=[1,"hoge"].includes(2);d.b,console.log([1,.1],"bar",A,"bar"),console.log(20n),console.log(4..toFixed(2));var M=exports;for(var _ in l)M[_]=l[_];l.__esModule&&Object.defineProperty(M,"__esModule",{value:!0})})();
 //# sourceMappingURL=index.js.map"
 `;
 
 exports[`loader test: generated source map 1`] = `
 {
   "file": "index.js",
-  "mappings": "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",
+  "mappings": "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",
   "names": [
     "__webpack_require__",
     "exports",
@@ -837,6 +894,9 @@ exports[`loader test: generated source map 1`] = `
     "vmm",
     "mod.Hoge",
     "mod.Piyo",
+    "Piyo",
+    "Foo",
+    "X",
     "constObject",
     "a",
     "b",
@@ -882,13 +942,15 @@ exports[`loader test: generated source map 1`] = `
     "floor",
     "fn2",
     "constObject[name_a]",
-    "constObject[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
+    "(constObject)[
+    (tempObjForElementAccess)[
+      (tempObjForElementAccess)[
         tempObjForElementAccess[tempObjForElementAccess.r]
       ]
     ]
   ]",
+    "tempObjForElementAccess2",
+    "true",
     "objWithComputedName[name_a]",
     "b2",
     "x",
@@ -954,6 +1016,8 @@ __webpack_require__.r = (exports) => {
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
 import * as mod from './mod.mjs';
+import { Piyo, X } from './mod.mjs';
+import Foo from './mod.mjs';
 
 const constValue1 = 1;
 const constValue2 = 0.1;
@@ -1035,7 +1099,13 @@ console.log(
   "5.5" /* vmm */
 );
 
-console.log(1 /* mod.Hoge */, (n as number) === 1 /* mod.Hoge */ || (n as number) === 2 /* mod.Piyo */);
+console.log(
+  1 /* mod.Hoge */,
+  (n as number) === 1 /* mod.Hoge */ || (n as number) === 2 /* mod.Piyo */,
+  2 /* Piyo */,
+  3 /* Foo */,
+  123 /* X */
+);
 
 export const constObject = {
   a: 4,
@@ -1143,21 +1213,40 @@ console.log(valueTypedEnum);
 // Element access with constant name
 const name_a = 'a';
 console.log(4 /* constObject[name_a] */);
+const uniqueSym = Symbol('aaa');
 // Nested element access
 const tempObjForElementAccess = {
-  o: 'a',
-  p: 'o',
-  q: 'p',
-  r: 'q',
+  // prettier-ignore
+  'o\\\\': 'a',
+  [uniqueSym]: 'o\\\\',
+  1: uniqueSym,
+  r: 1,
 } as const;
 console.log(
-  (4 /* constObject[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
+  // prettier-ignore
+  (4 /* (constObject)[
+    (tempObjForElementAccess)[
+      (tempObjForElementAccess)[
         tempObjForElementAccess[tempObjForElementAccess.r]
       ]
     ]
   ] */)
+);
+
+interface TempObjForElementAccess2 {
+  [\`true\`]: 1;
+  1: \`'foo'\`;
+  "'foo'": 'bar';
+  bar: true;
+}
+declare const tempObjForElementAccess2: TempObjForElementAccess2;
+console.log(
+  // prettier-ignore
+  (tempObjForElementAccess2)[
+    (tempObjForElementAccess2)[
+      tempObjForElementAccess2[tempObjForElementAccess2.true]
+    ]
+  ]
 );
 
 // Object initializer with computed name
@@ -1250,6 +1339,8 @@ export {};
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
 import * as mod from './mod.mjs';
+import { Piyo, X } from './mod.mjs';
+import Foo from './mod.mjs';
 
 const constValue1 = 1;
 const constValue2 = 0.1;
@@ -1331,7 +1422,13 @@ console.log(
   vmm
 );
 
-console.log(mod.Hoge, (n as number) === mod.Hoge || (n as number) === mod.Piyo);
+console.log(
+  mod.Hoge,
+  (n as number) === mod.Hoge || (n as number) === mod.Piyo,
+  Piyo,
+  Foo,
+  X
+);
 
 export const constObject = {
   a: 4,
@@ -1439,19 +1536,38 @@ console.log(valueTypedEnum);
 // Element access with constant name
 const name_a = 'a';
 console.log(constObject[name_a]);
+const uniqueSym = Symbol('aaa');
 // Nested element access
 const tempObjForElementAccess = {
-  o: 'a',
-  p: 'o',
-  q: 'p',
-  r: 'q',
+  // prettier-ignore
+  'o\\\\': 'a',
+  [uniqueSym]: 'o\\\\',
+  1: uniqueSym,
+  r: 1,
 } as const;
 console.log(
-  constObject[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
+  // prettier-ignore
+  (constObject)[
+    (tempObjForElementAccess)[
+      (tempObjForElementAccess)[
         tempObjForElementAccess[tempObjForElementAccess.r]
       ]
+    ]
+  ]
+);
+
+interface TempObjForElementAccess2 {
+  [\`true\`]: 1;
+  1: \`'foo'\`;
+  "'foo'": 'bar';
+  bar: true;
+}
+declare const tempObjForElementAccess2: TempObjForElementAccess2;
+console.log(
+  // prettier-ignore
+  (tempObjForElementAccess2)[
+    (tempObjForElementAccess2)[
+      tempObjForElementAccess2[tempObjForElementAccess2.true]
     ]
   ]
 );
@@ -1548,14 +1664,14 @@ export {};
 `;
 
 exports[`loader transforming causes unchanged: generated source 1`] = `
-"(()=>{"use strict";var e={d:(o,r)=>{for(var t in r)e.o(r,t)&&!e.o(o,t)&&Object.defineProperty(o,t,{enumerable:!0,get:r[t]})},o:(e,o)=>Object.prototype.hasOwnProperty.call(e,o),r:e=>{"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})}},o={};e.r(o),e.d(o,{Hoge:()=>r,Piyo:()=>t});const r=1,t=2;var l=exports;for(var n in o)l[n]=o[n];o.__esModule&&Object.defineProperty(l,"__esModule",{value:!0})})();
+"(()=>{"use strict";var e={d:(o,r)=>{for(var t in r)e.o(r,t)&&!e.o(o,t)&&Object.defineProperty(o,t,{enumerable:!0,get:r[t]})},o:(e,o)=>Object.prototype.hasOwnProperty.call(e,o),r:e=>{"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})}},o={};e.r(o),e.d(o,{Hoge:()=>t,Piyo:()=>l,X:()=>r,default:()=>a});const r=123,t=1,l=2,a=3;var d=exports;for(var n in o)d[n]=o[n];o.__esModule&&Object.defineProperty(d,"__esModule",{value:!0})})();
 //# sourceMappingURL=index.js.map"
 `;
 
 exports[`loader transforming causes unchanged: generated source map 1`] = `
 {
   "file": "index.js",
-  "mappings": "mBACA,IAAIA,EAAsB,CCA1BA,EAAwB,CAACC,EAASC,KACjC,IAAI,IAAIC,KAAOD,EACXF,EAAoBI,EAAEF,EAAYC,KAASH,EAAoBI,EAAEH,EAASE,IAC5EE,OAAOC,eAAeL,EAASE,EAAK,CAAEI,YAAY,EAAMC,IAAKN,EAAWC,MCJ3EH,EAAwB,CAACS,EAAKC,IAAUL,OAAOM,UAAUC,eAAeC,KAAKJ,EAAKC,GCClFV,EAAyBC,IACH,oBAAXa,QAA0BA,OAAOC,aAC1CV,OAAOC,eAAeL,EAASa,OAAOC,YAAa,CAAEC,MAAO,WAE7DX,OAAOC,eAAeL,EAAS,aAAc,CAAEe,OAAO,M,2CCLhD,MAAMC,EAAO,EACPC,EAAO,E",
+  "mappings": "mBACA,IAAIA,EAAsB,CCA1BA,EAAwB,CAACC,EAASC,KACjC,IAAI,IAAIC,KAAOD,EACXF,EAAoBI,EAAEF,EAAYC,KAASH,EAAoBI,EAAEH,EAASE,IAC5EE,OAAOC,eAAeL,EAASE,EAAK,CAAEI,YAAY,EAAMC,IAAKN,EAAWC,MCJ3EH,EAAwB,CAACS,EAAKC,IAAUL,OAAOM,UAAUC,eAAeC,KAAKJ,EAAKC,GCClFV,EAAyBC,IACH,oBAAXa,QAA0BA,OAAOC,aAC1CV,OAAOC,eAAeL,EAASa,OAAOC,YAAa,CAAEC,MAAO,WAE7DX,OAAOC,eAAeL,EAAS,aAAc,CAAEe,OAAO,M,iECLvD,MACA,EADiB,ICCJC,EAAO,EACPC,EAAO,EAEpB,EADY,E",
   "names": [
     "__webpack_require__",
     "exports",
@@ -1583,6 +1699,7 @@ exports[`loader transforming causes unchanged: generated source map 1`] = `
     "webpack://ts-const-value-transformer/webpack/runtime/define property getters",
     "webpack://ts-const-value-transformer/webpack/runtime/hasOwnProperty shorthand",
     "webpack://ts-const-value-transformer/webpack/runtime/make namespace object",
+    "webpack://ts-const-value-transformer/./src/test-project/mod3.mts",
     "webpack://ts-const-value-transformer/./src/test-project/mod.mts",
   ],
   "sourcesContent": [
@@ -1606,8 +1723,15 @@ __webpack_require__.r = (exports) => {
 	}
 	Object.defineProperty(exports, '__esModule', { value: true });
 };",
-    "export const Hoge = 1;
+    "const TheValue = 123;
+export default TheValue;
+",
+    "import { Baz } from './mod2.mjs';
+export const Hoge = 1;
 export const Piyo = 2;
+const Foo = 3;
+export default Foo;
+export { Baz as X };
 ",
   ],
   "version": 3,

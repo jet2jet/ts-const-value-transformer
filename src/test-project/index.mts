@@ -2,6 +2,8 @@ import * as ts from 'typescript';
 import { versionMajorMinor as vmm } from 'typescript';
 import { versionMajorMinor } from 'typescript';
 import * as mod from './mod.mjs';
+import { Piyo, X } from './mod.mjs';
+import Foo from './mod.mjs';
 
 const constValue1 = 1;
 const constValue2 = 0.1;
@@ -83,7 +85,13 @@ console.log(
   vmm
 );
 
-console.log(mod.Hoge, (n as number) === mod.Hoge || (n as number) === mod.Piyo);
+console.log(
+  mod.Hoge,
+  (n as number) === mod.Hoge || (n as number) === mod.Piyo,
+  Piyo,
+  Foo,
+  X
+);
 
 export const constObject = {
   a: 4,
@@ -191,19 +199,38 @@ console.log(valueTypedEnum);
 // Element access with constant name
 const name_a = 'a';
 console.log(constObject[name_a]);
+const uniqueSym = Symbol('aaa');
 // Nested element access
 const tempObjForElementAccess = {
-  o: 'a',
-  p: 'o',
-  q: 'p',
-  r: 'q',
+  // prettier-ignore
+  'o\\': 'a',
+  [uniqueSym]: 'o\\',
+  1: uniqueSym,
+  r: 1,
 } as const;
 console.log(
-  constObject[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
+  // prettier-ignore
+  (constObject)[
+    (tempObjForElementAccess)[
+      (tempObjForElementAccess)[
         tempObjForElementAccess[tempObjForElementAccess.r]
       ]
+    ]
+  ]
+);
+
+interface TempObjForElementAccess2 {
+  [`true`]: 1;
+  1: `'foo'`;
+  "'foo'": 'bar';
+  bar: true;
+}
+declare const tempObjForElementAccess2: TempObjForElementAccess2;
+console.log(
+  // prettier-ignore
+  (tempObjForElementAccess2)[
+    (tempObjForElementAccess2)[
+      tempObjForElementAccess2[tempObjForElementAccess2.true]
     ]
   ]
 );

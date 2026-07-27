@@ -3,6 +3,11 @@ import { createRequire } from 'module';
 import * as path from 'path';
 import type { RawSourceMap } from 'source-map';
 import type * as tsNamespace from 'typescript';
+import createPortalTransformerWithTs7, {
+  createPortalTransformerSyncWithTs7,
+  type CreatePortalTransformerWithTs7Options,
+  type PortalTransformerWithTs7,
+} from './createPortalTransformerWithTs7.mjs';
 import { getIgnoreFilesFunction, type TransformOptions } from './transform.mjs';
 import { transformAndPrintSourceWithMap } from './tscTransformer.mjs';
 
@@ -73,6 +78,61 @@ export interface PortalTransformer {
     sourceMap?: string | RawSourceMap | null,
     options?: TransformOptions
   ): PortalTransformerResult;
+}
+
+function isTypeScript7(ts: typeof tsNamespace) {
+  if ('version' in ts) {
+    const ver = ts.version.split('.').map((t) => Number(t));
+    if (ver.length < 3) {
+      throw new Error(`Unknown typescript version: ${ts.version}`);
+    }
+    if (ver[0]! < 5) {
+      throw new Error(`Too old typescript version (actual: ${ts.version})`);
+    }
+    if (ver[0]! >= 7) {
+      if (ver[0]! > 7 || ver[1] !== 0) {
+        throw new Error(`Unsupported typescript version: ${ts.version}`);
+      }
+      return true;
+    }
+  }
+  return false;
+}
+
+function makeTsgoOptions(
+  options: CreatePortalTransformerOptions
+): CreatePortalTransformerWithTs7Options {
+  const ts7Options: CreatePortalTransformerWithTs7Options = {
+    ...options,
+  };
+  // Adjust package paths
+  if (typeof options.typescript === 'string') {
+    ts7Options.ts7Ast = `${options.typescript}/unstable/ast`;
+    ts7Options.ts7AstFactory = `${options.typescript}/unstable/ast/factory`;
+    ts7Options.ts7AstUtils = `${options.typescript}/unstable/ast/utils`;
+    ts7Options.ts7Api = `${options.typescript}/unstable/sync`;
+  }
+  return ts7Options;
+}
+
+function convertTsgoTransformerToPortalTransformer(
+  ts: typeof tsNamespace,
+  transformer: PortalTransformerWithTs7
+): PortalTransformer {
+  const newTransformer = {
+    ...transformer,
+    ts,
+    program: undefined as unknown as tsNamespace.Program,
+    recreateProgram: () => {
+      // do nothing
+    },
+  };
+  Object.defineProperty(newTransformer, 'program', {
+    get: () => {
+      throw new Error('Not supported for native TypeScript');
+    },
+  });
+  return newTransformer;
 }
 
 function optionsToString(options: TransformOptions) {
@@ -267,6 +327,14 @@ export default async function createPortalTransformer(
   } else {
     ts = await import('typescript');
   }
+
+  if (isTypeScript7(ts)) {
+    const transformer = await createPortalTransformerWithTs7(
+      makeTsgoOptions(options)
+    );
+    return convertTsgoTransformerToPortalTransformer(ts, transformer);
+  }
+
   return createPortalTransformerImpl(options, ts);
 }
 
@@ -289,5 +357,13 @@ export function createPortalTransformerSync(
   } else {
     ts = require('typescript') as typeof tsNamespace;
   }
+
+  if (isTypeScript7(ts)) {
+    const transformer = createPortalTransformerSyncWithTs7(
+      makeTsgoOptions(options)
+    );
+    return convertTsgoTransformerToPortalTransformer(ts, transformer);
+  }
+
   return createPortalTransformerImpl(options, ts);
 }

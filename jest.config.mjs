@@ -21,6 +21,7 @@ export default {
     '^@/(.*)$': ['<rootDir>/src/main/$1', '<rootDir>/src/test-common/$1'],
     '(.+)\\.mjs': '$1',
     '(.+)\\.jsx': '$1',
+    '^typescript/unstable/(.*)$': '@typescript/native/unstable/$1',
   },
   globals: {
     __DEV__: true,
