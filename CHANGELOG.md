@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.11.0
+
+- (Experimental) Add `createPortalTransformerWithTs7` which supports TypeScript 7 (7.0.x)
+  - Also `createPortalTransformer` will automatically detect TypeScript 7
+
 ## v0.10.1
 
 - Fix for transformation with langage-server
