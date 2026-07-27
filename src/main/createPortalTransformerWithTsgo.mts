@@ -17,12 +17,7 @@ const require = createRequire(import.meta.url);
 
 export interface CreatePortalTransformerWithTsgoOptions
   extends TransformOptions {
-  /**
-   * Command to run language server. The first element is used for command name and following elements are used for `argv`.
-   * Default is `['npx', 'tsgo', '--lsp', '--stdio']`.
-   */
-  command?: readonly string[];
-  /** Path to tsconfig.json. If omitted, `tsconfig.json` will be used. **Currently `project` must be path to `tsconfig.json` file name; other than `tsconfig.json` is not supported.** */
+  /** Path to tsconfig.json. If omitted, `tsconfig.json` will be used. */
   project?: string;
   /** Package path to `typescript/unstable/ast` or `typescript/unstable/ast` namespace object. */
   tsgoAst?: string | typeof tsgoAst;
