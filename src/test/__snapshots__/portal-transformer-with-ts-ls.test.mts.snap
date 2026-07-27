@@ -202,22 +202,40 @@ console.log(valueTypedEnum);
 // Element access with constant name
 const name_a = 'a';
 console.log(4 /* constObject[name_a] */);
+const uniqueSym = Symbol('aaa');
 // Nested element access
 const tempObjForElementAccess = {
-  o: 'a',
-  p: 'o',
-  q: 'p',
-  r: 'q',
+  // prettier-ignore
+  'o\\\\': 'a',
+  [uniqueSym]: 'o\\\\',
+  1: uniqueSym,
+  r: 1,
 } as const;
 console.log(
   // prettier-ignore
-  (4 /* (constObject)[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
-        tempObjForElementAccess[tempObjForElementAccess.r]
+  (constObject)[
+    (tempObjForElementAccess)[
+      (tempObjForElementAccess)[
+        tempObjForElementAccess[1 /* tempObjForElementAccess.r */]
       ]
     ]
-  ] */)
+  ]
+);
+
+interface TempObjForElementAccess2 {
+  [\`true\`]: 1;
+  1: \`'foo'\`;
+  "'foo'": 'bar';
+  bar: true;
+}
+declare const tempObjForElementAccess2: TempObjForElementAccess2;
+console.log(
+  // prettier-ignore
+  (tempObjForElementAccess2)[
+    (tempObjForElementAccess2)[
+      tempObjForElementAccess2[tempObjForElementAccess2.true]
+    ]
+  ]
 );
 
 // Object initializer with computed name
@@ -310,7 +328,7 @@ export {};
 
 exports[`createPortalTransformerWithTsLs basic process test: generated source map 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQEpB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBoB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;EAU7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGfzC,sBAAW;cACrB0C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR7C,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb8C,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS/C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRmB,sBAAS;;YAEFc,cAAM;;;cAGJhD,mBAAW,EAAEC,qBAAW;aACzBoB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQEpB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBoB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;;;;;;gCAeCC,iCAAyB;;;;;;;;;;;;;;;;;;;;;;;+BAuB1BC,gBAAM;YACzBC,qCAA2B;;;wBAGfzC,sBAAW;cACrB0C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR7C,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb8C,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS/C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRmB,sBAAS;;YAEFc,cAAM;;;cAGJhD,mBAAW,EAAEC,qBAAW;aACzBoB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -354,13 +372,7 @@ exports[`createPortalTransformerWithTsLs basic process test: generated source ma
     "BazEnum['D']",
     "valueUsingEnumValue",
     "constObject[name_a]",
-    "(constObject)[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
-        tempObjForElementAccess[tempObjForElementAccess.r]
-      ]
-    ]
-  ]",
+    "tempObjForElementAccess.r",
     "name_a",
     "objWithComputedName[name_a]",
     "a",
@@ -583,20 +595,38 @@ console.log(valueTypedEnum);
 // Element access with constant name
 const name_a = 'a';
 console.log(constObject[name_a]);
+const uniqueSym = Symbol('aaa');
 // Nested element access
 const tempObjForElementAccess = {
-  o: 'a',
-  p: 'o',
-  q: 'p',
-  r: 'q',
+  // prettier-ignore
+  'o\\\\': 'a',
+  [uniqueSym]: 'o\\\\',
+  1: uniqueSym,
+  r: 1,
 } as const;
 console.log(
   // prettier-ignore
   (constObject)[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
+    (tempObjForElementAccess)[
+      (tempObjForElementAccess)[
         tempObjForElementAccess[tempObjForElementAccess.r]
       ]
+    ]
+  ]
+);
+
+interface TempObjForElementAccess2 {
+  [\`true\`]: 1;
+  1: \`'foo'\`;
+  "'foo'": 'bar';
+  bar: true;
+}
+declare const tempObjForElementAccess2: TempObjForElementAccess2;
+console.log(
+  // prettier-ignore
+  (tempObjForElementAccess2)[
+    (tempObjForElementAccess2)[
+      tempObjForElementAccess2[tempObjForElementAccess2.true]
     ]
   ]
 );
@@ -894,22 +924,40 @@ console.log(valueTypedEnum);
 // Element access with constant name
 const name_a = 'a';
 console.log(4 /* constObject[name_a] */);
+const uniqueSym = Symbol('aaa');
 // Nested element access
 const tempObjForElementAccess = {
-  o: 'a',
-  p: 'o',
-  q: 'p',
-  r: 'q',
+  // prettier-ignore
+  'o\\\\': 'a',
+  [uniqueSym]: 'o\\\\',
+  1: uniqueSym,
+  r: 1,
 } as const;
 console.log(
   // prettier-ignore
-  (4 /* (constObject)[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
-        tempObjForElementAccess[tempObjForElementAccess.r]
+  (constObject)[
+    (tempObjForElementAccess)[
+      (tempObjForElementAccess)[
+        tempObjForElementAccess[1 /* tempObjForElementAccess.r */]
       ]
     ]
-  ] */)
+  ]
+);
+
+interface TempObjForElementAccess2 {
+  [\`true\`]: 1;
+  1: \`'foo'\`;
+  "'foo'": 'bar';
+  bar: true;
+}
+declare const tempObjForElementAccess2: TempObjForElementAccess2;
+console.log(
+  // prettier-ignore
+  (tempObjForElementAccess2)[
+    (tempObjForElementAccess2)[
+      tempObjForElementAccess2[tempObjForElementAccess2.true]
+    ]
+  ]
 );
 
 // Object initializer with computed name
@@ -1002,7 +1050,7 @@ export {};
 
 exports[`createPortalTransformerWithTsLs basic process transform with explicitly specifying typescript package: generated source map 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQEpB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBoB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;EAU7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGfzC,sBAAW;cACrB0C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR7C,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb8C,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS/C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRmB,sBAAS;;YAEFc,cAAM;;;cAGJhD,mBAAW,EAAEC,qBAAW;aACzBoB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQEpB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBoB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;;;;;;gCAeCC,iCAAyB;;;;;;;;;;;;;;;;;;;;;;;+BAuB1BC,gBAAM;YACzBC,qCAA2B;;;wBAGfzC,sBAAW;cACrB0C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR7C,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb8C,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS/C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRmB,sBAAS;;YAEFc,cAAM;;;cAGJhD,mBAAW,EAAEC,qBAAW;aACzBoB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -1046,13 +1094,7 @@ exports[`createPortalTransformerWithTsLs basic process transform with explicitly
     "BazEnum['D']",
     "valueUsingEnumValue",
     "constObject[name_a]",
-    "(constObject)[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
-        tempObjForElementAccess[tempObjForElementAccess.r]
-      ]
-    ]
-  ]",
+    "tempObjForElementAccess.r",
     "name_a",
     "objWithComputedName[name_a]",
     "a",
@@ -1275,20 +1317,38 @@ console.log(valueTypedEnum);
 // Element access with constant name
 const name_a = 'a';
 console.log(constObject[name_a]);
+const uniqueSym = Symbol('aaa');
 // Nested element access
 const tempObjForElementAccess = {
-  o: 'a',
-  p: 'o',
-  q: 'p',
-  r: 'q',
+  // prettier-ignore
+  'o\\\\': 'a',
+  [uniqueSym]: 'o\\\\',
+  1: uniqueSym,
+  r: 1,
 } as const;
 console.log(
   // prettier-ignore
   (constObject)[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
+    (tempObjForElementAccess)[
+      (tempObjForElementAccess)[
         tempObjForElementAccess[tempObjForElementAccess.r]
       ]
+    ]
+  ]
+);
+
+interface TempObjForElementAccess2 {
+  [\`true\`]: 1;
+  1: \`'foo'\`;
+  "'foo'": 'bar';
+  bar: true;
+}
+declare const tempObjForElementAccess2: TempObjForElementAccess2;
+console.log(
+  // prettier-ignore
+  (tempObjForElementAccess2)[
+    (tempObjForElementAccess2)[
+      tempObjForElementAccess2[tempObjForElementAccess2.true]
     ]
   ]
 );
@@ -1598,22 +1658,40 @@ console.log(valueTypedEnum);
 // Element access with constant name
 const name_a = 'a';
 console.log(4 /* constObject[name_a] */);
+const uniqueSym = Symbol('aaa');
 // Nested element access
 const tempObjForElementAccess = {
-  o: 'a',
-  p: 'o',
-  q: 'p',
-  r: 'q',
+  // prettier-ignore
+  'o\\\\': 'a',
+  [uniqueSym]: 'o\\\\',
+  1: uniqueSym,
+  r: 1,
 } as const;
 console.log(
   // prettier-ignore
-  (4 /* (constObject)[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
-        tempObjForElementAccess[tempObjForElementAccess.r]
+  (constObject)[
+    (tempObjForElementAccess)[
+      (tempObjForElementAccess)[
+        tempObjForElementAccess[1 /* tempObjForElementAccess.r */]
       ]
     ]
-  ] */)
+  ]
+);
+
+interface TempObjForElementAccess2 {
+  [\`true\`]: 1;
+  1: \`'foo'\`;
+  "'foo'": 'bar';
+  bar: true;
+}
+declare const tempObjForElementAccess2: TempObjForElementAccess2;
+console.log(
+  // prettier-ignore
+  (tempObjForElementAccess2)[
+    (tempObjForElementAccess2)[
+      tempObjForElementAccess2[tempObjForElementAccess2.true]
+    ]
+  ]
 );
 
 // Object initializer with computed name
@@ -1706,7 +1784,7 @@ export {};
 
 exports[`createPortalTransformerWithTsLs with options test with hoistConstTemplateLiteral=true: generated source map 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;qBAETC,kCAAmB;;;;EAItCC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQErB,wBAAS;;;;QAINE,mBAAW;;;;;;EAMjBoB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;EAU7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGfzC,sBAAW;cACrB0C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR7C,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb8C,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS/C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRmB,sBAAS;;YAEFc,cAAM;;;cAGJhD,mBAAW,EAAEC,qBAAW;aACzBoB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;qBAETC,kCAAmB;;;;EAItCC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQErB,wBAAS;;;;QAINE,mBAAW;;;;;;EAMjBoB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;;;;;;gCAeCC,iCAAyB;;;;;;;;;;;;;;;;;;;;;;;+BAuB1BC,gBAAM;YACzBC,qCAA2B;;;wBAGfzC,sBAAW;cACrB0C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR7C,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb8C,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS/C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRmB,sBAAS;;YAEFc,cAAM;;;cAGJhD,mBAAW,EAAEC,qBAAW;aACzBoB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "\`ccc\${constValue4}\`",
@@ -1751,13 +1829,7 @@ exports[`createPortalTransformerWithTsLs with options test with hoistConstTempla
     "BazEnum['D']",
     "valueUsingEnumValue",
     "constObject[name_a]",
-    "(constObject)[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
-        tempObjForElementAccess[tempObjForElementAccess.r]
-      ]
-    ]
-  ]",
+    "tempObjForElementAccess.r",
     "name_a",
     "objWithComputedName[name_a]",
     "a",
@@ -1980,20 +2052,38 @@ console.log(valueTypedEnum);
 // Element access with constant name
 const name_a = 'a';
 console.log(constObject[name_a]);
+const uniqueSym = Symbol('aaa');
 // Nested element access
 const tempObjForElementAccess = {
-  o: 'a',
-  p: 'o',
-  q: 'p',
-  r: 'q',
+  // prettier-ignore
+  'o\\\\': 'a',
+  [uniqueSym]: 'o\\\\',
+  1: uniqueSym,
+  r: 1,
 } as const;
 console.log(
   // prettier-ignore
   (constObject)[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
+    (tempObjForElementAccess)[
+      (tempObjForElementAccess)[
         tempObjForElementAccess[tempObjForElementAccess.r]
       ]
+    ]
+  ]
+);
+
+interface TempObjForElementAccess2 {
+  [\`true\`]: 1;
+  1: \`'foo'\`;
+  "'foo'": 'bar';
+  bar: true;
+}
+declare const tempObjForElementAccess2: TempObjForElementAccess2;
+console.log(
+  // prettier-ignore
+  (tempObjForElementAccess2)[
+    (tempObjForElementAccess2)[
+      tempObjForElementAccess2[tempObjForElementAccess2.true]
     ]
   ]
 );
@@ -2291,22 +2381,40 @@ console.log(valueTypedEnum);
 // Element access with constant name
 const name_a = 'a';
 console.log(4 /* constObject[name_a] */);
+const uniqueSym = Symbol('aaa');
 // Nested element access
 const tempObjForElementAccess = {
-  o: 'a',
-  p: 'o',
-  q: 'p',
-  r: 'q',
+  // prettier-ignore
+  'o\\\\': 'a',
+  [uniqueSym]: 'o\\\\',
+  1: uniqueSym,
+  r: 1,
 } as const;
 console.log(
   // prettier-ignore
-  (4 /* (constObject)[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
-        tempObjForElementAccess[tempObjForElementAccess.r]
+  (constObject)[
+    (tempObjForElementAccess)[
+      (tempObjForElementAccess)[
+        tempObjForElementAccess[1 /* tempObjForElementAccess.r */]
       ]
     ]
-  ] */)
+  ]
+);
+
+interface TempObjForElementAccess2 {
+  [\`true\`]: 1;
+  1: \`'foo'\`;
+  "'foo'": 'bar';
+  bar: true;
+}
+declare const tempObjForElementAccess2: TempObjForElementAccess2;
+console.log(
+  // prettier-ignore
+  (tempObjForElementAccess2)[
+    (tempObjForElementAccess2)[
+      tempObjForElementAccess2[tempObjForElementAccess2.true]
+    ]
+  ]
 );
 
 // Object initializer with computed name
@@ -2399,7 +2507,7 @@ export {};
 
 exports[`createPortalTransformerWithTsLs with options test with hoistEnumValues=false: generated source map 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;;EAUZG,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQEnB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBmB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;;;;;;;;;;;;;;;;;;;;;YA2BZC,2BAAmB;;;;;;;;;;EAU7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGfjC,sBAAW;cACrBkC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRrC,qBAAW;;;;;;;;;;;;;;;;;;;YAmBbsC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBSvC,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXY,gBAAQ;;;YAGD0B,cAAM;;;cAGJxC,mBAAW,EAAEC,qBAAW;aACzBmB,yBAAa;;;8BAGIqB,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;;EAUZG,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQEnB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBmB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;;;;;;;;;;;;;;;;;;;;;YA2BZC,2BAAmB;;;;;;;;;;;;;;;gCAeCC,iCAAyB;;;;;;;;;;;;;;;;;;;;;;;+BAuB1BC,gBAAM;YACzBC,qCAA2B;;;wBAGfjC,sBAAW;cACrBkC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRrC,qBAAW;;;;;;;;;;;;;;;;;;;YAmBbsC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBSvC,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXY,gBAAQ;;;YAGD0B,cAAM;;;cAGJxC,mBAAW,EAAEC,qBAAW;aACzBmB,yBAAa;;;8BAGIqB,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -2435,13 +2543,7 @@ exports[`createPortalTransformerWithTsLs with options test with hoistEnumValues=
     "partialConstObject.q",
     "partialConstObject.r.t",
     "constObject[name_a]",
-    "(constObject)[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
-        tempObjForElementAccess[tempObjForElementAccess.r]
-      ]
-    ]
-  ]",
+    "tempObjForElementAccess.r",
     "name_a",
     "objWithComputedName[name_a]",
     "a",
@@ -2664,20 +2766,38 @@ console.log(valueTypedEnum);
 // Element access with constant name
 const name_a = 'a';
 console.log(constObject[name_a]);
+const uniqueSym = Symbol('aaa');
 // Nested element access
 const tempObjForElementAccess = {
-  o: 'a',
-  p: 'o',
-  q: 'p',
-  r: 'q',
+  // prettier-ignore
+  'o\\\\': 'a',
+  [uniqueSym]: 'o\\\\',
+  1: uniqueSym,
+  r: 1,
 } as const;
 console.log(
   // prettier-ignore
   (constObject)[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
+    (tempObjForElementAccess)[
+      (tempObjForElementAccess)[
         tempObjForElementAccess[tempObjForElementAccess.r]
       ]
+    ]
+  ]
+);
+
+interface TempObjForElementAccess2 {
+  [\`true\`]: 1;
+  1: \`'foo'\`;
+  "'foo'": 'bar';
+  bar: true;
+}
+declare const tempObjForElementAccess2: TempObjForElementAccess2;
+console.log(
+  // prettier-ignore
+  (tempObjForElementAccess2)[
+    (tempObjForElementAccess2)[
+      tempObjForElementAccess2[tempObjForElementAccess2.true]
     ]
   ]
 );
@@ -2975,22 +3095,40 @@ console.log(valueTypedEnum);
 // Element access with constant name
 const name_a = 'a';
 console.log(4 /* constObject[name_a] */);
+const uniqueSym = Symbol('aaa');
 // Nested element access
 const tempObjForElementAccess = {
-  o: 'a',
-  p: 'o',
-  q: 'p',
-  r: 'q',
+  // prettier-ignore
+  'o\\\\': 'a',
+  [uniqueSym]: 'o\\\\',
+  1: uniqueSym,
+  r: 1,
 } as const;
 console.log(
   // prettier-ignore
-  (4 /* (constObject)[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
-        tempObjForElementAccess[tempObjForElementAccess.r]
+  (constObject)[
+    (tempObjForElementAccess)[
+      (tempObjForElementAccess)[
+        tempObjForElementAccess[1 /* tempObjForElementAccess.r */]
       ]
     ]
-  ] */)
+  ]
+);
+
+interface TempObjForElementAccess2 {
+  [\`true\`]: 1;
+  1: \`'foo'\`;
+  "'foo'": 'bar';
+  bar: true;
+}
+declare const tempObjForElementAccess2: TempObjForElementAccess2;
+console.log(
+  // prettier-ignore
+  (tempObjForElementAccess2)[
+    (tempObjForElementAccess2)[
+      tempObjForElementAccess2[tempObjForElementAccess2.true]
+    ]
+  ]
 );
 
 // Object initializer with computed name
@@ -3083,7 +3221,7 @@ export {};
 
 exports[`createPortalTransformerWithTsLs with options test with hoistExternalValues=false and additionalExternalDirectories: generated source map 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;;;;;;;;;;;;EAoBZG,WAAC;;;;;;;;KAQEZ,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBY,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;EAU7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGfjC,sBAAW;cACrBkC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRrC,qBAAW;;;;;;;;;;;;;;;;;;;YAmBbsC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBSvC,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;;KAGXwB,sBAAS;;YAEFc,cAAM;;;cAGJxC,mBAAW,EAAEC,qBAAW;aACzBY,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;;;;;;;;;;;;EAoBZG,WAAC;;;;;;;;KAQEZ,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBY,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;;;;;;gCAeCC,iCAAyB;;;;;;;;;;;;;;;;;;;;;;;+BAuB1BC,gBAAM;YACzBC,qCAA2B;;;wBAGfjC,sBAAW;cACrBkC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRrC,qBAAW;;;;;;;;;;;;;;;;;;;YAmBbsC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBSvC,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;;KAGXwB,sBAAS;;YAEFc,cAAM;;;cAGJxC,mBAAW,EAAEC,qBAAW;aACzBY,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -3119,13 +3257,7 @@ exports[`createPortalTransformerWithTsLs with options test with hoistExternalVal
     "BazEnum['D']",
     "valueUsingEnumValue",
     "constObject[name_a]",
-    "(constObject)[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
-        tempObjForElementAccess[tempObjForElementAccess.r]
-      ]
-    ]
-  ]",
+    "tempObjForElementAccess.r",
     "name_a",
     "objWithComputedName[name_a]",
     "a",
@@ -3348,20 +3480,38 @@ console.log(valueTypedEnum);
 // Element access with constant name
 const name_a = 'a';
 console.log(constObject[name_a]);
+const uniqueSym = Symbol('aaa');
 // Nested element access
 const tempObjForElementAccess = {
-  o: 'a',
-  p: 'o',
-  q: 'p',
-  r: 'q',
+  // prettier-ignore
+  'o\\\\': 'a',
+  [uniqueSym]: 'o\\\\',
+  1: uniqueSym,
+  r: 1,
 } as const;
 console.log(
   // prettier-ignore
   (constObject)[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
+    (tempObjForElementAccess)[
+      (tempObjForElementAccess)[
         tempObjForElementAccess[tempObjForElementAccess.r]
       ]
+    ]
+  ]
+);
+
+interface TempObjForElementAccess2 {
+  [\`true\`]: 1;
+  1: \`'foo'\`;
+  "'foo'": 'bar';
+  bar: true;
+}
+declare const tempObjForElementAccess2: TempObjForElementAccess2;
+console.log(
+  // prettier-ignore
+  (tempObjForElementAccess2)[
+    (tempObjForElementAccess2)[
+      tempObjForElementAccess2[tempObjForElementAccess2.true]
     ]
   ]
 );
@@ -3659,22 +3809,40 @@ console.log(valueTypedEnum);
 // Element access with constant name
 const name_a = 'a';
 console.log(4 /* constObject[name_a] */);
+const uniqueSym = Symbol('aaa');
 // Nested element access
 const tempObjForElementAccess = {
-  o: 'a',
-  p: 'o',
-  q: 'p',
-  r: 'q',
+  // prettier-ignore
+  'o\\\\': 'a',
+  [uniqueSym]: 'o\\\\',
+  1: uniqueSym,
+  r: 1,
 } as const;
 console.log(
   // prettier-ignore
-  (4 /* (constObject)[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
-        tempObjForElementAccess[tempObjForElementAccess.r]
+  (constObject)[
+    (tempObjForElementAccess)[
+      (tempObjForElementAccess)[
+        tempObjForElementAccess[1 /* tempObjForElementAccess.r */]
       ]
     ]
-  ] */)
+  ]
+);
+
+interface TempObjForElementAccess2 {
+  [\`true\`]: 1;
+  1: \`'foo'\`;
+  "'foo'": 'bar';
+  bar: true;
+}
+declare const tempObjForElementAccess2: TempObjForElementAccess2;
+console.log(
+  // prettier-ignore
+  (tempObjForElementAccess2)[
+    (tempObjForElementAccess2)[
+      tempObjForElementAccess2[tempObjForElementAccess2.true]
+    ]
+  ]
 );
 
 // Object initializer with computed name
@@ -3767,7 +3935,7 @@ export {};
 
 exports[`createPortalTransformerWithTsLs with options test with hoistExternalValues=false: generated source map 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;;;;;;;;EAgBZG,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQEhB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBgB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;EAU7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGfrC,sBAAW;cACrBsC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRzC,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb0C,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS3C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXS,gBAAQ;KACRmB,sBAAS;;YAEFc,cAAM;;;cAGJ5C,mBAAW,EAAEC,qBAAW;aACzBgB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;;;;;;;;EAgBZG,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQEhB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBgB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;;;;;;gCAeCC,iCAAyB;;;;;;;;;;;;;;;;;;;;;;;+BAuB1BC,gBAAM;YACzBC,qCAA2B;;;wBAGfrC,sBAAW;cACrBsC,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRzC,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb0C,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS3C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXS,gBAAQ;KACRmB,sBAAS;;YAEFc,cAAM;;;cAGJ5C,mBAAW,EAAEC,qBAAW;aACzBgB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -3807,13 +3975,7 @@ exports[`createPortalTransformerWithTsLs with options test with hoistExternalVal
     "BazEnum['D']",
     "valueUsingEnumValue",
     "constObject[name_a]",
-    "(constObject)[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
-        tempObjForElementAccess[tempObjForElementAccess.r]
-      ]
-    ]
-  ]",
+    "tempObjForElementAccess.r",
     "name_a",
     "objWithComputedName[name_a]",
     "a",
@@ -4036,20 +4198,38 @@ console.log(valueTypedEnum);
 // Element access with constant name
 const name_a = 'a';
 console.log(constObject[name_a]);
+const uniqueSym = Symbol('aaa');
 // Nested element access
 const tempObjForElementAccess = {
-  o: 'a',
-  p: 'o',
-  q: 'p',
-  r: 'q',
+  // prettier-ignore
+  'o\\\\': 'a',
+  [uniqueSym]: 'o\\\\',
+  1: uniqueSym,
+  r: 1,
 } as const;
 console.log(
   // prettier-ignore
   (constObject)[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
+    (tempObjForElementAccess)[
+      (tempObjForElementAccess)[
         tempObjForElementAccess[tempObjForElementAccess.r]
       ]
+    ]
+  ]
+);
+
+interface TempObjForElementAccess2 {
+  [\`true\`]: 1;
+  1: \`'foo'\`;
+  "'foo'": 'bar';
+  bar: true;
+}
+declare const tempObjForElementAccess2: TempObjForElementAccess2;
+console.log(
+  // prettier-ignore
+  (tempObjForElementAccess2)[
+    (tempObjForElementAccess2)[
+      tempObjForElementAccess2[tempObjForElementAccess2.true]
     ]
   ]
 );
@@ -4347,20 +4527,38 @@ console.log(valueTypedEnum);
 // Element access with constant name
 const name_a = 'a';
 console.log(constObject["a" /* name_a */]);
+const uniqueSym = Symbol('aaa');
 // Nested element access
 const tempObjForElementAccess = {
-  o: 'a',
-  p: 'o',
-  q: 'p',
-  r: 'q',
+  // prettier-ignore
+  'o\\\\': 'a',
+  [uniqueSym]: 'o\\\\',
+  1: uniqueSym,
+  r: 1,
 } as const;
 console.log(
   // prettier-ignore
   (constObject)[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
+    (tempObjForElementAccess)[
+      (tempObjForElementAccess)[
         tempObjForElementAccess[tempObjForElementAccess.r]
       ]
+    ]
+  ]
+);
+
+interface TempObjForElementAccess2 {
+  [\`true\`]: 1;
+  1: \`'foo'\`;
+  "'foo'": 'bar';
+  bar: true;
+}
+declare const tempObjForElementAccess2: TempObjForElementAccess2;
+console.log(
+  // prettier-ignore
+  (tempObjForElementAccess2)[
+    (tempObjForElementAccess2)[
+      tempObjForElementAccess2[tempObjForElementAccess2.true]
     ]
   ]
 );
@@ -4455,7 +4653,7 @@ export {};
 
 exports[`createPortalTransformerWithTsLs with options test with hoistProperty=false: generated source map 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;;EAExBC,6BAAiB;EACjBC,eAAG;;;;;;EAMHC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQEjB,wBAAS;;;;QAINC,mBAAW;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;YA4EPiB,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;wBAKpCM,gBAAM;;;;;;;;;;;;;;;;;;;;+BAoBCA,gBAAM;gCACLA,gBAAM;;;wBAGdtB,sBAAW;cACrBuB,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR1B,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb2B,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS5B,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;;KAGXgB,sBAAS;;YAEFW,cAAM;;;cAGJ7B,mBAAW,EAAEC,qBAAW;;cAExBgB,iBAAS,YAAYC,sBAAS;;8BAEdY,gBAAI",
+  "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;;EAExBC,6BAAiB;EACjBC,eAAG;;;;;;EAMHC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQEjB,wBAAS;;;;QAINC,mBAAW;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;YA4EPiB,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;wBAKpCM,gBAAM;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;+BAsCCA,gBAAM;gCACLA,gBAAM;;;wBAGdtB,sBAAW;cACrBuB,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR1B,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb2B,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS5B,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;;KAGXgB,sBAAS;;YAEFW,cAAM;;;cAGJ7B,mBAAW,EAAEC,qBAAW;;cAExBgB,iBAAS,YAAYC,sBAAS;;8BAEdY,gBAAI",
   "names": [
     "undefined",
     "constValue1",
@@ -4695,20 +4893,38 @@ console.log(valueTypedEnum);
 // Element access with constant name
 const name_a = 'a';
 console.log(constObject[name_a]);
+const uniqueSym = Symbol('aaa');
 // Nested element access
 const tempObjForElementAccess = {
-  o: 'a',
-  p: 'o',
-  q: 'p',
-  r: 'q',
+  // prettier-ignore
+  'o\\\\': 'a',
+  [uniqueSym]: 'o\\\\',
+  1: uniqueSym,
+  r: 1,
 } as const;
 console.log(
   // prettier-ignore
   (constObject)[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
+    (tempObjForElementAccess)[
+      (tempObjForElementAccess)[
         tempObjForElementAccess[tempObjForElementAccess.r]
       ]
+    ]
+  ]
+);
+
+interface TempObjForElementAccess2 {
+  [\`true\`]: 1;
+  1: \`'foo'\`;
+  "'foo'": 'bar';
+  bar: true;
+}
+declare const tempObjForElementAccess2: TempObjForElementAccess2;
+console.log(
+  // prettier-ignore
+  (tempObjForElementAccess2)[
+    (tempObjForElementAccess2)[
+      tempObjForElementAccess2[tempObjForElementAccess2.true]
     ]
   ]
 );
@@ -5006,22 +5222,40 @@ console.log(valueTypedEnum);
 // Element access with constant name
 const name_a = 'a';
 console.log(4 /* constObject[name_a] */);
+const uniqueSym = Symbol('aaa');
 // Nested element access
 const tempObjForElementAccess = {
-  o: 'a',
-  p: 'o',
-  q: 'p',
-  r: 'q',
+  // prettier-ignore
+  'o\\\\': 'a',
+  [uniqueSym]: 'o\\\\',
+  1: uniqueSym,
+  r: 1,
 } as const;
 console.log(
   // prettier-ignore
-  (4 /* (constObject)[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
-        tempObjForElementAccess[tempObjForElementAccess.r]
+  (constObject)[
+    (tempObjForElementAccess)[
+      (tempObjForElementAccess)[
+        tempObjForElementAccess[1 /* tempObjForElementAccess.r */]
       ]
     ]
-  ] */)
+  ]
+);
+
+interface TempObjForElementAccess2 {
+  [\`true\`]: 1;
+  1: \`'foo'\`;
+  "'foo'": 'bar';
+  bar: true;
+}
+declare const tempObjForElementAccess2: TempObjForElementAccess2;
+console.log(
+  // prettier-ignore
+  (tempObjForElementAccess2)[
+    (tempObjForElementAccess2)[
+      tempObjForElementAccess2[tempObjForElementAccess2.true]
+    ]
+  ]
 );
 
 // Object initializer with computed name
@@ -5114,7 +5348,7 @@ export {};
 
 exports[`createPortalTransformerWithTsLs with options test with hoistPureFunctionCall: generated source map 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQEpB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBoB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;EAU7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGfzC,sBAAW;cACrB0C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR7C,qBAAW;;;;;;;;;0BASC8C,iBAAK,gBAAgBA,iBAAK;;;;;;;;;;YAUxCC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBShD,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRmB,sBAAS;;YAEFe,cAAM;;;cAGJjD,mBAAW,EAAEC,qBAAW;aACzBoB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEdgB,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQEpB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBoB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;;;;;;gCAeCC,iCAAyB;;;;;;;;;;;;;;;;;;;;;;;+BAuB1BC,gBAAM;YACzBC,qCAA2B;;;wBAGfzC,sBAAW;cACrB0C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR7C,qBAAW;;;;;;;;;0BASC8C,iBAAK,gBAAgBA,iBAAK;;;;;;;;;;YAUxCC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBShD,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRmB,sBAAS;;YAEFe,cAAM;;;cAGJjD,mBAAW,EAAEC,qBAAW;aACzBoB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEdgB,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -5158,13 +5392,7 @@ exports[`createPortalTransformerWithTsLs with options test with hoistPureFunctio
     "BazEnum['D']",
     "valueUsingEnumValue",
     "constObject[name_a]",
-    "(constObject)[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
-        tempObjForElementAccess[tempObjForElementAccess.r]
-      ]
-    ]
-  ]",
+    "tempObjForElementAccess.r",
     "name_a",
     "objWithComputedName[name_a]",
     "a",
@@ -5388,20 +5616,38 @@ console.log(valueTypedEnum);
 // Element access with constant name
 const name_a = 'a';
 console.log(constObject[name_a]);
+const uniqueSym = Symbol('aaa');
 // Nested element access
 const tempObjForElementAccess = {
-  o: 'a',
-  p: 'o',
-  q: 'p',
-  r: 'q',
+  // prettier-ignore
+  'o\\\\': 'a',
+  [uniqueSym]: 'o\\\\',
+  1: uniqueSym,
+  r: 1,
 } as const;
 console.log(
   // prettier-ignore
   (constObject)[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
+    (tempObjForElementAccess)[
+      (tempObjForElementAccess)[
         tempObjForElementAccess[tempObjForElementAccess.r]
       ]
+    ]
+  ]
+);
+
+interface TempObjForElementAccess2 {
+  [\`true\`]: 1;
+  1: \`'foo'\`;
+  "'foo'": 'bar';
+  bar: true;
+}
+declare const tempObjForElementAccess2: TempObjForElementAccess2;
+console.log(
+  // prettier-ignore
+  (tempObjForElementAccess2)[
+    (tempObjForElementAccess2)[
+      tempObjForElementAccess2[tempObjForElementAccess2.true]
     ]
   ]
 );
@@ -5699,22 +5945,40 @@ console.log(valueTypedEnum);
 // Element access with constant name
 const name_a = 'a';
 console.log(4 /* constObject[name_a] */);
+const uniqueSym = Symbol('aaa');
 // Nested element access
 const tempObjForElementAccess = {
-  o: 'a',
-  p: 'o',
-  q: 'p',
-  r: 'q',
+  // prettier-ignore
+  'o\\\\': 'a',
+  [uniqueSym]: 'o\\\\',
+  1: uniqueSym,
+  r: 1,
 } as const;
 console.log(
   // prettier-ignore
-  (4 /* (constObject)[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
-        tempObjForElementAccess[tempObjForElementAccess.r]
+  (constObject)[
+    (tempObjForElementAccess)[
+      (tempObjForElementAccess)[
+        tempObjForElementAccess[1 /* tempObjForElementAccess.r */]
       ]
     ]
-  ] */)
+  ]
+);
+
+interface TempObjForElementAccess2 {
+  [\`true\`]: 1;
+  1: \`'foo'\`;
+  "'foo'": 'bar';
+  bar: true;
+}
+declare const tempObjForElementAccess2: TempObjForElementAccess2;
+console.log(
+  // prettier-ignore
+  (tempObjForElementAccess2)[
+    (tempObjForElementAccess2)[
+      tempObjForElementAccess2[tempObjForElementAccess2.true]
+    ]
+  ]
 );
 
 // Object initializer with computed name
@@ -5807,7 +6071,7 @@ export {};
 
 exports[`createPortalTransformerWithTsLs with options test with hoistUndefinedSymbol=false: generated source map 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;EAyBEA,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;;;;;QAYKnB,mBAAW;;;;;;EAMjBoB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;EAU7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGfzC,sBAAW;cACrB0C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR7C,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb8C,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS/C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRmB,sBAAS;;YAEFc,cAAM;;;cAGJhD,mBAAW,EAAEC,qBAAW;aACzBoB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;EAyBEA,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;;;;;QAYKnB,mBAAW;;;;;;EAMjBoB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;;;;;;gCAeCC,iCAAyB;;;;;;;;;;;;;;;;;;;;;;;+BAuB1BC,gBAAM;YACzBC,qCAA2B;;;wBAGfzC,sBAAW;cACrB0C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR7C,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb8C,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS/C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRmB,sBAAS;;YAEFc,cAAM;;;cAGJhD,mBAAW,EAAEC,qBAAW;aACzBoB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "constValue1",
     "constValue2",
@@ -5850,13 +6114,7 @@ exports[`createPortalTransformerWithTsLs with options test with hoistUndefinedSy
     "BazEnum['D']",
     "valueUsingEnumValue",
     "constObject[name_a]",
-    "(constObject)[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
-        tempObjForElementAccess[tempObjForElementAccess.r]
-      ]
-    ]
-  ]",
+    "tempObjForElementAccess.r",
     "name_a",
     "objWithComputedName[name_a]",
     "a",
@@ -6079,20 +6337,38 @@ console.log(valueTypedEnum);
 // Element access with constant name
 const name_a = 'a';
 console.log(constObject[name_a]);
+const uniqueSym = Symbol('aaa');
 // Nested element access
 const tempObjForElementAccess = {
-  o: 'a',
-  p: 'o',
-  q: 'p',
-  r: 'q',
+  // prettier-ignore
+  'o\\\\': 'a',
+  [uniqueSym]: 'o\\\\',
+  1: uniqueSym,
+  r: 1,
 } as const;
 console.log(
   // prettier-ignore
   (constObject)[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
+    (tempObjForElementAccess)[
+      (tempObjForElementAccess)[
         tempObjForElementAccess[tempObjForElementAccess.r]
       ]
+    ]
+  ]
+);
+
+interface TempObjForElementAccess2 {
+  [\`true\`]: 1;
+  1: \`'foo'\`;
+  "'foo'": 'bar';
+  bar: true;
+}
+declare const tempObjForElementAccess2: TempObjForElementAccess2;
+console.log(
+  // prettier-ignore
+  (tempObjForElementAccess2)[
+    (tempObjForElementAccess2)[
+      tempObjForElementAccess2[tempObjForElementAccess2.true]
     ]
   ]
 );
@@ -6390,22 +6666,40 @@ console.log(valueTypedEnum);
 // Element access with constant name
 const name_a = 'a';
 console.log(4 /* constObject[name_a] */);
+const uniqueSym = Symbol('aaa');
 // Nested element access
 const tempObjForElementAccess = {
-  o: 'a',
-  p: 'o',
-  q: 'p',
-  r: 'q',
+  // prettier-ignore
+  'o\\\\': 'a',
+  [uniqueSym]: 'o\\\\',
+  1: uniqueSym,
+  r: 1,
 } as const;
 console.log(
   // prettier-ignore
-  (4 /* (constObject)[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
-        tempObjForElementAccess[tempObjForElementAccess.r]
+  (constObject)[
+    (tempObjForElementAccess)[
+      (tempObjForElementAccess)[
+        tempObjForElementAccess[1 /* tempObjForElementAccess.r */]
       ]
     ]
-  ] */)
+  ]
+);
+
+interface TempObjForElementAccess2 {
+  [\`true\`]: 1;
+  1: \`'foo'\`;
+  "'foo'": 'bar';
+  bar: true;
+}
+declare const tempObjForElementAccess2: TempObjForElementAccess2;
+console.log(
+  // prettier-ignore
+  (tempObjForElementAccess2)[
+    (tempObjForElementAccess2)[
+      tempObjForElementAccess2[tempObjForElementAccess2.true]
+    ]
+  ]
 );
 
 // Object initializer with computed name
@@ -6498,7 +6792,7 @@ export {};
 
 exports[`createPortalTransformerWithTsLs with options test with unsafeHoistAsExpresion: generated source map 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;GAIVC,gBAAO;EACRC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZX,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXO,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQErB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBqB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;YAKNC,mCAA2B;YAC3BC,sCAA8B;YAC9BC,sCAA8B;YAC9BC,yCAAiC;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAgC3CC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;EAU7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGf9C,sBAAW;cACrB+C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRlD,qBAAW;;;;;SAKhBmD,0BAAc;;;;;;;;;;;;;;YAcXC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBSrD,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXc,gBAAQ;KACRuB,sBAAS;;YAEFe,cAAM;;;cAGJtD,mBAAW,EAAEC,qBAAW;aACzBqB,yBAAa;cACZgB,iBAAS,YAAYC,sBAAS;aAC/BgB,oDAAwC;8BACvBC,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;GAIVC,gBAAO;EACRC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZX,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXO,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQErB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBqB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;YAKNC,mCAA2B;YAC3BC,sCAA8B;YAC9BC,sCAA8B;YAC9BC,yCAAiC;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAgC3CC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;;;;;;gCAeCC,iCAAyB;;;;;;;;;;;;;;;;;;;;;;;+BAuB1BC,gBAAM;YACzBC,qCAA2B;;;wBAGf9C,sBAAW;cACrB+C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRlD,qBAAW;;;;;SAKhBmD,0BAAc;;;;;;;;;;;;;;YAcXC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBSrD,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXc,gBAAQ;KACRuB,sBAAS;;YAEFe,cAAM;;;cAGJtD,mBAAW,EAAEC,qBAAW;aACzBqB,yBAAa;cACZgB,iBAAS,YAAYC,sBAAS;aAC/BgB,oDAAwC;8BACvBC,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -6547,13 +6841,7 @@ exports[`createPortalTransformerWithTsLs with options test with unsafeHoistAsExp
     "BazEnum['D']",
     "valueUsingEnumValue",
     "constObject[name_a]",
-    "(constObject)[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
-        tempObjForElementAccess[tempObjForElementAccess.r]
-      ]
-    ]
-  ]",
+    "tempObjForElementAccess.r",
     "name_a",
     "objWithComputedName[name_a]",
     "a",
@@ -6778,20 +7066,38 @@ console.log(valueTypedEnum);
 // Element access with constant name
 const name_a = 'a';
 console.log(constObject[name_a]);
+const uniqueSym = Symbol('aaa');
 // Nested element access
 const tempObjForElementAccess = {
-  o: 'a',
-  p: 'o',
-  q: 'p',
-  r: 'q',
+  // prettier-ignore
+  'o\\\\': 'a',
+  [uniqueSym]: 'o\\\\',
+  1: uniqueSym,
+  r: 1,
 } as const;
 console.log(
   // prettier-ignore
   (constObject)[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
+    (tempObjForElementAccess)[
+      (tempObjForElementAccess)[
         tempObjForElementAccess[tempObjForElementAccess.r]
       ]
+    ]
+  ]
+);
+
+interface TempObjForElementAccess2 {
+  [\`true\`]: 1;
+  1: \`'foo'\`;
+  "'foo'": 'bar';
+  bar: true;
+}
+declare const tempObjForElementAccess2: TempObjForElementAccess2;
+console.log(
+  // prettier-ignore
+  (tempObjForElementAccess2)[
+    (tempObjForElementAccess2)[
+      tempObjForElementAccess2[tempObjForElementAccess2.true]
     ]
   ]
 );
@@ -7089,22 +7395,40 @@ console.log(valueTypedEnum);
 // Element access with constant name
 const name_a = 'a';
 console.log(4 /* constObject[name_a] */);
+const uniqueSym = Symbol('aaa');
 // Nested element access
 const tempObjForElementAccess = {
-  o: 'a',
-  p: 'o',
-  q: 'p',
-  r: 'q',
+  // prettier-ignore
+  'o\\\\': 'a',
+  [uniqueSym]: 'o\\\\',
+  1: uniqueSym,
+  r: 1,
 } as const;
 console.log(
   // prettier-ignore
-  (4 /* (constObject)[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
-        tempObjForElementAccess[tempObjForElementAccess.r]
+  (constObject)[
+    (tempObjForElementAccess)[
+      (tempObjForElementAccess)[
+        tempObjForElementAccess[1 /* tempObjForElementAccess.r */]
       ]
     ]
-  ] */)
+  ]
+);
+
+interface TempObjForElementAccess2 {
+  [\`true\`]: 1;
+  1: \`'foo'\`;
+  "'foo'": 'bar';
+  bar: true;
+}
+declare const tempObjForElementAccess2: TempObjForElementAccess2;
+console.log(
+  // prettier-ignore
+  (tempObjForElementAccess2)[
+    (tempObjForElementAccess2)[
+      tempObjForElementAccess2[tempObjForElementAccess2.true]
+    ]
+  ]
 );
 
 // Object initializer with computed name
@@ -7197,7 +7521,7 @@ export {};
 
 exports[`createPortalTransformerWithTsLs with options test with unsafeHoistFunctionCall: generated source map 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQEpB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBoB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;EAU7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGfzC,sBAAW;cACrB0C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR7C,qBAAW;;;;;;;YAOb8C,iBAAK;;0BAESA,iBAAK,gBAAgBA,iBAAK;;;;;;;;;;YAUxCC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBShD,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRmB,sBAAS;;YAEFe,cAAM;;;cAGJjD,mBAAW,EAAEC,qBAAW;aACzBoB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEdgB,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQEpB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBoB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;;;;;;gCAeCC,iCAAyB;;;;;;;;;;;;;;;;;;;;;;;+BAuB1BC,gBAAM;YACzBC,qCAA2B;;;wBAGfzC,sBAAW;cACrB0C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR7C,qBAAW;;;;;;;YAOb8C,iBAAK;;0BAESA,iBAAK,gBAAgBA,iBAAK;;;;;;;;;;YAUxCC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBShD,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRmB,sBAAS;;YAEFe,cAAM;;;cAGJjD,mBAAW,EAAEC,qBAAW;aACzBoB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEdgB,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -7241,13 +7565,7 @@ exports[`createPortalTransformerWithTsLs with options test with unsafeHoistFunct
     "BazEnum['D']",
     "valueUsingEnumValue",
     "constObject[name_a]",
-    "(constObject)[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
-        tempObjForElementAccess[tempObjForElementAccess.r]
-      ]
-    ]
-  ]",
+    "tempObjForElementAccess.r",
     "name_a",
     "objWithComputedName[name_a]",
     "a",
@@ -7471,20 +7789,38 @@ console.log(valueTypedEnum);
 // Element access with constant name
 const name_a = 'a';
 console.log(constObject[name_a]);
+const uniqueSym = Symbol('aaa');
 // Nested element access
 const tempObjForElementAccess = {
-  o: 'a',
-  p: 'o',
-  q: 'p',
-  r: 'q',
+  // prettier-ignore
+  'o\\\\': 'a',
+  [uniqueSym]: 'o\\\\',
+  1: uniqueSym,
+  r: 1,
 } as const;
 console.log(
   // prettier-ignore
   (constObject)[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
+    (tempObjForElementAccess)[
+      (tempObjForElementAccess)[
         tempObjForElementAccess[tempObjForElementAccess.r]
       ]
+    ]
+  ]
+);
+
+interface TempObjForElementAccess2 {
+  [\`true\`]: 1;
+  1: \`'foo'\`;
+  "'foo'": 'bar';
+  bar: true;
+}
+declare const tempObjForElementAccess2: TempObjForElementAccess2;
+console.log(
+  // prettier-ignore
+  (tempObjForElementAccess2)[
+    (tempObjForElementAccess2)[
+      tempObjForElementAccess2[tempObjForElementAccess2.true]
     ]
   ]
 );
@@ -7782,20 +8118,38 @@ console.log(valueTypedEnum);
 // Element access with constant name
 const name_a = 'a';
 console.log(4 /* constObject[name_a] */);
+const uniqueSym = Symbol('aaa');
 // Nested element access
 const tempObjForElementAccess = {
-  o: 'a',
-  p: 'o',
-  q: 'p',
-  r: 'q',
+  // prettier-ignore
+  'o\\\\': 'a',
+  [uniqueSym]: 'o\\\\',
+  1: uniqueSym,
+  r: 1,
 } as const;
 console.log(
   // prettier-ignore
-  (4 /* (constObject)[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
-        tempObjForElementAccess[tempObjForElementAccess.r]
+  (constObject)[
+    (tempObjForElementAccess)[
+      (tempObjForElementAccess)[
+        tempObjForElementAccess[1 /* tempObjForElementAccess.r */]
       ]
+    ]
+  ]
+);
+
+interface TempObjForElementAccess2 {
+  [\`true\`]: 1;
+  1: \`'foo'\`;
+  "'foo'": 'bar';
+  bar: true;
+}
+declare const tempObjForElementAccess2: TempObjForElementAccess2;
+console.log(
+  // prettier-ignore
+  (true /* (tempObjForElementAccess2)[
+    (tempObjForElementAccess2)[
+      tempObjForElementAccess2[tempObjForElementAccess2.true]
     ]
   ] */)
 );
@@ -7890,7 +8244,7 @@ export {};
 
 exports[`createPortalTransformerWithTsLs with options test with unsafeHoistWritableValues=true: generated source map 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;EAEvCS,yBAAc;;;;;;;;;;;;;;IAcZX,mBAAW,KAAKW,yBAAc,KAAKP,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZI,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQErB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBqB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;YAiBNC,4BAAgB;;;;;;;;;;;;;;;;;;;;;;EAsB1BC,+BAAoB;EACpBC,8BAAoB;EACpBC,iCAAsB;EACtBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;EAU7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGf7C,sBAAW;cACrB8C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRjD,qBAAW;;;;;;;;;;;;oDAY2BkD,gBAAC;;;;;;;YAOzCC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBSpD,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXc,gBAAQ;KACRsB,sBAAS;;YAEFe,cAAM;;;cAGJrD,mBAAW,EAAEC,qBAAW;aACzBqB,yBAAa;cACZe,iBAAS,YAAYC,sBAAS;;8BAEdgB,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,wBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,2BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;EAEvCS,yBAAc;;;;;;;;;;;;;;IAcZX,mBAAW,KAAKW,yBAAc,KAAKP,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZI,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQErB,wBAAS;;;;QAINC,mBAAW;;;;;;EAMjBqB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,4BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;YAiBNC,4BAAgB;;;;;;;;;;;;;;;;;;;;;;EAsB1BC,+BAAoB;EACpBC,8BAAoB;EACpBC,iCAAsB;EACtBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;;;;;;gCAeCC,iCAAyB;;;;;;;;;;;;;;;EAevDC;;;;GAIC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGf9C,sBAAW;cACrB+C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGRlD,qBAAW;;;;;;;;;;;;oDAY2BmD,gBAAC;;;;;;;YAOzCC,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBSrD,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXc,gBAAQ;KACRsB,sBAAS;;YAEFgB,cAAM;;;cAGJtD,mBAAW,EAAEC,qBAAW;aACzBqB,yBAAa;cACZe,iBAAS,YAAYC,sBAAS;;8BAEdiB,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -7938,11 +8292,10 @@ exports[`createPortalTransformerWithTsLs with options test with unsafeHoistWrita
     "BazEnum['D']",
     "valueUsingEnumValue",
     "constObject[name_a]",
-    "(constObject)[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
-        tempObjForElementAccess[tempObjForElementAccess.r]
-      ]
+    "tempObjForElementAccess.r",
+    "(tempObjForElementAccess2)[
+    (tempObjForElementAccess2)[
+      tempObjForElementAccess2[tempObjForElementAccess2.true]
     ]
   ]",
     "name_a",
@@ -8168,20 +8521,38 @@ console.log(valueTypedEnum);
 // Element access with constant name
 const name_a = 'a';
 console.log(constObject[name_a]);
+const uniqueSym = Symbol('aaa');
 // Nested element access
 const tempObjForElementAccess = {
-  o: 'a',
-  p: 'o',
-  q: 'p',
-  r: 'q',
+  // prettier-ignore
+  'o\\\\': 'a',
+  [uniqueSym]: 'o\\\\',
+  1: uniqueSym,
+  r: 1,
 } as const;
 console.log(
   // prettier-ignore
   (constObject)[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
+    (tempObjForElementAccess)[
+      (tempObjForElementAccess)[
         tempObjForElementAccess[tempObjForElementAccess.r]
       ]
+    ]
+  ]
+);
+
+interface TempObjForElementAccess2 {
+  [\`true\`]: 1;
+  1: \`'foo'\`;
+  "'foo'": 'bar';
+  bar: true;
+}
+declare const tempObjForElementAccess2: TempObjForElementAccess2;
+console.log(
+  // prettier-ignore
+  (tempObjForElementAccess2)[
+    (tempObjForElementAccess2)[
+      tempObjForElementAccess2[tempObjForElementAccess2.true]
     ]
   ]
 );
@@ -8479,22 +8850,40 @@ console.log(valueTypedEnum);
 // Element access with constant name
 const name_a = 'a';
 console.log(4 /* constObject[name_a] */);
+const uniqueSym = Symbol('aaa');
 // Nested element access
 const tempObjForElementAccess = {
-  o: 'a',
-  p: 'o',
-  q: 'p',
-  r: 'q',
+  // prettier-ignore
+  'o\\\\': 'a',
+  [uniqueSym]: 'o\\\\',
+  1: uniqueSym,
+  r: 1,
 } as const;
 console.log(
   // prettier-ignore
-  (4 /* (constObject)[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
-        tempObjForElementAccess[tempObjForElementAccess.r]
+  (constObject)[
+    (tempObjForElementAccess)[
+      (tempObjForElementAccess)[
+        tempObjForElementAccess[1 /* tempObjForElementAccess.r */]
       ]
     ]
-  ] */)
+  ]
+);
+
+interface TempObjForElementAccess2 {
+  [\`true\`]: 1;
+  1: \`'foo'\`;
+  "'foo'": 'bar';
+  bar: true;
+}
+declare const tempObjForElementAccess2: TempObjForElementAccess2;
+console.log(
+  // prettier-ignore
+  (tempObjForElementAccess2)[
+    (tempObjForElementAccess2)[
+      tempObjForElementAccess2[tempObjForElementAccess2.true]
+    ]
+  ]
 );
 
 // Object initializer with computed name
@@ -8587,7 +8976,7 @@ export {};
 
 exports[`createPortalTransformerWithTsLs with options test with useUndefinedSymbolForUndefinedValue=true: generated source map 1`] = `
 {
-  "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,yBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,4BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQEpB,yBAAS;;;;QAINC,mBAAW;;;;;;EAMjBoB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,6BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;EAU7BC;;;;;;GAMC;;;;+BAI4BC,gBAAM;YACzBC,qCAA2B;;;wBAGfzC,sBAAW;cACrB0C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR7C,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb8C,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS/C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRmB,sBAAS;;YAEFc,cAAM;;;cAGJhD,mBAAW,EAAEC,qBAAW;aACzBoB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
+  "mappings": ";;;;;;;;;;;;;;;;;;;qBAmBqBA,yBAAS;;;;;;EAM5BC,mBAAW;EACXC,qBAAW;EACXC,sBAAW;;;EAGXC,uBAAW;;EAEXC,sBAAW;EACXC,qBAAW;EACXC,sBAAW;;EAEXC,4BAAW;;;;;EAKXC,uBAAY;;EAEZC,4BAAY;EACZC,2BAAY;;EAEZV,mBAAW,GAAGC,qBAAW,GAAGC,sBAAW;;;;;;;;;;;;;;;;IAgBrCF,mBAAW,wBAAwBI,sBAAW;;;;;;GAM/CF,sBAAW;GACXF,mBAAW;EACZC,qBAAW;EACXC,sBAAW;EACXM,uBAAY;;;;;;;;;EASZG,kCAAwB;EACxBC,gCAAoB;EACpBC,6BAAiB;EACjBC,eAAG;;;;EAIHC,gBAAQ;oBACUA,gBAAQ,sBAAsBC,gBAAQ;EACxDC,YAAI;EACJC,WAAG;EACHC,WAAC;;;;;;;;KAQEpB,yBAAS;;;;QAINC,mBAAW;;;;;;EAMjBoB,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbC,wBAAa;EACbC,6BAAa;EACbC,uBAAa;EACbC,wBAAa;;EAEbC,wBAAgB;EAChBC,8BAAgB;;;EAGhBR,qBAAa;EACbC,yBAAa;EACbC,yBAAa;EACbG,uBAAa;EACbC,wBAAa;EACbC,wBAAgB;EAChBC,8BAAgB;;EAEhBC,wBAAgB;EAChBC,2BAAgB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAwChBC,8BAAoB;;EAEpBC,8BAAsB;;;;;;;YAOZC,iBAAS,EAAEC,sBAAS;;;;;;YAMpBC,iBAAS,EAAEC,sBAAS;;YAEpBC,oBAAY,EAAEC,yBAAY;;;4BAGVL,iBAAS;YACzBM,2BAAmB;;;uCAGQN,iBAAS,GAAGC,sBAAS;;;;;YAKhDM,2BAAmB;;;;;;;;;;;;;;;gCAeCC,iCAAyB;;;;;;;;;;;;;;;;;;;;;;;+BAuB1BC,gBAAM;YACzBC,qCAA2B;;;wBAGfzC,sBAAW;cACrB0C,SAAC,EAAEC,cAAE,EAAEC,YAAC;;;cAGR7C,qBAAW;;;;;;;;;;;;;;;;;;;YAmBb8C,cAAM;;;AAGlBA,cAAM;;;;;;;;;;;;;;;;;eAiBS/C,mBAAW;gBACVA,mBAAW,EAAEC,qBAAW;gBACxBC,sBAAW,EAAEC,uBAAW;;;;KAInCD,sBAAW;;KAEXa,gBAAQ;KACRmB,sBAAS;;YAEFc,cAAM;;;cAGJhD,mBAAW,EAAEC,qBAAW;aACzBoB,yBAAa;cACZY,iBAAS,YAAYC,sBAAS;;8BAEde,gBAAI;;;;;EAKhCC;;;GAGC;;;SAGMC;;;GAGN",
   "names": [
     "undefined",
     "constValue1",
@@ -8631,13 +9020,7 @@ exports[`createPortalTransformerWithTsLs with options test with useUndefinedSymb
     "BazEnum['D']",
     "valueUsingEnumValue",
     "constObject[name_a]",
-    "(constObject)[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
-        tempObjForElementAccess[tempObjForElementAccess.r]
-      ]
-    ]
-  ]",
+    "tempObjForElementAccess.r",
     "name_a",
     "objWithComputedName[name_a]",
     "a",
@@ -8860,20 +9243,38 @@ console.log(valueTypedEnum);
 // Element access with constant name
 const name_a = 'a';
 console.log(constObject[name_a]);
+const uniqueSym = Symbol('aaa');
 // Nested element access
 const tempObjForElementAccess = {
-  o: 'a',
-  p: 'o',
-  q: 'p',
-  r: 'q',
+  // prettier-ignore
+  'o\\\\': 'a',
+  [uniqueSym]: 'o\\\\',
+  1: uniqueSym,
+  r: 1,
 } as const;
 console.log(
   // prettier-ignore
   (constObject)[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
+    (tempObjForElementAccess)[
+      (tempObjForElementAccess)[
         tempObjForElementAccess[tempObjForElementAccess.r]
       ]
+    ]
+  ]
+);
+
+interface TempObjForElementAccess2 {
+  [\`true\`]: 1;
+  1: \`'foo'\`;
+  "'foo'": 'bar';
+  bar: true;
+}
+declare const tempObjForElementAccess2: TempObjForElementAccess2;
+console.log(
+  // prettier-ignore
+  (tempObjForElementAccess2)[
+    (tempObjForElementAccess2)[
+      tempObjForElementAccess2[tempObjForElementAccess2.true]
     ]
   ]
 );

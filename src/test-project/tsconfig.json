@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
     "declaration": true,
     "isolatedModules": true,
     "lib": ["ES2023"],
@@ -17,6 +16,7 @@
     "noUncheckedIndexedAccess": true,
     "stripInternal": true,
     "target": "es2023",
+    "types": ["node"],
     "verbatimModuleSyntax": true,
     "plugins": [
       {

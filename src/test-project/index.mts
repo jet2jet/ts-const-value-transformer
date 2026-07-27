@@ -199,20 +199,38 @@ console.log(valueTypedEnum);
 // Element access with constant name
 const name_a = 'a';
 console.log(constObject[name_a]);
+const uniqueSym = Symbol('aaa');
 // Nested element access
 const tempObjForElementAccess = {
-  o: 'a',
-  p: 'o',
-  q: 'p',
-  r: 'q',
+  // prettier-ignore
+  'o\\': 'a',
+  [uniqueSym]: 'o\\',
+  1: uniqueSym,
+  r: 1,
 } as const;
 console.log(
   // prettier-ignore
   (constObject)[
-    tempObjForElementAccess[
-      tempObjForElementAccess[
+    (tempObjForElementAccess)[
+      (tempObjForElementAccess)[
         tempObjForElementAccess[tempObjForElementAccess.r]
       ]
+    ]
+  ]
+);
+
+interface TempObjForElementAccess2 {
+  [`true`]: 1;
+  1: `'foo'`;
+  "'foo'": 'bar';
+  bar: true;
+}
+declare const tempObjForElementAccess2: TempObjForElementAccess2;
+console.log(
+  // prettier-ignore
+  (tempObjForElementAccess2)[
+    (tempObjForElementAccess2)[
+      tempObjForElementAccess2[tempObjForElementAccess2.true]
     ]
   ]
 );
