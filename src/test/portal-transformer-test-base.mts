@@ -20,19 +20,22 @@ export function testPortalTransformer(
   createPortalTransformer: (
     options: CreatePortalTransformerOptions
   ) => Promise<PortalTransformer>,
-  getPackageOptions: () => Partial<CreatePortalTransformerOptions>
+  getPackageOptions: () => Partial<CreatePortalTransformerOptions>,
+  cbJustAfterFinish?: () => void
 ): void;
 export function testPortalTransformer(
   createPortalTransformer: (
     options: CreatePortalTransformerWithTsgoOptions
   ) => Promise<PortalTransformerWithTsgo>,
-  getPackageOptions: () => Partial<CreatePortalTransformerWithTsgoOptions>
+  getPackageOptions: () => Partial<CreatePortalTransformerWithTsgoOptions>,
+  cbJustAfterFinish?: () => void
 ): void;
 export function testPortalTransformer(
   createPortalTransformer: (
     options: CreatePortalTransformerWithTsLsOptions
   ) => Promise<PortalTransformerWithTsLs>,
-  getPackageOptions: () => Partial<CreatePortalTransformerWithTsLsOptions>
+  getPackageOptions: () => Partial<CreatePortalTransformerWithTsLsOptions>,
+  cbJustAfterFinish?: () => void
 ): void;
 
 export function testPortalTransformer(
@@ -41,7 +44,8 @@ export function testPortalTransformer(
   ) => Promise<
     PortalTransformer | PortalTransformerWithTsgo | PortalTransformerWithTsLs
   >,
-  getPackageOptions: () => Partial<CreatePortalTransformerOptions>
+  getPackageOptions: () => Partial<CreatePortalTransformerOptions>,
+  cbJustAfterFinish?: () => void
 ): void {
   describe('basic process', () => {
     it('test', async () => {
@@ -72,6 +76,7 @@ export function testPortalTransformer(
           transformer.close();
         }
       }
+      cbJustAfterFinish?.();
     });
 
     it('transform with explicitly specifying typescript package', async () => {
@@ -100,6 +105,7 @@ export function testPortalTransformer(
           transformer.close();
         }
       }
+      cbJustAfterFinish?.();
     });
 
     it('transforming causes unchanged', async () => {
@@ -127,6 +133,7 @@ export function testPortalTransformer(
           transformer.close();
         }
       }
+      cbJustAfterFinish?.();
     });
   });
   describe('with options', () => {
@@ -156,6 +163,7 @@ export function testPortalTransformer(
           transformer.close();
         }
       }
+      cbJustAfterFinish?.();
     });
     it('test with hoistEnumValues=false', async () => {
       const transformer = await createPortalTransformer({
@@ -183,6 +191,7 @@ export function testPortalTransformer(
           transformer.close();
         }
       }
+      cbJustAfterFinish?.();
     });
     it('test with hoistExternalValues=false', async () => {
       const transformer = await createPortalTransformer({
@@ -210,6 +219,7 @@ export function testPortalTransformer(
           transformer.close();
         }
       }
+      cbJustAfterFinish?.();
     });
     it('test with hoistExternalValues=false and additionalExternalDirectories', async () => {
       const transformer = await createPortalTransformer({
@@ -238,6 +248,7 @@ export function testPortalTransformer(
           transformer.close();
         }
       }
+      cbJustAfterFinish?.();
     });
     it('test with unsafeHoistFunctionCall', async () => {
       const transformer = await createPortalTransformer({
@@ -265,6 +276,7 @@ export function testPortalTransformer(
           transformer.close();
         }
       }
+      cbJustAfterFinish?.();
     });
     it('test with hoistPureFunctionCall', async () => {
       const transformer = await createPortalTransformer({
@@ -292,6 +304,7 @@ export function testPortalTransformer(
           transformer.close();
         }
       }
+      cbJustAfterFinish?.();
     });
     it('test with unsafeHoistAsExpresion', async () => {
       const transformer = await createPortalTransformer({
@@ -319,6 +332,7 @@ export function testPortalTransformer(
           transformer.close();
         }
       }
+      cbJustAfterFinish?.();
     });
     it('test with unsafeHoistWritableValues=true', async () => {
       const transformer = await createPortalTransformer({
@@ -346,6 +360,7 @@ export function testPortalTransformer(
           transformer.close();
         }
       }
+      cbJustAfterFinish?.();
     });
     it('test with hoistUndefinedSymbol=false', async () => {
       const transformer = await createPortalTransformer({
@@ -373,6 +388,7 @@ export function testPortalTransformer(
           transformer.close();
         }
       }
+      cbJustAfterFinish?.();
     });
     it('test with useUndefinedSymbolForUndefinedValue=true', async () => {
       const transformer = await createPortalTransformer({
@@ -400,6 +416,7 @@ export function testPortalTransformer(
           transformer.close();
         }
       }
+      cbJustAfterFinish?.();
     });
     it('test with hoistConstTemplateLiteral=true', async () => {
       const transformer = await createPortalTransformer({
@@ -427,6 +444,7 @@ export function testPortalTransformer(
           transformer.close();
         }
       }
+      cbJustAfterFinish?.();
     });
   });
 }
