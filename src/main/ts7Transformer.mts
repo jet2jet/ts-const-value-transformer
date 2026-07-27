@@ -1,7 +1,7 @@
-import type * as tsgoAst from '@typescript/native/unstable/ast';
-import type * as tsgoAstFactory from '@typescript/native/unstable/ast/factory';
-import type * as tsgoAstUtils from '@typescript/native/unstable/ast/utils';
-import type * as tsgoApi from '@typescript/native/unstable/sync';
+import type * as ts7Ast from '@typescript/native/unstable/ast';
+import type * as ts7AstFactory from '@typescript/native/unstable/ast/factory';
+import type * as ts7AstUtils from '@typescript/native/unstable/ast/utils';
+import type * as ts7Api from '@typescript/native/unstable/sync';
 import type * as sourceMap from 'source-map';
 import {
   printSourceWithMapWithProxy,
@@ -15,28 +15,28 @@ import type { ApiProxy, ProxyTypes } from './TsProxy.mjs';
 
 const SYMBOL_TYPE_PROPERTIES = Symbol('type-properties');
 
-interface TypeWithSymbols extends tsgoApi.Type {
-  [SYMBOL_TYPE_PROPERTIES]?: readonly tsgoApi.Symbol[];
+interface TypeWithSymbols extends ts7Api.Type {
+  [SYMBOL_TYPE_PROPERTIES]?: readonly ts7Api.Symbol[];
 }
 
 function getNodeText(
-  node: tsgoAst.Node,
-  sourceFile: tsgoAst.SourceFile,
-  tsgoAstInstance: typeof tsgoAst
+  node: ts7Ast.Node,
+  sourceFile: ts7Ast.SourceFile,
+  ts7AstInstance: typeof ts7Ast
 ): string {
   // same implementation of legacy typescript's getText()
-  const start = tsgoAstInstance.getTokenPosOfNode(node, sourceFile);
+  const start = ts7AstInstance.getTokenPosOfNode(node, sourceFile);
   return sourceFile.text.slice(start, node.end);
 }
 
 function getNodeFullText(
-  node: tsgoAst.Node,
-  sourceFile: tsgoAst.SourceFile
+  node: ts7Ast.Node,
+  sourceFile: ts7Ast.SourceFile
 ): string {
   return sourceFile.text.slice(node.pos, node.end);
 }
 
-function getPropertiesOfType(type: tsgoApi.Type, typeChecker: tsgoApi.Checker) {
+function getPropertiesOfType(type: ts7Api.Type, typeChecker: ts7Api.Checker) {
   // Use cache because getPropertiesOfType uses api calls
   let properties = (type as TypeWithSymbols)[SYMBOL_TYPE_PROPERTIES];
   if (!properties) {
@@ -47,26 +47,26 @@ function getPropertiesOfType(type: tsgoApi.Type, typeChecker: tsgoApi.Checker) {
 }
 
 function getAliasedSymbol(
-  typeChecker: tsgoApi.Checker,
-  project: tsgoApi.Project,
-  symbol: tsgoApi.Symbol,
-  tsgoApiInstance: typeof tsgoApi,
-  tsgoAstInstance: typeof tsgoAst,
-  tsgoAstUtilsInstance: typeof tsgoAstUtils
-): tsgoApi.Symbol {
+  typeChecker: ts7Api.Checker,
+  project: ts7Api.Project,
+  symbol: ts7Api.Symbol,
+  ts7ApiInstance: typeof ts7Api,
+  ts7AstInstance: typeof ts7Ast,
+  ts7AstUtilsInstance: typeof ts7AstUtils
+): ts7Api.Symbol {
   for (const n of symbol.declarations) {
     const node = n.resolve(project);
     if (!node) {
       continue;
     }
-    if (tsgoAstInstance.isImportClause(node)) {
+    if (ts7AstInstance.isImportClause(node)) {
       const d = node.name;
       const p = node.parent;
       if (
         d != null &&
         node.namedBindings == null &&
         p != null &&
-        tsgoAstInstance.isImportDeclaration(p)
+        ts7AstInstance.isImportDeclaration(p)
       ) {
         const exportSym = pickExportSymbolFromSpecifier(
           p.moduleSpecifier,
@@ -78,13 +78,13 @@ function getAliasedSymbol(
               typeChecker,
               project,
               r,
-              tsgoApiInstance,
-              tsgoAstInstance,
-              tsgoAstUtilsInstance
+              ts7ApiInstance,
+              ts7AstInstance,
+              ts7AstUtilsInstance
             )
           : symbol;
       }
-    } else if (tsgoAstInstance.isImportSpecifier(node)) {
+    } else if (ts7AstInstance.isImportSpecifier(node)) {
       if (node.propertyName) {
         const symName = typeChecker.getSymbolAtLocation(node.propertyName);
         const r = symName && getActualSymbolFromExport(symName);
@@ -93,18 +93,18 @@ function getAliasedSymbol(
               typeChecker,
               project,
               r,
-              tsgoApiInstance,
-              tsgoAstInstance,
-              tsgoAstUtilsInstance
+              ts7ApiInstance,
+              ts7AstInstance,
+              ts7AstUtilsInstance
             )
           : symbol;
       } else {
         const p = node.parent?.parent?.parent;
-        if (p != null && tsgoAstInstance.isImportDeclaration(p)) {
+        if (p != null && ts7AstInstance.isImportDeclaration(p)) {
           const exportName = getNodeText(
             node.name,
             node.getSourceFile(),
-            tsgoAstInstance
+            ts7AstInstance
           );
           const exportSym = pickExportSymbolFromSpecifier(
             p.moduleSpecifier,
@@ -116,9 +116,9 @@ function getAliasedSymbol(
                 typeChecker,
                 project,
                 r,
-                tsgoApiInstance,
-                tsgoAstInstance,
-                tsgoAstUtilsInstance
+                ts7ApiInstance,
+                ts7AstInstance,
+                ts7AstUtilsInstance
               )
             : symbol;
         }
@@ -128,7 +128,7 @@ function getAliasedSymbol(
   return symbol;
 
   function pickExportSymbolFromSpecifier(
-    moduleSpecifier: tsgoAst.Node,
+    moduleSpecifier: ts7Ast.Node,
     exportName: string
   ) {
     const sym = typeChecker.getSymbolAtLocation(moduleSpecifier);
@@ -137,7 +137,7 @@ function getAliasedSymbol(
     }
     const exports = sym.getExports();
     const e = exports.get(
-      tsgoAstUtilsInstance.escapeLeadingUnderscores('export=')
+      ts7AstUtilsInstance.escapeLeadingUnderscores('export=')
     );
     if (e) {
       const t = typeChecker.getTypeOfSymbol(e);
@@ -150,25 +150,24 @@ function getAliasedSymbol(
       }
     } else {
       return (
-        exports.get(
-          tsgoAstUtilsInstance.escapeLeadingUnderscores(exportName)
-        ) ?? null
+        exports.get(ts7AstUtilsInstance.escapeLeadingUnderscores(exportName)) ??
+        null
       );
     }
   }
 
-  function getActualSymbolFromExport(symbol: tsgoApi.Symbol): tsgoApi.Symbol {
+  function getActualSymbolFromExport(symbol: ts7Api.Symbol): ts7Api.Symbol {
     for (const n of symbol.declarations) {
       const node = n.resolve(project);
       if (!node) {
         continue;
       }
-      if (tsgoAstInstance.isExportSpecifier(node)) {
+      if (ts7AstInstance.isExportSpecifier(node)) {
         // Handle 'export { A } from "module"' pattern
         const p = node.parent?.parent;
         if (
           p != null &&
-          tsgoAstInstance.isExportDeclaration(p) &&
+          ts7AstInstance.isExportDeclaration(p) &&
           p.moduleSpecifier
         ) {
           if (node.propertyName) {
@@ -179,7 +178,7 @@ function getAliasedSymbol(
             const exportName = getNodeText(
               node.name,
               node.getSourceFile(),
-              tsgoAstInstance
+              ts7AstInstance
             );
             const exportSym = pickExportSymbolFromSpecifier(
               p.moduleSpecifier,
@@ -195,11 +194,11 @@ function getAliasedSymbol(
         //   * export { A } : only node.name is available
         //   * export { A as B } -- or -- export { A as 'literal' } : node.propertyName is available
         //   -- node.propertyName would not be identifier
-        if (tsgoAstInstance.isIdentifier(nameNode)) {
+        if (ts7AstInstance.isIdentifier(nameNode)) {
           const s = typeChecker.getResolvedSymbol(nameNode);
           return s ?? symbol;
         }
-      } else if (tsgoAstInstance.isExportAssignment(node)) {
+      } else if (ts7AstInstance.isExportAssignment(node)) {
         const exprSym = typeChecker.getSymbolAtLocation(node.expression);
         return exprSym ?? symbol;
       }
@@ -208,23 +207,23 @@ function getAliasedSymbol(
   }
 }
 
-function isSourceFileFromExternalLibrary(sourceFile: tsgoAst.SourceFile) {
+function isSourceFileFromExternalLibrary(sourceFile: ts7Ast.SourceFile) {
   // Legacy typescript only uses `isExternalLibraryImport` derived from whether the path includes 'node_modules'
   return /[\\/]node_modules[\\/]/.test(sourceFile.fileName);
 }
 
 function getNameFromElementAccessExpression(
-  node: tsgoAst.ElementAccessExpression,
-  typeChecker: tsgoApi.Checker,
-  tsgoApiInstance: typeof tsgoApi
+  node: ts7Ast.ElementAccessExpression,
+  typeChecker: ts7Api.Checker,
+  ts7ApiInstance: typeof ts7Api
 ) {
   const type = typeChecker.getTypeAtLocation(node.argumentExpression);
   if (type == null) {
     return false;
   }
   if (
-    ((type.flags & tsgoApiInstance.TypeFlags.StringLiteral) !== 0 ||
-      (type.flags & tsgoApiInstance.TypeFlags.NumberLiteral) !== 0) &&
+    ((type.flags & ts7ApiInstance.TypeFlags.StringLiteral) !== 0 ||
+      (type.flags & ts7ApiInstance.TypeFlags.NumberLiteral) !== 0) &&
     'value' in type
   ) {
     return `${type.value as string | number}`;
@@ -232,23 +231,20 @@ function getNameFromElementAccessExpression(
   return null;
 }
 
-function isEnumLiteralType(
-  type: tsgoApi.Type,
-  tsgoApiInstance: typeof tsgoApi
-) {
-  return (type.flags & tsgoApiInstance.TypeFlags.EnumLiteral) !== 0;
+function isEnumLiteralType(type: ts7Api.Type, ts7ApiInstance: typeof ts7Api) {
+  return (type.flags & ts7ApiInstance.TypeFlags.EnumLiteral) !== 0;
 }
 
 function makeTsgoProxy(
-  project: tsgoApi.Project | null,
-  tsgoApiInstance: typeof tsgoApi,
-  tsgoAstInstance: typeof tsgoAst,
-  tsgoAstFactoryInstance: typeof tsgoAstFactory,
-  tsgoAstUtilsInstance: typeof tsgoAstUtils
+  project: ts7Api.Project | null,
+  ts7ApiInstance: typeof ts7Api,
+  ts7AstInstance: typeof ts7Ast,
+  ts7AstFactoryInstance: typeof ts7AstFactory,
+  ts7AstUtilsInstance: typeof ts7AstUtils
 ): ApiProxy {
   const typeChecker = project && project.checker;
 
-  const getTypeAtLocation = (node: tsgoAst.Node) => {
+  const getTypeAtLocation = (node: ts7Ast.Node) => {
     if (!typeChecker) {
       return undefined;
     }
@@ -256,7 +252,7 @@ function makeTsgoProxy(
   };
 
   const isEnumAccess = (
-    node: tsgoAst.PropertyAccessExpression | tsgoAst.ElementAccessExpression
+    node: ts7Ast.PropertyAccessExpression | ts7Ast.ElementAccessExpression
   ) => {
     if (!typeChecker) {
       return false;
@@ -265,10 +261,10 @@ function makeTsgoProxy(
     if (type == null) {
       return false;
     }
-    return isEnumLiteralType(type, tsgoApiInstance);
+    return isEnumLiteralType(type, ts7ApiInstance);
   };
   const isReadonlyPropertyAccess = (
-    node: tsgoAst.PropertyAccessExpression | tsgoAst.ElementAccessExpression
+    node: ts7Ast.PropertyAccessExpression | ts7Ast.ElementAccessExpression
   ): boolean => {
     if (!typeChecker) {
       return false;
@@ -277,13 +273,13 @@ function makeTsgoProxy(
     if (type == null) {
       return false;
     }
-    const memberName = tsgoAstInstance.isPropertyAccessExpression(node)
+    const memberName = ts7AstInstance.isPropertyAccessExpression(node)
       ? node.name.text
-      : getNameFromElementAccessExpression(node, typeChecker, tsgoApiInstance);
+      : getNameFromElementAccessExpression(node, typeChecker, ts7ApiInstance);
     if (memberName == null) {
       return false;
     }
-    if (type.flags & tsgoApiInstance.TypeFlags.Object) {
+    if (type.flags & ts7ApiInstance.TypeFlags.Object) {
       const properties = getPropertiesOfType(type, typeChecker);
       const prop = properties.find((sym) => sym.name === memberName);
       if (prop) {
@@ -294,9 +290,9 @@ function makeTsgoProxy(
         // similar to getDeclarationModifierFlagsFromSymbol
         if (prop.valueDeclaration) {
           const effectiveDeclaration =
-            (prop.flags & tsgoApiInstance.SymbolFlags.GetAccessor &&
+            (prop.flags & ts7ApiInstance.SymbolFlags.GetAccessor &&
               prop.declarations.find(
-                (decl) => decl.kind === tsgoAstInstance.SyntaxKind.GetAccessor
+                (decl) => decl.kind === ts7AstInstance.SyntaxKind.GetAccessor
               )) ||
             prop.valueDeclaration;
           const n = effectiveDeclaration.resolve(project);
@@ -304,7 +300,7 @@ function makeTsgoProxy(
             n != null &&
             'modifierFlags' in n &&
             ((n.modifierFlags as number) &
-              tsgoAstInstance.ModifierFlags.Readonly) !==
+              ts7AstInstance.ModifierFlags.Readonly) !==
               0
           ) {
             return true;
@@ -315,20 +311,20 @@ function makeTsgoProxy(
           const decl = prop.declarations[0]!.resolve(project);
           if (
             decl &&
-            tsgoAstInstance.isPropertySignatureDeclaration(decl) &&
+            ts7AstInstance.isPropertySignatureDeclaration(decl) &&
             decl.modifiers?.some(
-              (m) => m.kind === tsgoAstInstance.SyntaxKind.ReadonlyKeyword
+              (m) => m.kind === ts7AstInstance.SyntaxKind.ReadonlyKeyword
             )
           ) {
             return true;
           }
           if (
             decl &&
-            tsgoAstInstance.isVariableDeclaration(decl) &&
+            ts7AstInstance.isVariableDeclaration(decl) &&
             // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
             decl.parent &&
-            tsgoAstInstance.isVariableDeclarationList(decl.parent) &&
-            decl.parent.flags & tsgoAstInstance.NodeFlags.Const
+            ts7AstInstance.isVariableDeclarationList(decl.parent) &&
+            decl.parent.flags & ts7AstInstance.NodeFlags.Const
           ) {
             return true;
           }
@@ -345,9 +341,9 @@ function makeTsgoProxy(
         node: ProxyTypes.Node
       ) => ProxyTypes.Node | readonly ProxyTypes.Node[] | undefined
     ): T {
-      return tsgoAstInstance.visitEachChild(
-        node as ProxyTypes.Node as tsgoAst.Node,
-        visitor as tsgoAst.Visitor
+      return ts7AstInstance.visitEachChild(
+        node as ProxyTypes.Node as ts7Ast.Node,
+        visitor as ts7Ast.Visitor
       ) as ProxyTypes.Node as T;
     },
     getNodeText(
@@ -355,9 +351,9 @@ function makeTsgoProxy(
       sourceFile: ProxyTypes.SourceFile
     ): string {
       return getNodeText(
-        node as tsgoAst.Node,
-        sourceFile as tsgoAst.SourceFile,
-        tsgoAstInstance
+        node as ts7Ast.Node,
+        sourceFile as ts7Ast.SourceFile,
+        ts7AstInstance
       );
     },
     getNodeFullText(
@@ -365,8 +361,8 @@ function makeTsgoProxy(
       sourceFile: ProxyTypes.SourceFile
     ): string {
       return getNodeFullText(
-        node as tsgoAst.Node,
-        sourceFile as tsgoAst.SourceFile
+        node as ts7Ast.Node,
+        sourceFile as ts7Ast.SourceFile
       );
     },
     appendMultiLineComment<Node extends ProxyTypes.Node>(
@@ -389,67 +385,67 @@ function makeTsgoProxy(
       return range;
     },
     isExpression(node: ProxyTypes.Node): node is ProxyTypes.Expression {
-      return tsgoAstInstance.isExpression(node as tsgoAst.Node);
+      return ts7AstInstance.isExpression(node as ts7Ast.Node);
     },
     isAsExpression(node: ProxyTypes.Node): boolean {
-      return tsgoAstInstance.isAsExpression(node as tsgoAst.Node);
+      return ts7AstInstance.isAsExpression(node as ts7Ast.Node);
     },
     isCallLikeExpression(node: ProxyTypes.Node): boolean {
-      const n = node as tsgoAst.Node;
+      const n = node as ts7Ast.Node;
       // Since TypeScript 7, isCallLikeExpression includes BinaryExpression, which is treated as CallLike only when 'instanceof' syntax
-      if (tsgoAstInstance.isBinaryExpression(n)) {
+      if (ts7AstInstance.isBinaryExpression(n)) {
         return (
-          n.operatorToken.kind === tsgoAstInstance.SyntaxKind.InstanceOfKeyword
+          n.operatorToken.kind === ts7AstInstance.SyntaxKind.InstanceOfKeyword
         );
       }
-      if (!tsgoAstInstance.isCallLikeExpression(n)) {
+      if (!ts7AstInstance.isCallLikeExpression(n)) {
         return false;
       }
       return true;
     },
     isTemplateExpression(node: ProxyTypes.Node): boolean {
-      return tsgoAstInstance.isTemplateExpression(node as tsgoAst.Node);
+      return ts7AstInstance.isTemplateExpression(node as ts7Ast.Node);
     },
     isPropertyAccessExpression(
       node: ProxyTypes.Node
     ): node is ProxyTypes.PropertyAccessExpression {
-      return tsgoAstInstance.isPropertyAccessExpression(node as tsgoAst.Node);
+      return ts7AstInstance.isPropertyAccessExpression(node as ts7Ast.Node);
     },
     isElementAccessExpression(
       node: ProxyTypes.Node
     ): node is ProxyTypes.ElementAccessExpression {
-      return tsgoAstInstance.isElementAccessExpression(node as tsgoAst.Node);
+      return ts7AstInstance.isElementAccessExpression(node as ts7Ast.Node);
     },
     isInterfaceDeclaration(node: ProxyTypes.Node): boolean {
-      return tsgoAstInstance.isInterfaceDeclaration(node as tsgoAst.Node);
+      return ts7AstInstance.isInterfaceDeclaration(node as ts7Ast.Node);
     },
     isTypeAliasDeclaration(node: ProxyTypes.Node): boolean {
-      return tsgoAstInstance.isTypeAliasDeclaration(node as tsgoAst.Node);
+      return ts7AstInstance.isTypeAliasDeclaration(node as ts7Ast.Node);
     },
     isImportDeclaration(node: ProxyTypes.Node): boolean {
-      return tsgoAstInstance.isImportDeclaration(node as tsgoAst.Node);
+      return ts7AstInstance.isImportDeclaration(node as ts7Ast.Node);
     },
     isTypeOnlyExportDeclaration(node: ProxyTypes.Node): boolean {
       // almost same implementation of legacy typescript's isTypeOnlyExportDeclaration()
-      const n = node as tsgoAst.Node;
-      if (tsgoAstInstance.isExportSpecifier(n)) {
+      const n = node as ts7Ast.Node;
+      if (ts7AstInstance.isExportSpecifier(n)) {
         if (n.isTypeOnly) {
           return true;
         }
         const p1 = n.parent;
-        if (p1 == null || !tsgoAstInstance.isNamedExports(p1)) {
+        if (p1 == null || !ts7AstInstance.isNamedExports(p1)) {
           return false;
         }
         const p2 = p1.parent;
-        if (p2 == null || !tsgoAstInstance.isExportDeclaration(p2)) {
+        if (p2 == null || !ts7AstInstance.isExportDeclaration(p2)) {
           return false;
         }
         return p2.isTypeOnly;
-      } else if (tsgoAstInstance.isExportDeclaration(n)) {
+      } else if (ts7AstInstance.isExportDeclaration(n)) {
         return n.isTypeOnly && !!n.moduleSpecifier && !n.exportClause;
-      } else if (tsgoAstInstance.isNamespaceExport(n)) {
+      } else if (ts7AstInstance.isNamespaceExport(n)) {
         const p = n.parent;
-        if (p == null || !tsgoAstInstance.isExportDeclaration(p)) {
+        if (p == null || !ts7AstInstance.isExportDeclaration(p)) {
           return false;
         }
         return p.isTypeOnly;
@@ -457,24 +453,24 @@ function makeTsgoProxy(
       return false;
     },
     isIdentifier(node: ProxyTypes.Node): node is ProxyTypes.Identifier {
-      return tsgoAstInstance.isIdentifier(node as tsgoAst.Node);
+      return ts7AstInstance.isIdentifier(node as ts7Ast.Node);
     },
     isComputedPropertyName(node: ProxyTypes.Node): boolean {
-      return tsgoAstInstance.isComputedPropertyName(node as tsgoAst.Node);
+      return ts7AstInstance.isComputedPropertyName(node as ts7Ast.Node);
     },
 
     getTypeAtLocation(node: ProxyTypes.Node): ProxyTypes.Type | undefined {
-      return getTypeAtLocation(node as tsgoAst.Node);
+      return getTypeAtLocation(node as ts7Ast.Node);
     },
     isEnumLiteral(type: ProxyTypes.Type): boolean {
-      return isEnumLiteralType(type as tsgoApi.Type, tsgoApiInstance);
+      return isEnumLiteralType(type as ts7Api.Type, ts7ApiInstance);
     },
     isStringLiteral(
       type: ProxyTypes.Type
     ): type is ProxyTypes.StringLiteralType {
       return (
-        ((type as tsgoApi.Type).flags &
-          tsgoApiInstance.TypeFlags.StringLiteral) !==
+        ((type as ts7Api.Type).flags &
+          ts7ApiInstance.TypeFlags.StringLiteral) !==
         0
       );
     },
@@ -482,91 +478,90 @@ function makeTsgoProxy(
       type: ProxyTypes.Type
     ): type is ProxyTypes.NumberLiteralType {
       return (
-        ((type as tsgoApi.Type).flags &
-          tsgoApiInstance.TypeFlags.NumberLiteral) !==
+        ((type as ts7Api.Type).flags &
+          ts7ApiInstance.TypeFlags.NumberLiteral) !==
         0
       );
     },
     isBigIntLiteral(type: ProxyTypes.Type): boolean {
       return (
-        ((type as tsgoApi.Type).flags &
-          tsgoApiInstance.TypeFlags.BigIntLiteral) !==
+        ((type as ts7Api.Type).flags &
+          ts7ApiInstance.TypeFlags.BigIntLiteral) !==
         0
       );
     },
     isBooleanLiteral(type: ProxyTypes.Type): boolean {
       return (
-        ((type as tsgoApi.Type).flags &
-          tsgoApiInstance.TypeFlags.BooleanLiteral) !==
+        ((type as ts7Api.Type).flags &
+          ts7ApiInstance.TypeFlags.BooleanLiteral) !==
         0
       );
     },
     isNullType(type: ProxyTypes.Type): boolean {
       return (
-        ((type as tsgoApi.Type).flags & tsgoApiInstance.TypeFlags.Null) !== 0
+        ((type as ts7Api.Type).flags & ts7ApiInstance.TypeFlags.Null) !== 0
       );
     },
     isUndefinedType(type: ProxyTypes.Type): boolean {
       return (
-        ((type as tsgoApi.Type).flags & tsgoApiInstance.TypeFlags.Undefined) !==
-        0
+        ((type as ts7Api.Type).flags & ts7ApiInstance.TypeFlags.Undefined) !== 0
       );
     },
     typeToString(type: ProxyTypes.Type): string {
-      return typeChecker?.typeToString(type as tsgoApi.Type) ?? '';
+      return typeChecker?.typeToString(type as ts7Api.Type) ?? '';
     },
 
     factory: {
       createIdentifier(text: string): ProxyTypes.Identifier {
-        return tsgoAstFactoryInstance.createIdentifier(text);
+        return ts7AstFactoryInstance.createIdentifier(text);
       },
       createStringLiteral(value: string): ProxyTypes.PrimaryExpression {
-        return tsgoAstFactoryInstance.createStringLiteral(value, 0);
+        return ts7AstFactoryInstance.createStringLiteral(value, 0);
       },
       createNumericLiteral(
         value: number | string
       ): ProxyTypes.PrimaryExpression {
-        return tsgoAstFactoryInstance.createNumericLiteral(`${value}`, 0);
+        return ts7AstFactoryInstance.createNumericLiteral(`${value}`, 0);
       },
       createExpressionWithMinusToken(
         operand: ProxyTypes.Expression
       ): ProxyTypes.Expression {
-        return tsgoAstFactoryInstance.createParenthesizedExpression(
-          tsgoAstFactoryInstance.createPrefixUnaryExpression(
-            tsgoAstInstance.SyntaxKind.MinusToken,
-            operand as tsgoAst.Expression
+        return ts7AstFactoryInstance.createParenthesizedExpression(
+          ts7AstFactoryInstance.createPrefixUnaryExpression(
+            ts7AstInstance.SyntaxKind.MinusToken,
+            operand as ts7Ast.Expression
           )
         );
       },
       createBigIntLiteral(value: string): ProxyTypes.PrimaryExpression {
-        return tsgoAstFactoryInstance.createBigIntLiteral(value, 0);
+        return ts7AstFactoryInstance.createBigIntLiteral(value, 0);
       },
       createTrue(): ProxyTypes.PrimaryExpression {
-        return tsgoAstFactoryInstance.createKeywordExpression(
-          tsgoAstInstance.SyntaxKind.TrueKeyword
+        return ts7AstFactoryInstance.createKeywordExpression(
+          ts7AstInstance.SyntaxKind.TrueKeyword
         );
       },
       createFalse(): ProxyTypes.PrimaryExpression {
-        return tsgoAstFactoryInstance.createKeywordExpression(
-          tsgoAstInstance.SyntaxKind.FalseKeyword
+        return ts7AstFactoryInstance.createKeywordExpression(
+          ts7AstInstance.SyntaxKind.FalseKeyword
         );
       },
       createNull(): ProxyTypes.PrimaryExpression {
-        return tsgoAstFactoryInstance.createKeywordExpression(
-          tsgoAstInstance.SyntaxKind.NullKeyword
+        return ts7AstFactoryInstance.createKeywordExpression(
+          ts7AstInstance.SyntaxKind.NullKeyword
         );
       },
       createParenthesizedExpression(
         expression: ProxyTypes.Expression
       ): ProxyTypes.Expression {
-        return tsgoAstFactoryInstance.createParenthesizedExpression(
-          expression as tsgoAst.Expression
+        return ts7AstFactoryInstance.createParenthesizedExpression(
+          expression as ts7Ast.Expression
         );
       },
       createVoidZero(): ProxyTypes.Expression {
-        return tsgoAstFactoryInstance.createParenthesizedExpression(
-          tsgoAstFactoryInstance.createVoidExpression(
-            tsgoAstFactoryInstance.createNumericLiteral('0', 0)
+        return ts7AstFactoryInstance.createParenthesizedExpression(
+          ts7AstFactoryInstance.createVoidExpression(
+            ts7AstFactoryInstance.createNumericLiteral('0', 0)
           )
         );
       },
@@ -578,17 +573,15 @@ function makeTsgoProxy(
         | ProxyTypes.ElementAccessExpression
     ): boolean {
       return isEnumAccess(
-        node as
-          | tsgoAst.PropertyAccessExpression
-          | tsgoAst.ElementAccessExpression
+        node as ts7Ast.PropertyAccessExpression | ts7Ast.ElementAccessExpression
       );
     },
     isEnumIdentifier(node: ProxyTypes.Identifier): boolean {
       if (!typeChecker) {
         return false;
       }
-      const type = getTypeAtLocation(node as tsgoAst.Identifier);
-      return type != null && isEnumLiteralType(type, tsgoApiInstance);
+      const type = getTypeAtLocation(node as ts7Ast.Identifier);
+      return type != null && isEnumLiteralType(type, ts7ApiInstance);
     },
     isExternalReference(
       node: ProxyTypes.Node,
@@ -597,7 +590,7 @@ function makeTsgoProxy(
       if (!typeChecker) {
         return false;
       }
-      const nodeSym = typeChecker.getSymbolAtLocation(node as tsgoAst.Node);
+      const nodeSym = typeChecker.getSymbolAtLocation(node as ts7Ast.Node);
       let nodeFrom = nodeSym?.declarations?.[0];
       while (nodeFrom) {
         const n = nodeFrom.resolve(project);
@@ -623,21 +616,21 @@ function makeTsgoProxy(
           }
         }
         // Walk into the 'import' variables
-        if (!tsgoAstInstance.isImportSpecifier(n)) {
+        if (!ts7AstInstance.isImportSpecifier(n)) {
           break;
         }
         const baseName = n.propertyName ?? n.name;
         const baseSym = typeChecker.getSymbolAtLocation(baseName);
         // We must follow 'aliased' symbol for parsing the symbol which name is not changed from the exported symbol name
         const exportedSym =
-          baseSym && baseSym.flags & tsgoApiInstance.SymbolFlags.Alias
+          baseSym && baseSym.flags & ts7ApiInstance.SymbolFlags.Alias
             ? (getAliasedSymbol(
                 typeChecker,
                 project,
                 baseSym,
-                tsgoApiInstance,
-                tsgoAstInstance,
-                tsgoAstUtilsInstance
+                ts7ApiInstance,
+                ts7AstInstance,
+                ts7AstUtilsInstance
               ) ?? baseSym)
             : baseSym;
         const nextNodeFrom = exportedSym?.declarations?.[0];
@@ -646,7 +639,7 @@ function makeTsgoProxy(
         }
         nodeFrom = nextNodeFrom;
       }
-      const type = getTypeAtLocation(node as tsgoAst.Node);
+      const type = getTypeAtLocation(node as ts7Ast.Node);
       const sym = type?.getSymbol();
       if (!sym) {
         return false;
@@ -666,12 +659,12 @@ function makeTsgoProxy(
       sourceFile: ProxyTypes.SourceFile
     ): boolean {
       const fullText = getNodeFullText(
-        node as tsgoAst.Node,
-        sourceFile as tsgoAst.SourceFile
+        node as ts7Ast.Node,
+        sourceFile as ts7Ast.SourceFile
       );
-      const ranges = tsgoAstInstance.getLeadingCommentRanges(fullText, 0) ?? [];
+      const ranges = ts7AstInstance.getLeadingCommentRanges(fullText, 0) ?? [];
       for (const range of ranges) {
-        if (range.kind !== tsgoAstInstance.SyntaxKind.MultiLineCommentTrivia) {
+        if (range.kind !== ts7AstInstance.SyntaxKind.MultiLineCommentTrivia) {
           continue;
         }
         const text = fullText.slice(range.pos + 2, range.end - 2).trim();
@@ -688,27 +681,27 @@ function makeTsgoProxy(
       if (!typeChecker) {
         return false;
       }
-      const node = _node as tsgoAst.Node;
+      const node = _node as ts7Ast.Node;
       if (
-        tsgoAstInstance.isIdentifier(node) &&
+        ts7AstInstance.isIdentifier(node) &&
         // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
         node.parent &&
-        !tsgoAstInstance.isPropertyAccessExpression(node.parent)
+        !ts7AstInstance.isPropertyAccessExpression(node.parent)
       ) {
         const nodeSym = typeChecker.getSymbolAtLocation(node);
         if (nodeSym?.valueDeclaration) {
-          let target: tsgoAst.Node | undefined =
+          let target: ts7Ast.Node | undefined =
             nodeSym.valueDeclaration.resolve(project);
           for (;;) {
             if (!target) {
               return false;
             }
             // Parameters are writable
-            if (target.kind === tsgoAstInstance.SyntaxKind.Parameter) {
+            if (target.kind === ts7AstInstance.SyntaxKind.Parameter) {
               return false;
             }
-            if (tsgoAstInstance.isVariableDeclarationList(target)) {
-              if (target.flags & tsgoAstInstance.NodeFlags.Const) {
+            if (ts7AstInstance.isVariableDeclarationList(target)) {
+              if (target.flags & ts7AstInstance.NodeFlags.Const) {
                 return true;
               } else {
                 return false;
@@ -722,8 +715,8 @@ function makeTsgoProxy(
         }
       }
       if (
-        tsgoAstInstance.isPropertyAccessExpression(node) ||
-        tsgoAstInstance.isElementAccessExpression(node)
+        ts7AstInstance.isPropertyAccessExpression(node) ||
+        ts7AstInstance.isElementAccessExpression(node)
       ) {
         if (isEnumAccess(node)) {
           return true;
@@ -741,20 +734,16 @@ function makeTsgoProxy(
         return false;
       }
       const node = _node as
-        | tsgoAst.PropertyAccessExpression
-        | tsgoAst.ElementAccessExpression;
+        | ts7Ast.PropertyAccessExpression
+        | ts7Ast.ElementAccessExpression;
       const type = getTypeAtLocation(node.expression);
-      const memberName = tsgoAstInstance.isPropertyAccessExpression(node)
+      const memberName = ts7AstInstance.isPropertyAccessExpression(node)
         ? node.name.text
-        : getNameFromElementAccessExpression(
-            node,
-            typeChecker,
-            tsgoApiInstance
-          );
+        : getNameFromElementAccessExpression(node, typeChecker, ts7ApiInstance);
       if (memberName == null) {
         return false;
       }
-      if (type != null && type.flags & tsgoApiInstance.TypeFlags.Object) {
+      if (type != null && type.flags & ts7ApiInstance.TypeFlags.Object) {
         const properties = getPropertiesOfType(type, typeChecker);
         const prop = properties.find((sym) => sym.name === memberName);
         // If the property access uses indexed access, `prop` will be undefined
@@ -772,20 +761,20 @@ function makeTsgoProxy(
         return false;
       }
       if (
-        tsgoAstInstance.isPropertyAccessExpression(parent as tsgoAst.Node) ||
-        tsgoAstInstance.isElementAccessExpression(parent as tsgoAst.Node)
+        ts7AstInstance.isPropertyAccessExpression(parent as ts7Ast.Node) ||
+        ts7AstInstance.isElementAccessExpression(parent as ts7Ast.Node)
       ) {
         return false;
       }
-      const type = getTypeAtLocation(node as tsgoAst.Identifier);
-      const sym = typeChecker.getSymbolAtLocation(node as tsgoAst.Identifier);
+      const type = getTypeAtLocation(node as ts7Ast.Identifier);
+      const sym = typeChecker.getSymbolAtLocation(node as ts7Ast.Identifier);
       if (!sym || sym.name !== 'undefined') {
         return false;
       }
       if (
         type == null ||
-        type.flags & tsgoApiInstance.TypeFlags.UnionOrIntersection ||
-        !(type.flags & tsgoApiInstance.TypeFlags.Undefined)
+        type.flags & ts7ApiInstance.TypeFlags.UnionOrIntersection ||
+        !(type.flags & ts7ApiInstance.TypeFlags.Undefined)
       ) {
         return false;
       }
@@ -793,42 +782,42 @@ function makeTsgoProxy(
     },
 
     makeStringLiteralSource(value: string): string {
-      // tsgo does not have escapeNonAsciiString
+      // ts7 does not have escapeNonAsciiString
       return JSON.stringify(value);
     },
     getLineStarts(sourceFile: ProxyTypes.SourceFile): readonly number[] {
-      return tsgoAstInstance.computeLineStarts(sourceFile.text);
+      return ts7AstInstance.computeLineStarts(sourceFile.text);
     },
   };
 }
 
 export function printSource(
-  project: tsgoApi.Project | null,
-  sourceFile: tsgoAst.SourceFile,
-  tsgoApiInstance: typeof tsgoApi,
-  tsgoAstInstance: typeof tsgoAst,
-  tsgoAstFactoryInstance: typeof tsgoAstFactory,
-  tsgoAstUtilsInstance: typeof tsgoAstUtils
+  project: ts7Api.Project | null,
+  sourceFile: ts7Ast.SourceFile,
+  ts7ApiInstance: typeof ts7Api,
+  ts7AstInstance: typeof ts7Ast,
+  ts7AstFactoryInstance: typeof ts7AstFactory,
+  ts7AstUtilsInstance: typeof ts7AstUtils
 ): string {
   return printSourceWithProxy(
     sourceFile,
     makeTsgoProxy(
       project,
-      tsgoApiInstance,
-      tsgoAstInstance,
-      tsgoAstFactoryInstance,
-      tsgoAstUtilsInstance
+      ts7ApiInstance,
+      ts7AstInstance,
+      ts7AstFactoryInstance,
+      ts7AstUtilsInstance
     )
   );
 }
 
 export function printSourceWithMap(
-  project: tsgoApi.Project | null,
-  sourceFile: tsgoAst.SourceFile,
-  tsgoApiInstance: typeof tsgoApi,
-  tsgoAstInstance: typeof tsgoAst,
-  tsgoAstFactoryInstance: typeof tsgoAstFactory,
-  tsgoAstUtilsInstance: typeof tsgoAstUtils,
+  project: ts7Api.Project | null,
+  sourceFile: ts7Ast.SourceFile,
+  ts7ApiInstance: typeof ts7Api,
+  ts7AstInstance: typeof ts7Ast,
+  ts7AstFactoryInstance: typeof ts7AstFactory,
+  ts7AstUtilsInstance: typeof ts7AstUtils,
   originalSourceName: string,
   startOfSourceMap?: sourceMap.RawSourceMap
 ): [string, sourceMap.RawSourceMap] {
@@ -837,54 +826,54 @@ export function printSourceWithMap(
     originalSourceName,
     makeTsgoProxy(
       project,
-      tsgoApiInstance,
-      tsgoAstInstance,
-      tsgoAstFactoryInstance,
-      tsgoAstUtilsInstance
+      ts7ApiInstance,
+      ts7AstInstance,
+      ts7AstFactoryInstance,
+      ts7AstUtilsInstance
     ),
     startOfSourceMap
   );
 }
 
 export function transformSource(
-  project: tsgoApi.Project | null,
-  sourceFile: tsgoAst.SourceFile,
-  tsgoApiInstance: typeof tsgoApi,
-  tsgoAstInstance: typeof tsgoAst,
-  tsgoAstFactoryInstance: typeof tsgoAstFactory,
-  tsgoAstUtilsInstance: typeof tsgoAstUtils,
+  project: ts7Api.Project | null,
+  sourceFile: ts7Ast.SourceFile,
+  ts7ApiInstance: typeof ts7Api,
+  ts7AstInstance: typeof ts7Ast,
+  ts7AstFactoryInstance: typeof ts7AstFactory,
+  ts7AstUtilsInstance: typeof ts7AstUtils,
   options?: TransformOptions
-): tsgoAst.SourceFile {
+): ts7Ast.SourceFile {
   const proxy = makeTsgoProxy(
     project,
-    tsgoApiInstance,
-    tsgoAstInstance,
-    tsgoAstFactoryInstance,
-    tsgoAstUtilsInstance
+    ts7ApiInstance,
+    ts7AstInstance,
+    ts7AstFactoryInstance,
+    ts7AstUtilsInstance
   );
   return transformSourceWithProxy(
     sourceFile,
     proxy,
     undefined,
     options
-  ) as tsgoAst.SourceFile;
+  ) as ts7Ast.SourceFile;
 }
 
 export function transformAndPrintSource(
-  project: tsgoApi.Project | null,
-  sourceFile: tsgoAst.SourceFile,
-  tsgoApiInstance: typeof tsgoApi,
-  tsgoAstInstance: typeof tsgoAst,
-  tsgoAstFactoryInstance: typeof tsgoAstFactory,
-  tsgoAstUtilsInstance: typeof tsgoAstUtils,
+  project: ts7Api.Project | null,
+  sourceFile: ts7Ast.SourceFile,
+  ts7ApiInstance: typeof ts7Api,
+  ts7AstInstance: typeof ts7Ast,
+  ts7AstFactoryInstance: typeof ts7AstFactory,
+  ts7AstUtilsInstance: typeof ts7AstUtils,
   options?: TransformOptions
 ): string {
   const proxy = makeTsgoProxy(
     project,
-    tsgoApiInstance,
-    tsgoAstInstance,
-    tsgoAstFactoryInstance,
-    tsgoAstUtilsInstance
+    ts7ApiInstance,
+    ts7AstInstance,
+    ts7AstFactoryInstance,
+    ts7AstUtilsInstance
   );
   return transformAndPrintSourceWithProxy(
     sourceFile,
@@ -895,22 +884,22 @@ export function transformAndPrintSource(
 }
 
 export function transformAndPrintSourceWithMap(
-  project: tsgoApi.Project | null,
-  sourceFile: tsgoAst.SourceFile,
-  tsgoApiInstance: typeof tsgoApi,
-  tsgoAstInstance: typeof tsgoAst,
-  tsgoAstFactoryInstance: typeof tsgoAstFactory,
-  tsgoAstUtilsInstance: typeof tsgoAstUtils,
+  project: ts7Api.Project | null,
+  sourceFile: ts7Ast.SourceFile,
+  ts7ApiInstance: typeof ts7Api,
+  ts7AstInstance: typeof ts7Ast,
+  ts7AstFactoryInstance: typeof ts7AstFactory,
+  ts7AstUtilsInstance: typeof ts7AstUtils,
   originalSourceName: string,
   options?: TransformOptions,
   startOfSourceMap?: sourceMap.RawSourceMap
 ): [string, sourceMap.RawSourceMap] {
   const proxy = makeTsgoProxy(
     project,
-    tsgoApiInstance,
-    tsgoAstInstance,
-    tsgoAstFactoryInstance,
-    tsgoAstUtilsInstance
+    ts7ApiInstance,
+    ts7AstInstance,
+    ts7AstFactoryInstance,
+    ts7AstUtilsInstance
   );
   return transformAndPrintSourceWithMapWithProxy(
     sourceFile,

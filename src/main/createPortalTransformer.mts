@@ -3,11 +3,11 @@ import { createRequire } from 'module';
 import * as path from 'path';
 import type { RawSourceMap } from 'source-map';
 import type * as tsNamespace from 'typescript';
-import createPortalTransformerWithTsgo, {
-  createPortalTransformerSyncWithTsgo,
-  type CreatePortalTransformerWithTsgoOptions,
-  type PortalTransformerWithTsgo,
-} from './createPortalTransformerWithTsgo.mjs';
+import createPortalTransformerWithTs7, {
+  createPortalTransformerSyncWithTs7,
+  type CreatePortalTransformerWithTs7Options,
+  type PortalTransformerWithTs7,
+} from './createPortalTransformerWithTs7.mjs';
 import { getIgnoreFilesFunction, type TransformOptions } from './transform.mjs';
 import { transformAndPrintSourceWithMap } from './tscTransformer.mjs';
 
@@ -101,23 +101,23 @@ function isTypeScript7(ts: typeof tsNamespace) {
 
 function makeTsgoOptions(
   options: CreatePortalTransformerOptions
-): CreatePortalTransformerWithTsgoOptions {
-  const tsgoOptions: CreatePortalTransformerWithTsgoOptions = {
+): CreatePortalTransformerWithTs7Options {
+  const ts7Options: CreatePortalTransformerWithTs7Options = {
     ...options,
   };
   // Adjust package paths
   if (typeof options.typescript === 'string') {
-    tsgoOptions.tsgoAst = `${options.typescript}/unstable/ast`;
-    tsgoOptions.tsgoAstFactory = `${options.typescript}/unstable/ast/factory`;
-    tsgoOptions.tsgoAstUtils = `${options.typescript}/unstable/ast/utils`;
-    tsgoOptions.tsgoApi = `${options.typescript}/unstable/sync`;
+    ts7Options.ts7Ast = `${options.typescript}/unstable/ast`;
+    ts7Options.ts7AstFactory = `${options.typescript}/unstable/ast/factory`;
+    ts7Options.ts7AstUtils = `${options.typescript}/unstable/ast/utils`;
+    ts7Options.ts7Api = `${options.typescript}/unstable/sync`;
   }
-  return tsgoOptions;
+  return ts7Options;
 }
 
 function convertTsgoTransformerToPortalTransformer(
   ts: typeof tsNamespace,
-  transformer: PortalTransformerWithTsgo
+  transformer: PortalTransformerWithTs7
 ): PortalTransformer {
   const newTransformer = {
     ...transformer,
@@ -329,7 +329,7 @@ export default async function createPortalTransformer(
   }
 
   if (isTypeScript7(ts)) {
-    const transformer = await createPortalTransformerWithTsgo(
+    const transformer = await createPortalTransformerWithTs7(
       makeTsgoOptions(options)
     );
     return convertTsgoTransformerToPortalTransformer(ts, transformer);
@@ -359,7 +359,7 @@ export function createPortalTransformerSync(
   }
 
   if (isTypeScript7(ts)) {
-    const transformer = createPortalTransformerSyncWithTsgo(
+    const transformer = createPortalTransformerSyncWithTs7(
       makeTsgoOptions(options)
     );
     return convertTsgoTransformerToPortalTransformer(ts, transformer);

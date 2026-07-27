@@ -5,9 +5,9 @@ import type {
   PortalTransformer,
 } from '@/createPortalTransformer.mjs';
 import type {
-  CreatePortalTransformerWithTsgoOptions,
-  PortalTransformerWithTsgo,
-} from '@/createPortalTransformerWithTsgo.mjs';
+  CreatePortalTransformerWithTs7Options,
+  PortalTransformerWithTs7,
+} from '@/createPortalTransformerWithTs7.mjs';
 import type {
   CreatePortalTransformerWithTsLsOptions,
   PortalTransformerWithTsLs,
@@ -25,9 +25,9 @@ export function testPortalTransformer(
 ): void;
 export function testPortalTransformer(
   createPortalTransformer: (
-    options: CreatePortalTransformerWithTsgoOptions
-  ) => Promise<PortalTransformerWithTsgo>,
-  getPackageOptions: () => Partial<CreatePortalTransformerWithTsgoOptions>,
+    options: CreatePortalTransformerWithTs7Options
+  ) => Promise<PortalTransformerWithTs7>,
+  getPackageOptions: () => Partial<CreatePortalTransformerWithTs7Options>,
   cbJustAfterFinish?: () => void
 ): void;
 export function testPortalTransformer(
@@ -42,7 +42,7 @@ export function testPortalTransformer(
   createPortalTransformer: (
     options: CreatePortalTransformerOptions
   ) => Promise<
-    PortalTransformer | PortalTransformerWithTsgo | PortalTransformerWithTsLs
+    PortalTransformer | PortalTransformerWithTs7 | PortalTransformerWithTsLs
   >,
   getPackageOptions: () => Partial<CreatePortalTransformerOptions>,
   cbJustAfterFinish?: () => void

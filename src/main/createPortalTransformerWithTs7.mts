@@ -1,38 +1,38 @@
 import { createRequire } from 'module';
 import * as path from 'path';
 import { pathToFileURL } from 'url';
-import type * as tsgoAst from '@typescript/native/unstable/ast';
-import type * as tsgoAstFactory from '@typescript/native/unstable/ast/factory';
-import type * as tsgoAstUtils from '@typescript/native/unstable/ast/utils';
-import type * as tsgoApi from '@typescript/native/unstable/sync';
+import type * as ts7Ast from '@typescript/native/unstable/ast';
+import type * as ts7AstFactory from '@typescript/native/unstable/ast/factory';
+import type * as ts7AstUtils from '@typescript/native/unstable/ast/utils';
+import type * as ts7Api from '@typescript/native/unstable/sync';
 import type { RawSourceMap } from 'source-map';
 import type {
   PortalTransformerResult,
   PortalTransformerResultNonNull,
 } from './createPortalTransformer.mjs';
 import { getIgnoreFilesFunction, type TransformOptions } from './transform.mjs';
-import { transformAndPrintSourceWithMap } from './tsgoTransformer.mjs';
+import { transformAndPrintSourceWithMap } from './ts7Transformer.mjs';
 
 const require = createRequire(import.meta.url);
 
-export interface CreatePortalTransformerWithTsgoOptions
+export interface CreatePortalTransformerWithTs7Options
   extends TransformOptions {
   /** Path to tsconfig.json. If omitted, `tsconfig.json` will be used. */
   project?: string;
   /** Package path to `typescript/unstable/ast` or `typescript/unstable/ast` namespace object. */
-  tsgoAst?: string | typeof tsgoAst;
+  ts7Ast?: string | typeof ts7Ast;
   /**
    * Package path to `typescript/unstable/ast/factory` or `typescript/unstable/ast/factory` namespace object.
-   * If omitted and {@linkcode tsgoAst} is a string value, `tsgoAst + '/factory'` is used.
+   * If omitted and {@linkcode ts7Ast} is a string value, `ts7Ast + '/factory'` is used.
    */
-  tsgoAstFactory?: string | typeof tsgoAstFactory;
+  ts7AstFactory?: string | typeof ts7AstFactory;
   /**
    * Package path to `typescript/unstable/ast/utils` or `typescript/unstable/ast/utils` namespace object.
-   * If omitted and {@linkcode tsgoAst} is a string value, `tsgoAst + '/utils'` is used.
+   * If omitted and {@linkcode ts7Ast} is a string value, `ts7Ast + '/utils'` is used.
    */
-  tsgoAstUtils?: string | typeof tsgoAstUtils;
+  ts7AstUtils?: string | typeof ts7AstUtils;
   /** Package path to `typescript/unstable/sync` or `typescript/unstable/sync` namespace object. */
-  tsgoApi?: string | typeof tsgoApi;
+  ts7Api?: string | typeof ts7Api;
   /** The current directory for file search. Also affects to `project` option. */
   cwd?: string;
   /** Specifies to cache base (original) source code for check if the input is changed. Default is false. */
@@ -41,15 +41,15 @@ export interface CreatePortalTransformerWithTsgoOptions
   cacheResult?: boolean;
 }
 
-export interface PortalTransformerWithTsgo {
+export interface PortalTransformerWithTs7 {
   /** The `typescript/unstable/ast` namespace object */
-  readonly tsgoAst: typeof tsgoAst;
+  readonly ts7Ast: typeof ts7Ast;
   /** The `typescript/unstable/ast/factory` namespace object */
-  readonly tsgoAstFactory: typeof tsgoAstFactory;
+  readonly ts7AstFactory: typeof ts7AstFactory;
   /** The `typescript/unstable/ast/utils` namespace object */
-  readonly tsgoAstUtils: typeof tsgoAstUtils;
+  readonly ts7AstUtils: typeof ts7AstUtils;
   /** The `typescript/unstable/sync` namespace object */
-  readonly tsgoApi: typeof tsgoApi;
+  readonly ts7Api: typeof ts7Api;
   /** Clears transformed cache. */
   clearCache(): void;
   /**
@@ -99,19 +99,19 @@ function optionsToString(options: TransformOptions) {
 }
 
 function createPortalTransformerImpl(
-  options: CreatePortalTransformerWithTsgoOptions,
-  tsgoAstInstance: typeof tsgoAst,
-  tsgoAstFactoryInstance: typeof tsgoAstFactory,
-  tsgoAstUtilsInstance: typeof tsgoAstUtils,
-  tsgoApiInstance: typeof tsgoApi
-): PortalTransformerWithTsgo {
+  options: CreatePortalTransformerWithTs7Options,
+  ts7AstInstance: typeof ts7Ast,
+  ts7AstFactoryInstance: typeof ts7AstFactory,
+  ts7AstUtilsInstance: typeof ts7AstUtils,
+  ts7ApiInstance: typeof ts7Api
+): PortalTransformerWithTs7 {
   const project = options.project ?? 'tsconfig.json';
   const ignoreFiles = getIgnoreFilesFunction(options.ignoreFiles);
   const cwd = options.cwd ?? process.cwd();
   const cacheBaseSource = options.cacheBaseSource ?? false;
   const cacheResult = options.cacheResult ?? true;
 
-  const api = new tsgoApiInstance.API({ cwd });
+  const api = new ts7ApiInstance.API({ cwd });
   const conf = api.parseConfigFile({
     uri: pathToFileURL(path.resolve(cwd, project)).toString(),
   });
@@ -136,10 +136,10 @@ function createPortalTransformerImpl(
   >();
 
   const instance = {
-    tsgoAst: tsgoAstInstance,
-    tsgoAstFactory: tsgoAstFactoryInstance,
-    tsgoAstUtils: tsgoAstUtilsInstance,
-    tsgoApi: tsgoApiInstance,
+    ts7Ast: ts7AstInstance,
+    ts7AstFactory: ts7AstFactoryInstance,
+    ts7AstUtils: ts7AstUtilsInstance,
+    ts7Api: ts7ApiInstance,
     clearCache: () => cache.clear(),
     transform: (content, fileName, sourceMap, individualOptions) => {
       const individualOptionsJson = optionsToString(individualOptions ?? {});
@@ -173,10 +173,10 @@ function createPortalTransformerImpl(
         transformAndPrintSourceWithMap(
           tsProject,
           sourceFile,
-          tsgoApiInstance,
-          tsgoAstInstance,
-          tsgoAstFactoryInstance,
-          tsgoAstUtilsInstance,
+          ts7ApiInstance,
+          ts7AstInstance,
+          ts7AstFactoryInstance,
+          ts7AstUtilsInstance,
           fileName,
           { ...options, ...individualOptions },
           rawSourceMap
@@ -204,180 +204,174 @@ function createPortalTransformerImpl(
     close: () => {
       snapshot.dispose();
     },
-  } satisfies PortalTransformerWithTsgo;
+  } satisfies PortalTransformerWithTs7;
   return instance;
 }
 
 /**
  * Creates the new portal transformer instance for the TS project using language server.
- * After creation, the transformation process can be performed by calling {@link PortalTransformerWithTsgo.transform}.
+ * After creation, the transformation process can be performed by calling {@link PortalTransformerWithTs7.transform}.
  */
-export default async function createPortalTransformerWithTsgo(
-  options: CreatePortalTransformerWithTsgoOptions = {}
-): Promise<PortalTransformerWithTsgo> {
-  let tsgoAstInstance: typeof tsgoAst;
-  if (options.tsgoAst != null) {
-    if (typeof options.tsgoAst === 'string') {
+export default async function createPortalTransformerWithTs7(
+  options: CreatePortalTransformerWithTs7Options = {}
+): Promise<PortalTransformerWithTs7> {
+  let ts7AstInstance: typeof ts7Ast;
+  if (options.ts7Ast != null) {
+    if (typeof options.ts7Ast === 'string') {
       // Use eval to avoid webpack warnings
       // eslint-disable-next-line no-eval
-      tsgoAstInstance = (await eval(
-        'import(options.tsgoAst)'
-      )) as typeof tsgoAst;
+      ts7AstInstance = (await eval('import(options.ts7Ast)')) as typeof ts7Ast;
     } else {
-      tsgoAstInstance = options.tsgoAst;
+      ts7AstInstance = options.ts7Ast;
     }
   } else {
-    tsgoAstInstance = (await import(
+    ts7AstInstance = (await import(
       // @ts-expect-error: the import path is different in the development
       'typescript/unstable/ast'
-    )) as typeof tsgoAst;
+    )) as typeof ts7Ast;
   }
-  let tsgoAstFactoryInstance: typeof tsgoAstFactory;
-  if (options.tsgoAstFactory != null) {
-    if (typeof options.tsgoAstFactory === 'string') {
+  let ts7AstFactoryInstance: typeof ts7AstFactory;
+  if (options.ts7AstFactory != null) {
+    if (typeof options.ts7AstFactory === 'string') {
       // Use eval to avoid webpack warnings
       // eslint-disable-next-line no-eval
-      tsgoAstFactoryInstance = (await eval(
-        'import(options.tsgoAstFactory)'
-      )) as typeof tsgoAstFactory;
+      ts7AstFactoryInstance = (await eval(
+        'import(options.ts7AstFactory)'
+      )) as typeof ts7AstFactory;
     } else {
-      tsgoAstFactoryInstance = options.tsgoAstFactory;
+      ts7AstFactoryInstance = options.ts7AstFactory;
     }
   } else {
-    if (typeof options.tsgoAst === 'string') {
+    if (typeof options.ts7Ast === 'string') {
       // Use eval to avoid webpack warnings
       // eslint-disable-next-line no-eval
-      tsgoAstFactoryInstance = (await eval(
-        "import(options.tsgoAst + '/factory')"
-      )) as typeof tsgoAstFactory;
+      ts7AstFactoryInstance = (await eval(
+        "import(options.ts7Ast + '/factory')"
+      )) as typeof ts7AstFactory;
     } else {
-      tsgoAstFactoryInstance = (await import(
+      ts7AstFactoryInstance = (await import(
         // @ts-expect-error: the import path is different in the development
         'typescript/unstable/ast/factory'
-      )) as typeof tsgoAstFactory;
+      )) as typeof ts7AstFactory;
     }
   }
-  let tsgoAstUtilsInstance: typeof tsgoAstUtils;
-  if (options.tsgoAstUtils != null) {
-    if (typeof options.tsgoAstUtils === 'string') {
+  let ts7AstUtilsInstance: typeof ts7AstUtils;
+  if (options.ts7AstUtils != null) {
+    if (typeof options.ts7AstUtils === 'string') {
       // Use eval to avoid webpack warnings
       // eslint-disable-next-line no-eval
-      tsgoAstUtilsInstance = (await eval(
-        'import(options.tsgoAstUtils)'
-      )) as typeof tsgoAstUtils;
+      ts7AstUtilsInstance = (await eval(
+        'import(options.ts7AstUtils)'
+      )) as typeof ts7AstUtils;
     } else {
-      tsgoAstUtilsInstance = options.tsgoAstUtils;
+      ts7AstUtilsInstance = options.ts7AstUtils;
     }
   } else {
-    if (typeof options.tsgoAst === 'string') {
+    if (typeof options.ts7Ast === 'string') {
       // Use eval to avoid webpack warnings
       // eslint-disable-next-line no-eval
-      tsgoAstUtilsInstance = (await eval(
-        "import(options.tsgoAst + '/utils')"
-      )) as typeof tsgoAstUtils;
+      ts7AstUtilsInstance = (await eval(
+        "import(options.ts7Ast + '/utils')"
+      )) as typeof ts7AstUtils;
     } else {
-      tsgoAstUtilsInstance = (await import(
+      ts7AstUtilsInstance = (await import(
         // @ts-expect-error: the import path is different in the development
         'typescript/unstable/ast/utils'
-      )) as typeof tsgoAstUtils;
+      )) as typeof ts7AstUtils;
     }
   }
-  let tsgoApiInstance: typeof tsgoApi;
-  if (options.tsgoApi != null) {
-    if (typeof options.tsgoApi === 'string') {
+  let ts7ApiInstance: typeof ts7Api;
+  if (options.ts7Api != null) {
+    if (typeof options.ts7Api === 'string') {
       // Use eval to avoid webpack warnings
       // eslint-disable-next-line no-eval
-      tsgoApiInstance = (await eval(
-        'import(options.tsgoApi)'
-      )) as typeof tsgoApi;
+      ts7ApiInstance = (await eval('import(options.ts7Api)')) as typeof ts7Api;
     } else {
-      tsgoApiInstance = options.tsgoApi;
+      ts7ApiInstance = options.ts7Api;
     }
   } else {
-    tsgoApiInstance = (await import(
+    ts7ApiInstance = (await import(
       // @ts-expect-error: the import path is different in the development
       'typescript/unstable/sync'
-    )) as typeof tsgoApi;
+    )) as typeof ts7Api;
   }
   return createPortalTransformerImpl(
     options,
-    tsgoAstInstance,
-    tsgoAstFactoryInstance,
-    tsgoAstUtilsInstance,
-    tsgoApiInstance
+    ts7AstInstance,
+    ts7AstFactoryInstance,
+    ts7AstUtilsInstance,
+    ts7ApiInstance
   );
 }
 
 /**
  * Creates the new portal transformer instance for the TS project (using `require` function).
- * After creation, the transformation process can be performed by calling {@link PortalTransformerWithTsgo.transform}.
+ * After creation, the transformation process can be performed by calling {@link PortalTransformerWithTs7.transform}.
  */
-export function createPortalTransformerSyncWithTsgo(
-  options: CreatePortalTransformerWithTsgoOptions = {}
-): PortalTransformerWithTsgo {
-  let tsgoAstInstance: typeof tsgoAst;
-  if (options.tsgoAst != null) {
-    if (typeof options.tsgoAst === 'string') {
-      tsgoAstInstance = require(options.tsgoAst) as typeof tsgoAst;
+export function createPortalTransformerSyncWithTs7(
+  options: CreatePortalTransformerWithTs7Options = {}
+): PortalTransformerWithTs7 {
+  let ts7AstInstance: typeof ts7Ast;
+  if (options.ts7Ast != null) {
+    if (typeof options.ts7Ast === 'string') {
+      ts7AstInstance = require(options.ts7Ast) as typeof ts7Ast;
     } else {
-      tsgoAstInstance = options.tsgoAst;
+      ts7AstInstance = options.ts7Ast;
     }
   } else {
-    tsgoAstInstance = require('typescript/unstable/ast') as typeof tsgoAst;
+    ts7AstInstance = require('typescript/unstable/ast') as typeof ts7Ast;
   }
-  let tsgoAstFactoryInstance: typeof tsgoAstFactory;
-  if (options.tsgoAstFactory != null) {
-    if (typeof options.tsgoAstFactory === 'string') {
-      tsgoAstFactoryInstance = require(
-        options.tsgoAstFactory
-      ) as typeof tsgoAstFactory;
+  let ts7AstFactoryInstance: typeof ts7AstFactory;
+  if (options.ts7AstFactory != null) {
+    if (typeof options.ts7AstFactory === 'string') {
+      ts7AstFactoryInstance = require(
+        options.ts7AstFactory
+      ) as typeof ts7AstFactory;
     } else {
-      tsgoAstFactoryInstance = options.tsgoAstFactory;
+      ts7AstFactoryInstance = options.ts7AstFactory;
     }
   } else {
-    if (typeof options.tsgoAst === 'string') {
-      tsgoAstFactoryInstance = require(
-        options.tsgoAst + '/factory'
-      ) as typeof tsgoAstFactory;
+    if (typeof options.ts7Ast === 'string') {
+      ts7AstFactoryInstance = require(
+        options.ts7Ast + '/factory'
+      ) as typeof ts7AstFactory;
     } else {
-      tsgoAstFactoryInstance =
-        require('typescript/unstable/ast/factory') as typeof tsgoAstFactory;
-    }
-  }
-  let tsgoAstUtilsInstance: typeof tsgoAstUtils;
-  if (options.tsgoAstUtils != null) {
-    if (typeof options.tsgoAstUtils === 'string') {
-      tsgoAstUtilsInstance = require(
-        options.tsgoAstUtils
-      ) as typeof tsgoAstUtils;
-    } else {
-      tsgoAstUtilsInstance = options.tsgoAstUtils;
-    }
-  } else {
-    if (typeof options.tsgoAst === 'string') {
-      tsgoAstUtilsInstance = require(
-        options.tsgoAst + '/factory'
-      ) as typeof tsgoAstUtils;
-    } else {
-      tsgoAstUtilsInstance =
-        require('typescript/unstable/ast/utils') as typeof tsgoAstUtils;
+      ts7AstFactoryInstance =
+        require('typescript/unstable/ast/factory') as typeof ts7AstFactory;
     }
   }
-  let tsgoApiInstance: typeof tsgoApi;
-  if (options.tsgoApi != null) {
-    if (typeof options.tsgoApi === 'string') {
-      tsgoApiInstance = require(options.tsgoApi) as typeof tsgoApi;
+  let ts7AstUtilsInstance: typeof ts7AstUtils;
+  if (options.ts7AstUtils != null) {
+    if (typeof options.ts7AstUtils === 'string') {
+      ts7AstUtilsInstance = require(options.ts7AstUtils) as typeof ts7AstUtils;
     } else {
-      tsgoApiInstance = options.tsgoApi;
+      ts7AstUtilsInstance = options.ts7AstUtils;
     }
   } else {
-    tsgoApiInstance = require('typescript/unstable/sync') as typeof tsgoApi;
+    if (typeof options.ts7Ast === 'string') {
+      ts7AstUtilsInstance = require(
+        options.ts7Ast + '/factory'
+      ) as typeof ts7AstUtils;
+    } else {
+      ts7AstUtilsInstance =
+        require('typescript/unstable/ast/utils') as typeof ts7AstUtils;
+    }
+  }
+  let ts7ApiInstance: typeof ts7Api;
+  if (options.ts7Api != null) {
+    if (typeof options.ts7Api === 'string') {
+      ts7ApiInstance = require(options.ts7Api) as typeof ts7Api;
+    } else {
+      ts7ApiInstance = options.ts7Api;
+    }
+  } else {
+    ts7ApiInstance = require('typescript/unstable/sync') as typeof ts7Api;
   }
   return createPortalTransformerImpl(
     options,
-    tsgoAstInstance,
-    tsgoAstFactoryInstance,
-    tsgoAstUtilsInstance,
-    tsgoApiInstance
+    ts7AstInstance,
+    ts7AstFactoryInstance,
+    ts7AstUtilsInstance,
+    ts7ApiInstance
   );
 }
