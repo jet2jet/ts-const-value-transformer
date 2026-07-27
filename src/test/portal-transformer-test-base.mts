@@ -5,6 +5,10 @@ import type {
   PortalTransformer,
 } from '@/createPortalTransformer.mjs';
 import type {
+  CreatePortalTransformerWithTsgoOptions,
+  PortalTransformerWithTsgo,
+} from '@/createPortalTransformerWithTsgo.mjs';
+import type {
   CreatePortalTransformerWithTsLsOptions,
   PortalTransformerWithTsLs,
 } from '@/createPortalTransformerWithTsLs.mjs';
@@ -15,18 +19,29 @@ const TEST_PROJECT_DIR = path.resolve(THIS_DIR, '../test-project');
 export function testPortalTransformer(
   createPortalTransformer: (
     options: CreatePortalTransformerOptions
-  ) => Promise<PortalTransformer>
+  ) => Promise<PortalTransformer>,
+  getPackageOptions: () => Partial<CreatePortalTransformerOptions>
+): void;
+export function testPortalTransformer(
+  createPortalTransformer: (
+    options: CreatePortalTransformerWithTsgoOptions
+  ) => Promise<PortalTransformerWithTsgo>,
+  getPackageOptions: () => Partial<CreatePortalTransformerWithTsgoOptions>
 ): void;
 export function testPortalTransformer(
   createPortalTransformer: (
     options: CreatePortalTransformerWithTsLsOptions
-  ) => Promise<PortalTransformerWithTsLs>
+  ) => Promise<PortalTransformerWithTsLs>,
+  getPackageOptions: () => Partial<CreatePortalTransformerWithTsLsOptions>
 ): void;
 
 export function testPortalTransformer(
   createPortalTransformer: (
     options: CreatePortalTransformerOptions
-  ) => Promise<PortalTransformer | PortalTransformerWithTsLs>
+  ) => Promise<
+    PortalTransformer | PortalTransformerWithTsgo | PortalTransformerWithTsLs
+  >,
+  getPackageOptions: () => Partial<CreatePortalTransformerOptions>
 ): void {
   describe('basic process', () => {
     it('test', async () => {
@@ -63,7 +78,7 @@ export function testPortalTransformer(
       const transformer = await createPortalTransformer({
         project: 'tsconfig.json',
         cwd: path.resolve(TEST_PROJECT_DIR),
-        typescript: 'typescript',
+        ...getPackageOptions(),
       });
       try {
         const result = transformer.transform(

@@ -17,7 +17,7 @@ export interface CreatePortalTransformerWithTsLsOptions
   extends TransformOptions {
   /**
    * Command to run language server. The first element is used for command name and following elements are used for `argv`.
-   * Default is `['npx', 'tsgo', '--lsp', '--stdio']`.
+   * Default is `['npx', 'tsc', '--lsp', '--stdio']`.
    */
   command?: readonly string[];
   /** Path to tsconfig.json. If omitted, `tsconfig.json` will be used. **Currently `project` must be path to `tsconfig.json` file name; other than `tsconfig.json` is not supported.** */
@@ -93,7 +93,7 @@ function createPortalTransformerImpl(
       `options.project must be 'tsconfig.json' due to restriction of language-server (actual: "${project}")`
     );
   }
-  const commandArray = options.command ?? ['npx', 'tsgo', '--lsp', '--stdio'];
+  const commandArray = options.command ?? ['npx', 'tsc', '--lsp', '--stdio'];
   if (commandArray.length < 1) {
     throw new Error(`options.command must have at least one element`);
   }

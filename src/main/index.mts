@@ -5,6 +5,11 @@ import createPortalTransformer, {
   type PortalTransformerResult,
   type PortalTransformerResultNonNull,
 } from './createPortalTransformer.mjs';
+import createPortalTransformerWithTsgo, {
+  createPortalTransformerSyncWithTsgo,
+  type CreatePortalTransformerWithTsgoOptions,
+  type PortalTransformerWithTsgo,
+} from './createPortalTransformerWithTsgo.mjs';
 import createPortalTransformerWithTsLs, {
   createPortalTransformerSyncWithTsLs,
   type CreatePortalTransformerWithTsLsOptions,
@@ -42,5 +47,9 @@ export {
   createPortalTransformerSyncWithTsLs,
   type CreatePortalTransformerWithTsLsOptions,
   type PortalTransformerWithTsLs,
+  createPortalTransformerWithTsgo,
+  createPortalTransformerSyncWithTsgo,
+  type CreatePortalTransformerWithTsgoOptions,
+  type PortalTransformerWithTsgo,
   version,
 };

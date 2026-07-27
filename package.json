@@ -43,6 +43,16 @@
       "import": "./dist/createPortalTransformerWithTsLs.mjs",
       "types": "./dist/createPortalTransformerWithTsLs.d.mts"
     },
+    "./createPortalTransformerWithTsgo": {
+      "default": "./dist/createPortalTransformerWithTsgo.mjs",
+      "import": "./dist/createPortalTransformerWithTsgo.mjs",
+      "types": "./dist/createPortalTransformerWithTsgo.d.mts"
+    },
+    "./createPortalTransformerWithTsgo.mjs": {
+      "default": "./dist/createPortalTransformerWithTsgo.mjs",
+      "import": "./dist/createPortalTransformerWithTsgo.mjs",
+      "types": "./dist/createPortalTransformerWithTsgo.d.mts"
+    },
     "./getCustomTransformers": {
       "default": "./dist/getCustomTransformers.mjs",
       "import": "./dist/getCustomTransformers.mjs",
@@ -106,7 +116,7 @@
     "@types/node": "~20.19.22",
     "@typescript-eslint/eslint-plugin": "^8.48.0",
     "@typescript-eslint/parser": "^8.48.0",
-    "@typescript/native-preview": "7.0.0-dev.20260211.1",
+    "@typescript/native": "npm:typescript@~7.0.2",
     "babel-loader": "^10.0.0",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
@@ -127,7 +137,7 @@
     "webpack-cli": "^6.0.1"
   },
   "peerDependencies": {
-    "typescript": ">=5.5"
+    "typescript": ">=5.5 <7"
   },
   "dependencies": {
     "source-map": "^0.7.6",

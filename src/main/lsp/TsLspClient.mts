@@ -87,7 +87,7 @@ export default class TsLspClient extends SyncLspClient {
     }
     this._supportPullDiagnostics = r.capabilities.diagnosticProvider != null;
 
-    this.notifyMessage('initialized');
+    this.notifyMessage('initialized', {});
 
     if (!this.pumpMessage(true)) {
       throw new Error('Peer closed');
