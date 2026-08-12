@@ -132,6 +132,7 @@ const yourWebpackConfiguration = {
               // ... other options from `TransformOptions` fields
               // hoistProperty: false,
               // ...
+              // (You can specify `ts7Api` and TypeScript7-related options to use TypeScript 7)
             }
           },
         ],

@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.11.1
+
+- Support TS7-related options for webpack loader
+- Fix for initializing TS7 project
+
 ## v0.11.0
 
 - (Experimental) Add `createPortalTransformerWithTs7` which supports TypeScript 7 (7.0.x)
