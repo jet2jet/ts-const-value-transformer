@@ -115,14 +115,15 @@ function createPortalTransformerImpl(
   const conf = api.parseConfigFile({
     uri: pathToFileURL(path.resolve(cwd, project)).toString(),
   });
+  const parsedConfigFile = conf.options.configFilePath as string | undefined;
 
-  if (conf.fileNames.length === 0) {
+  if (parsedConfigFile == null) {
     throw new Error(
       `[ts-const-value-transformer] Unable to load tsconfig file (effective name = '${project}')`
     );
   }
 
-  const snapshot = api.updateSnapshot({ openProject: conf.fileNames[0]! });
+  const snapshot = api.updateSnapshot({ openProject: parsedConfigFile });
   const tsProject = snapshot.getProjects()[0]!;
   const program = tsProject.program;
 
