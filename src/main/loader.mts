@@ -72,10 +72,10 @@ const loader: webpack.LoaderDefinitionFunction<
             'typescript' in options &&
             typeof options.typescript === 'string'
           ) {
-            ts7Options.ts7Ast = `${options.typescript}/unstable/ast`;
-            ts7Options.ts7AstFactory = `${options.typescript}/unstable/ast/factory`;
-            ts7Options.ts7AstUtils = `${options.typescript}/unstable/ast/utils`;
-            ts7Options.ts7Api = `${options.typescript}/unstable/sync`;
+            ts7Options.ts7Ast = `${options.typescript}/ast`;
+            ts7Options.ts7AstFactory = `${options.typescript}/ast/factory`;
+            ts7Options.ts7AstUtils = `${options.typescript}/ast/utils`;
+            ts7Options.ts7Api = `${options.typescript}/sync`;
           }
           transformer = await createPortalTransformerWithTs7(ts7Options);
         } else {

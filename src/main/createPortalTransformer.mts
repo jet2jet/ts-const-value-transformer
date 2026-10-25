@@ -89,10 +89,10 @@ function makeTsgoOptions(
   };
   // Adjust package paths
   if (typeof options.typescript === 'string') {
-    ts7Options.ts7Ast = `${options.typescript}/unstable/ast`;
-    ts7Options.ts7AstFactory = `${options.typescript}/unstable/ast/factory`;
-    ts7Options.ts7AstUtils = `${options.typescript}/unstable/ast/utils`;
-    ts7Options.ts7Api = `${options.typescript}/unstable/sync`;
+    ts7Options.ts7Ast = `${options.typescript}/ast`;
+    ts7Options.ts7AstFactory = `${options.typescript}/ast/factory`;
+    ts7Options.ts7AstUtils = `${options.typescript}/ast/utils`;
+    ts7Options.ts7Api = `${options.typescript}/sync`;
   }
   return ts7Options;
 }

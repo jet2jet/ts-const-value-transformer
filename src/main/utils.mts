@@ -10,7 +10,7 @@ export function isTypeScript7(ts: typeof tsNamespace): boolean {
       throw new Error(`Too old typescript version (actual: ${ts.version})`);
     }
     if (ver[0]! >= 7) {
-      if (ver[0]! > 7 || ver[1] !== 0) {
+      if (ver[0]! > 7 || ver[1]! < 1) {
         throw new Error(`Unsupported typescript version: ${ts.version}`);
       }
       return true;

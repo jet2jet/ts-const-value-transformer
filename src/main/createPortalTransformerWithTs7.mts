@@ -1,10 +1,10 @@
 import { createRequire } from 'module';
 import * as path from 'path';
 import { pathToFileURL } from 'url';
-import type * as ts7Ast from '@typescript/native/unstable/ast';
-import type * as ts7AstFactory from '@typescript/native/unstable/ast/factory';
-import type * as ts7AstUtils from '@typescript/native/unstable/ast/utils';
-import type * as ts7Api from '@typescript/native/unstable/sync';
+import type * as ts7Ast from '@typescript/native/ast';
+import type * as ts7AstFactory from '@typescript/native/ast/factory';
+import type * as ts7AstUtils from '@typescript/native/ast/utils';
+import type * as ts7Api from '@typescript/native/sync';
 import type { RawSourceMap } from 'source-map';
 import type {
   PortalTransformerResult,
@@ -19,19 +19,19 @@ export interface CreatePortalTransformerWithTs7Options
   extends TransformOptions {
   /** Path to tsconfig.json. If omitted, `tsconfig.json` will be used. */
   project?: string;
-  /** Package path to `typescript/unstable/ast` or `typescript/unstable/ast` namespace object. */
+  /** Package path to `typescript/ast` or `typescript/ast` namespace object. */
   ts7Ast?: string | typeof ts7Ast;
   /**
-   * Package path to `typescript/unstable/ast/factory` or `typescript/unstable/ast/factory` namespace object.
+   * Package path to `typescript/ast/factory` or `typescript/ast/factory` namespace object.
    * If omitted and {@linkcode ts7Ast} is a string value, `ts7Ast + '/factory'` is used.
    */
   ts7AstFactory?: string | typeof ts7AstFactory;
   /**
-   * Package path to `typescript/unstable/ast/utils` or `typescript/unstable/ast/utils` namespace object.
+   * Package path to `typescript/ast/utils` or `typescript/ast/utils` namespace object.
    * If omitted and {@linkcode ts7Ast} is a string value, `ts7Ast + '/utils'` is used.
    */
   ts7AstUtils?: string | typeof ts7AstUtils;
-  /** Package path to `typescript/unstable/sync` or `typescript/unstable/sync` namespace object. */
+  /** Package path to `typescript/sync` or `typescript/sync` namespace object. */
   ts7Api?: string | typeof ts7Api;
   /** The current directory for file search. Also affects to `project` option. */
   cwd?: string;
@@ -42,13 +42,13 @@ export interface CreatePortalTransformerWithTs7Options
 }
 
 export interface PortalTransformerWithTs7 {
-  /** The `typescript/unstable/ast` namespace object */
+  /** The `typescript/ast` namespace object */
   readonly ts7Ast: typeof ts7Ast;
-  /** The `typescript/unstable/ast/factory` namespace object */
+  /** The `typescript/ast/factory` namespace object */
   readonly ts7AstFactory: typeof ts7AstFactory;
-  /** The `typescript/unstable/ast/utils` namespace object */
+  /** The `typescript/ast/utils` namespace object */
   readonly ts7AstUtils: typeof ts7AstUtils;
-  /** The `typescript/unstable/sync` namespace object */
+  /** The `typescript/sync` namespace object */
   readonly ts7Api: typeof ts7Api;
   /** Clears transformed cache. */
   clearCache(): void;
@@ -115,7 +115,7 @@ function createPortalTransformerImpl(
   const conf = api.parseConfigFile({
     uri: pathToFileURL(path.resolve(cwd, project)).toString(),
   });
-  const parsedConfigFile = conf.options.configFilePath as string | undefined;
+  const parsedConfigFile = conf.options.configFilePath;
 
   if (parsedConfigFile == null) {
     throw new Error(
@@ -123,7 +123,7 @@ function createPortalTransformerImpl(
     );
   }
 
-  const snapshot = api.updateSnapshot({ openProject: parsedConfigFile });
+  const snapshot = api.createSnapshot({ openProjects: [parsedConfigFile] });
   const tsProject = snapshot.getProjects()[0]!;
   const program = tsProject.program;
 
@@ -228,7 +228,7 @@ export default async function createPortalTransformerWithTs7(
   } else {
     ts7AstInstance = (await import(
       // @ts-expect-error: the import path is different in the development
-      'typescript/unstable/ast'
+      'typescript/ast'
     )) as typeof ts7Ast;
   }
   let ts7AstFactoryInstance: typeof ts7AstFactory;
@@ -252,7 +252,7 @@ export default async function createPortalTransformerWithTs7(
     } else {
       ts7AstFactoryInstance = (await import(
         // @ts-expect-error: the import path is different in the development
-        'typescript/unstable/ast/factory'
+        'typescript/ast/factory'
       )) as typeof ts7AstFactory;
     }
   }
@@ -277,7 +277,7 @@ export default async function createPortalTransformerWithTs7(
     } else {
       ts7AstUtilsInstance = (await import(
         // @ts-expect-error: the import path is different in the development
-        'typescript/unstable/ast/utils'
+        'typescript/ast/utils'
       )) as typeof ts7AstUtils;
     }
   }
@@ -293,7 +293,7 @@ export default async function createPortalTransformerWithTs7(
   } else {
     ts7ApiInstance = (await import(
       // @ts-expect-error: the import path is different in the development
-      'typescript/unstable/sync'
+      'typescript/sync'
     )) as typeof ts7Api;
   }
   return createPortalTransformerImpl(
@@ -320,7 +320,7 @@ export function createPortalTransformerSyncWithTs7(
       ts7AstInstance = options.ts7Ast;
     }
   } else {
-    ts7AstInstance = require('typescript/unstable/ast') as typeof ts7Ast;
+    ts7AstInstance = require('typescript/ast') as typeof ts7Ast;
   }
   let ts7AstFactoryInstance: typeof ts7AstFactory;
   if (options.ts7AstFactory != null) {
@@ -338,7 +338,7 @@ export function createPortalTransformerSyncWithTs7(
       ) as typeof ts7AstFactory;
     } else {
       ts7AstFactoryInstance =
-        require('typescript/unstable/ast/factory') as typeof ts7AstFactory;
+        require('typescript/ast/factory') as typeof ts7AstFactory;
     }
   }
   let ts7AstUtilsInstance: typeof ts7AstUtils;
@@ -355,7 +355,7 @@ export function createPortalTransformerSyncWithTs7(
       ) as typeof ts7AstUtils;
     } else {
       ts7AstUtilsInstance =
-        require('typescript/unstable/ast/utils') as typeof ts7AstUtils;
+        require('typescript/ast/utils') as typeof ts7AstUtils;
     }
   }
   let ts7ApiInstance: typeof ts7Api;
@@ -366,7 +366,7 @@ export function createPortalTransformerSyncWithTs7(
       ts7ApiInstance = options.ts7Api;
     }
   } else {
-    ts7ApiInstance = require('typescript/unstable/sync') as typeof ts7Api;
+    ts7ApiInstance = require('typescript/sync') as typeof ts7Api;
   }
   return createPortalTransformerImpl(
     options,

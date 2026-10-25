@@ -1,7 +1,7 @@
-import type * as ts7Ast from '@typescript/native/unstable/ast';
-import type * as ts7AstFactory from '@typescript/native/unstable/ast/factory';
-import type * as ts7AstUtils from '@typescript/native/unstable/ast/utils';
-import type * as ts7Api from '@typescript/native/unstable/sync';
+import type * as ts7Ast from '@typescript/native/ast';
+import type * as ts7AstFactory from '@typescript/native/ast/factory';
+import type * as ts7AstUtils from '@typescript/native/ast/utils';
+import type * as ts7Api from '@typescript/native/sync';
 import type * as sourceMap from 'source-map';
 import {
   printSourceWithMapWithProxy,
@@ -17,16 +17,6 @@ const SYMBOL_TYPE_PROPERTIES = Symbol('type-properties');
 
 interface TypeWithSymbols extends ts7Api.Type {
   [SYMBOL_TYPE_PROPERTIES]?: readonly ts7Api.Symbol[];
-}
-
-function getNodeText(
-  node: ts7Ast.Node,
-  sourceFile: ts7Ast.SourceFile,
-  ts7AstInstance: typeof ts7Ast
-): string {
-  // same implementation of legacy typescript's getText()
-  const start = ts7AstInstance.getTokenPosOfNode(node, sourceFile);
-  return sourceFile.text.slice(start, node.end);
 }
 
 function getNodeFullText(
@@ -101,11 +91,7 @@ function getAliasedSymbol(
       } else {
         const p = node.parent?.parent?.parent;
         if (p != null && ts7AstInstance.isImportDeclaration(p)) {
-          const exportName = getNodeText(
-            node.name,
-            node.getSourceFile(),
-            ts7AstInstance
-          );
+          const exportName = node.name.getText(node.getSourceFile());
           const exportSym = pickExportSymbolFromSpecifier(
             p.moduleSpecifier,
             exportName
@@ -141,13 +127,9 @@ function getAliasedSymbol(
     );
     if (e) {
       const t = typeChecker.getTypeOfSymbol(e);
-      if (t) {
-        return getPropertiesOfType(t, typeChecker).find(
-          (sym) => sym.name === exportName
-        );
-      } else {
-        return null;
-      }
+      return getPropertiesOfType(t, typeChecker).find(
+        (sym) => sym.name === exportName
+      );
     } else {
       return (
         exports.get(ts7AstUtilsInstance.escapeLeadingUnderscores(exportName)) ??
@@ -175,11 +157,7 @@ function getAliasedSymbol(
             const r = symName && getActualSymbolFromExport(symName);
             return r ?? symName ?? symbol;
           } else {
-            const exportName = getNodeText(
-              node.name,
-              node.getSourceFile(),
-              ts7AstInstance
-            );
+            const exportName = node.name.getText(node.getSourceFile());
             const exportSym = pickExportSymbolFromSpecifier(
               p.moduleSpecifier,
               exportName
@@ -350,11 +328,7 @@ function makeTsgoProxy(
       node: ProxyTypes.Node,
       sourceFile: ProxyTypes.SourceFile
     ): string {
-      return getNodeText(
-        node as ts7Ast.Node,
-        sourceFile as ts7Ast.SourceFile,
-        ts7AstInstance
-      );
+      return (node as ts7Ast.Node).getText(sourceFile as ts7Ast.SourceFile);
     },
     getNodeFullText(
       node: ProxyTypes.Node,
