@@ -3,7 +3,6 @@ import * as path from 'path';
 import { pathToFileURL } from 'url';
 import type * as ts7Ast from '@typescript/native/ast';
 import type * as ts7AstFactory from '@typescript/native/ast/factory';
-import type * as ts7AstUtils from '@typescript/native/ast/utils';
 import type * as ts7Api from '@typescript/native/sync';
 import type { RawSourceMap } from 'source-map';
 import type {
@@ -26,11 +25,6 @@ export interface CreatePortalTransformerWithTs7Options
    * If omitted and {@linkcode ts7Ast} is a string value, `ts7Ast + '/factory'` is used.
    */
   ts7AstFactory?: string | typeof ts7AstFactory;
-  /**
-   * Package path to `typescript/ast/utils` or `typescript/ast/utils` namespace object.
-   * If omitted and {@linkcode ts7Ast} is a string value, `ts7Ast + '/utils'` is used.
-   */
-  ts7AstUtils?: string | typeof ts7AstUtils;
   /** Package path to `typescript/sync` or `typescript/sync` namespace object. */
   ts7Api?: string | typeof ts7Api;
   /** The current directory for file search. Also affects to `project` option. */
@@ -46,8 +40,6 @@ export interface PortalTransformerWithTs7 {
   readonly ts7Ast: typeof ts7Ast;
   /** The `typescript/ast/factory` namespace object */
   readonly ts7AstFactory: typeof ts7AstFactory;
-  /** The `typescript/ast/utils` namespace object */
-  readonly ts7AstUtils: typeof ts7AstUtils;
   /** The `typescript/sync` namespace object */
   readonly ts7Api: typeof ts7Api;
   /** Clears transformed cache. */
@@ -102,7 +94,6 @@ function createPortalTransformerImpl(
   options: CreatePortalTransformerWithTs7Options,
   ts7AstInstance: typeof ts7Ast,
   ts7AstFactoryInstance: typeof ts7AstFactory,
-  ts7AstUtilsInstance: typeof ts7AstUtils,
   ts7ApiInstance: typeof ts7Api
 ): PortalTransformerWithTs7 {
   const project = options.project ?? 'tsconfig.json';
@@ -139,7 +130,6 @@ function createPortalTransformerImpl(
   const instance = {
     ts7Ast: ts7AstInstance,
     ts7AstFactory: ts7AstFactoryInstance,
-    ts7AstUtils: ts7AstUtilsInstance,
     ts7Api: ts7ApiInstance,
     clearCache: () => cache.clear(),
     transform: (content, fileName, sourceMap, individualOptions) => {
@@ -177,7 +167,6 @@ function createPortalTransformerImpl(
           ts7ApiInstance,
           ts7AstInstance,
           ts7AstFactoryInstance,
-          ts7AstUtilsInstance,
           fileName,
           { ...options, ...individualOptions },
           rawSourceMap
@@ -256,31 +245,6 @@ export default async function createPortalTransformerWithTs7(
       )) as typeof ts7AstFactory;
     }
   }
-  let ts7AstUtilsInstance: typeof ts7AstUtils;
-  if (options.ts7AstUtils != null) {
-    if (typeof options.ts7AstUtils === 'string') {
-      // Use eval to avoid webpack warnings
-      // eslint-disable-next-line no-eval
-      ts7AstUtilsInstance = (await eval(
-        'import(options.ts7AstUtils)'
-      )) as typeof ts7AstUtils;
-    } else {
-      ts7AstUtilsInstance = options.ts7AstUtils;
-    }
-  } else {
-    if (typeof options.ts7Ast === 'string') {
-      // Use eval to avoid webpack warnings
-      // eslint-disable-next-line no-eval
-      ts7AstUtilsInstance = (await eval(
-        "import(options.ts7Ast + '/utils')"
-      )) as typeof ts7AstUtils;
-    } else {
-      ts7AstUtilsInstance = (await import(
-        // @ts-expect-error: the import path is different in the development
-        'typescript/ast/utils'
-      )) as typeof ts7AstUtils;
-    }
-  }
   let ts7ApiInstance: typeof ts7Api;
   if (options.ts7Api != null) {
     if (typeof options.ts7Api === 'string') {
@@ -300,7 +264,6 @@ export default async function createPortalTransformerWithTs7(
     options,
     ts7AstInstance,
     ts7AstFactoryInstance,
-    ts7AstUtilsInstance,
     ts7ApiInstance
   );
 }
@@ -341,23 +304,6 @@ export function createPortalTransformerSyncWithTs7(
         require('typescript/ast/factory') as typeof ts7AstFactory;
     }
   }
-  let ts7AstUtilsInstance: typeof ts7AstUtils;
-  if (options.ts7AstUtils != null) {
-    if (typeof options.ts7AstUtils === 'string') {
-      ts7AstUtilsInstance = require(options.ts7AstUtils) as typeof ts7AstUtils;
-    } else {
-      ts7AstUtilsInstance = options.ts7AstUtils;
-    }
-  } else {
-    if (typeof options.ts7Ast === 'string') {
-      ts7AstUtilsInstance = require(
-        options.ts7Ast + '/factory'
-      ) as typeof ts7AstUtils;
-    } else {
-      ts7AstUtilsInstance =
-        require('typescript/ast/utils') as typeof ts7AstUtils;
-    }
-  }
   let ts7ApiInstance: typeof ts7Api;
   if (options.ts7Api != null) {
     if (typeof options.ts7Api === 'string') {
@@ -372,7 +318,6 @@ export function createPortalTransformerSyncWithTs7(
     options,
     ts7AstInstance,
     ts7AstFactoryInstance,
-    ts7AstUtilsInstance,
     ts7ApiInstance
   );
 }

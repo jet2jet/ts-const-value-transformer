@@ -74,7 +74,6 @@ const loader: webpack.LoaderDefinitionFunction<
           ) {
             ts7Options.ts7Ast = `${options.typescript}/ast`;
             ts7Options.ts7AstFactory = `${options.typescript}/ast/factory`;
-            ts7Options.ts7AstUtils = `${options.typescript}/ast/utils`;
             ts7Options.ts7Api = `${options.typescript}/sync`;
           }
           transformer = await createPortalTransformerWithTs7(ts7Options);
