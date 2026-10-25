@@ -365,10 +365,10 @@ export interface CreatePortalTransformerWithTsLsOptions
 
 #### createPortalTransformerWithTs7: (options?: CreatePortalTransformerWithTs7Options) => Promise<PortalTransformerWithTs7>
 
-_Experimental_: Creates 'portal transformer' like [`createPortalTransformer`](#createportaltransformer-options-createportaltransformeroptions--promise), but uses TypeScript 7.
+Creates 'portal transformer' like [`createPortalTransformer`](#createportaltransformer-options-createportaltransformeroptions--promise), but uses TypeScript 7.1.
 
-- This uses unstable APIs in TypeScript 7, so please be careful.
-- **If you installed TypeScript 7 as `typescript` package, `createPortalTransformer` will automatically use `createPortalTransformerWithTs7`.** If you installed with liased name, you must specify package names in `CreatePortalTransformerWithTs7Options`.
+- This uses APIs in TypeScript 7.1 or later. **APIs in TypeScript 7.0 are not supported (dropped).**
+- **If you installed TypeScript 7.1 or later as `typescript` package, `createPortalTransformer` will automatically use `createPortalTransformerWithTs7`.** If you installed with liased name, you must specify package names in `CreatePortalTransformerWithTs7Options`.
 
 `CreatePortalTransformerWithTs7Options` has a following signature. Also, `TransformOptions` fields, including `ignoreFiles`, can be used.
 
@@ -377,19 +377,14 @@ export interface CreatePortalTransformerWithTs7Options
   extends TransformOptions {
   /** Path to tsconfig.json. If omitted, `tsconfig.json` will be used. */
   project?: string;
-  /** Package path to `typescript/unstable/ast` or `typescript/unstable/ast` namespace object. */
+  /** Package path to `typescript/ast` or `typescript/ast` namespace object. */
   ts7Ast?: string | typeof ts7Ast;
   /**
-   * Package path to `typescript/unstable/ast/factory` or `typescript/unstable/ast/factory` namespace object.
+   * Package path to `typescript/ast/factory` or `typescript/ast/factory` namespace object.
    * If omitted and {@linkcode ts7Ast} is a string value, `ts7Ast + '/factory'` is used.
    */
   ts7AstFactory?: string | typeof ts7AstFactory;
-  /**
-   * Package path to `typescript/unstable/ast/utils` or `typescript/unstable/ast/utils` namespace object.
-   * If omitted and {@linkcode ts7Ast} is a string value, `ts7Ast + '/utils'` is used.
-   */
-  ts7AstUtils?: string | typeof ts7AstUtils;
-  /** Package path to `typescript/unstable/sync` or `typescript/unstable/sync` namespace object. */
+  /** Package path to `typescript/sync` or `typescript/sync` namespace object. */
   ts7Api?: string | typeof ts7Api;
   /** The current directory for file search. Also affects to `project` option. */
   cwd?: string;

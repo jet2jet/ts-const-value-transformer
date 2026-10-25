@@ -1,7 +1,6 @@
-import type * as ts7Ast from '@typescript/native/unstable/ast';
-import type * as ts7AstFactory from '@typescript/native/unstable/ast/factory';
-import type * as ts7AstUtils from '@typescript/native/unstable/ast/utils';
-import type * as ts7Api from '@typescript/native/unstable/sync';
+import type * as ts7Ast from '@typescript/native/ast';
+import type * as ts7AstFactory from '@typescript/native/ast/factory';
+import type * as ts7Api from '@typescript/native/sync';
 import type * as sourceMap from 'source-map';
 import {
   printSourceWithMapWithProxy,
@@ -13,220 +12,13 @@ import {
 } from './transform.mjs';
 import type { ApiProxy, ProxyTypes } from './TsProxy.mjs';
 
-const SYMBOL_TYPE_PROPERTIES = Symbol('type-properties');
-
-interface TypeWithSymbols extends ts7Api.Type {
-  [SYMBOL_TYPE_PROPERTIES]?: readonly ts7Api.Symbol[];
-}
-
-function getNodeText(
-  node: ts7Ast.Node,
-  sourceFile: ts7Ast.SourceFile,
-  ts7AstInstance: typeof ts7Ast
-): string {
-  // same implementation of legacy typescript's getText()
-  const start = ts7AstInstance.getTokenPosOfNode(node, sourceFile);
-  return sourceFile.text.slice(start, node.end);
-}
-
-function getNodeFullText(
-  node: ts7Ast.Node,
-  sourceFile: ts7Ast.SourceFile
-): string {
-  return sourceFile.text.slice(node.pos, node.end);
-}
-
-function getPropertiesOfType(type: ts7Api.Type, typeChecker: ts7Api.Checker) {
-  // Use cache because getPropertiesOfType uses api calls
-  let properties = (type as TypeWithSymbols)[SYMBOL_TYPE_PROPERTIES];
-  if (!properties) {
-    properties = typeChecker.getPropertiesOfType(type);
-    (type as TypeWithSymbols)[SYMBOL_TYPE_PROPERTIES] = properties;
-  }
-  return properties;
-}
-
-function getAliasedSymbol(
-  typeChecker: ts7Api.Checker,
-  project: ts7Api.Project,
-  symbol: ts7Api.Symbol,
-  ts7ApiInstance: typeof ts7Api,
-  ts7AstInstance: typeof ts7Ast,
-  ts7AstUtilsInstance: typeof ts7AstUtils
-): ts7Api.Symbol {
-  for (const n of symbol.declarations) {
-    const node = n.resolve(project);
-    if (!node) {
-      continue;
-    }
-    if (ts7AstInstance.isImportClause(node)) {
-      const d = node.name;
-      const p = node.parent;
-      if (
-        d != null &&
-        node.namedBindings == null &&
-        p != null &&
-        ts7AstInstance.isImportDeclaration(p)
-      ) {
-        const exportSym = pickExportSymbolFromSpecifier(
-          p.moduleSpecifier,
-          'default'
-        );
-        const r = exportSym && getActualSymbolFromExport(exportSym);
-        return r
-          ? getAliasedSymbol(
-              typeChecker,
-              project,
-              r,
-              ts7ApiInstance,
-              ts7AstInstance,
-              ts7AstUtilsInstance
-            )
-          : symbol;
-      }
-    } else if (ts7AstInstance.isImportSpecifier(node)) {
-      if (node.propertyName) {
-        const symName = typeChecker.getSymbolAtLocation(node.propertyName);
-        const r = symName && getActualSymbolFromExport(symName);
-        return r
-          ? getAliasedSymbol(
-              typeChecker,
-              project,
-              r,
-              ts7ApiInstance,
-              ts7AstInstance,
-              ts7AstUtilsInstance
-            )
-          : symbol;
-      } else {
-        const p = node.parent?.parent?.parent;
-        if (p != null && ts7AstInstance.isImportDeclaration(p)) {
-          const exportName = getNodeText(
-            node.name,
-            node.getSourceFile(),
-            ts7AstInstance
-          );
-          const exportSym = pickExportSymbolFromSpecifier(
-            p.moduleSpecifier,
-            exportName
-          );
-          const r = exportSym && getActualSymbolFromExport(exportSym);
-          return r
-            ? getAliasedSymbol(
-                typeChecker,
-                project,
-                r,
-                ts7ApiInstance,
-                ts7AstInstance,
-                ts7AstUtilsInstance
-              )
-            : symbol;
-        }
-      }
-    }
-  }
-  return symbol;
-
-  function pickExportSymbolFromSpecifier(
-    moduleSpecifier: ts7Ast.Node,
-    exportName: string
-  ) {
-    const sym = typeChecker.getSymbolAtLocation(moduleSpecifier);
-    if (!sym) {
-      return null;
-    }
-    const exports = sym.getExports();
-    const e = exports.get(
-      ts7AstUtilsInstance.escapeLeadingUnderscores('export=')
-    );
-    if (e) {
-      const t = typeChecker.getTypeOfSymbol(e);
-      if (t) {
-        return getPropertiesOfType(t, typeChecker).find(
-          (sym) => sym.name === exportName
-        );
-      } else {
-        return null;
-      }
-    } else {
-      return (
-        exports.get(ts7AstUtilsInstance.escapeLeadingUnderscores(exportName)) ??
-        null
-      );
-    }
-  }
-
-  function getActualSymbolFromExport(symbol: ts7Api.Symbol): ts7Api.Symbol {
-    for (const n of symbol.declarations) {
-      const node = n.resolve(project);
-      if (!node) {
-        continue;
-      }
-      if (ts7AstInstance.isExportSpecifier(node)) {
-        // Handle 'export { A } from "module"' pattern
-        const p = node.parent?.parent;
-        if (
-          p != null &&
-          ts7AstInstance.isExportDeclaration(p) &&
-          p.moduleSpecifier
-        ) {
-          if (node.propertyName) {
-            const symName = typeChecker.getSymbolAtLocation(node.propertyName);
-            const r = symName && getActualSymbolFromExport(symName);
-            return r ?? symName ?? symbol;
-          } else {
-            const exportName = getNodeText(
-              node.name,
-              node.getSourceFile(),
-              ts7AstInstance
-            );
-            const exportSym = pickExportSymbolFromSpecifier(
-              p.moduleSpecifier,
-              exportName
-            );
-            const r = exportSym && getActualSymbolFromExport(exportSym);
-            return r ?? symbol;
-          }
-        }
-
-        const nameNode = node.propertyName ?? node.name;
-        // ExportSpecifier should be either:
-        //   * export { A } : only node.name is available
-        //   * export { A as B } -- or -- export { A as 'literal' } : node.propertyName is available
-        //   -- node.propertyName would not be identifier
-        if (ts7AstInstance.isIdentifier(nameNode)) {
-          const s = typeChecker.getResolvedSymbol(nameNode);
-          return s ?? symbol;
-        }
-      } else if (ts7AstInstance.isExportAssignment(node)) {
-        const exprSym = typeChecker.getSymbolAtLocation(node.expression);
-        return exprSym ?? symbol;
-      }
-    }
-    return symbol;
-  }
-}
-
-function isSourceFileFromExternalLibrary(sourceFile: ts7Ast.SourceFile) {
-  // Legacy typescript only uses `isExternalLibraryImport` derived from whether the path includes 'node_modules'
-  return /[\\/]node_modules[\\/]/.test(sourceFile.fileName);
-}
-
 function getNameFromElementAccessExpression(
   node: ts7Ast.ElementAccessExpression,
-  typeChecker: ts7Api.Checker,
-  ts7ApiInstance: typeof ts7Api
+  typeChecker: ts7Api.Checker
 ) {
   const type = typeChecker.getTypeAtLocation(node.argumentExpression);
-  if (type == null) {
-    return false;
-  }
-  if (
-    ((type.flags & ts7ApiInstance.TypeFlags.StringLiteral) !== 0 ||
-      (type.flags & ts7ApiInstance.TypeFlags.NumberLiteral) !== 0) &&
-    'value' in type
-  ) {
-    return `${type.value as string | number}`;
+  if (type.isStringLiteralType() || type.isNumberLiteralType()) {
+    return `${type.value}`;
   }
   return null;
 }
@@ -239,8 +31,7 @@ function makeTsgoProxy(
   project: ts7Api.Project | null,
   ts7ApiInstance: typeof ts7Api,
   ts7AstInstance: typeof ts7Ast,
-  ts7AstFactoryInstance: typeof ts7AstFactory,
-  ts7AstUtilsInstance: typeof ts7AstUtils
+  ts7AstFactoryInstance: typeof ts7AstFactory
 ): ApiProxy {
   const typeChecker = project && project.checker;
 
@@ -275,16 +66,14 @@ function makeTsgoProxy(
     }
     const memberName = ts7AstInstance.isPropertyAccessExpression(node)
       ? node.name.text
-      : getNameFromElementAccessExpression(node, typeChecker, ts7ApiInstance);
+      : getNameFromElementAccessExpression(node, typeChecker);
     if (memberName == null) {
       return false;
     }
     if (type.flags & ts7ApiInstance.TypeFlags.Object) {
-      const properties = getPropertiesOfType(type, typeChecker);
-      const prop = properties.find((sym) => sym.name === memberName);
+      const prop = type.getProperty(memberName);
       if (prop) {
-        // Use undeclared enum value to improve memory performance
-        if ((prop.checkFlags & 8) /* Readonly */ !== 0) {
+        if ((prop.checkFlags & ts7ApiInstance.CheckFlags.Readonly) !== 0) {
           return true;
         }
         // similar to getDeclarationModifierFlagsFromSymbol
@@ -350,20 +139,13 @@ function makeTsgoProxy(
       node: ProxyTypes.Node,
       sourceFile: ProxyTypes.SourceFile
     ): string {
-      return getNodeText(
-        node as ts7Ast.Node,
-        sourceFile as ts7Ast.SourceFile,
-        ts7AstInstance
-      );
+      return (node as ts7Ast.Node).getText(sourceFile as ts7Ast.SourceFile);
     },
     getNodeFullText(
       node: ProxyTypes.Node,
       sourceFile: ProxyTypes.SourceFile
     ): string {
-      return getNodeFullText(
-        node as ts7Ast.Node,
-        sourceFile as ts7Ast.SourceFile
-      );
+      return (node as ts7Ast.Node).getFullText(sourceFile as ts7Ast.SourceFile);
     },
     appendMultiLineComment<Node extends ProxyTypes.Node>(
       node: Node,
@@ -468,34 +250,18 @@ function makeTsgoProxy(
     isStringLiteral(
       type: ProxyTypes.Type
     ): type is ProxyTypes.StringLiteralType {
-      return (
-        ((type as ts7Api.Type).flags &
-          ts7ApiInstance.TypeFlags.StringLiteral) !==
-        0
-      );
+      return (type as ts7Api.Type).isStringLiteralType();
     },
     isNumberLiteral(
       type: ProxyTypes.Type
     ): type is ProxyTypes.NumberLiteralType {
-      return (
-        ((type as ts7Api.Type).flags &
-          ts7ApiInstance.TypeFlags.NumberLiteral) !==
-        0
-      );
+      return (type as ts7Api.Type).isNumberLiteralType();
     },
     isBigIntLiteral(type: ProxyTypes.Type): boolean {
-      return (
-        ((type as ts7Api.Type).flags &
-          ts7ApiInstance.TypeFlags.BigIntLiteral) !==
-        0
-      );
+      return (type as ts7Api.Type).isBigIntLiteralType();
     },
     isBooleanLiteral(type: ProxyTypes.Type): boolean {
-      return (
-        ((type as ts7Api.Type).flags &
-          ts7ApiInstance.TypeFlags.BooleanLiteral) !==
-        0
-      );
+      return (type as ts7Api.Type).isBooleanLiteralType();
     },
     isNullType(type: ProxyTypes.Type): boolean {
       return (
@@ -624,14 +390,7 @@ function makeTsgoProxy(
         // We must follow 'aliased' symbol for parsing the symbol which name is not changed from the exported symbol name
         const exportedSym =
           baseSym && baseSym.flags & ts7ApiInstance.SymbolFlags.Alias
-            ? (getAliasedSymbol(
-                typeChecker,
-                project,
-                baseSym,
-                ts7ApiInstance,
-                ts7AstInstance,
-                ts7AstUtilsInstance
-              ) ?? baseSym)
+            ? typeChecker.getAliasedSymbol(baseSym)
             : baseSym;
         const nextNodeFrom = exportedSym?.declarations?.[0];
         if (nextNodeFrom === nodeFrom) {
@@ -649,7 +408,9 @@ function makeTsgoProxy(
         return false;
       }
       const typeDefinitionSource = def.getSourceFile();
-      if (isSourceFileFromExternalLibrary(typeDefinitionSource)) {
+      if (
+        project.program.isSourceFileFromExternalLibrary(typeDefinitionSource)
+      ) {
         return true;
       }
       return false;
@@ -658,8 +419,7 @@ function makeTsgoProxy(
       node: ProxyTypes.Node,
       sourceFile: ProxyTypes.SourceFile
     ): boolean {
-      const fullText = getNodeFullText(
-        node as ts7Ast.Node,
+      const fullText = (node as ts7Ast.Node).getFullText(
         sourceFile as ts7Ast.SourceFile
       );
       const ranges = ts7AstInstance.getLeadingCommentRanges(fullText, 0) ?? [];
@@ -697,7 +457,7 @@ function makeTsgoProxy(
               return false;
             }
             // Parameters are writable
-            if (target.kind === ts7AstInstance.SyntaxKind.Parameter) {
+            if (ts7AstInstance.isParameterDeclaration(target)) {
               return false;
             }
             if (ts7AstInstance.isVariableDeclarationList(target)) {
@@ -739,13 +499,12 @@ function makeTsgoProxy(
       const type = getTypeAtLocation(node.expression);
       const memberName = ts7AstInstance.isPropertyAccessExpression(node)
         ? node.name.text
-        : getNameFromElementAccessExpression(node, typeChecker, ts7ApiInstance);
+        : getNameFromElementAccessExpression(node, typeChecker);
       if (memberName == null) {
         return false;
       }
       if (type != null && type.flags & ts7ApiInstance.TypeFlags.Object) {
-        const properties = getPropertiesOfType(type, typeChecker);
-        const prop = properties.find((sym) => sym.name === memberName);
+        const prop = type.getProperty(memberName);
         // If the property access uses indexed access, `prop` will be undefined
         if (prop) {
           return true;
@@ -768,7 +527,7 @@ function makeTsgoProxy(
       }
       const type = getTypeAtLocation(node as ts7Ast.Identifier);
       const sym = typeChecker.getSymbolAtLocation(node as ts7Ast.Identifier);
-      if (!sym || sym.name !== 'undefined') {
+      if (!sym || sym.escapedName.toString() !== 'undefined') {
         return false;
       }
       if (
@@ -786,7 +545,7 @@ function makeTsgoProxy(
       return JSON.stringify(value);
     },
     getLineStarts(sourceFile: ProxyTypes.SourceFile): readonly number[] {
-      return ts7AstInstance.computeLineStarts(sourceFile.text);
+      return (sourceFile as ts7Ast.SourceFile).getLineStarts();
     },
   };
 }
@@ -796,8 +555,7 @@ export function printSource(
   sourceFile: ts7Ast.SourceFile,
   ts7ApiInstance: typeof ts7Api,
   ts7AstInstance: typeof ts7Ast,
-  ts7AstFactoryInstance: typeof ts7AstFactory,
-  ts7AstUtilsInstance: typeof ts7AstUtils
+  ts7AstFactoryInstance: typeof ts7AstFactory
 ): string {
   return printSourceWithProxy(
     sourceFile,
@@ -805,8 +563,7 @@ export function printSource(
       project,
       ts7ApiInstance,
       ts7AstInstance,
-      ts7AstFactoryInstance,
-      ts7AstUtilsInstance
+      ts7AstFactoryInstance
     )
   );
 }
@@ -817,7 +574,6 @@ export function printSourceWithMap(
   ts7ApiInstance: typeof ts7Api,
   ts7AstInstance: typeof ts7Ast,
   ts7AstFactoryInstance: typeof ts7AstFactory,
-  ts7AstUtilsInstance: typeof ts7AstUtils,
   originalSourceName: string,
   startOfSourceMap?: sourceMap.RawSourceMap
 ): [string, sourceMap.RawSourceMap] {
@@ -828,8 +584,7 @@ export function printSourceWithMap(
       project,
       ts7ApiInstance,
       ts7AstInstance,
-      ts7AstFactoryInstance,
-      ts7AstUtilsInstance
+      ts7AstFactoryInstance
     ),
     startOfSourceMap
   );
@@ -841,15 +596,13 @@ export function transformSource(
   ts7ApiInstance: typeof ts7Api,
   ts7AstInstance: typeof ts7Ast,
   ts7AstFactoryInstance: typeof ts7AstFactory,
-  ts7AstUtilsInstance: typeof ts7AstUtils,
   options?: TransformOptions
 ): ts7Ast.SourceFile {
   const proxy = makeTsgoProxy(
     project,
     ts7ApiInstance,
     ts7AstInstance,
-    ts7AstFactoryInstance,
-    ts7AstUtilsInstance
+    ts7AstFactoryInstance
   );
   return transformSourceWithProxy(
     sourceFile,
@@ -865,15 +618,13 @@ export function transformAndPrintSource(
   ts7ApiInstance: typeof ts7Api,
   ts7AstInstance: typeof ts7Ast,
   ts7AstFactoryInstance: typeof ts7AstFactory,
-  ts7AstUtilsInstance: typeof ts7AstUtils,
   options?: TransformOptions
 ): string {
   const proxy = makeTsgoProxy(
     project,
     ts7ApiInstance,
     ts7AstInstance,
-    ts7AstFactoryInstance,
-    ts7AstUtilsInstance
+    ts7AstFactoryInstance
   );
   return transformAndPrintSourceWithProxy(
     sourceFile,
@@ -889,7 +640,6 @@ export function transformAndPrintSourceWithMap(
   ts7ApiInstance: typeof ts7Api,
   ts7AstInstance: typeof ts7Ast,
   ts7AstFactoryInstance: typeof ts7AstFactory,
-  ts7AstUtilsInstance: typeof ts7AstUtils,
   originalSourceName: string,
   options?: TransformOptions,
   startOfSourceMap?: sourceMap.RawSourceMap
@@ -898,8 +648,7 @@ export function transformAndPrintSourceWithMap(
     project,
     ts7ApiInstance,
     ts7AstInstance,
-    ts7AstFactoryInstance,
-    ts7AstUtilsInstance
+    ts7AstFactoryInstance
   );
   return transformAndPrintSourceWithMapWithProxy(
     sourceFile,
