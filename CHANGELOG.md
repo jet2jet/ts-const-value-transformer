@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.12.0
+
+- Support TypeScript 7.1 and **drop TypeScript 7.0.x**
+
 ## v0.11.1
 
 - Support TS7-related options for webpack loader
